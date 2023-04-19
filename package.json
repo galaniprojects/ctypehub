@@ -11,7 +11,7 @@
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.ts*\"",
     "lint-css": "stylelint --max-warnings 0 --fix \"src/**/*.css\"",
     "css": "tcm --namedExports --pattern 'src/frontend/**/*.module.css' && eslint --fix --config ./.eslintrc.json \"src/**/*.css.d.ts\"",
-    "test": "tsc --noEmit && LC_ALL=en_US.UTF-8 jest",
+    "test": "tsc --noEmit",
     "dev": "yarn parcel watch",
     "build": "rm -rf dist && yarn parcel build",
     "start": "node --enable-source-maps dist/backend/server.js",
@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
-    "@types/hapi__hapi": "^21.0.0",
+    "@types/hapi__hapi": "^20.0.13",
     "@types/hapi__inert": "^5.2.6",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.11",
