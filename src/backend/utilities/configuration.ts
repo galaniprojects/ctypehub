@@ -15,12 +15,12 @@ class ConfigurationError extends Error {
   }
 }
 
-const httpAuthPassword = env.SECRET_HTTP_AUTH_PASSWORD;
-
 const baseUri = env.URL;
 if (!baseUri) {
   throw new ConfigurationError('No base URI provided');
 }
+
+const httpAuthPassword = env.SECRET_HTTP_AUTH_PASSWORD;
 
 export const configuration = {
   port: env.PORT || 3000,
