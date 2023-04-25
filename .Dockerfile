@@ -7,14 +7,16 @@ FROM base AS builder
 # one of dependencies uses node-gyp which requires build tools
 RUN apk add --update --no-cache python3 g++ make && ln -sf python3 /usr/bin/python
 
-# install build dependencies
-# @parcel/css-linux-x64-musl is not optional but marked so
+# get the dependencies and sources
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --ignore-optional && yarn add --ignore-optional --dev @parcel/css-linux-x64-musl && yarn cache clean --all
 
-# get the sources and build the app
+# install build dependencies, build the app
+# @parcel/css-linux-x64-musl & lightningcss-linux-x64-musl are not optional but marked so
+RUN yarn install --frozen-lockfile --ignore-optional && yarn add --ignore-optional --dev @parcel/css-linux-x64-musl lightningcss-linux-x64-musl && yarn cache clean --all
+
 COPY src ./src
 COPY tsconfig.json ./
+
 RUN yarn build
 
 FROM base AS release
@@ -27,8 +29,8 @@ COPY ./nginx.conf /etc/nginx/http.d/default.conf
 ENV PORT 4000
 ENV NODE_ENV production
 
-# get the dependencies and sources
-COPY package.json yarn.lock ./
+# get the dependencies and migrations stuff
+COPY package.json yarn.lock .sequelizerc ./
 # install the production dependencies only (depends on NODE_ENV)
 RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
 
@@ -36,6 +38,5 @@ RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
 COPY --from=builder /app/dist dist
 
 EXPOSE 3000
+
 ENTRYPOINT nginx; exec yarn --silent start
-
-

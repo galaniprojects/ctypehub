@@ -14,4 +14,6 @@ export const configuration = {
   isProduction: env.NODE_ENV === 'production',
   distFolder: path.join(cwd(), 'dist', 'frontend'),
   httpAuthPassword,
+  databaseUri:
+    env.DATABASE_URI || 'postgres://postgres:postgres@localhost:5432/postgres',
 };

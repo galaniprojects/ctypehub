@@ -1,5 +1,5 @@
 {
-  "repository": "git@github.com:galaniprojects/kilt-registry.git",
+  "repository": "git@github.com:galaniprojects/ctypehub.com.git",
   "license": "UNLICENSED",
   "type": "module",
   "engines": {
@@ -13,9 +13,12 @@
     "css": "tcm --namedExports --pattern 'src/frontend/**/*.module.css' && eslint --fix --config ./.eslintrc.json \"src/**/*.css.d.ts\"",
     "test": "tsc --noEmit",
     "dev": "yarn parcel watch",
+    "dev-start": "echo '{\"type\":\"commonjs\"}' > dist/package.json && supervisor --watch dist/backend/ --enable-source-maps dist/backend/server.js",
+    "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
+    "kill-db": "docker rm -f postgres",
+    "migrate": "sequelize-cli db:migrate",
     "build": "rm -rf dist && yarn parcel build",
-    "start": "node --enable-source-maps dist/backend/server.js",
-    "dev-start": "echo '{\"type\":\"commonjs\"}' > dist/package.json && supervisor --watch dist/backend/ --enable-source-maps dist/backend/server.js"
+    "start": "yarn migrate && node --enable-source-maps dist/backend/server.js"
   },
   "dependencies": {
     "@hapi/basic": "^7.0.1",
@@ -28,9 +31,12 @@
     "hapi-dev-errors": "^4.0.0",
     "hapi-pino": "^12.0.0",
     "http-status-codes": "^2.2.0",
+    "pg": "^8.10.0",
     "pino": "^8.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sequelize": "^6.31.0",
+    "sequelize-cli": "^6.6.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
