@@ -3,11 +3,12 @@ import { createManager } from 'exiting';
 
 import { configuration } from './configuration';
 
-const { isProduction, port, host } = configuration;
+const { isProduction, port, baseUri } = configuration;
 
 export const server = hapiServer({
   port,
-  host,
+  host: '127.0.0.1',
+  uri: baseUri,
   debug: isProduction ? false : undefined,
   routes: { security: true },
 });
