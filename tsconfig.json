@@ -1,15 +1,8 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    "rootDir": "./src",
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
-    "outDir": "dist",
-    "strict": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true,
+    "jsxImportSource": "react",
     "skipLibCheck": true
-  },
-  "include": ["./src/**/*"]
+  }
 }

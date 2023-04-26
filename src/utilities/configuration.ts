@@ -1,11 +1,9 @@
 import { cwd } from 'node:process';
 import path from 'node:path';
 
-import dotenv from 'dotenv';
 import { pino } from 'pino';
 
-dotenv.config();
-const { env } = process;
+const env = import.meta.env;
 
 class ConfigurationError extends Error {
   constructor(message: string) {
@@ -25,7 +23,7 @@ const httpAuthPassword = env.SECRET_HTTP_AUTH_PASSWORD;
 export const configuration = {
   port: env.PORT || 3000,
   baseUri,
-  isProduction: env.NODE_ENV === 'production',
+  isProduction: env.PROD,
   distFolder: path.join(cwd(), 'dist', 'frontend'),
   httpAuthPassword,
   databaseUri:

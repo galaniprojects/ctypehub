@@ -25,6 +25,10 @@ export async function checkDatabaseConnection() {
 }
 
 export function trackDatabaseConnection() {
+  if (!sequelize) {
+    initDatabase();
+  }
+
   setInterval(async () => {
     try {
       await checkDatabaseConnection();

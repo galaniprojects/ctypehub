@@ -4,18 +4,14 @@ WORKDIR /app
 
 FROM base AS builder
 
-# one of dependencies uses node-gyp which requires build tools
-RUN apk add --update --no-cache python3 g++ make && ln -sf python3 /usr/bin/python
-
 # get the dependencies and sources
 COPY package.json yarn.lock ./
 
 # install build dependencies, build the app
-# @parcel/css-linux-x64-musl & lightningcss-linux-x64-musl are not optional but marked so
-RUN yarn install --frozen-lockfile --ignore-optional && yarn add --ignore-optional --dev @parcel/css-linux-x64-musl lightningcss-linux-x64-musl && yarn cache clean --all
+RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
 
 COPY src ./src
-COPY tsconfig.json ./
+COPY tsconfig.json astro.config.mjs ./
 
 RUN yarn build
 
