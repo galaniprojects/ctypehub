@@ -1,13 +1,21 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+const titleWithDash = title ? `${title} – ` : '';
+---
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>CTypeHub</title>
+    <title>{titleWithDash}CTypeHub</title>
     <meta name="viewport" content="width=device-width, viewport-fit=cover" />
   </head>
 
   <body>
-    <div id="app"></div>
-    <script src="index.tsx" type="module" defer></script>
+    <slot />
   </body>
 </html>

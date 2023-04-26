@@ -1,5 +1,4 @@
 import { LoggerOptions, pino } from 'pino';
-import hapiPino from 'hapi-pino';
 
 import { configuration } from './configuration';
 
@@ -18,12 +17,3 @@ const options: LoggerOptions = {
 };
 
 export const logger = pino(options);
-
-export const hapiLogger = {
-  plugin: hapiPino,
-  options: {
-    ...options,
-    ignoreTags: ['noLogs'],
-    logRequestComplete: isProduction,
-  },
-};
