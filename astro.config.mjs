@@ -1,12 +1,20 @@
 import { defineConfig } from 'astro/config';
-import react from "@astrojs/react";
-import node from "@astrojs/node";
+import react from '@astrojs/react';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-  output: "server",
+  output: 'server',
   adapter: node({
-    mode: "standalone"
-  })
+    mode: 'standalone',
+  }),
+  vite: {
+    resolve: {
+      alias: {
+        buffer: 'buffer/',
+        cbor: 'cbor-web',
+      },
+    },
+  },
 });
