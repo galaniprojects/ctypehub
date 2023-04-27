@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import * as styles from './ReactTest.module.css';
+import styles from './ReactTest.module.css';
 
 export function ReactTest() {
   const [flag, setFlag] = useState(false);
