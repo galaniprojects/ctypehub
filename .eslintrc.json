@@ -22,7 +22,7 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
-    "import/no-extraneous-dependencies": "error",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.*", "**/jest.setup.ts"] }],
     "import/no-unresolved": ["error", { "ignore": ["\\.js$"] }],
     "import/order": ["error", {
       "newlines-between": "always-and-inside-groups",
