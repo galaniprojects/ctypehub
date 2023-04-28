@@ -33,6 +33,6 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: galaniprojects/ctype-hub
+          ECR_REPOSITORY: galaniprojects/ctypehub
         with:
-          args: set image -n ctype-hub deployment/ctype-hub ctype-hub=$ECR_REGISTRY/$ECR_REPOSITORY@${{ github.event.inputs.tag }}
+          args: set image -n ctypehub deployment/ctypehub ctypehub=$ECR_REGISTRY/$ECR_REPOSITORY@${{ github.event.inputs.tag }}
