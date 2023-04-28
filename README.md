@@ -1,3 +1,3 @@
-# ctypehub.com
+# ctypehub
 
-The source code of https://ctypehub.com
+The source code of https://ctypehub.galaniprojects.de
