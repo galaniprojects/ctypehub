@@ -18,6 +18,19 @@ if (!baseUri) {
   throw new ConfigurationError('No base URI provided');
 }
 
+const subscan = {
+  host: env.SUBSCAN_HOST,
+  secret: env.SECRET_SUBSCAN,
+};
+if (!subscan.host || !subscan.secret) {
+  throw new ConfigurationError('Subscan credentials missing');
+}
+
+const blockchainEndpoint = env.BLOCKCHAIN_ENDPOINT;
+if (!blockchainEndpoint) {
+  throw new ConfigurationError('No blockchain endpoint provided');
+}
+
 export const configuration = {
   port: env.PORT || 3000,
   baseUri,
@@ -25,4 +38,6 @@ export const configuration = {
   distFolder: path.join(cwd(), 'dist', 'frontend'),
   databaseUri:
     env.DATABASE_URI || 'postgres://postgres:postgres@localhost:5432/postgres',
+  subscan,
+  blockchainEndpoint,
 };
