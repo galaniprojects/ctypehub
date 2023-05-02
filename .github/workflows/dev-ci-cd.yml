@@ -51,4 +51,4 @@ jobs:
           ECR_REPOSITORY: galaniprojects/ctypehub
           IMAGE_TAG: ${{ github.sha }}
         with:
-          args: set image -n dev-ctypehub deployment/ctypehub ctypehub=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          args: set image -n ctypehub-dev deployment/ctypehub ctypehub=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
