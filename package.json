@@ -19,7 +19,7 @@
     "start": "yarn migrate && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
-    "@astrojs/node": "^5.1.1",
+    "@astrojs/node": "^5.1.2",
     "@astrojs/react": "^2.1.1",
     "@kiltprotocol/sdk-js": "^0.32.0",
     "astro": "^2.3.2",
