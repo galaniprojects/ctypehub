@@ -1,4 +1,6 @@
+require('dotenv').config();
+
 module.exports = {
   url: process.env.DATABASE_URI,
-  'migrations-path': 'src/backend/migrations',
+  'migrations-path': 'src/migrations',
 };
