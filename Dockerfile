@@ -27,6 +27,7 @@ ENV NODE_ENV production
 
 # get the dependencies and migrations stuff
 COPY package.json yarn.lock .sequelizerc ./
+COPY src/backend/migrations ./src/backend/migrations
 # install the production dependencies only (depends on NODE_ENV)
 RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
 
