@@ -1,8 +1,11 @@
 import { Sequelize } from 'sequelize';
 
-import { CType } from '../models/ctype';
+import { CType, CTypeModelDefinition } from '../models/ctype';
 
-import { LastBlockScanned } from '../models/lastBlockScanned';
+import {
+  LastBlockScanned,
+  LastBlockScannedModelDefinition,
+} from '../models/lastBlockScanned';
 
 import { configuration } from './configuration';
 import { logger } from './logger';
@@ -23,8 +26,8 @@ function getSequelize() {
 export async function initModels() {
   const sequelize = getSequelize();
 
-  CType.initTable(sequelize);
-  LastBlockScanned.initTable(sequelize);
+  CType.init(CTypeModelDefinition, { sequelize });
+  LastBlockScanned.init(LastBlockScannedModelDefinition, { sequelize });
 
   await sequelize.sync();
 }
