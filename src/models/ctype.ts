@@ -2,19 +2,23 @@ import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model } from 'sequelize';
 
-interface CTypeData extends ICType {
-  description: string;
+interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
+  id: ICType['$id'];
+  schema: ICType['$schema'];
   block: string;
+  creator: string;
+  createdAt: number;
+  description?: string;
 }
 
 export class CType extends Model<CTypeData> {}
 
 export const CTypeModelDefinition = {
-  $id: {
+  id: {
     type: DataTypes.STRING,
     primaryKey: true,
   },
-  $schema: {
+  schema: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -32,6 +36,14 @@ export const CTypeModelDefinition = {
   },
   block: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  creator: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   description: {

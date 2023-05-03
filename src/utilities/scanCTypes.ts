@@ -37,7 +37,12 @@ async function getCTypeEvents(fromBlock: number, page: number, row: number) {
         finalized: true,
       },
     })
-    .json<{ data: { count: number; events: Array<{ params: string }> } }>();
+    .json<{
+      data: {
+        count: number;
+        events: Array<{ params: string; block_timestamp: number }>;
+      };
+    }>();
 
   return { count, events };
 }
@@ -64,19 +69,32 @@ export async function scanCTypes() {
           page,
           SUBSCAN_MAX_ROWS,
         );
-        for (const { params } of events) {
+        for (const { params, block_timestamp } of events) {
           const parsed = JSON.parse(params) as [
             { type_name: 'CTypeCreatorOf'; value: `0x${string}` },
             { type_name: 'CTypeHashOf'; value: `0x${string}` },
           ];
-          const cTypeDetails = await CType.fetchFromChain(
-            CType.hashToId(parsed[1].value),
-          );
-          // TODO: populate database with CType details
+          const cTypeHash = parsed[1].value;
+
+          try {
+            const cTypeDetails = await CType.fetchFromChain(
+              CType.hashToId(cTypeHash),
+            );
+            const { $id, $schema, createdAt, ...rest } = cTypeDetails;
+
+            await CTypeModel.create({
+              id: $id,
+              schema: $schema,
+              block: createdAt.toString(),
+              createdAt: block_timestamp,
+              ...rest,
+            });
+          } catch (exception) {
+            logger.error(exception, `Error for CType ${cTypeHash}`);
+          }
         }
       }
     }
-
     await sleep(SCAN_INTERVAL);
   }
 }

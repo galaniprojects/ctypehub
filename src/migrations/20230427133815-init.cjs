@@ -6,11 +6,11 @@ module.exports = {
     const { sequelize } = queryInterface;
 
     sequelize.define('CType', {
-      $id: {
+      id: {
         type: Sequelize.STRING,
         primaryKey: true,
       },
-      $schema: {
+      schema: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -28,6 +28,14 @@ module.exports = {
       },
       block: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      creator: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
       description: {
