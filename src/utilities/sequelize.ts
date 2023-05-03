@@ -11,21 +11,11 @@ import { configuration } from './configuration';
 import { logger } from './logger';
 import { trackConnectionState } from './trackConnectionState';
 
-let sequelizeInstance: Sequelize;
-
-function getSequelize() {
-  if (!sequelizeInstance) {
-    sequelizeInstance = new Sequelize(configuration.databaseUri, {
-      logging: (sql) => logger.trace(sql),
-    });
-  }
-
-  return sequelizeInstance;
-}
+export const sequelize = new Sequelize(configuration.databaseUri, {
+  logging: (sql) => logger.trace(sql),
+});
 
 export async function initModels() {
-  const sequelize = getSequelize();
-
   CType.init(CTypeModelDefinition, { sequelize });
   LastBlockScanned.init(LastBlockScannedModelDefinition, { sequelize });
 
@@ -45,8 +35,6 @@ export async function checkDatabaseConnection(sequelize: Sequelize) {
 }
 
 export function trackDatabaseConnection() {
-  const sequelize = getSequelize();
-
   setInterval(async () => {
     try {
       await checkDatabaseConnection(sequelize);
