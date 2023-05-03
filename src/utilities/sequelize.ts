@@ -2,11 +2,6 @@ import { Sequelize } from 'sequelize';
 
 import { CType, CTypeModelDefinition } from '../models/ctype';
 
-import {
-  LastBlockScanned,
-  LastBlockScannedModelDefinition,
-} from '../models/lastBlockScanned';
-
 import { configuration } from './configuration';
 import { logger } from './logger';
 import { trackConnectionState } from './trackConnectionState';
@@ -17,7 +12,6 @@ export const sequelize = new Sequelize(configuration.databaseUri, {
 
 export async function initModels() {
   CType.init(CTypeModelDefinition, { sequelize });
-  LastBlockScanned.init(LastBlockScannedModelDefinition, { sequelize });
 
   await sequelize.sync();
 }
