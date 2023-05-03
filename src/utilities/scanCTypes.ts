@@ -52,7 +52,7 @@ async function getCTypeEvents(
         finalized: true,
       },
     })
-    .json<{ data: { count: number; events: { params: string }[] } }>();
+    .json<{ data: { count: number; events: Array<{ params: string }> } }>();
 
   return { count, events };
 }
