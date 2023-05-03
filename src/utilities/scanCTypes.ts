@@ -73,9 +73,7 @@ export async function scanCTypes() {
 
     if (count !== 0) {
       const pages = Math.ceil(count / SUBSCAN_MAX_ROWS);
-      const pagesArray = Array.from({ length: pages }, (v, i) => i);
-
-      for (const page of pagesArray) {
+      for (let page = 0; page < pages; page += 1) {
         const { events } = await getCTypeEvents(
           fromBlock,
           toBlock,
