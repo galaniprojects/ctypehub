@@ -48,7 +48,9 @@ export async function scanCTypes() {
       order: [['block', 'DESC']],
     });
 
-    const fromBlock = Number(latestCType.dataValues.block) + 1;
+    const fromBlock = latestCType
+      ? Number(latestCType.dataValues.block) + 1
+      : 0;
 
     const { count } = await getCTypeEvents(fromBlock, 0, 1);
 
