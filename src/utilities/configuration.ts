@@ -18,14 +18,11 @@ if (!baseUri) {
   throw new ConfigurationError('No base URI provided');
 }
 
-const httpAuthPassword = env.SECRET_HTTP_AUTH_PASSWORD;
-
 export const configuration = {
   port: env.PORT || 3000,
   baseUri,
   isProduction: env.PROD,
   distFolder: path.join(cwd(), 'dist', 'frontend'),
-  httpAuthPassword,
   databaseUri:
     env.DATABASE_URI || 'postgres://postgres:postgres@localhost:5432/postgres',
 };
