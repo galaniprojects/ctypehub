@@ -22,22 +22,7 @@ const apiKeyHeader = {
   'X-API-Key': subscan.secret,
 };
 
-async function getLastFinalizedBlock() {
-  const { data } = await got
-    .post(endpoints.metadata, {
-      headers: apiKeyHeader,
-    })
-    .json<{ data: { finalized_blockNum: string } }>();
-
-  return data.finalized_blockNum;
-}
-
-async function getCTypeEvents(
-  fromBlock: number,
-  toBlock: string,
-  page: number,
-  row: number,
-) {
+async function getCTypeEvents(fromBlock: number, page: number, row: number) {
   const {
     data: { count, events },
   } = await got
@@ -48,7 +33,7 @@ async function getCTypeEvents(
         row,
         module: 'ctype',
         call: 'CTypeCreated',
-        block_range: `${fromBlock}-${toBlock}`,
+        from_block: fromBlock,
         finalized: true,
       },
     })
@@ -65,9 +50,7 @@ export async function scanCTypes() {
 
     const fromBlock = Number(latestCType.dataValues.block) + 1;
 
-    const toBlock = await getLastFinalizedBlock();
-
-    const { count } = await getCTypeEvents(fromBlock, toBlock, 0, 1);
+    const { count } = await getCTypeEvents(fromBlock, 0, 1);
 
     logger.debug(`Found ${count} new CTypes`);
 
@@ -76,7 +59,6 @@ export async function scanCTypes() {
       for (let page = 0; page < pages; page += 1) {
         const { events } = await getCTypeEvents(
           fromBlock,
-          toBlock,
           page,
           SUBSCAN_MAX_ROWS,
         );
