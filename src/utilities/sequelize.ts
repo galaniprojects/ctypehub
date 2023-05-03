@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import CType from '../models/ctype';
 
-import LastBlockScanned from '../models/lastBlockScanned';
+import { LastBlockScanned } from '../models/lastBlockScanned';
 
 import { configuration } from './configuration';
 import { logger } from './logger';

@@ -1,8 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-export default class LastBlockScanned extends Model {
-  declare value: number;
-
+export class LastBlockScanned extends Model<{ value: number }> {
   static initTable(sequelize: Sequelize): void {
     LastBlockScanned.init(
       {
