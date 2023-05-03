@@ -4,6 +4,7 @@ import { DataTypes, Model } from 'sequelize';
 
 interface CTypeData extends ICType {
   description: string;
+  block: string;
 }
 
 export class CType extends Model<CTypeData> {}
@@ -26,6 +27,10 @@ export const CTypeModelDefinition = {
     allowNull: false,
   },
   type: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  block: {
     type: DataTypes.STRING,
     allowNull: false,
   },

@@ -2,7 +2,7 @@ import { got } from 'got';
 
 import { CType } from '@kiltprotocol/sdk-js';
 
-import { LastBlockScanned } from '../models/lastBlockScanned';
+import { CType as CTypeModel } from '../models/ctype';
 
 import { configuration } from './configuration';
 import { sleep } from './sleep';
@@ -59,13 +59,13 @@ async function getCTypeEvents(
 
 export async function scanCTypes() {
   while (true) {
-    const lastBlockScanned = await LastBlockScanned.findOne();
+    const latestCType = await CTypeModel.findOne({
+      order: [['block', 'DESC']],
+    });
 
-    const fromBlock = lastBlockScanned
-      ? lastBlockScanned.dataValues.value + 1
-      : 0;
+    const fromBlock = Number(latestCType.dataValues.block) + 1;
+
     const toBlock = await getLastFinalizedBlock();
-    console.log('toBlock: ', toBlock);
 
     const { count } = await getCTypeEvents(fromBlock, toBlock, 0, 1);
 
@@ -91,12 +91,6 @@ export async function scanCTypes() {
           // TODO: populate database with CType details
         }
       }
-    }
-
-    if (!lastBlockScanned) {
-      await LastBlockScanned.create({ value: Number(toBlock) });
-    } else {
-      await LastBlockScanned.update({ value: Number(toBlock) }, { where: {} });
     }
 
     await sleep(SCAN_INTERVAL);

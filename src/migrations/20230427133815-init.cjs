@@ -26,15 +26,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      block: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       description: {
         type: Sequelize.STRING,
-      },
-    });
-
-    sequelize.define('LastBlockScanned', {
-      value: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
       },
     });
 
