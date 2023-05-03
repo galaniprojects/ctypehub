@@ -2,14 +2,11 @@ import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-export default class CType extends Model {
-  declare $id: ICType['$id'];
-  declare $schema: ICType['$schema'];
-  declare title: ICType['title'];
-  declare properties: ICType['properties'];
-  declare type: ICType['type'];
-  declare description: string;
+interface CTypeData extends ICType {
+  description: string;
+}
 
+export default class CType extends Model<CTypeData> {
   static initTable(sequelize: Sequelize): void {
     CType.init(
       {
