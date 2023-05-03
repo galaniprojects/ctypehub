@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-import CType from '../models/ctype';
+import { CType } from '../models/ctype';
 
 import { LastBlockScanned } from '../models/lastBlockScanned';
 

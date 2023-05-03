@@ -6,7 +6,7 @@ interface CTypeData extends ICType {
   description: string;
 }
 
-export default class CType extends Model<CTypeData> {
+export class CType extends Model<CTypeData> {
   static initTable(sequelize: Sequelize): void {
     CType.init(
       {
