@@ -33,10 +33,6 @@ export default class CType extends Model {
           type: DataTypes.STRING,
           allowNull: false,
         },
-        createdAt: {
-          type: DataTypes.DATE,
-          allowNull: false,
-        },
         description: {
           type: DataTypes.STRING,
         },
