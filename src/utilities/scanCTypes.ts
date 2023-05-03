@@ -8,7 +8,7 @@ import { configuration } from './configuration';
 import { sleep } from './sleep';
 import { logger } from './logger';
 
-const SCAN_INTERVAL = 24 * 60 * 60 * 1000;
+const SCAN_INTERVAL = 10 * 60 * 1000;
 const SUBSCAN_MAX_ROWS = 100;
 
 const { subscan } = configuration;
