@@ -22,7 +22,11 @@ const apiKeyHeader = {
   'X-API-Key': subscan.secret,
 };
 
-async function getCTypeEvents(fromBlock: number, page: number, row: number) {
+export async function getCTypeEvents(
+  fromBlock: number,
+  page: number,
+  row: number,
+) {
   const {
     data: { count, events },
   } = await got

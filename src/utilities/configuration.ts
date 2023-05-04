@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { pino } from 'pino';
 
-const env = import.meta.env;
+import * as env from './env';
 
 class ConfigurationError extends Error {
   constructor(message: string) {
@@ -35,6 +35,7 @@ export const configuration = {
   port: env.PORT || 3000,
   baseUri,
   isProduction: env.PROD,
+  isTest: env.MODE === 'test',
   distFolder: path.join(cwd(), 'dist', 'frontend'),
   databaseUri:
     env.DATABASE_URI || 'postgres://postgres:postgres@localhost:5432/postgres',
