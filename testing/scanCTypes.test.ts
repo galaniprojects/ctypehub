@@ -4,7 +4,15 @@
 
 import type { Sequelize } from 'sequelize';
 
-import { afterAll, beforeAll, describe, expect, it, jest } from '@jest/globals';
+import {
+  afterAll,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from '@jest/globals';
 import { got } from 'got';
 import {
   Blockchain,
@@ -120,6 +128,10 @@ afterAll(async () => {
   await teardown();
 }, 10_000);
 
+beforeEach(() => {
+  jest.mocked(got.post).mockClear();
+});
+
 describe('scanCTypes', () => {
   describe('getCTypeEvents', () => {
     it('should query the subscan API', async () => {
@@ -161,9 +173,54 @@ describe('scanCTypes', () => {
       };
 
       await scanCTypes();
+      expect(got.post).toHaveBeenCalledTimes(2);
+      expect(got.post).toHaveBeenLastCalledWith(
+        'https://example.com/api/scan/events',
+        {
+          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          json: {
+            call: 'CTypeCreated',
+            finalized: true,
+            from_block: 0,
+            module: 'ctype',
+            page: 0,
+            row: 100,
+          },
+        },
+      );
       const created = await CTypeModel.findByPk(cType.$id);
       expect(created).not.toBeNull();
       expect(created?.dataValues.title).toBe(cType.title);
+    });
+
+    it('should not add a CType if it already exists', async () => {
+      postResponse = { data: { count: 0, events: [] } };
+
+      const latestCType = await CTypeModel.findOne({
+        order: [['block', 'DESC']],
+      });
+      const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
+
+      await scanCTypes();
+
+      expect(got.post).toHaveBeenCalledTimes(1);
+      expect(got.post).toHaveBeenLastCalledWith(
+        'https://example.com/api/scan/events',
+        {
+          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          json: {
+            call: 'CTypeCreated',
+            finalized: true,
+            from_block: expectedFromBlock,
+            module: 'ctype',
+            page: 0,
+            row: 1,
+          },
+        },
+      );
+
+      const { count } = await CTypeModel.findAndCountAll();
+      expect(count).toBe(1);
     });
   });
 });

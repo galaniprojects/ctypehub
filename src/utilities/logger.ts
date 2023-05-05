@@ -6,8 +6,7 @@ const { isProduction, isTest } = configuration;
 
 const level = (() => {
   if (isTest) return 'warn';
-  if (isProduction) return 'debug';
-  return 'trace';
+  return 'debug';
 })();
 
 const options: LoggerOptions = {
