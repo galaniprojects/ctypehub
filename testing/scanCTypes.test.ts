@@ -20,7 +20,11 @@ import {
 } from '@kiltprotocol/sdk-js';
 
 import * as env from '../src/utilities/env';
-import { getCTypeEvents } from '../src/utilities/scanCTypes';
+import {
+  EventParams,
+  getCTypeEvents,
+  scanCTypes,
+} from '../src/utilities/scanCTypes';
 import { configuration } from '../src/utilities/configuration';
 import { CType as CTypeModel } from '../src/models/ctype';
 
@@ -138,10 +142,28 @@ describe('scanCTypes', () => {
     });
   });
 
-  it('should allow sequelize queries (delete me)', async () => {
-    const latestCType = await CTypeModel.findOne({
-      order: [['block', 'DESC']],
+  describe('scanCTypes', () => {
+    it('should add new CType to the database', async () => {
+      const mockParams: EventParams = [
+        { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
+        { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
+      ];
+      postResponse = {
+        data: {
+          count: 1,
+          events: [
+            {
+              params: JSON.stringify(mockParams),
+              block_timestamp: 1651756558000,
+            },
+          ],
+        },
+      };
+
+      await scanCTypes();
+      const created = await CTypeModel.findByPk(cType.$id);
+      expect(created).not.toBeNull();
+      expect(created?.dataValues.title).toBe(cType.title);
     });
-    expect(latestCType).toBeNull();
   });
 });

@@ -22,6 +22,11 @@ const apiKeyHeader = {
   'X-API-Key': subscan.secret,
 };
 
+export type EventParams = [
+  { type_name: 'CTypeCreatorOf'; value: `0x${string}` },
+  { type_name: 'CTypeHashOf'; value: `0x${string}` },
+];
+
 export async function getCTypeEvents(
   fromBlock: number,
   page: number,
@@ -52,53 +57,52 @@ export async function getCTypeEvents(
 }
 
 export async function scanCTypes() {
-  while (true) {
-    const latestCType = await CTypeModel.findOne({
-      order: [['block', 'DESC']],
-    });
+  const latestCType = await CTypeModel.findOne({
+    order: [['block', 'DESC']],
+  });
 
-    const fromBlock = latestCType
-      ? Number(latestCType.dataValues.block) + 1
-      : 0;
+  const fromBlock = latestCType ? Number(latestCType.dataValues.block) + 1 : 0;
 
-    const { count } = await getCTypeEvents(fromBlock, 0, 1);
+  const { count } = await getCTypeEvents(fromBlock, 0, 1);
 
-    logger.debug(`Found ${count} new CTypes`);
+  logger.debug(`Found ${count} new CTypes`);
 
-    if (count !== 0) {
-      const pages = Math.ceil(count / SUBSCAN_MAX_ROWS);
-      for (let page = 0; page < pages; page += 1) {
-        const { events } = await getCTypeEvents(
-          fromBlock,
-          page,
-          SUBSCAN_MAX_ROWS,
-        );
-        for (const { params, block_timestamp } of events) {
-          const parsed = JSON.parse(params) as [
-            { type_name: 'CTypeCreatorOf'; value: `0x${string}` },
-            { type_name: 'CTypeHashOf'; value: `0x${string}` },
-          ];
-          const cTypeHash = parsed[1].value;
+  if (count !== 0) {
+    const pages = Math.ceil(count / SUBSCAN_MAX_ROWS);
+    for (let page = 0; page < pages; page += 1) {
+      const { events } = await getCTypeEvents(
+        fromBlock,
+        page,
+        SUBSCAN_MAX_ROWS,
+      );
+      for (const { params, block_timestamp } of events) {
+        const parsed = JSON.parse(params) as EventParams;
+        const cTypeHash = parsed[1].value;
 
-          try {
-            const cTypeDetails = await CType.fetchFromChain(
-              CType.hashToId(cTypeHash),
-            );
-            const { $id, $schema, createdAt, ...rest } = cTypeDetails;
+        try {
+          const cTypeDetails = await CType.fetchFromChain(
+            CType.hashToId(cTypeHash),
+          );
+          const { $id, $schema, createdAt, ...rest } = cTypeDetails;
 
-            await CTypeModel.create({
-              id: $id,
-              schema: $schema,
-              block: createdAt.toString(),
-              createdAt: block_timestamp,
-              ...rest,
-            });
-          } catch (exception) {
-            logger.error(exception, `Error for CType ${cTypeHash}`);
-          }
+          await CTypeModel.create({
+            id: $id,
+            schema: $schema,
+            block: createdAt.toString(),
+            createdAt: block_timestamp,
+            ...rest,
+          });
+        } catch (exception) {
+          logger.error(exception, `Error for CType ${cTypeHash}`);
         }
       }
     }
+  }
+}
+
+export async function watchForCTypes() {
+  while (true) {
+    await scanCTypes();
     await sleep(SCAN_INTERVAL);
   }
 }
