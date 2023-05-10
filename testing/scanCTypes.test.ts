@@ -107,6 +107,24 @@ async function createCType() {
 
 let sequelize: Sequelize;
 
+function mockCTypeEvent() {
+  const mockParams: EventParams = [
+    { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
+    { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
+  ];
+  postResponse = {
+    data: {
+      count: 1,
+      events: [
+        {
+          params: JSON.stringify(mockParams),
+          block_timestamp: 1602732456,
+        },
+      ],
+    },
+  };
+}
+
 beforeAll(async () => {
   await setup();
   await connect(configuration.blockchainEndpoint);
@@ -128,7 +146,8 @@ afterAll(async () => {
   await teardown();
 }, 10_000);
 
-beforeEach(() => {
+beforeEach(async () => {
+  await CTypeModel.destroy({ truncate: true });
   jest.mocked(got.post).mockClear();
 });
 
@@ -136,7 +155,7 @@ describe('scanCTypes', () => {
   describe('getCTypeEvents', () => {
     it('should query the subscan API', async () => {
       postResponse = { data: { count: 0, events: [] } };
-      await getCTypeEvents(10, 0, 0);
+      const cTypeEvents = await getCTypeEvents(10, 0, 0);
       expect(got.post).toHaveBeenCalledWith(
         'https://example.com/api/scan/events',
         {
@@ -151,26 +170,14 @@ describe('scanCTypes', () => {
           },
         },
       );
+      expect(cTypeEvents.count).toBe(0);
+      expect(cTypeEvents.events.length).toBe(0);
     });
   });
 
   describe('scanCTypes', () => {
     it('should add new CType to the database', async () => {
-      const mockParams: EventParams = [
-        { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
-        { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
-      ];
-      postResponse = {
-        data: {
-          count: 1,
-          events: [
-            {
-              params: JSON.stringify(mockParams),
-              block_timestamp: 1651756558000,
-            },
-          ],
-        },
-      };
+      mockCTypeEvent();
 
       await scanCTypes();
       expect(got.post).toHaveBeenCalledTimes(2);
@@ -194,16 +201,24 @@ describe('scanCTypes', () => {
     });
 
     it('should not add a CType if it already exists', async () => {
-      postResponse = { data: { count: 0, events: [] } };
-
-      const latestCType = await CTypeModel.findOne({
-        order: [['block', 'DESC']],
-      });
-      const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
+      mockCTypeEvent();
 
       await scanCTypes();
 
-      expect(got.post).toHaveBeenCalledTimes(1);
+      const latestCType = await CTypeModel.findOne({
+        order: [['createdAt', 'DESC']],
+        where: {
+          isFromSubscan: true,
+        },
+      });
+
+      const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
+
+      postResponse = { data: { count: 0, events: [] } };
+
+      await scanCTypes();
+
+      expect(got.post).toHaveBeenCalledTimes(3);
       expect(got.post).toHaveBeenLastCalledWith(
         'https://example.com/api/scan/events',
         {

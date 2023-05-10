@@ -38,6 +38,11 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      isFromSubscan: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       description: {
         type: Sequelize.STRING,
       },

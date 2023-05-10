@@ -11,14 +11,16 @@ export const sequelize = new Sequelize(configuration.databaseUri, {
 });
 
 export async function initModels() {
-  CType.init(CTypeModelDefinition, { sequelize });
+  CType.init(CTypeModelDefinition, {
+    sequelize,
+  });
 
   await sequelize.sync();
 }
 
 export const databaseConnectionState = trackConnectionState(2 * 60 * 1000);
 
-export async function checkDatabaseConnection(sequelize: Sequelize) {
+async function checkDatabaseConnection() {
   try {
     await sequelize.authenticate();
     databaseConnectionState.on();
@@ -31,7 +33,7 @@ export async function checkDatabaseConnection(sequelize: Sequelize) {
 export function trackDatabaseConnection() {
   setInterval(async () => {
     try {
-      await checkDatabaseConnection(sequelize);
+      await checkDatabaseConnection();
     } catch {}
   }, 60 * 1000);
 }
