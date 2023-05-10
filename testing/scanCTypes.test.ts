@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import type { Sequelize } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 
 import {
   afterAll,
@@ -24,12 +24,14 @@ import {
   disconnect,
   ICType,
   KiltKeyringPair,
+  SubmittableExtrinsic,
   Utils,
 } from '@kiltprotocol/sdk-js';
 
 import * as env from '../src/utilities/env';
 import {
   EventParams,
+  EventsResponseJson,
   getCTypeEvents,
   scanCTypes,
 } from '../src/utilities/scanCTypes';
@@ -38,7 +40,7 @@ import { CType as CTypeModel } from '../src/models/ctype';
 
 import { endowAccount, setup, submitter, teardown } from './integration.setup';
 
-let postResponse = {};
+let postResponse: EventsResponseJson;
 jest.mock('got', () => ({
   got: {
     post: jest.fn().mockReturnValue({
@@ -82,6 +84,7 @@ async function createDid() {
 }
 
 let cType: ICType;
+let extrinsic: SubmittableExtrinsic;
 
 async function createCType() {
   cType = CType.fromProperties('Email', {
@@ -92,7 +95,8 @@ async function createCType() {
 
   const api = ConfigService.get('api');
   const tx = api.tx.ctype.add(CType.toChain(cType));
-  const extrinsic = await Did.authorizeTx(
+
+  extrinsic = await Did.authorizeTx(
     did,
     tx,
     async ({ data }) => ({
@@ -119,6 +123,7 @@ function mockCTypeEvent() {
         {
           params: JSON.stringify(mockParams),
           block_timestamp: 1602732456,
+          extrinsic_hash: extrinsic.hash.toHex(),
         },
       ],
     },
@@ -208,7 +213,9 @@ describe('scanCTypes', () => {
       const latestCType = await CTypeModel.findOne({
         order: [['createdAt', 'DESC']],
         where: {
-          isFromSubscan: true,
+          block: {
+            [Op.not]: null,
+          },
         },
       });
 
@@ -236,6 +243,35 @@ describe('scanCTypes', () => {
 
       const { count } = await CTypeModel.findAndCountAll();
       expect(count).toBe(1);
+    });
+
+    it('should correctly upsert an existing CType', async () => {
+      const { $id, $schema, title, properties, type } = cType;
+      await CTypeModel.create({
+        id: $id,
+        schema: $schema,
+        title,
+        properties,
+        type,
+        creator: did,
+        createdAt: Date.now(),
+        extrinsicHash: extrinsic.hash.toHex(),
+      });
+
+      const beforeUpsert = await CTypeModel.findOne({
+        where: { id: cType.$id },
+      });
+      expect(beforeUpsert).not.toBeNull();
+      expect(beforeUpsert?.dataValues.block).toBeNull();
+
+      mockCTypeEvent();
+      await scanCTypes();
+
+      const afterUpsert = await CTypeModel.findOne({
+        where: { id: cType.$id },
+      });
+
+      expect(afterUpsert?.dataValues.block).not.toBeNull();
     });
   });
 });

@@ -5,11 +5,11 @@ import { DataTypes, Model, ModelAttributes } from 'sequelize';
 interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
-  block: string;
   creator: string;
   createdAt: number;
-  isFromSubscan: boolean;
-  description?: string;
+  extrinsicHash: string;
+  block: string | null;
+  description: string | null;
 }
 
 export class CType extends Model<CTypeData> {}
@@ -35,10 +35,6 @@ export const CTypeModelDefinition: ModelAttributes = {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  block: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   creator: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -47,10 +43,12 @@ export const CTypeModelDefinition: ModelAttributes = {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  isFromSubscan: {
-    type: DataTypes.BOOLEAN,
+  extrinsicHash: {
+    type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: false,
+  },
+  block: {
+    type: DataTypes.STRING,
   },
   description: {
     type: DataTypes.STRING,

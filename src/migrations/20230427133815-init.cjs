@@ -26,10 +26,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      block: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       creator: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -38,10 +34,12 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      isFromSubscan: {
-        type: Sequelize.BOOLEAN,
+      extrinsicHash: {
+        type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: false,
+      },
+      block: {
+        type: Sequelize.STRING,
       },
       description: {
         type: Sequelize.STRING,
