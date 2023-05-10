@@ -7,7 +7,6 @@ import { CType as CTypeModel } from '../models/ctype';
 import { configuration } from './configuration';
 import { sleep } from './sleep';
 import { logger } from './logger';
-import { sequelize } from './sequelize';
 
 const SCAN_INTERVAL_MS = 10 * 60 * 1000;
 
@@ -100,26 +99,25 @@ export async function scanCTypes() {
   for (let page = 0; page < pages; page += 1) {
     const { events } = await getCTypeEvents(fromBlock, page, SUBSCAN_MAX_ROWS);
     for (const { blockTimestampMs, hash } of events) {
+      let cTypeDetails: CType.ICTypeDetails;
+
       try {
-        const cTypeDetails = await CType.fetchFromChain(CType.hashToId(hash));
-        const { $id, $schema, createdAt: block, ...rest } = cTypeDetails;
-        try {
-          await CTypeModel.upsert({
-            id: $id,
-            schema: $schema,
-            block: block.toString(),
-            createdAt: blockTimestampMs,
-            isFromSubscan: true,
-            ...rest,
-          });
-        } catch (exception) {
-          logger.error(exception, 'Error upserting CType');
-          await sequelize.close();
-          break;
-        }
+        cTypeDetails = await CType.fetchFromChain(CType.hashToId(hash));
       } catch (exception) {
         logger.error(exception, `Error fetching details for CType ${hash}`);
+        continue;
       }
+
+      const { $id, $schema, createdAt: block, ...rest } = cTypeDetails;
+
+      await CTypeModel.upsert({
+        id: $id,
+        schema: $schema,
+        block: block.toString(),
+        createdAt: blockTimestampMs,
+        isFromSubscan: true,
+        ...rest,
+      });
     }
   }
 }
