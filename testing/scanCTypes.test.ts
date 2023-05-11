@@ -267,11 +267,8 @@ describe('scanCTypes', () => {
       mockCTypeEvent();
       await scanCTypes();
 
-      const afterUpsert = await CTypeModel.findOne({
-        where: { id: cType.$id },
-      });
-
-      expect(afterUpsert?.dataValues.block).not.toBeNull();
+      await beforeUpsert.reload();
+      expect(beforeUpsert?.dataValues.block).not.toBeNull();
     });
   });
 });
