@@ -2,10 +2,15 @@ import { LoggerOptions, pino } from 'pino';
 
 import { configuration } from './configuration';
 
-const { isProduction } = configuration;
+const { isProduction, isTest } = configuration;
+
+const level = (() => {
+  if (isTest) return 'warn';
+  return 'debug';
+})();
 
 const options: LoggerOptions = {
-  level: isProduction ? 'debug' : 'trace',
+  level,
   ...(!isProduction && { transport: { target: 'pino-pretty' } }),
   redact: isProduction
     ? [
