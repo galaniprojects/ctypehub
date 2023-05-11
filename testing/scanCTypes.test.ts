@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { Op, Sequelize } from 'sequelize';
+import { EmptyResultError, Op, Sequelize } from 'sequelize';
 
 import {
   afterAll,
@@ -258,17 +258,19 @@ describe('scanCTypes', () => {
         extrinsicHash: extrinsic.hash.toHex(),
       });
 
-      const beforeUpsert = await CTypeModel.findOne({
-        where: { id: cType.$id },
-      });
-      expect(beforeUpsert).not.toBeNull();
-      expect(beforeUpsert?.dataValues.block).toBeNull();
+      const beforeUpsert = await CTypeModel.findByPk(cType.$id);
+
+      if (!beforeUpsert) {
+        throw new Error('Not found');
+      }
+
+      expect(beforeUpsert.dataValues.block).toBeNull();
 
       mockCTypeEvent();
       await scanCTypes();
 
       await beforeUpsert.reload();
-      expect(beforeUpsert?.dataValues.block).not.toBeNull();
+      expect(beforeUpsert.dataValues.block).not.toBeNull();
     });
   });
 });
