@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-import { EmptyResultError, Op, Sequelize } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 
 import {
   afterAll,
@@ -159,7 +159,7 @@ beforeEach(async () => {
 describe('scanCTypes', () => {
   describe('getCTypeEvents', () => {
     it('should query the subscan API', async () => {
-      postResponse = { data: { count: 0, events: [] } };
+      postResponse = { data: { count: 0, events: null } };
       const cTypeEvents = await getCTypeEvents(10, 0, 0);
       expect(got.post).toHaveBeenCalledWith(
         'https://example.com/api/scan/events',
@@ -176,7 +176,7 @@ describe('scanCTypes', () => {
         },
       );
       expect(cTypeEvents.count).toBe(0);
-      expect(cTypeEvents.events.length).toBe(0);
+      expect(cTypeEvents.events).toBeUndefined();
     });
   });
 
