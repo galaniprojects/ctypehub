@@ -74,20 +74,18 @@ export async function getCTypeEvents(
     return { count };
   }
 
-  const parsedEvents: CTypeEvent[] = events.map(
-    ({ block_timestamp, extrinsic_hash, params }) => {
+  const parsedEvents: CTypeEvent[] = events
+    .reverse()
+    .map(({ block_timestamp, extrinsic_hash, params }) => {
       const eventParams = JSON.parse(params) as EventParams;
       return {
         blockTimestampMs: block_timestamp * 1000,
         cTypeHash: eventParams[1].value,
         extrinsicHash: extrinsic_hash,
       };
-    },
-  );
+    });
 
-  const eventsOrderedByASC = parsedEvents.reverse();
-
-  return { count, events: eventsOrderedByASC };
+  return { count, events: parsedEvents };
 }
 
 export async function scanCTypes() {
