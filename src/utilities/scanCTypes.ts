@@ -32,7 +32,7 @@ export interface EventsResponseJson {
       params: string;
       block_timestamp: number;
       extrinsic_hash: `0x${string}`;
-    }>;
+    }> | null;
   };
 }
 
@@ -51,7 +51,7 @@ export async function getCTypeEvents(
   fromBlock: number,
   page: number,
   row: number,
-): Promise<{ count: number; events: CTypeEvent[] }> {
+): Promise<{ count: number; events?: CTypeEvent[] }> {
   const json = {
     page,
     row,
@@ -70,16 +70,20 @@ export async function getCTypeEvents(
     })
     .json<EventsResponseJson>();
 
-  const parsedEvents: CTypeEvent[] = events.map(
-    ({ block_timestamp, extrinsic_hash, params }) => {
+  if (!events) {
+    return { count };
+  }
+
+  const parsedEvents: CTypeEvent[] = events
+    .reverse()
+    .map(({ block_timestamp, extrinsic_hash, params }) => {
       const eventParams = JSON.parse(params) as EventParams;
       return {
         blockTimestampMs: block_timestamp * 1000,
         cTypeHash: eventParams[1].value,
         extrinsicHash: extrinsic_hash,
       };
-    },
-  );
+    });
 
   return { count, events: parsedEvents };
 }
@@ -108,6 +112,10 @@ export async function scanCTypes() {
   const pages = Math.ceil(count / SUBSCAN_MAX_ROWS);
   for (let page = 0; page < pages; page += 1) {
     const { events } = await getCTypeEvents(fromBlock, page, SUBSCAN_MAX_ROWS);
+    if (!events) {
+      throw new Error('No events');
+    }
+
     for (const { blockTimestampMs, cTypeHash, extrinsicHash } of events) {
       let cTypeDetails: CType.ICTypeDetails;
 
