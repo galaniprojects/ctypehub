@@ -109,8 +109,9 @@ export async function scanCTypes() {
 
   logger.debug(`Found ${count} new CTypes`);
 
-  const pages = Math.ceil(count / SUBSCAN_MAX_ROWS);
-  for (let page = 0; page < pages; page += 1) {
+  const pages = Math.floor(count / SUBSCAN_MAX_ROWS);
+
+  for (let page = pages; page >= 0; page--) {
     const { events } = await getCTypeEvents(fromBlock, page, SUBSCAN_MAX_ROWS);
     if (!events) {
       throw new Error('No events');
