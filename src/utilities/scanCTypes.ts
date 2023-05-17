@@ -135,7 +135,7 @@ export async function scanCTypes() {
       await CTypeModel.upsert({
         id: $id,
         schema: $schema,
-        createdAt: blockTimestampMs,
+        createdAt: new Date(blockTimestampMs),
         extrinsicHash,
         block: block.toString(),
         ...rest,

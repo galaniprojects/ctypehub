@@ -1,12 +1,12 @@
-import type { ICType } from '@kiltprotocol/sdk-js';
+import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
 export interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
-  creator: string;
-  createdAt: number;
+  creator: DidUri;
+  createdAt: Date;
   extrinsicHash: string;
   block: string | null;
   description: string | null;

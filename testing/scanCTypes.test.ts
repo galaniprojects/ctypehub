@@ -254,7 +254,7 @@ describe('scanCTypes', () => {
         properties,
         type,
         creator: did,
-        createdAt: Date.now(),
+        createdAt: new Date(),
         extrinsicHash: extrinsic.hash.toHex(),
       });
 

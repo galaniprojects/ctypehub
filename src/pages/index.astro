@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
-import CTypeResultCard from '../components/CTypeResultCard/CTypeResultCard.astro';
 
 import { CType } from '../models/ctype';
+import { CTypeOverview } from '../components/CTypeOverview/CTypeOverview';
 
 const cTypes = await CType.findAll({ offset: 0, limit: 20 });
 ---
@@ -12,7 +12,7 @@ const cTypes = await CType.findAll({ offset: 0, limit: 20 });
   <Header />
 
   <ul>
-    {cTypes.map(({ dataValues }) => <CTypeResultCard cTypeData={dataValues} />)}
+    {cTypes.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
   </ul>
 </Layout>
 
