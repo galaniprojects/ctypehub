@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header/Header.astro';
+import { CType } from '../models/ctype';
+
+const { id } = Astro.params;
+
+const cType = await CType.findByPk(id);
+---
+
+<!-- TODO: Design -->
+<Layout>
+  <Header />
+  {!cType && <p>404 - Not found</p>}
+
+  {
+    cType && (
+      <section>
+        <h1>{cType.dataValues.title}</h1>
+        <pre>{JSON.stringify(cType.dataValues, null, 2)}</pre>
+      </section>
+    )
+  }
+</Layout>
+
+<style>
+  h1,
+  p,
+  pre {
+    color: var(--color-text-primary);
+  }
+</style>

@@ -2,7 +2,7 @@ import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
-interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
+export interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
   creator: string;
