@@ -7,7 +7,7 @@ import { CTypeOverview } from './CTypeOverview';
 
 const mockCTypeData: CTypeData = {
   id: 'kilt:ctype:0xexample',
-  schema: '"http://kilt-protocol.org/draft-01/ctype#',
+  schema: 'http://kilt-protocol.org/draft-01/ctype#',
   title: 'Example CType',
   properties: { example: { type: 'string' }, isExample: { type: 'boolean' } },
   type: 'object',

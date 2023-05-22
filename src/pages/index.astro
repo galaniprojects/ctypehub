@@ -5,7 +5,11 @@ import Header from '../components/Header/Header.astro';
 import { CType } from '../models/ctype';
 import { CTypeOverview } from '../components/CTypeOverview/CTypeOverview';
 
-const cTypes = await CType.findAll({ offset: 0, limit: 20 });
+const cTypes = await CType.findAll({
+  offset: 0,
+  limit: 20,
+  order: [['createdAt', 'DESC']],
+});
 ---
 
 <Layout>
