@@ -2,6 +2,7 @@ export default {
   coverageProvider: 'v8',
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
+    env$: '<rootDir>/testing/env.js',
     '\\.css$': '<rootDir>/testing/identity-obj-proxy.js',
   },
   // Use this configuration option to add custom reporters to Jest
