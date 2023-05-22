@@ -28,17 +28,22 @@ import {
   Utils,
 } from '@kiltprotocol/sdk-js';
 
-import * as env from '../src/utilities/env';
+import { CType as CTypeModel } from '../models/ctype';
+import {
+  endowAccount,
+  setup,
+  submitter,
+  teardown,
+} from '../../testing/integration.setup';
+
+import * as env from './env';
 import {
   EventParams,
   EventsResponseJson,
   getCTypeEvents,
   scanCTypes,
-} from '../src/utilities/scanCTypes';
-import { configuration } from '../src/utilities/configuration';
-import { CType as CTypeModel } from '../src/models/ctype';
-
-import { endowAccount, setup, submitter, teardown } from './integration.setup';
+} from './scanCTypes';
+import { configuration } from './configuration';
 
 let postResponse: EventsResponseJson;
 jest.mock('got', () => ({
@@ -132,7 +137,7 @@ beforeAll(async () => {
 
   await createCType();
 
-  const imported = await import('../src/utilities/sequelize');
+  const imported = await import('./sequelize');
   await imported.initModels();
   sequelize = imported.sequelize;
 }, 30_000);

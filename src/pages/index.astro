@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 
 import { CType } from '../models/ctype';
-import { CTypeOverview } from '../components/CTypeOverview/CTypeOverview';
+import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
 
 const cTypes = await CType.findAll({
   offset: 0,
