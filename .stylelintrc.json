@@ -1,7 +1,8 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-css-modules"
+    "stylelint-config-css-modules",
+    "stylelint-config-html"
   ],
   "rules": {
     "value-keyword-case": null,
