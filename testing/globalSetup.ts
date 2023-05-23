@@ -1,4 +1,5 @@
-import { spawn } from 'node:child_process';
+import { promisify } from 'node:util';
+import { exec, spawn } from 'node:child_process';
 
 import { GenericContainer, Wait } from 'testcontainers';
 
@@ -37,7 +38,8 @@ export default async function globalSetup() {
   }
 
   // configure the tests to talk to a new Astro instance
-  globalShared.server = spawn('which', ['yarn'], {
+  const yarn = (await promisify(exec)('which yarn')).stdout.trim();
+  globalShared.server = spawn(yarn, ['dev'], {
     detached: true,
     env: { MODE: 'test', DATABASE_URI: process.env.DATABASE_URI },
   });
