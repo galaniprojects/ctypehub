@@ -14,7 +14,7 @@ const SCAN_INTERVAL_MS = 10 * 60 * 1000;
 
 const SUBSCAN_MAX_ROWS = 100;
 
-const { subscan } = configuration;
+const { subscan, isTest } = configuration;
 
 const endpoints = {
   metadata: `https://${subscan.host}/api/scan/metadata`,
@@ -145,7 +145,7 @@ export async function scanCTypes() {
 }
 
 export async function watchForCTypes() {
-  while (true) {
+  while (!isTest) {
     await scanCTypes();
     await sleep(SCAN_INTERVAL_MS);
   }

@@ -13,11 +13,6 @@ class ConfigurationError extends Error {
   }
 }
 
-const baseUri = env.URL;
-if (!baseUri) {
-  throw new ConfigurationError('No base URI provided');
-}
-
 const subscan = {
   host: env.SUBSCAN_HOST,
   secret: env.SECRET_SUBSCAN,
@@ -33,7 +28,6 @@ if (!blockchainEndpoint) {
 
 export const configuration = {
   port: env.PORT || 3000,
-  baseUri,
   isProduction: env.PROD,
   isTest: env.MODE === 'test',
   distFolder: path.join(cwd(), 'dist', 'frontend'),

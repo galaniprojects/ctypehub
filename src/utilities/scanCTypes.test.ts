@@ -1,7 +1,3 @@
-/**
- * @jest-environment node
- */
-
 import { Op, Sequelize } from 'sequelize';
 
 import {
@@ -28,17 +24,17 @@ import {
   Utils,
 } from '@kiltprotocol/sdk-js';
 
-import * as env from '../src/utilities/env';
+import { CType as CTypeModel } from '../models/ctype';
+import { endowAccount } from '../../testing/endowAccount';
+
+import * as env from './env';
 import {
   EventParams,
   EventsResponseJson,
   getCTypeEvents,
   scanCTypes,
-} from '../src/utilities/scanCTypes';
-import { configuration } from '../src/utilities/configuration';
-import { CType as CTypeModel } from '../src/models/ctype';
-
-import { endowAccount, setup, submitter, teardown } from './integration.setup';
+} from './scanCTypes';
+import { configuration } from './configuration';
 
 let postResponse: EventsResponseJson;
 jest.mock('got', () => ({
@@ -49,14 +45,7 @@ jest.mock('got', () => ({
   },
 }));
 
-jest.mock('../src/utilities/env', () => ({
-  URL: 'http://localhost:3000',
-  SUBSCAN_HOST: 'example.com',
-  SECRET_SUBSCAN: 'SECRET_SUBSCAN',
-  BLOCKCHAIN_ENDPOINT: 'BLOCKCHAIN_ENDPOINT',
-  DATABASE_URI: 'DATABASE_URI',
-}));
-
+let submitter: KiltKeyringPair;
 let assertionMethod: KiltKeyringPair;
 let did: DidUri;
 
@@ -131,8 +120,10 @@ function mockCTypeEvent() {
 }
 
 beforeAll(async () => {
-  await setup();
   await connect(configuration.blockchainEndpoint);
+
+  submitter = Utils.Crypto.makeKeypairFromSeed(undefined, 'sr25519');
+  await endowAccount(submitter.address);
 
   const created = await createDid();
   assertionMethod = created.assertionMethod;
@@ -140,7 +131,7 @@ beforeAll(async () => {
 
   await createCType();
 
-  const imported = await import('../src/utilities/sequelize');
+  const imported = await import('./sequelize');
   await imported.initModels();
   sequelize = imported.sequelize;
 }, 30_000);
@@ -148,7 +139,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await sequelize.close();
   await disconnect();
-  await teardown();
 }, 10_000);
 
 beforeEach(async () => {

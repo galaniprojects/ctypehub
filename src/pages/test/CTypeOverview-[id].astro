@@ -1,0 +1,31 @@
+---
+import type { CTypeData } from '../../models/ctype';
+
+import { configuration } from '../../utilities/configuration';
+import CTypeOverview from '../../components/CTypeOverview/CTypeOverview.astro';
+import { NotFoundResponse } from '../../utilities/NotFoundResponse';
+
+const cTypes: Record<string, CTypeData> = {
+  example: {
+    id: 'kilt:ctype:0xexample',
+    schema: 'http://kilt-protocol.org/draft-01/ctype#',
+    title: 'Example CType',
+    properties: { example: { type: 'string' }, isExample: { type: 'boolean' } },
+    type: 'object',
+    creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+    createdAt: new Date(1684341336000),
+    extrinsicHash: '0xexamplehash',
+    description: 'This is some example cType data',
+    block: '123',
+  },
+};
+
+const { isProduction } = configuration;
+
+const cType = cTypes[Astro.params.id || ''];
+if (!cType || isProduction) {
+  return new NotFoundResponse();
+}
+---
+
+<CTypeOverview cTypeData={cType} />
