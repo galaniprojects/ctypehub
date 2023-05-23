@@ -1,9 +1,9 @@
 module.exports = {
   MODE: 'test',
   PROD: false,
-  URL: 'http://localhost:3000',
+  URL: process.env.URL,
   SUBSCAN_HOST: 'example.com',
   SECRET_SUBSCAN: 'SECRET_SUBSCAN',
-  BLOCKCHAIN_ENDPOINT: 'BLOCKCHAIN_ENDPOINT',
-  DATABASE_URI: 'DATABASE_URI',
+  BLOCKCHAIN_ENDPOINT: process.env.BLOCKCHAIN_ENDPOINT,
+  DATABASE_URI: process.env.DATABASE_URI,
 };

@@ -1,5 +1,9 @@
 export default {
   coverageProvider: 'v8',
+  // A path to a module which exports an async function that is triggered once before all test suites
+  globalSetup: '<rootDir>/testing/globalSetup.ts',
+  // A path to a module which exports an async function that is triggered once after all test suites
+  globalTeardown: '<rootDir>/testing/globalTeardown.ts',
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
     env$: '<rootDir>/testing/env.js',
