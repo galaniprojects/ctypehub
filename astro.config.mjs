@@ -12,7 +12,6 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        testcontainers: null, // integration tests may sit in src without Astro panicking
         buffer: 'buffer/',
         cbor: 'cbor-web',
       },
