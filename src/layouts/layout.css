@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Lato Regular';
-  src: url('/fonts/lato-regular.woff2') format('woff2');
+  src: url('./lato-regular.woff2') format('woff2');
 }
 
 :root {
