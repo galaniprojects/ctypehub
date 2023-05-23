@@ -7,8 +7,6 @@ export const PROD = import.meta.env.PROD;
 
 export const PORT = globalThis.process.env.PORT || import.meta.env.PORT;
 
-export const URL = globalThis.process.env.URL || import.meta.env.URL;
-
 export const SUBSCAN_HOST =
   globalThis.process.env.SUBSCAN_HOST || import.meta.env.SUBSCAN_HOST;
 

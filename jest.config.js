@@ -6,7 +6,7 @@ export default {
   globalTeardown: '<rootDir>/testing/globalTeardown.ts',
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    env$: '<rootDir>/testing/env.js',
+    env$: '<rootDir>/testing/env.ts',
     '\\.css$': '<rootDir>/testing/identity-obj-proxy.js',
   },
   // Use this configuration option to add custom reporters to Jest

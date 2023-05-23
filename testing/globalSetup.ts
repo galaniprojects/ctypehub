@@ -4,6 +4,9 @@ import { exec, spawn } from 'node:child_process';
 import { GenericContainer, Wait } from 'testcontainers';
 
 import { globalShared } from './globalShared';
+import * as envMock from './env';
+
+const env = { ...envMock, PROD: '', BLOCKCHAIN_ENDPOINT: '', DATABASE_URI: '' };
 
 export default async function globalSetup() {
   const WS_PORT = 9944;
@@ -20,7 +23,9 @@ export default async function globalSetup() {
   {
     const port = globalShared.blockchainContainer.getMappedPort(WS_PORT);
     const host = globalShared.blockchainContainer.getHost();
-    process.env.BLOCKCHAIN_ENDPOINT = `ws://${host}:${port}`;
+    const endpoint = `ws://${host}:${port}`;
+    env.BLOCKCHAIN_ENDPOINT = endpoint;
+    process.env.BLOCKCHAIN_ENDPOINT = endpoint;
   }
 
   // configure the code to use a local blank database
@@ -34,15 +39,14 @@ export default async function globalSetup() {
   {
     const port = globalShared.databaseContainer.getMappedPort(DB_PORT);
     const host = globalShared.databaseContainer.getHost();
-    process.env.DATABASE_URI = `postgres://postgres:${POSTGRES_PASSWORD}@${host}:${port}/postgres`;
+    const databaseUri = `postgres://postgres:${POSTGRES_PASSWORD}@${host}:${port}/postgres`;
+    env.DATABASE_URI = databaseUri;
+    process.env.DATABASE_URI = databaseUri;
   }
 
   // configure the tests to talk to a new Astro instance
   const yarn = (await promisify(exec)('which yarn')).stdout.trim();
-  globalShared.server = spawn(yarn, ['dev'], {
-    detached: true,
-    env: { MODE: 'test', DATABASE_URI: process.env.DATABASE_URI },
-  });
+  globalShared.server = spawn(yarn, ['dev'], { detached: true, env });
   process.env.URL = await new Promise((resolve) => {
     /*globalShared.server.stderr?.on('data', (buffer: Buffer) => {
       console.log(buffer.toString('utf-8'));
