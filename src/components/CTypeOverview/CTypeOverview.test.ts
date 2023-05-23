@@ -4,7 +4,7 @@ import { getSnapshotHtmlForPath } from '../../../testing/getSnapshotHtmlForPath'
 
 describe('CTypeOverview', () => {
   it('should match snapshot', async () => {
-    const html = await getSnapshotHtmlForPath('ctype-example');
+    const html = await getSnapshotHtmlForPath('CTypeOverview-example');
     expect(html).toMatchSnapshot();
   });
 });
