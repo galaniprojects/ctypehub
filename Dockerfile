@@ -11,7 +11,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
 
 COPY src ./src
-COPY tsconfig.json astro.config.mjs ./
+COPY tsconfig.json astro.config.mjs .env.example ./
 
 RUN yarn build
 
