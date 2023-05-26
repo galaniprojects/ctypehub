@@ -16,10 +16,7 @@ const SUBSCAN_MAX_ROWS = 100;
 
 const { subscan, isTest } = configuration;
 
-const endpoints = {
-  metadata: `https://${subscan.network}.api.subscan.io/api/scan/metadata`,
-  events: `https://${subscan.network}.api.subscan.io/api/scan/events`,
-};
+const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
 
 const apiKeyHeader = {
   'X-API-Key': subscan.secret,
@@ -64,7 +61,7 @@ export async function getCTypeEvents(
   const {
     data: { count, events },
   } = await got
-    .post(endpoints.events, {
+    .post(eventsApi, {
       headers: apiKeyHeader,
       json,
     })
