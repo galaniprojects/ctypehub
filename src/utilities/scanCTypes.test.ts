@@ -152,7 +152,7 @@ describe('scanCTypes', () => {
       postResponse = { data: { count: 0, events: null } };
       const cTypeEvents = await getCTypeEvents(10, 0, 0);
       expect(got.post).toHaveBeenCalledWith(
-        'https://example.com/api/scan/events',
+        'https://example.api.subscan.io/api/scan/events',
         {
           headers: { 'X-API-Key': env.SECRET_SUBSCAN },
           json: {
@@ -177,7 +177,7 @@ describe('scanCTypes', () => {
       await scanCTypes();
       expect(got.post).toHaveBeenCalledTimes(2);
       expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.com/api/scan/events',
+        'https://example.api.subscan.io/api/scan/events',
         {
           headers: { 'X-API-Key': env.SECRET_SUBSCAN },
           json: {
@@ -217,7 +217,7 @@ describe('scanCTypes', () => {
 
       expect(got.post).toHaveBeenCalledTimes(3);
       expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.com/api/scan/events',
+        'https://example.api.subscan.io/api/scan/events',
         {
           headers: { 'X-API-Key': env.SECRET_SUBSCAN },
           json: {

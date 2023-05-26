@@ -14,11 +14,14 @@ class ConfigurationError extends Error {
 }
 
 const subscan = {
-  host: env.SUBSCAN_HOST,
+  network: env.SUBSCAN_NETWORK,
   secret: env.SECRET_SUBSCAN,
 };
-if (!subscan.host || !subscan.secret) {
-  throw new ConfigurationError('Subscan credentials missing');
+if (!subscan.network) {
+  throw new ConfigurationError('No subscan network provided');
+}
+if (!subscan.secret) {
+  throw new ConfigurationError('No subscan secret provided');
 }
 
 const blockchainEndpoint = env.BLOCKCHAIN_ENDPOINT;

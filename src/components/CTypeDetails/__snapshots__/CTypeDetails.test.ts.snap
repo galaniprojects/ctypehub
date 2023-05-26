@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CTypeDetails should handle nested CType 1`] = `""`;
+
+exports[`CTypeDetails should handle nested CType property 1`] = `""`;
+
+exports[`CTypeDetails should match snapshot 1`] = `""`;

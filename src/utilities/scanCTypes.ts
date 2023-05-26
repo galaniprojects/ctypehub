@@ -17,8 +17,8 @@ const SUBSCAN_MAX_ROWS = 100;
 const { subscan, isTest } = configuration;
 
 const endpoints = {
-  metadata: `https://${subscan.host}/api/scan/metadata`,
-  events: `https://${subscan.host}/api/scan/events`,
+  metadata: `https://${subscan.network}.api.subscan.io/api/scan/metadata`,
+  events: `https://${subscan.network}.api.subscan.io/api/scan/events`,
 };
 
 const apiKeyHeader = {
