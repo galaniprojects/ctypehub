@@ -1,7 +1,13 @@
 ---
 import type { CTypeData } from '../../models/ctype';
 
-import { CType, ConfigService, Did, ICType } from '@kiltprotocol/sdk-js';
+import {
+  CType,
+  ConfigService,
+  Did,
+  DidUri,
+  ICType,
+} from '@kiltprotocol/sdk-js';
 
 import Container from '../Container.module.css';
 
@@ -31,6 +37,16 @@ function $refToHref($ref: string) {
   return $ref;
 }
 
+async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
+  const api = ConfigService.get('api');
+  const didChain = await api.call.did.query(Did.toChain(creator));
+  if (didChain.isNone) {
+    return;
+  }
+  const { web3Name } = Did.linkedInfoFromChain(didChain);
+  return web3Name;
+}
+
 interface Props {
   cTypeData: CTypeData;
 }
@@ -38,9 +54,7 @@ interface Props {
 const { title, creator, properties, createdAt, description, extrinsicHash } =
   Astro.props.cTypeData;
 
-const api = ConfigService.get('api');
-const didChain = await api.call.did.query(Did.toChain(creator));
-const { web3Name } = Did.linkedInfoFromChain(didChain);
+const web3Name = await getWeb3NameForDid(creator);
 
 const kiltCType = CType.fromProperties(title, properties);
 

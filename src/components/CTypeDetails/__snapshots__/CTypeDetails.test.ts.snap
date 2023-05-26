@@ -1,7 +1,198 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CTypeDetails should handle nested CType 1`] = `""`;
+exports[`CTypeDetails should handle nested CType 1`] = `
+"<section class="_container_lf0xe_1">
+  <h1 class="title">Example nested CType</h1>
 
-exports[`CTypeDetails should handle nested CType property 1`] = `""`;
+  <dl class="astro-OEZZIHGW">
+    <dt class="key">Creator:</dt>
+    <dd class="value">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
 
-exports[`CTypeDetails should match snapshot 1`] = `""`;
+    <dt class="key">Description:</dt>
+    <dd class="value">This is an example of a CType with a nested CType</dd>
+
+    <dt class="key" id="example">Property 1:</dt>
+    <dd class="value">
+      <a href="/kilt:ctype:0x1" class="astro-OEZZIHGW">example</a>
+    </dd>
+
+    <dt class="key" id="hasNestedCType">Property 2:</dt>
+    <dd class="value">hasNestedCType</dd>
+
+    <div class="indent">
+      <dt class="key">Type:</dt>
+      <dd class="value">boolean</dd>
+    </div>
+
+    <dt class="key">Creation date:</dt>
+    <dd class="value">5/17/2023, 6:35:36 PM</dd>
+
+    <dt class="key">Extrinsic:</dt>
+    <dd class="value">
+      <a
+        href="https://example.subscan.io/extrinsic/0xexamplehash"
+        class="astro-OEZZIHGW"
+      >
+        0xexamplehash
+      </a>
+    </dd>
+
+    <dt class="key">
+      Technical Details: <button class="toggleDetails"></button>
+    </dt>
+    <dd class="value technicalDetails hidden">
+      <pre class="astro-OEZZIHGW">
+{
+  &quot;$id&quot;: &quot;kilt:ctype:0x1692376199a5a74445bec96882d2d0313042d445906e6faa21f30949150a3779&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;properties&quot;: {
+    &quot;example&quot;: {
+      &quot;$ref&quot;: &quot;kilt:ctype:0x1&quot;
+    },
+    &quot;hasNestedCType&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;title&quot;: &quot;Example nested CType&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</pre
+      >
+    </dd>
+  </dl>
+</section>
+"
+`;
+
+exports[`CTypeDetails should handle nested CType property 1`] = `
+"<section class="_container_lf0xe_1">
+  <h1 class="title">Example nested CType property</h1>
+
+  <dl class="astro-OEZZIHGW">
+    <dt class="key">Creator:</dt>
+    <dd class="value">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
+
+    <dt class="key">Description:</dt>
+    <dd class="value">This is an example of a CType with a nested property</dd>
+
+    <dt class="key" id="example">Property 1:</dt>
+    <dd class="value">
+      <a href="/kilt:ctype:0x1#example" class="astro-OEZZIHGW">example</a>
+    </dd>
+
+    <dt class="key" id="hasNestedProperty">Property 2:</dt>
+    <dd class="value">hasNestedProperty</dd>
+
+    <div class="indent">
+      <dt class="key">Type:</dt>
+      <dd class="value">boolean</dd>
+    </div>
+
+    <dt class="key">Creation date:</dt>
+    <dd class="value">5/17/2023, 6:35:36 PM</dd>
+
+    <dt class="key">Extrinsic:</dt>
+    <dd class="value">
+      <a
+        href="https://example.subscan.io/extrinsic/0xexamplenestedhash"
+        class="astro-OEZZIHGW"
+      >
+        0xexamplenestedhash
+      </a>
+    </dd>
+
+    <dt class="key">
+      Technical Details: <button class="toggleDetails"></button>
+    </dt>
+    <dd class="value technicalDetails hidden">
+      <pre class="astro-OEZZIHGW">
+{
+  &quot;$id&quot;: &quot;kilt:ctype:0x9775780b45911ece6e960dcc3eb630ea1579988d0b58c1ee2a19e2b14eeb9904&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;properties&quot;: {
+    &quot;example&quot;: {
+      &quot;$ref&quot;: &quot;kilt:ctype:0x1#/properties/example&quot;
+    },
+    &quot;hasNestedProperty&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;title&quot;: &quot;Example nested CType property&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</pre
+      >
+    </dd>
+  </dl>
+</section>
+"
+`;
+
+exports[`CTypeDetails should match snapshot 1`] = `
+"<section class="_container_lf0xe_1">
+  <h1 class="title">Example CType</h1>
+
+  <dl class="astro-OEZZIHGW">
+    <dt class="key">Creator:</dt>
+    <dd class="value">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
+
+    <dt class="key">Description:</dt>
+    <dd class="value">This is some example cType data</dd>
+
+    <dt class="key" id="example">Property 1:</dt>
+    <dd class="value">example</dd>
+
+    <div class="indent">
+      <dt class="key">Type:</dt>
+      <dd class="value">string</dd>
+    </div>
+    <dt class="key" id="isExample">Property 2:</dt>
+    <dd class="value">isExample</dd>
+
+    <div class="indent">
+      <dt class="key">Type:</dt>
+      <dd class="value">boolean</dd>
+    </div>
+
+    <dt class="key">Creation date:</dt>
+    <dd class="value">5/17/2023, 6:35:36 PM</dd>
+
+    <dt class="key">Extrinsic:</dt>
+    <dd class="value">
+      <a
+        href="https://example.subscan.io/extrinsic/0xexamplehash"
+        class="astro-OEZZIHGW"
+      >
+        0xexamplehash
+      </a>
+    </dd>
+
+    <dt class="key">
+      Technical Details: <button class="toggleDetails"></button>
+    </dt>
+    <dd class="value technicalDetails hidden">
+      <pre class="astro-OEZZIHGW">
+{
+  &quot;$id&quot;: &quot;kilt:ctype:0xf3b3e856755acaa7f274a15b99baf636a306a2a96e1c324a8cbb12b0bc1716af&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;properties&quot;: {
+    &quot;example&quot;: {
+      &quot;type&quot;: &quot;string&quot;
+    },
+    &quot;isExample&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    }
+  },
+  &quot;title&quot;: &quot;Example CType&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</pre
+      >
+    </dd>
+  </dl>
+</section>
+"
+`;

@@ -48,9 +48,9 @@ export default async function globalSetup() {
   const yarn = (await promisify(exec)('which yarn')).stdout.trim();
   globalShared.server = spawn(yarn, ['dev'], { detached: true, env });
   process.env.URL = await new Promise((resolve) => {
-    /*globalShared.server.stderr?.on('data', (buffer: Buffer) => {
+    globalShared.server.stderr?.on('data', (buffer: Buffer) => {
       console.log(buffer.toString('utf-8'));
-    });*/
+    });
     globalShared.server.stdout?.on('data', async (buffer: Buffer) => {
       const text = buffer.toString('utf-8');
       // console.log(text);
