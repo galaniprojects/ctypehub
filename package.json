@@ -23,7 +23,7 @@
     "@astrojs/react": "^2.2.0",
     "@kiltprotocol/sdk-js": "^0.32.0",
     "astro": "^2.5.5",
-    "got": "^12.6.0",
+    "got": "^12.6.1",
     "http-status-codes": "^2.2.0",
     "pg": "^8.11.0",
     "pg-hstore": "^2.3.4",
