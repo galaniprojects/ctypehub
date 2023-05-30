@@ -23,7 +23,7 @@ exports[`CTypeDetails should handle nested CType 1`] = `
     </div>
 
     <dt class="">Creation date:</dt>
-    <dd class="">5/1/2023, 1:11:11 PM</dd>
+    <dd class="">5/1/2023, 12:00:00 PM</dd>
 
     <dt class="">Extrinsic:</dt>
     <dd class="">
@@ -81,7 +81,7 @@ exports[`CTypeDetails should handle nested CType property 1`] = `
     </div>
 
     <dt class="">Creation date:</dt>
-    <dd class="">5/1/2023, 1:11:11 PM</dd>
+    <dd class="">5/1/2023, 12:00:00 PM</dd>
 
     <dt class="">Extrinsic:</dt>
     <dd class="">
@@ -144,7 +144,7 @@ exports[`CTypeDetails should match snapshot 1`] = `
     </div>
 
     <dt class="">Creation date:</dt>
-    <dd class="">5/1/2023, 1:11:11 PM</dd>
+    <dd class="">5/1/2023, 12:00:00 PM</dd>
 
     <dt class="">Extrinsic:</dt>
     <dd class="">
