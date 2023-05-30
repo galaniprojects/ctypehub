@@ -56,6 +56,7 @@
       },
       "rules": {
         "react/jsx-key": "off",
+        "react/jsx-no-undef": "off",
         "react/no-unknown-property": ["error", { "ignore": ["class"] }]
       }
     }
