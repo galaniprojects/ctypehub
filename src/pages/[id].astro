@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
+import CTypeDetails from '../components/CTypeDetails/CTypeDetails.astro';
 import { CType } from '../models/ctype';
 import { NotFoundResponse } from '../utilities/NotFoundResponse';
 
@@ -13,20 +14,18 @@ if (!cType) {
 }
 ---
 
-<!-- TODO: Design -->
 <Layout>
   <Header />
 
-  <section>
-    <h1>{cType.dataValues.title}</h1>
-    <pre>{JSON.stringify(cType.dataValues, null, 2)}</pre>
+  <section class="view">
+    <CTypeDetails cTypeData={cType.dataValues} />
   </section>
 </Layout>
 
 <style>
-  h1,
-  p,
-  pre {
-    color: var(--color-text-primary);
+  .view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 </style>

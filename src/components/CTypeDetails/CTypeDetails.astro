@@ -1,0 +1,176 @@
+---
+import type { CTypeData } from '../../models/ctype';
+
+import {
+  CType,
+  ConfigService,
+  Did,
+  DidUri,
+  ICType,
+} from '@kiltprotocol/sdk-js';
+
+import containerStyles from '../Container.module.css';
+
+import { generatePath, paths } from '../../paths';
+import { configuration } from '../../utilities/configuration';
+
+function isKiltCTypeRef(ref: string): ref is ICType['$id'] {
+  const regex = /^kilt:ctype:0x([a-fA-F0-9]+)(#\/properties\/.+)?$/;
+  return regex.test(ref);
+}
+
+function $refToHref($ref: string) {
+  if (isKiltCTypeRef($ref)) {
+    return generatePath(paths.ctypeDetails, $ref);
+  }
+  return $ref;
+}
+
+async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
+  const api = ConfigService.get('api');
+  const didChain = await api.call.did.query(Did.toChain(did));
+  if (didChain.isNone) {
+    return;
+  }
+  const { web3Name } = Did.linkedInfoFromChain(didChain);
+  return web3Name;
+}
+
+interface Props {
+  cTypeData: CTypeData;
+}
+
+const { title, creator, properties, createdAt, description, extrinsicHash } =
+  Astro.props.cTypeData;
+
+const web3Name = await getWeb3NameForDid(creator);
+
+const kiltCType = CType.fromProperties(title, properties);
+
+const { subscan } = configuration;
+---
+
+<section class={containerStyles.container}>
+  <h1 class="title">{title}</h1>
+
+  <dl>
+    <dt>Creator:</dt>
+    <dd>
+      {
+        web3Name ? (
+          <a href={`https://w3n.id/${web3Name}`}>w3n:{web3Name}</a>
+        ) : (
+          creator
+        )
+      }
+    </dd>
+
+    {
+      description && (
+        <Fragment>
+          <dt>Description:</dt>
+          <dd>{description}</dd>
+        </Fragment>
+      )
+    }
+
+    {
+      Object.entries(properties).map(([name, { type, $ref }], index) => (
+        <Fragment>
+          <dt id={`/properties/${name}`}>{`Property ${index + 1}:`}</dt>
+          <dd>{$ref ? <a href={$refToHref($ref)}>{name}</a> : name}</dd>
+
+          {type && (
+            <div class="indent">
+              <dt>Type:</dt>
+              <dd>{type}</dd>
+            </div>
+          )}
+        </Fragment>
+      ))
+    }
+
+    <dt>Creation date:</dt>
+    <dd>
+      {createdAt.toLocaleString()}
+    </dd>
+
+    <dt>Extrinsic:</dt>
+    <dd>
+      <a
+        href={`https://${subscan.network}.subscan.io/extrinsic/${extrinsicHash}`}
+      >
+        {extrinsicHash}
+      </a>
+    </dd>
+
+    <dt>
+      <a class="showDetails" href="#details">Technical Details:</a>
+    </dt>
+
+    <dd id="details">
+      <pre>{JSON.stringify(kiltCType, null, 2)}</pre>
+    </dd>
+  </dl>
+</section>
+
+<style>
+  h1,
+  dt,
+  dd {
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+
+  pre {
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 1.375rem;
+    margin: 0;
+    color: var(--color-text-primary);
+  }
+
+  dt {
+    font-family: 'Lato Bold', sans-serif;
+    color: #ce9000;
+    margin-block-end: 0.25rem;
+  }
+
+  dd {
+    margin-inline: 0;
+    margin-block-end: 0.5rem;
+    color: var(--color-text-primary);
+  }
+
+  .indent {
+    margin-inline-start: 1.25rem;
+  }
+
+  .showDetails {
+    background: url('chevron-down.svg') no-repeat right;
+    font-family: inherit;
+    color: inherit;
+    text-decoration: none;
+    padding-inline-end: 1.5rem;
+  }
+
+  #details {
+    display: none;
+  }
+
+  #details:target {
+    display: block;
+    color: #b0d5fb;
+    background: rgba(var(--color-black-rgb) / 60%);
+    border: 1px solid rgba(147 222 141 / 30%);
+    overflow: auto;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    margin-block-start: 0.5rem;
+  }
+</style>

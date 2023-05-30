@@ -2,15 +2,16 @@
 import { NotFoundResponse } from '../../utilities/NotFoundResponse';
 
 import { configuration } from '../../utilities/configuration';
-import CTypeOverview from '../../components/CTypeOverview/CTypeOverview.astro';
+import CTypeDetails from '../../components/CTypeDetails/CTypeDetails.astro';
 import { cTypes } from '../../../testing/cTypes';
 
 const { isProduction } = configuration;
 
 const cType = cTypes[Astro.params.id || ''];
+
 if (!cType || isProduction) {
   return new NotFoundResponse();
 }
 ---
 
-<CTypeOverview cTypeData={cType} />
+<CTypeDetails cTypeData={cType} />

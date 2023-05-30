@@ -5,7 +5,7 @@
 export const MODE = import.meta.env.MODE;
 export const PROD = import.meta.env.PROD;
 export const PORT = import.meta.env.PORT;
-export const SUBSCAN_HOST = import.meta.env.SUBSCAN_HOST;
+export const SUBSCAN_NETWORK = import.meta.env.SUBSCAN_NETWORK;
 export const SECRET_SUBSCAN = import.meta.env.SECRET_SUBSCAN;
 export const BLOCKCHAIN_ENDPOINT = import.meta.env.BLOCKCHAIN_ENDPOINT;
 export const DATABASE_URI = import.meta.env.DATABASE_URI;

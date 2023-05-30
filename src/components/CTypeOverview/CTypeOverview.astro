@@ -1,6 +1,10 @@
 ---
 import type { CTypeData } from '../../models/ctype';
 
+import containerStyles from '../Container.module.css';
+
+import { generatePath, paths } from '../../paths';
+
 interface Props {
   cTypeData: CTypeData;
 }
@@ -8,25 +12,15 @@ interface Props {
 const { title, id } = Astro.props.cTypeData;
 ---
 
-<li class="container">
+<li class={containerStyles.container}>
   <h2 class="title">
-    <a class="link" href={`/${id}`}>
+    <a class="link" href={generatePath(paths.ctypeDetails, id)}>
       {title}
     </a>
   </h2>
 </li>
 
 <style>
-  .container {
-    box-sizing: border-box;
-    width: 95%;
-    padding: 1.25rem;
-    border: 1px solid rgba(var(--color-white-rgb) / 5%);
-    margin-block-start: 0.25rem;
-    background: rgba(var(--color-black-rgb) / 30%);
-    border-radius: 0.3125rem;
-  }
-
   .title {
     overflow-wrap: break-word;
     font-size: 1rem;
