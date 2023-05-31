@@ -3,11 +3,11 @@ import { NotFoundResponse } from '../../utilities/NotFoundResponse';
 
 import { configuration } from '../../utilities/configuration';
 import CTypeDetails from '../../components/CTypeDetails/CTypeDetails.astro';
-import { cTypes } from '../../../testing/cTypes';
+import { mockCTypes } from '../../utilities/mockCTypes';
 
 const { isProduction } = configuration;
 
-const cType = cTypes[Astro.params.id || ''];
+const cType = mockCTypes[Astro.params.id || ''];
 
 if (!cType || isProduction) {
   return new NotFoundResponse();

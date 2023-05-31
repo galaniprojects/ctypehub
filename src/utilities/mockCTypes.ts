@@ -1,6 +1,6 @@
-import type { CTypeData } from '../src/models/ctype';
+import type { CTypeData } from '../models/ctype';
 
-export const cTypes: Record<string, CTypeData> = {
+export const mockCTypes: Record<string, CTypeData> = {
   example: {
     id: 'kilt:ctype:0x1',
     schema: 'http://kilt-protocol.org/draft-01/ctype#',
