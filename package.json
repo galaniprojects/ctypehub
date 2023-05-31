@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@astrojs/node": "^5.1.4",
-    "@astrojs/react": "^2.2.0",
+    "@astrojs/react": "^2.2.1",
     "@kiltprotocol/sdk-js": "^0.32.1",
     "astro": "^2.5.5",
     "got": "^12.6.0",
