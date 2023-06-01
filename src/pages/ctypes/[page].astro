@@ -1,0 +1,33 @@
+---
+import { NotFoundResponse } from '../../utilities/NotFoundResponse';
+
+import { paginate } from '../../utilities/paginate';
+import CTypeOverview from '../../components/CTypeOverview/CTypeOverview.astro';
+
+const { page } = Astro.params;
+
+if (!page || page === '0' || !Number.isInteger(Number(page))) {
+  return new NotFoundResponse();
+}
+
+const {
+  data,
+  currentPage,
+  lastPage,
+  url: { prev, next },
+} = await paginate(page);
+
+if (data.length === 0) {
+  return new NotFoundResponse();
+}
+---
+
+<section>
+  <ul>
+    {data.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
+  </ul>
+
+  <p>Page {currentPage} of {lastPage}</p>
+  {prev && <a href={prev}>Previous</a>}
+  {next && <a href={next}>Next</a>}
+</section>
