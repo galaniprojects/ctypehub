@@ -7,19 +7,23 @@ const limit = 10;
 
 export async function paginate(page: string): Promise<Page<CType>> {
   const currentPage = Number(page);
-  const offset = (currentPage - 1) * limit;
-
   const total = await CType.count();
-
-  const data = await CType.findAll({
-    offset,
-    limit,
-    order: [['createdAt', 'ASC']],
-  });
-
   const lastPage = Math.ceil(total / limit);
 
+  const pageTooHigh = currentPage > lastPage;
+
+  const offset = Math.max(total - currentPage * limit, 0);
+
+  const data = pageTooHigh
+    ? []
+    : await CType.findAll({
+        offset,
+        limit,
+        order: [['createdAt', 'DESC']],
+      });
+
   const path = paths.ctypes;
+
   const current = generatePath(path, String(currentPage));
   const prev =
     currentPage === 1 ? undefined : generatePath(path, String(currentPage - 1));
