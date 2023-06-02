@@ -1,4 +1,5 @@
 export const paths = {
+  home: '/',
   ctypeDetails: '/[param]',
   ctypes: '/ctypes/page-[param]',
 };

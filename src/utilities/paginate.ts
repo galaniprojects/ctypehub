@@ -6,21 +6,22 @@ import { CType } from '../models/ctype';
 const limit = 10;
 
 export async function paginate(page: string): Promise<Page<CType>> {
-  const currentPage = Number(page);
   const total = await CType.count();
-  const lastPage = Math.ceil(total / limit);
 
-  const pageTooHigh = currentPage > lastPage;
+  const lastPage = Math.floor(total / limit);
 
-  const offset = Math.max(total - currentPage * limit, 0);
+  const currentPage = Number(page);
 
-  const data = pageTooHigh
-    ? []
-    : await CType.findAll({
-        offset,
-        limit,
-        order: [['createdAt', 'DESC']],
-      });
+  const offset = total - currentPage * limit;
+
+  const data =
+    currentPage >= lastPage
+      ? []
+      : await CType.findAll({
+          offset,
+          limit,
+          order: [['createdAt', 'DESC']],
+        });
 
   const path = paths.ctypes;
 
@@ -28,8 +29,8 @@ export async function paginate(page: string): Promise<Page<CType>> {
   const prev =
     currentPage === 1 ? undefined : generatePath(path, String(currentPage - 1));
   const next =
-    currentPage === lastPage
-      ? undefined
+    currentPage === lastPage - 1
+      ? paths.home
       : generatePath(path, String(currentPage + 1));
 
   return {
@@ -44,6 +45,39 @@ export async function paginate(page: string): Promise<Page<CType>> {
       current,
       prev,
       next,
+    },
+  };
+}
+
+export async function getLatest(): Promise<Page<CType>> {
+  const total = await CType.count();
+  const lastPage = Math.floor(total / limit);
+  const totalPaginated = (lastPage - 1) * limit;
+
+  const size = total - totalPaginated;
+
+  const data = await CType.findAll({
+    limit: size,
+    order: [['createdAt', 'DESC']],
+  });
+
+  const current = paths.home;
+
+  return {
+    data,
+    start: 0,
+    end: data.length - 1,
+    total,
+    currentPage: lastPage,
+    lastPage,
+    size,
+    url: {
+      current,
+      next: undefined,
+      prev:
+        lastPage === 1
+          ? undefined
+          : generatePath(paths.ctypes, String(lastPage - 1)),
     },
   };
 }

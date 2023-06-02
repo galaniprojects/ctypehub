@@ -2,31 +2,70 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 
-import { CType } from '../models/ctype';
 import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
+import { getLatest } from '../utilities/paginate';
 
-const cTypes = await CType.findAll({
-  offset: 0,
-  limit: 20,
-  order: [['createdAt', 'DESC']],
-});
+const {
+  data,
+  currentPage,
+  url: { prev },
+} = await getLatest();
 ---
 
 <Layout>
   <Header />
 
-  <ul>
-    {cTypes.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
-  </ul>
+  {
+    data && data.length > 0 && (
+      <section>
+        <ul>
+          {data.map(({ dataValues }) => (
+            <CTypeOverview cTypeData={dataValues} />
+          ))}
+        </ul>
+
+        <nav>
+          <p>Page {currentPage}</p>
+          {prev && <a href={prev}>Older</a>}
+        </nav>
+      </section>
+    )
+  }
 </Layout>
 
 <style>
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+  }
+
   ul {
+    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: center;
+  }
+
+  p {
+    color: var(--color-text-primary);
+    grid-column: 2 / 3;
+  }
+
+  a {
+    text-align: center;
+    color: var(--color-link);
   }
 </style>
