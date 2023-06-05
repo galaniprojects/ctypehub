@@ -1,83 +1,73 @@
 import type { Page } from 'astro';
 
-import { generatePath, paths } from '../paths';
+import { paths } from '../paths';
 import { CType } from '../models/ctype';
 
-const limit = 10;
+export async function paginate(url: URL, pageLimit = 10): Promise<Page<CType>> {
+  const page = url.searchParams.get('page');
 
-export async function paginate(page: string): Promise<Page<CType>> {
+  const isHomePage = !page || !Number.isInteger(Number(page));
+
   const total = await CType.count();
+  const lastPage = Math.floor(total / pageLimit);
 
-  const lastPage = Math.floor(total / limit);
+  const currentPage = isHomePage ? lastPage : Number(page);
+  const offset = isHomePage ? 0 : total - currentPage * pageLimit;
+  const totalPaginated = Math.max(lastPage - 1, 0) * pageLimit;
+  const size = isHomePage ? total - totalPaginated : pageLimit;
 
-  const currentPage = Number(page);
-
-  const offset = total - currentPage * limit;
+  const start = total - offset;
+  const end = start - (size - 1);
 
   const data =
-    currentPage >= lastPage
+    currentPage > lastPage
       ? []
       : await CType.findAll({
           offset,
-          limit,
+          limit: size,
           order: [['createdAt', 'DESC']],
         });
 
-  const path = paths.ctypes;
+  const current = url.toString();
 
-  const current = generatePath(path, String(currentPage));
-  const prev =
-    currentPage === 1 ? undefined : generatePath(path, String(currentPage - 1));
-  const next =
-    currentPage === lastPage - 1
-      ? paths.home
-      : generatePath(path, String(currentPage + 1));
+  const next = () => {
+    if (isHomePage) {
+      return undefined;
+    }
+    if (currentPage === lastPage - 1) {
+      return new URL(paths.home, current).toString();
+    }
+    const next = new URL(current);
+    next.searchParams.set('page', String(currentPage + 1));
+    return next.toString();
+  };
+
+  const prev = () => {
+    if (isHomePage && lastPage <= 1) {
+      return undefined;
+    }
+
+    if (currentPage === 1) {
+      return undefined;
+    }
+
+    const prev = new URL(current);
+    prev.searchParams.set('page', String(currentPage - 1));
+    return prev.toString();
+  };
 
   return {
     data,
-    start: offset,
-    end: offset + (data.length - 1),
+    start,
+    end,
     total,
     currentPage,
-    size: limit,
-    lastPage,
-    url: {
-      current,
-      prev,
-      next,
-    },
-  };
-}
-
-export async function getLatest(): Promise<Page<CType>> {
-  const total = await CType.count();
-  const lastPage = Math.floor(total / limit);
-  const totalPaginated = (lastPage - 1) * limit;
-
-  const size = total - totalPaginated;
-
-  const data = await CType.findAll({
-    limit: size,
-    order: [['createdAt', 'DESC']],
-  });
-
-  const current = paths.home;
-
-  return {
-    data,
-    start: 0,
-    end: data.length - 1,
-    total,
-    currentPage: lastPage,
-    lastPage,
     size,
+    lastPage,
     url: {
       current,
-      next: undefined,
-      prev:
-        lastPage === 1
-          ? undefined
-          : generatePath(paths.ctypes, String(lastPage - 1)),
+      prev: prev(),
+      next: next(),
     },
   };
 }

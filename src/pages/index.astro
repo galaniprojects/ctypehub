@@ -3,34 +3,34 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 
 import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
-import { getLatest } from '../utilities/paginate';
+import { paginate } from '../utilities/paginate';
+import { NotFoundResponse } from '../utilities/NotFoundResponse';
 
 const {
   data,
   currentPage,
-  url: { prev },
-} = await getLatest();
+  url: { prev, next },
+} = await paginate(Astro.url);
+
+if (data.length === 0) {
+  return new NotFoundResponse();
+}
 ---
 
 <Layout>
   <Header />
 
-  {
-    data && data.length > 0 && (
-      <section>
-        <ul>
-          {data.map(({ dataValues }) => (
-            <CTypeOverview cTypeData={dataValues} />
-          ))}
-        </ul>
+  <section>
+    <ul>
+      {data.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
+    </ul>
 
-        <nav>
-          <p>Page {currentPage}</p>
-          {prev && <a href={prev}>Older</a>}
-        </nav>
-      </section>
-    )
-  }
+    <nav>
+      {next && <a href={next}>Newer</a>}
+      <p>Page {currentPage}</p>
+      {prev && <a href={prev}>Older</a>}
+    </nav>
+  </section>
 </Layout>
 
 <style>

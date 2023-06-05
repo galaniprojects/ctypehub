@@ -1,7 +1,6 @@
 export const paths = {
   home: '/',
-  ctypeDetails: '/[param]',
-  ctypes: '/ctypes/page-[param]',
+  ctypeDetails: '/ctype/[param]',
 };
 
 export function generatePath(path: string, param: string) {
