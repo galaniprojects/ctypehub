@@ -131,9 +131,7 @@ beforeAll(async () => {
 
   await createCType();
 
-  const imported = await import('./sequelize');
-  await imported.initModels();
-  sequelize = imported.sequelize;
+  sequelize = (await import('./sequelize')).sequelize;
 }, 30_000);
 
 afterAll(async () => {
