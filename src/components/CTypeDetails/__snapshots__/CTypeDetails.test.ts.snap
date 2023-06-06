@@ -12,7 +12,7 @@ exports[`CTypeDetails should handle nested CType 1`] = `
     <dd>This is an example of a CType with a nested CType</dd>
 
     <dt id="/properties/example">Property 1:</dt>
-    <dd><a href="/kilt:ctype:0x1">example</a></dd>
+    <dd><a href="/ctype/kilt:ctype:0x1">example</a></dd>
 
     <dt id="/properties/hasNestedCType">Property 2:</dt>
     <dd>hasNestedCType</dd>
@@ -71,7 +71,7 @@ exports[`CTypeDetails should handle nested CType property 1`] = `
     <dd>This is an example of a CType with a nested property</dd>
 
     <dt id="/properties/example">Property 1:</dt>
-    <dd><a href="/kilt:ctype:0x1#/properties/example">example</a></dd>
+    <dd><a href="/ctype/kilt:ctype:0x1#/properties/example">example</a></dd>
 
     <dt id="/properties/hasNestedProperty">Property 2:</dt>
     <dd>hasNestedProperty</dd>

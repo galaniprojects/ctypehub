@@ -3,7 +3,7 @@
 exports[`CTypeOverview should match snapshot 1`] = `
 "<li class="_container">
   <h2 class="title">
-    <a class="link" href="/kilt:ctype:0x1"> Example CType </a>
+    <a class="link" href="/ctype/kilt:ctype:0x1"> Example CType </a>
   </h2>
 </li>
 "
