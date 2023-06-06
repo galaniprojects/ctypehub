@@ -6,20 +6,26 @@ exports[`index.astro should render all CTypes 1`] = `
     <h1>CTypeHub</h1>
   </header>
 
-  <ul>
-    <li class="_container">
-      <h2 class="title">
-        <a class="link" href="/kilt:ctype:0x1"> Example CType </a>
-      </h2>
-    </li>
-    <li class="_container">
-      <h2 class="title">
-        <a class="link" href="/kilt:ctype:0x2">
-          Example nested CType property
-        </a>
-      </h2>
-    </li>
-  </ul>
+  <section>
+    <ul>
+      <li class="_container">
+        <h2 class="title">
+          <a class="link" href="/ctype/kilt:ctype:0x1"> Example CType </a>
+        </h2>
+      </li>
+      <li class="_container">
+        <h2 class="title">
+          <a class="link" href="/ctype/kilt:ctype:0x2">
+            Example nested CType property
+          </a>
+        </h2>
+      </li>
+    </ul>
+
+    <nav>
+      <p>Page 0</p>
+    </nav>
+  </section>
 </body>
 "
 `;
