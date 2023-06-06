@@ -68,6 +68,6 @@
     "stylelint-config-standard": "^33.0.0",
     "testcontainers": "^9.8.0",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
