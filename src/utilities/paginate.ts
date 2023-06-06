@@ -1,6 +1,5 @@
 import type { Page } from 'astro';
 
-import { paths } from '../paths';
 import { CType } from '../models/ctype';
 
 export async function paginate(url: URL, pageLimit = 10): Promise<Page<CType>> {
@@ -30,19 +29,20 @@ export async function paginate(url: URL, pageLimit = 10): Promise<Page<CType>> {
 
   const current = url.toString();
 
-  const next = () => {
+  const next = (() => {
     if (isHomePage) {
       return undefined;
     }
-    if (currentPage === lastPage - 1) {
-      return new URL(paths.home, current).toString();
-    }
     const next = new URL(current);
+    if (currentPage === lastPage - 1) {
+      next.searchParams.delete('page');
+      return next.toString();
+    }
     next.searchParams.set('page', String(currentPage + 1));
     return next.toString();
-  };
+  })();
 
-  const prev = () => {
+  const prev = (() => {
     if (isHomePage && lastPage <= 1) {
       return undefined;
     }
@@ -54,7 +54,7 @@ export async function paginate(url: URL, pageLimit = 10): Promise<Page<CType>> {
     const prev = new URL(current);
     prev.searchParams.set('page', String(currentPage - 1));
     return prev.toString();
-  };
+  })();
 
   return {
     data,
@@ -66,8 +66,8 @@ export async function paginate(url: URL, pageLimit = 10): Promise<Page<CType>> {
     lastPage,
     url: {
       current,
-      prev: prev(),
-      next: next(),
+      prev,
+      next,
     },
   };
 }

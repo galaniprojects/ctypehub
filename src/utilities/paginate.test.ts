@@ -1,5 +1,7 @@
 import type { FindOptions } from 'sequelize';
 
+import type { Page } from 'astro';
+
 import { describe, it, jest } from '@jest/globals';
 
 import { CType } from '../models/ctype';
@@ -12,9 +14,9 @@ const baseUrl = process.env.URL as string;
 
 jest
   .mocked(CType.findAll)
-  .mockImplementation(async <M>({ limit }: FindOptions) => {
+  .mockImplementation(async <Model>({ limit }: FindOptions) => {
     const data = new Array(limit);
-    return Promise.resolve(data as M[]);
+    return data as Model[];
   });
 
 describe('paginate', () => {
@@ -23,27 +25,22 @@ describe('paginate', () => {
 
     const url = new URL(baseUrl);
 
-    const {
-      data,
-      start,
-      end,
-      total,
-      currentPage,
-      size,
-      lastPage,
-      url: { current, prev, next },
-    } = await paginate(url);
+    const paginated = await paginate(url);
 
-    expect(data).toHaveLength(19);
-    expect(start).toBe(39);
-    expect(end).toBe(21);
-    expect(total).toBe(39);
-    expect(currentPage).toBe(3);
-    expect(size).toBe(19);
-    expect(lastPage).toBe(3);
-    expect(current).toBe(baseUrl);
-    expect(prev).toBe(`${baseUrl}?page=2`);
-    expect(next).toBeUndefined();
+    expect(paginated).toMatchObject<Page<CType>>({
+      data: new Array(19),
+      start: 39,
+      end: 21,
+      total: 39,
+      currentPage: 3,
+      size: 19,
+      lastPage: 3,
+      url: {
+        current: baseUrl,
+        prev: `${baseUrl}?page=2`,
+        next: undefined,
+      },
+    });
   });
 
   it('should return the correct data for a page number', async () => {
@@ -52,27 +49,22 @@ describe('paginate', () => {
     const url = new URL(baseUrl);
     url.searchParams.set('page', '2');
 
-    const {
-      data,
-      start,
-      end,
-      total,
-      currentPage,
-      size,
-      lastPage,
-      url: { current, prev, next },
-    } = await paginate(url);
+    const paginated = await paginate(url);
 
-    expect(data).toHaveLength(10);
-    expect(start).toBe(20);
-    expect(end).toBe(11);
-    expect(total).toBe(39);
-    expect(currentPage).toBe(2);
-    expect(size).toBe(10);
-    expect(lastPage).toBe(3);
-    expect(current).toBe(`${baseUrl}?page=2`);
-    expect(prev).toBe(`${baseUrl}?page=1`);
-    expect(next).toBe(baseUrl);
+    expect(paginated).toMatchObject<Page<CType>>({
+      data: new Array(10),
+      start: 20,
+      end: 11,
+      total: 39,
+      currentPage: 2,
+      size: 10,
+      lastPage: 3,
+      url: {
+        current: `${baseUrl}?page=2`,
+        prev: `${baseUrl}?page=1`,
+        next: baseUrl,
+      },
+    });
   });
 
   it('should not change static page data when total data size increases', async () => {
@@ -95,8 +87,6 @@ describe('paginate', () => {
     expect(before.end).toBe(after.end);
     expect(before.size).toBe(after.size);
     expect(before.url).toEqual(after.url);
-
-    jest.mocked(CType.count).mockResolvedValue(123);
   });
 
   it('should not return data if the page does not exist', async () => {
@@ -113,26 +103,21 @@ describe('paginate', () => {
     jest.mocked(CType.count).mockResolvedValue(6);
     const url = new URL(baseUrl);
 
-    const {
-      data,
-      start,
-      end,
-      total,
-      currentPage,
-      size,
-      lastPage,
-      url: { current, prev, next },
-    } = await paginate(url);
+    const paginated = await paginate(url);
 
-    expect(data).toHaveLength(6);
-    expect(start).toBe(6);
-    expect(end).toBe(1);
-    expect(total).toBe(6);
-    expect(currentPage).toBe(0);
-    expect(size).toBe(6);
-    expect(lastPage).toBe(0);
-    expect(current).toBe(baseUrl);
-    expect(prev).toBeUndefined();
-    expect(next).toBeUndefined();
+    expect(paginated).toMatchObject<Page<CType>>({
+      data: new Array(6),
+      start: 6,
+      end: 1,
+      total: 6,
+      currentPage: 0,
+      size: 6,
+      lastPage: 0,
+      url: {
+        current: baseUrl,
+        prev: undefined,
+        next: undefined,
+      },
+    });
   });
 });
