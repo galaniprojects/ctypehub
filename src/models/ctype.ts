@@ -2,6 +2,8 @@ import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
+import { sequelize } from '../utilities/sequelize';
+
 export interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
@@ -54,3 +56,6 @@ export const CTypeModelDefinition: ModelAttributes = {
     type: DataTypes.STRING,
   },
 };
+
+CType.init(CTypeModelDefinition, { sequelize });
+sequelize.sync();
