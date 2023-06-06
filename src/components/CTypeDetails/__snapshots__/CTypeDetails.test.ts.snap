@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CTypeDetails should handle nested CType 1`] = `
-"<section class="_container_lf0xe_1">
+"<section class="_container">
   <h1 class="title">Example nested CType</h1>
 
   <dl>
@@ -60,7 +60,7 @@ exports[`CTypeDetails should handle nested CType 1`] = `
 `;
 
 exports[`CTypeDetails should handle nested CType property 1`] = `
-"<section class="_container_lf0xe_1">
+"<section class="_container">
   <h1 class="title">Example nested CType property</h1>
 
   <dl>
@@ -119,7 +119,7 @@ exports[`CTypeDetails should handle nested CType property 1`] = `
 `;
 
 exports[`CTypeDetails should match snapshot 1`] = `
-"<section class="_container_lf0xe_1">
+"<section class="_container">
   <h1 class="title">Example CType</h1>
 
   <dl>

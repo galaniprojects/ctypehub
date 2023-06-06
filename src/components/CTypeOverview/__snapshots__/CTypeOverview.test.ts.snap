@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CTypeOverview should match snapshot 1`] = `
-"<li class="_container_lf0xe_1">
+"<li class="_container">
   <h2 class="title">
     <a class="link" href="/kilt:ctype:0x1"> Example CType </a>
   </h2>
