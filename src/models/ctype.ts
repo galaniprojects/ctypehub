@@ -57,5 +57,17 @@ export const CTypeModelDefinition: ModelAttributes = {
   },
 };
 
+const fields = Object.keys(CTypeModelDefinition)
+  .filter((name) => name !== 'createdAt')
+  .map((name) => `coalesce("${name}"::text, '')`)
+  .join(` || ' ' || `);
+
+CTypeModelDefinition.search = {
+  type: `tsvector generated always as (to_tsvector('english', ${fields})) stored`,
+  set() {
+    throw new Error('search is read-only');
+  },
+};
+
 CType.init(CTypeModelDefinition, { sequelize });
 sequelize.sync();

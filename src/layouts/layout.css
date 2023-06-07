@@ -18,6 +18,8 @@
   --color-white-rgb: 255 255 255;
   --color-black-rgb: 0 0 0;
   --color-link: #2987cd;
+  --color-border: #2ea2f8;
+  --border-radius: 5px;
 }
 
 html,

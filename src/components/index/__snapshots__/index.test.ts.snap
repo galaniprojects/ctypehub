@@ -3,10 +3,20 @@
 exports[`index.astro should render all CTypes 1`] = `
 "<body>
   <header>
-    <h1>CTypeHub</h1>
+    <h2><a href="/">CTypeHub</a></h2>
   </header>
 
-  <section>
+  <search>
+    <form action="/" method="get" class="_container">
+      <input
+        type="search"
+        name="query"
+        placeholder="Search query"
+        aria-label="Search query"
+        class="_search _component"
+      /><button type="submit">Search</button>
+    </form>
+
     <ul>
       <li class="_container">
         <h2 class="title">
@@ -25,7 +35,44 @@ exports[`index.astro should render all CTypes 1`] = `
     <nav>
       <p>Page 0</p>
     </nav>
-  </section>
+  </search>
+</body>
+"
+`;
+
+exports[`index.astro should render search results 1`] = `
+"<body>
+  <header>
+    <h2><a href="/">CTypeHub</a></h2>
+  </header>
+
+  <search>
+    <form action="/" method="get" class="_container">
+      <input
+        type="search"
+        name="query"
+        value="nested"
+        placeholder="Search query"
+        aria-label="Search query"
+        autofocus
+        class="_search _component"
+      /><button type="submit">Search</button>
+    </form>
+
+    <ul>
+      <li class="_container">
+        <h2 class="title">
+          <a class="link" href="/ctype/kilt:ctype:0x2">
+            Example nested CType property
+          </a>
+        </h2>
+      </li>
+    </ul>
+
+    <nav>
+      <p>Page 0</p>
+    </nav>
+  </search>
 </body>
 "
 `;

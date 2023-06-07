@@ -1,0 +1,16 @@
+.component {
+  box-sizing: border-box;
+  block-size: 2.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-family: inherit;
+}
+
+.search {
+  composes: component;
+  border-inline-end: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+  padding-inline-start: 2.25rem;
+  background: white url('magnifying-glass.svg') center left 0.75rem no-repeat;
+}

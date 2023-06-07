@@ -4,6 +4,7 @@
   padding: 1.25rem;
   border: 1px solid rgba(var(--color-white-rgb) / 10%);
   margin-block-start: 0.25rem;
+  margin-inline: auto;
   background: rgba(var(--color-black-rgb) / 30%);
-  border-radius: 0.3125rem;
+  border-radius: var(--border-radius);
 }
