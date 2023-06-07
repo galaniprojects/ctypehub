@@ -14,7 +14,7 @@ import { NotFoundResponse } from '../utilities/NotFoundResponse';
 const query = Astro.url.searchParams.get('query');
 const where = !query
   ? undefined
-  : { search: { [Op.match]: fn('to_tsquery', query) } };
+  : { search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) } };
 
 const {
   data,
