@@ -31,10 +31,6 @@ exports[`index.astro should render all CTypes 1`] = `
         </h2>
       </li>
     </ul>
-
-    <nav>
-      <p>Page 0</p>
-    </nav>
   </search>
 </body>
 "
@@ -68,10 +64,6 @@ exports[`index.astro should render search results 1`] = `
         </h2>
       </li>
     </ul>
-
-    <nav>
-      <p>Page 0</p>
-    </nav>
   </search>
 </body>
 "
