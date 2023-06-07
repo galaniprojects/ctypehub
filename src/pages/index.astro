@@ -47,11 +47,23 @@ if (data.length === 0) {
       {data.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
     </ul>
 
-    <nav>
-      {next && <a href={next}>Newer</a>}
-      <p>Page {currentPage}</p>
-      {prev && <a href={prev}>Older</a>}
-    </nav>
+    {
+      (prev || next) && (
+        <nav>
+          {next && (
+            <a class="newer" href={next}>
+              Newer
+            </a>
+          )}
+          {next && <p>Page {currentPage}</p>}
+          {prev && (
+            <a class="older" href={prev}>
+              Older
+            </a>
+          )}
+        </nav>
+      )
+    }
   </search>
 </Layout>
 
@@ -62,6 +74,18 @@ if (data.length === 0) {
     align-items: center;
     justify-content: space-between;
     padding-block: 1rem;
+  }
+
+  button {
+    box-sizing: border-box;
+    block-size: 2.25rem;
+    border: var(--color-border);
+    border-radius: var(--border-radius);
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+    background: var(--color-link);
+    padding-inline: 0.75rem;
+    color: white;
   }
 
   ul {
@@ -76,14 +100,17 @@ if (data.length === 0) {
 
   nav {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 6rem 1fr;
     gap: 1rem;
     align-items: center;
+    margin-block: 1rem;
   }
 
   p {
     color: var(--color-text-primary);
-    grid-column: 2 / 3;
+    grid-column: 2;
+    text-align: center;
+    margin: 0;
   }
 
   a {
@@ -91,15 +118,11 @@ if (data.length === 0) {
     color: var(--color-link);
   }
 
-  button {
-    box-sizing: border-box;
-    block-size: 2.25rem;
-    border: var(--color-border);
-    border-radius: var(--border-radius);
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-    background: var(--color-link);
-    padding-inline: 0.75rem;
-    color: white;
+  .newer {
+    grid-column: 1;
+  }
+
+  .older {
+    grid-column: 3;
   }
 </style>
