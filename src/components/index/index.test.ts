@@ -19,4 +19,8 @@ describe('index.astro', () => {
     const html = await getSnapshotHtmlForPath('?query=nested');
     expect(html).toMatchSnapshot();
   });
+  it('should render when no search results', async () => {
+    const html = await getSnapshotHtmlForPath('?query=asdagalasdg');
+    expect(html).toMatchSnapshot();
+  });
 });

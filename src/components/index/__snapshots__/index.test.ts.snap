@@ -68,3 +68,28 @@ exports[`index.astro should render search results 1`] = `
 </body>
 "
 `;
+
+exports[`index.astro should render when no search results 1`] = `
+"<body>
+  <header>
+    <h2><a href="/">CTypeHub</a></h2>
+  </header>
+
+  <search>
+    <form action="/" method="get" class="_container">
+      <input
+        type="search"
+        name="query"
+        value="asdagalasdg"
+        placeholder="Search query"
+        aria-label="Search query"
+        autofocus
+        class="_search _component"
+      /><button type="submit">Search</button>
+    </form>
+
+    <p>No results for &quot;asdagalasdg&quot;</p>
+  </search>
+</body>
+"
+`;

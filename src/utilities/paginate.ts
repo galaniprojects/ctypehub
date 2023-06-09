@@ -39,6 +39,12 @@ export async function paginate(
     if (isHomePage) {
       return undefined;
     }
+    if (currentPage > lastPage) {
+      return undefined;
+    }
+    if (currentPage < 1) {
+      return undefined;
+    }
     const next = new URL(current);
     if (currentPage === lastPage - 1) {
       next.searchParams.delete('page');
@@ -52,8 +58,10 @@ export async function paginate(
     if (isHomePage && lastPage <= 1) {
       return undefined;
     }
-
-    if (currentPage === 1) {
+    if (currentPage > lastPage) {
+      return undefined;
+    }
+    if (currentPage <= 1) {
       return undefined;
     }
 
