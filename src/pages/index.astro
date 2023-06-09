@@ -9,7 +9,6 @@ import Header from '../components/Header/Header.astro';
 
 import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
 import { paginate } from '../utilities/paginate';
-import { NotFoundResponse } from '../utilities/NotFoundResponse';
 
 const query = Astro.url.searchParams.get('query');
 const where = !query
@@ -39,11 +38,17 @@ const {
       /><button type="submit">Search</button>
     </form>
 
-    {query && data.length === 0 && <p>No results for "{query}"</p>}
+    {query && data.length === 0 && <p>No results for &quot;{query}&quot;</p>}
 
-    <ul>
-      {data.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
-    </ul>
+    {
+      data.length > 0 && (
+        <ul>
+          {data.map(({ dataValues }) => (
+            <CTypeOverview cTypeData={dataValues} />
+          ))}
+        </ul>
+      )
+    }
 
     {
       (prev || next) && (
