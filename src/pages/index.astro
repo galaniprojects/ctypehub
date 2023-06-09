@@ -21,10 +21,6 @@ const {
   currentPage,
   url: { prev, next },
 } = await paginate(Astro.url, where);
-
-if (data.length === 0) {
-  return new NotFoundResponse();
-}
 ---
 
 <Layout>
@@ -43,6 +39,8 @@ if (data.length === 0) {
       /><button type="submit">Search</button>
     </form>
 
+    {query && data.length === 0 && <p>No results for "{query}"</p>}
+
     <ul>
       {data.map(({ dataValues }) => <CTypeOverview cTypeData={dataValues} />)}
     </ul>
@@ -51,13 +49,13 @@ if (data.length === 0) {
       (prev || next) && (
         <nav>
           {next && (
-            <a class="newer" href={next}>
+            <a class="newer" href={next} rel="next">
               Newer
             </a>
           )}
-          {next && <p>Page {currentPage}</p>}
+          {next && <p class="page">Page {currentPage}</p>}
           {prev && (
-            <a class="older" href={prev}>
+            <a class="older" href={prev} rel="prev">
               Older
             </a>
           )}
@@ -88,6 +86,10 @@ if (data.length === 0) {
     color: white;
   }
 
+  p {
+    color: var(--color-text-primary);
+  }
+
   ul {
     width: 100%;
     list-style: none;
@@ -106,8 +108,7 @@ if (data.length === 0) {
     margin-block: 1rem;
   }
 
-  p {
-    color: var(--color-text-primary);
+  .page {
     grid-column: 2;
     text-align: center;
     margin: 0;
