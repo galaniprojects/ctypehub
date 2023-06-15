@@ -39,8 +39,9 @@ exports[`CTypeDetails should handle nested CType 1`] = `
     <dd id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0x1692376199a5a74445bec96882d2d0313042d445906e6faa21f30949150a3779&quot;,
-  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;$id&quot;: &quot;kilt:ctype:0xea8670f43bb28356de7becdac900dd48f60a3d0d863c72b8fa11c841946529b6&quot;,
+  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
+  &quot;additionalProperties&quot;: false,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;$ref&quot;: &quot;kilt:ctype:0x1&quot;
@@ -98,8 +99,9 @@ exports[`CTypeDetails should handle nested CType property 1`] = `
     <dd id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0x9775780b45911ece6e960dcc3eb630ea1579988d0b58c1ee2a19e2b14eeb9904&quot;,
-  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;$id&quot;: &quot;kilt:ctype:0x12501132c73da08f9aa80abcb2152f242de7b342c0e9a3e12fa8aacda35b89ea&quot;,
+  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
+  &quot;additionalProperties&quot;: false,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;$ref&quot;: &quot;kilt:ctype:0x1#/properties/example&quot;
@@ -161,8 +163,9 @@ exports[`CTypeDetails should match snapshot 1`] = `
     <dd id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0xf3b3e856755acaa7f274a15b99baf636a306a2a96e1c324a8cbb12b0bc1716af&quot;,
-  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
+  &quot;$id&quot;: &quot;kilt:ctype:0xdd49b562c6a808dce6ab1cac484405c1e02a917a178e923e4fcce3f9855834e4&quot;,
+  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
+  &quot;additionalProperties&quot;: false,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;type&quot;: &quot;string&quot;
