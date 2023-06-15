@@ -75,19 +75,23 @@ const { subscan } = configuration;
     }
 
     {
-      Object.entries(properties).map(([name, { type, $ref }], index) => (
-        <Fragment>
-          <dt id={`/properties/${name}`}>{`Property ${index + 1}:`}</dt>
-          <dd>{$ref ? <a href={$refToHref($ref)}>{name}</a> : name}</dd>
+      Object.entries(properties).map(([name, value], index) => {
+        const type = 'type' in value ? value.type : undefined;
+        const $ref = '$ref' in value ? value.$ref : undefined;
+        return (
+          <Fragment>
+            <dt id={`/properties/${name}`}>{`Property ${index + 1}:`}</dt>
+            <dd>{$ref ? <a href={$refToHref($ref)}>{name}</a> : name}</dd>
 
-          {type && (
-            <div class="indent">
-              <dt>Type:</dt>
-              <dd>{type}</dd>
-            </div>
-          )}
-        </Fragment>
-      ))
+            {type && (
+              <div class="indent">
+                <dt>Type:</dt>
+                <dd>{type}</dd>
+              </div>
+            )}
+          </Fragment>
+        );
+      })
     }
 
     <dt>Creation date:</dt>
