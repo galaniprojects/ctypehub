@@ -137,7 +137,8 @@ beforeAll(async () => {
 afterAll(async () => {
   await sequelize.close();
   await disconnect();
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  // give the SDK time to log the disconnect message
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 }, 10_000);
 
 beforeEach(async () => {
