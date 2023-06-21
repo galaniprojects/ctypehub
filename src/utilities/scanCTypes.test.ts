@@ -137,6 +137,7 @@ beforeAll(async () => {
 afterAll(async () => {
   await sequelize.close();
   await disconnect();
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 }, 10_000);
 
 beforeEach(async () => {
