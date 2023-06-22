@@ -27,7 +27,6 @@ import {
 import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
 
-import * as env from './env';
 import {
   EventParams,
   EventsResponseJson,
@@ -154,7 +153,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,
@@ -179,7 +178,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenLastCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,
@@ -219,7 +218,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenLastCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,

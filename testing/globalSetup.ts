@@ -14,7 +14,7 @@ interface Shared {
   databaseContainer: StartedTestContainer;
 }
 
-export const globalShared = globalThis as unknown as Shared;
+const globalShared = globalThis as unknown as Shared;
 
 export async function setup() {
   const WS_PORT = 9944;
