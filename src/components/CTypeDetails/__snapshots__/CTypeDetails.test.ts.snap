@@ -1,7 +1,7 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`CTypeDetails should handle nested CType 1`] = `
-"<section class="_container">
+exports[`CTypeDetails > should handle nested CType 1`] = `
+<section class="_container">
   <h1 class="title">Example nested CType</h1>
 
   <dl>
@@ -52,16 +52,14 @@ exports[`CTypeDetails should handle nested CType 1`] = `
   },
   &quot;title&quot;: &quot;Example nested CType&quot;,
   &quot;type&quot;: &quot;object&quot;
-}</pre
-      >
+}</pre>
     </dd>
   </dl>
 </section>
-"
 `;
 
-exports[`CTypeDetails should handle nested CType property 1`] = `
-"<section class="_container">
+exports[`CTypeDetails > should handle nested CType property 1`] = `
+<section class="_container">
   <h1 class="title">Example nested CType property</h1>
 
   <dl>
@@ -112,16 +110,14 @@ exports[`CTypeDetails should handle nested CType property 1`] = `
   },
   &quot;title&quot;: &quot;Example nested CType property&quot;,
   &quot;type&quot;: &quot;object&quot;
-}</pre
-      >
+}</pre>
     </dd>
   </dl>
 </section>
-"
 `;
 
-exports[`CTypeDetails should match snapshot 1`] = `
-"<section class="_container">
+exports[`CTypeDetails > should match snapshot 1`] = `
+<section class="_container">
   <h1 class="title">Example CType</h1>
 
   <dl>
@@ -176,10 +172,8 @@ exports[`CTypeDetails should match snapshot 1`] = `
   },
   &quot;title&quot;: &quot;Example CType&quot;,
   &quot;type&quot;: &quot;object&quot;
-}</pre
-      >
+}</pre>
     </dd>
   </dl>
 </section>
-"
 `;

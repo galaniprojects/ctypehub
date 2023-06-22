@@ -1,3 +1,4 @@
+export const PORT = '3000';
 export const MODE = 'test';
 export const PROD = false;
 export const SUBSCAN_NETWORK = 'example';

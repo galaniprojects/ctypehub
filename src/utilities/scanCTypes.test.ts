@@ -7,8 +7,8 @@ import {
   describe,
   expect,
   it,
-  jest,
-} from '@jest/globals';
+  vi,
+} from 'vitest';
 import { got } from 'got';
 import {
   Blockchain,
@@ -37,9 +37,9 @@ import {
 import { configuration } from './configuration';
 
 let postResponse: EventsResponseJson;
-jest.mock('got', () => ({
+vi.mock('got', () => ({
   got: {
-    post: jest.fn().mockReturnValue({
+    post: vi.fn().mockReturnValue({
       json: () => postResponse,
     }),
   },
@@ -143,7 +143,7 @@ afterAll(async () => {
 
 beforeEach(async () => {
   await CTypeModel.destroy({ truncate: true });
-  jest.mocked(got.post).mockClear();
+  vi.mocked(got.post).mockClear();
 });
 
 describe('scanCTypes', () => {

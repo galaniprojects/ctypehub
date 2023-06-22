@@ -1,14 +1,22 @@
 import { promisify } from 'node:util';
-import { exec, spawn } from 'node:child_process';
+import { ChildProcess, exec, spawn } from 'node:child_process';
+import process from 'node:process';
 
-import { GenericContainer, Wait } from 'testcontainers';
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 
-import { globalShared } from './globalShared';
 import * as envMock from './env';
 
 const env = { ...envMock, PROD: '', BLOCKCHAIN_ENDPOINT: '', DATABASE_URI: '' };
 
-export default async function globalSetup() {
+interface Shared {
+  server: ChildProcess;
+  blockchainContainer: StartedTestContainer;
+  databaseContainer: StartedTestContainer;
+}
+
+export const globalShared = globalThis as unknown as Shared;
+
+export async function setup() {
   const WS_PORT = 9944;
 
   // configure the code to use a local blank instance of blockchain
@@ -62,4 +70,15 @@ export default async function globalSetup() {
       resolve(match[0]);
     });
   });
+}
+
+export async function teardown() {
+  await new Promise<void>((resolve) => {
+    globalShared.server.on('close', resolve);
+    if (globalShared.server.pid) {
+      process.kill(-globalShared.server.pid);
+    }
+  });
+  await globalShared.blockchainContainer.stop();
+  await globalShared.databaseContainer.stop();
 }
