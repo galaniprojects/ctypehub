@@ -8,7 +8,7 @@
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
     "plugin:astro/recommended",
-    "plugin:jest/recommended"
+    "plugin:vitest/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -18,11 +18,11 @@
     }
   },
   "rules": {
-    "no-restricted-globals": ["error", "describe", "it", "jest", "beforeEach", "afterEach"],
+    "no-restricted-globals": ["error", "describe", "it", "expect", "beforeEach", "afterEach"],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.*", "testing/*"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.*", "testing/*.*", "vitest.config.ts"] }],
     "import/no-unresolved": ["error", { "ignore": ["\\.js$"] }],
     "import/order": ["error", {
       "newlines-between": "always-and-inside-groups",

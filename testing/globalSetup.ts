@@ -1,18 +1,26 @@
 import { promisify } from 'node:util';
-import { exec, spawn } from 'node:child_process';
+import { ChildProcess, exec, spawn } from 'node:child_process';
+import process from 'node:process';
 
-import { GenericContainer, Wait } from 'testcontainers';
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 
-import { globalShared } from './globalShared';
-import * as envMock from './env';
+const env = {
+  MODE: 'test',
+  SUBSCAN_NETWORK: 'example',
+  SECRET_SUBSCAN: 'SECRET_SUBSCAN',
+  BLOCKCHAIN_ENDPOINT: '',
+  DATABASE_URI: '',
+};
 
-const env = { ...envMock, PROD: '', BLOCKCHAIN_ENDPOINT: '', DATABASE_URI: '' };
+let server: ChildProcess;
+let blockchainContainer: StartedTestContainer;
+let databaseContainer: StartedTestContainer;
 
-export default async function globalSetup() {
+export async function setup() {
   const WS_PORT = 9944;
 
   // configure the code to use a local blank instance of blockchain
-  globalShared.blockchainContainer = await new GenericContainer(
+  blockchainContainer = await new GenericContainer(
     'kiltprotocol/mashnet-node:latest',
   )
     .withCommand(['--dev', `--ws-port=${WS_PORT}`, '--ws-external'])
@@ -21,8 +29,8 @@ export default async function globalSetup() {
     .start();
 
   {
-    const port = globalShared.blockchainContainer.getMappedPort(WS_PORT);
-    const host = globalShared.blockchainContainer.getHost();
+    const port = blockchainContainer.getMappedPort(WS_PORT);
+    const host = blockchainContainer.getHost();
     const endpoint = `ws://${host}:${port}`;
     env.BLOCKCHAIN_ENDPOINT = endpoint;
     process.env.BLOCKCHAIN_ENDPOINT = endpoint;
@@ -31,14 +39,14 @@ export default async function globalSetup() {
   // configure the code to use a local blank database
   const DB_PORT = 5432;
   const POSTGRES_PASSWORD = 'postgres';
-  globalShared.databaseContainer = await new GenericContainer('postgres')
+  databaseContainer = await new GenericContainer('postgres')
     .withEnvironment({ POSTGRES_PASSWORD })
     .withExposedPorts(DB_PORT)
     .start();
 
   {
-    const port = globalShared.databaseContainer.getMappedPort(DB_PORT);
-    const host = globalShared.databaseContainer.getHost();
+    const port = databaseContainer.getMappedPort(DB_PORT);
+    const host = databaseContainer.getHost();
     const databaseUri = `postgres://postgres:${POSTGRES_PASSWORD}@${host}:${port}/postgres`;
     env.DATABASE_URI = databaseUri;
     process.env.DATABASE_URI = databaseUri;
@@ -46,12 +54,12 @@ export default async function globalSetup() {
 
   // configure the tests to talk to a new Astro instance
   const yarn = (await promisify(exec)('which yarn')).stdout.trim();
-  globalShared.server = spawn(yarn, ['dev'], { detached: true, env });
+  server = spawn(yarn, ['dev'], { detached: true, env });
   process.env.URL = await new Promise((resolve) => {
-    globalShared.server.stderr?.on('data', (buffer: Buffer) => {
+    server.stderr?.on('data', (buffer: Buffer) => {
       console.log(buffer.toString('utf-8'));
     });
-    globalShared.server.stdout?.on('data', async (buffer: Buffer) => {
+    server.stdout?.on('data', async (buffer: Buffer) => {
       const text = buffer.toString('utf-8');
       // console.log(text);
       const match = text.match(/http:\S+/);
@@ -62,4 +70,15 @@ export default async function globalSetup() {
       resolve(match[0]);
     });
   });
+}
+
+export async function teardown() {
+  await new Promise<void>((resolve) => {
+    server.on('close', resolve);
+    if (server.pid) {
+      process.kill(-server.pid);
+    }
+  });
+  await blockchainContainer.stop();
+  await databaseContainer.stop();
 }

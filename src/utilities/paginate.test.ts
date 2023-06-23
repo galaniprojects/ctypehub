@@ -2,26 +2,31 @@ import type { FindOptions } from 'sequelize';
 
 import type { Page } from 'astro';
 
-import { describe, it, jest } from '@jest/globals';
+import { describe, it, vi, expect } from 'vitest';
 
 import { CType } from '../models/ctype';
 
 import { paginate } from './paginate';
 
-jest.mock('../models/ctype');
+vi.mock('../models/ctype', () => ({
+  CType: {
+    findAll: vi.fn(),
+    count: vi.fn(),
+  },
+}));
 
 const baseUrl = process.env.URL as string;
 
-jest
-  .mocked(CType.findAll)
-  .mockImplementation(async <Model>({ limit }: FindOptions) => {
+vi.mocked(CType.findAll).mockImplementation(
+  async <Model>({ limit }: FindOptions = {}) => {
     const data = new Array(limit);
     return data as Model[];
-  });
+  },
+);
 
 describe('paginate', () => {
   it('should return the correct data for home page', async () => {
-    jest.mocked(CType.count).mockResolvedValue(39);
+    vi.mocked(CType.count).mockResolvedValue(39);
 
     const url = new URL(baseUrl);
 
@@ -44,7 +49,7 @@ describe('paginate', () => {
   });
 
   it('should return the correct data for a page number', async () => {
-    jest.mocked(CType.count).mockResolvedValue(39);
+    vi.mocked(CType.count).mockResolvedValue(39);
 
     const url = new URL(baseUrl);
     url.searchParams.set('page', '2');
@@ -68,14 +73,14 @@ describe('paginate', () => {
   });
 
   it('should not change static page data when total data size increases', async () => {
-    jest.mocked(CType.count).mockResolvedValue(49);
+    vi.mocked(CType.count).mockResolvedValue(49);
 
     const url = new URL(baseUrl);
     url.searchParams.set('page', '2');
 
     const before = await paginate(url);
 
-    jest.mocked(CType.count).mockResolvedValue(123);
+    vi.mocked(CType.count).mockResolvedValue(123);
 
     const after = await paginate(url);
 
@@ -90,7 +95,7 @@ describe('paginate', () => {
   });
 
   it('should not return data if the page does not exist', async () => {
-    jest.mocked(CType.count).mockResolvedValue(49);
+    vi.mocked(CType.count).mockResolvedValue(49);
     const url = new URL(baseUrl);
     url.searchParams.set('page', '34');
 
@@ -100,7 +105,7 @@ describe('paginate', () => {
   });
 
   it('should return data if the number of total entries is less than the page limit', async () => {
-    jest.mocked(CType.count).mockResolvedValue(6);
+    vi.mocked(CType.count).mockResolvedValue(6);
     const url = new URL(baseUrl);
 
     const paginated = await paginate(url);

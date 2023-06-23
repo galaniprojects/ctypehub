@@ -7,8 +7,8 @@ import {
   describe,
   expect,
   it,
-  jest,
-} from '@jest/globals';
+  vi,
+} from 'vitest';
 import { got } from 'got';
 import {
   Blockchain,
@@ -27,7 +27,6 @@ import {
 import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
 
-import * as env from './env';
 import {
   EventParams,
   EventsResponseJson,
@@ -37,9 +36,9 @@ import {
 import { configuration } from './configuration';
 
 let postResponse: EventsResponseJson;
-jest.mock('got', () => ({
+vi.mock('got', () => ({
   got: {
-    post: jest.fn().mockReturnValue({
+    post: vi.fn().mockReturnValue({
       json: () => postResponse,
     }),
   },
@@ -143,7 +142,7 @@ afterAll(async () => {
 
 beforeEach(async () => {
   await CTypeModel.destroy({ truncate: true });
-  jest.mocked(got.post).mockClear();
+  vi.mocked(got.post).mockClear();
 });
 
 describe('scanCTypes', () => {
@@ -154,7 +153,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,
@@ -179,7 +178,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenLastCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,
@@ -219,7 +218,7 @@ describe('scanCTypes', () => {
       expect(got.post).toHaveBeenLastCalledWith(
         'https://example.api.subscan.io/api/scan/events',
         {
-          headers: { 'X-API-Key': env.SECRET_SUBSCAN },
+          headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
             call: 'CTypeCreated',
             finalized: true,
