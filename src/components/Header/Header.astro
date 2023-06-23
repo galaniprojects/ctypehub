@@ -1,20 +1,41 @@
 ---
+import buttonStyles from '../Button.module.css';
+
+interface Props {
+  create?: true;
+}
+
+const { create } = Astro.props;
 ---
 
 <header>
+  <span></span>
   <h2><a href="/">CTypeHub</a></h2>
+  {
+    create ? (
+      <a href="/" class={buttonStyles.primary}>
+        Search Registry
+      </a>
+    ) : (
+      <a href="/create" class={buttonStyles.primary}>
+        Create Claim Type
+      </a>
+    )
+  }
 </header>
 
 <style>
   header {
+    box-sizing: border-box;
     width: 100%;
     height: calc(74rem / 16);
     border-block-end: 1px solid rgba(var(--color-white-rgb) / 10%);
     background: var(--color-background-secondary);
     box-shadow: 0 5px 6px 0 rgba(var(--color-black-rgb) / 30%);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding-inline: 0.5rem;
   }
 
   h2 {
