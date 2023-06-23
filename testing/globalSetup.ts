@@ -4,9 +4,13 @@ import process from 'node:process';
 
 import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
 
-import * as envMock from './env';
-
-const env = { ...envMock, PROD: '', BLOCKCHAIN_ENDPOINT: '', DATABASE_URI: '' };
+const env = {
+  MODE: 'test',
+  SUBSCAN_NETWORK: 'example',
+  SECRET_SUBSCAN: 'SECRET_SUBSCAN',
+  BLOCKCHAIN_ENDPOINT: '',
+  DATABASE_URI: '',
+};
 
 let server: ChildProcess;
 let blockchainContainer: StartedTestContainer;
