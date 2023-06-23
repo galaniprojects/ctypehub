@@ -1,5 +1,5 @@
 {
-  "repository": "git@github.com:galaniprojects/ctypehub.com.git",
+  "repository": "git@github.com:galaniprojects/ctypehub.git",
   "license": "UNLICENSED",
   "type": "module",
   "engines": {
