@@ -3,6 +3,7 @@ import { fn, Op } from 'sequelize';
 
 import containerStyles from '../components/Container.module.css';
 import inputStyles from '../components/Input/Input.module.css';
+import buttonStyles from '../components/Button.module.css';
 
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
@@ -35,7 +36,7 @@ const {
         aria-label="Search query"
         autofocus={!!query}
         class={inputStyles.search}
-      /><button type="submit">Search</button>
+      /><button type="submit" class={buttonStyles.search}>Search</button>
     </form>
 
     {query && data.length === 0 && <p>No results for &quot;{query}&quot;</p>}
@@ -77,18 +78,6 @@ const {
     align-items: center;
     justify-content: space-between;
     padding-block: 1rem;
-  }
-
-  button {
-    box-sizing: border-box;
-    block-size: 2.25rem;
-    border: var(--color-border);
-    border-radius: var(--border-radius);
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
-    background: var(--color-link);
-    padding-inline: 0.75rem;
-    color: white;
   }
 
   p {
