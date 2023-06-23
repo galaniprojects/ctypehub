@@ -1,0 +1,13 @@
+.primary {
+  display: inline-block;
+  box-sizing: border-box;
+  block-size: 2.25rem;
+  line-height: 2.25rem;
+  border: var(--color-border);
+  border-radius: var(--border-radius);
+  background: var(--color-link);
+  padding-inline: 0.75rem;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+}
