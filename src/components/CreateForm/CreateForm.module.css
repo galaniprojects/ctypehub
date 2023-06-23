@@ -1,0 +1,7 @@
+.title {
+  composes: component from '../Input/Input.module.css';
+}
+
+.submit {
+  composes: primary from '../Button.module.css';
+}
