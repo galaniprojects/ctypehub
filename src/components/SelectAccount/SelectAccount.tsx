@@ -3,8 +3,7 @@ import { ChangeEvent, useCallback, useState } from 'react';
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 import { connect, disconnect } from '@kiltprotocol/sdk-js';
 
-import inputStyles from '../Input/Input.module.css';
-import buttonStyles from '../Button.module.css';
+import styles from './SelectAccount.module.css';
 
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 
@@ -22,14 +21,24 @@ export function SelectAccount({ onSelect }: Props) {
 
   const handleEnableClick = useCallback(async () => {
     const api = await connect(getBlockchainEndpoint());
-    setGenesisHash(api.genesisHash.toHex());
+    const apiGenesisHash = api.genesisHash.toHex();
+    setGenesisHash(apiGenesisHash);
     await disconnect();
 
     await web3Enable(originName);
     const loaded = await web3Accounts();
+    if (loaded.length === 0) {
+      return;
+    }
 
     setAccounts(loaded);
-    onSelect(loaded[0]);
+
+    const usable = loaded.find(
+      ({ meta: { genesisHash } }) => genesisHash === apiGenesisHash,
+    );
+    if (usable) {
+      onSelect(usable);
+    }
   }, [onSelect]);
 
   const handleChange = useCallback(
@@ -43,28 +52,25 @@ export function SelectAccount({ onSelect }: Props) {
     [accounts, onSelect],
   );
 
-  if (!accounts) {
-    return (
-      <button
-        onClick={handleEnableClick}
-        className={buttonStyles.primary}
-        type="button"
-      >
-        Select payment KILT account
-      </button>
-    );
-  }
-
   return (
-    <select onChange={handleChange} className={inputStyles.component}>
-      {accounts.map(({ meta }, index) => {
-        const disabled = meta.genesisHash !== genesisHash;
-        return (
-          <option value={index} key={index} disabled={disabled}>
-            {disabled && '[Not KILT]'} {meta.name} ({meta.source})
-          </option>
-        );
-      })}
-    </select>
+    <p className={styles.label}>
+      <button onClick={handleEnableClick} className={styles.load} type="button">
+        Load accounts
+      </button>
+      and{' '}
+      <label>
+        select payment KILT account:
+        <select onChange={handleChange} className={styles.select} required>
+          {accounts?.map(({ meta }, index) => {
+            const disabled = meta.genesisHash !== genesisHash;
+            return (
+              <option value={index} key={index} disabled={disabled}>
+                {disabled && '[Not KILT] '} {meta.name} ({meta.source})
+              </option>
+            );
+          })}
+        </select>
+      </label>
+    </p>
   );
 }

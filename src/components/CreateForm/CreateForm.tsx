@@ -61,9 +61,7 @@ export function CreateForm() {
         </label>
       </p>
 
-      <p>
-        <SelectAccount onSelect={setAccount} />
-      </p>
+      <SelectAccount onSelect={setAccount} />
 
       <button type="submit" className={styles.submit}>
         Create
