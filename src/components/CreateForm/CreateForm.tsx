@@ -11,9 +11,7 @@ import {
 import styles from './CreateForm.module.css';
 
 import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
-
-// TODO
-const BLOCKCHAIN_ENDPOINT = 'wss://peregrine.kilt.io';
+import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 
 export function CreateForm() {
   const [account, setAccount] = useState<InjectedAccount>();
@@ -33,7 +31,7 @@ export function CreateForm() {
         const properties = {};
         const cType = CType.fromProperties(title, properties);
 
-        const api = await connect(BLOCKCHAIN_ENDPOINT);
+        const api = await connect(getBlockchainEndpoint());
         const createTx = api.tx.ctype.add(CType.toChain(cType));
 
         const authorized = await window.kilt.sporran.signExtrinsicWithDid(

@@ -5,6 +5,7 @@ import inputStyles from '../components/Input/Input.module.css';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 import { CreateForm } from '../components/CreateForm/CreateForm';
+import { configuration } from '../utilities/configuration';
 ---
 
 <Layout>
@@ -15,6 +16,6 @@ import { CreateForm } from '../components/CreateForm/CreateForm';
 <style>
 </style>
 
-<script is:inline>
+<script is:inline data-blockchain-endpoint={configuration.blockchainEndpoint}>
   window.kilt = {};
 </script>

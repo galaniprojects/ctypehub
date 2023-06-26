@@ -6,12 +6,11 @@ import { connect, disconnect } from '@kiltprotocol/sdk-js';
 import inputStyles from '../Input/Input.module.css';
 import buttonStyles from '../Button.module.css';
 
+import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
+
 export type InjectedAccount = Awaited<ReturnType<typeof web3Accounts>>[number];
 
 const originName = 'CTypeHub';
-
-// TODO
-const BLOCKCHAIN_ENDPOINT = 'wss://peregrine.kilt.io';
 
 interface Props {
   onSelect: (account: InjectedAccount) => void;
@@ -22,7 +21,7 @@ export function SelectAccount({ onSelect }: Props) {
   const [accounts, setAccounts] = useState<InjectedAccount[]>();
 
   const handleEnableClick = useCallback(async () => {
-    const api = await connect(BLOCKCHAIN_ENDPOINT);
+    const api = await connect(getBlockchainEndpoint());
     setGenesisHash(api.genesisHash.toHex());
     await disconnect();
 
