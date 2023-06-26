@@ -12,6 +12,7 @@ import styles from './CreateForm.module.css';
 
 import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
+import { generatePath, paths } from '../../paths';
 
 export function CreateForm() {
   const [account, setAccount] = useState<InjectedAccount>();
@@ -32,8 +33,20 @@ export function CreateForm() {
         const cType = CType.fromProperties(title, properties);
 
         const api = await connect(getBlockchainEndpoint());
-        const createTx = api.tx.ctype.add(CType.toChain(cType));
+        const existing = await api.query.ctype.ctypes(
+          CType.idToHash(cType.$id),
+        );
+        if (existing.isSome) {
+          const redirect = window.confirm(
+            'Such CType already exists. Open its page?',
+          );
+          if (redirect) {
+            window.location.href = generatePath(paths.ctypeDetails, cType.$id);
+          }
+          return;
+        }
 
+        const createTx = api.tx.ctype.add(CType.toChain(cType));
         const authorized = await window.kilt.sporran.signExtrinsicWithDid(
           createTx.toHex(),
           account.address as KiltAddress,
