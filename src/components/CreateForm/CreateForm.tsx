@@ -4,6 +4,7 @@ import {
   Blockchain,
   connect,
   CType,
+  Did,
   disconnect,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
@@ -31,6 +32,7 @@ export function CreateForm() {
 
         const properties = {};
         const cType = CType.fromProperties(title, properties);
+        const cTypeUrl = generatePath(paths.ctypeDetails, cType.$id);
 
         const api = await connect(getBlockchainEndpoint());
         const existing = await api.query.ctype.ctypes(
@@ -41,7 +43,7 @@ export function CreateForm() {
             'Such CType already exists. Open its page?',
           );
           if (redirect) {
-            window.location.href = generatePath(paths.ctypeDetails, cType.$id);
+            window.location.href = cTypeUrl;
           }
           return;
         }
@@ -51,13 +53,26 @@ export function CreateForm() {
           createTx.toHex(),
           account.address as KiltAddress,
         );
+        const creator = Did.parse(authorized.didKeyUri).did;
         const authorizedTx = api.tx(authorized.signed);
 
         const injected = await web3FromSource(account.meta.source);
         const signed = await authorizedTx.signAsync(account.address, injected);
         await Blockchain.submitSignedTx(signed);
 
-        // TODO: post to backend
+        const extrinsicHash = signed.hash.toHex();
+        const response = await fetch(paths.ctypes, {
+          method: 'POST',
+          body: JSON.stringify({ cType, extrinsicHash, creator }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (response.ok) {
+          window.location.href = cTypeUrl;
+          return;
+        }
+
+        console.error(response);
+        // TODO: handle error
       } finally {
         await disconnect();
       }
