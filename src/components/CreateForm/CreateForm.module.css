@@ -15,6 +15,32 @@
   background: rgb(27 28 29 / 90%);
 }
 
+.progress {
+  color: var(--color-text-primary);
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.spinner {
+  --size: calc(74rem / 16);
+
+  height: var(--size);
+  width: var(--size);
+  display: block;
+  margin-block-end: 0.625rem;
+  margin-inline: auto;
+  background: url('./spinner.svg') no-repeat center center;
+  animation: rotation 1.5s infinite linear;
+}
+
 .output {
   display: block;
   margin-block-end: 1.25rem;

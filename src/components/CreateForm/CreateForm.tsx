@@ -42,6 +42,7 @@ function Modal({ children }: PropsWithChildren) {
 
 export function CreateForm() {
   const [account, setAccount] = useState<InjectedAccount>();
+  const [progress, setProgress] = useState(false);
   const [error, setError] = useState(false);
   const unsetError = useCallback(() => setError(false), []);
 
@@ -53,6 +54,7 @@ export function CreateForm() {
           throw new Error('Cannot trigger submit without an account');
         }
 
+        setProgress(true);
         const formData = new FormData(event.currentTarget);
         const title = formData.get('title') as string;
 
@@ -100,6 +102,7 @@ export function CreateForm() {
         console.error(response);
         setError(true);
       } finally {
+        setProgress(false);
         await disconnect();
       }
     },
@@ -120,6 +123,15 @@ export function CreateForm() {
       <button type="submit" className={styles.submit}>
         Create
       </button>
+
+      {progress && (
+        <Modal>
+          <p className={styles.progress}>
+            <span className={styles.spinner} />
+            Storing the CType on the KILT blockchain
+          </p>
+        </Modal>
+      )}
 
       {error && (
         <Modal>
