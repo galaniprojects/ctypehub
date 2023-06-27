@@ -14,7 +14,7 @@ export async function post({ request, url }: Parameters<APIRoute>[0]) {
     });
   }
 
-  const { cType, creator, extrinsicHash } = await request.json();
+  const { cType, creator, extrinsicHash, description } = await request.json();
   if (!CType.isICType(cType)) {
     return new Response('Only ICType is accepted', {
       status: StatusCodes.UNPROCESSABLE_ENTITY,
@@ -40,6 +40,7 @@ export async function post({ request, url }: Parameters<APIRoute>[0]) {
     schema,
     creator,
     extrinsicHash,
+    description,
     createdAt: new Date(),
     ...rest,
   });
