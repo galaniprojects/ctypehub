@@ -12,9 +12,12 @@ import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
 import { paginate } from '../utilities/paginate';
 
 const query = Astro.url.searchParams.get('query');
-const where = !query
-  ? undefined
-  : { search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) } };
+const where = {
+  block: { [Op.ne]: null },
+  ...(query && {
+    search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) },
+  }),
+};
 
 const {
   data,
@@ -39,7 +42,7 @@ const {
       /><button type="submit" class={buttonStyles.search}>Search</button>
     </form>
 
-    {query && data.length === 0 && <p>No results for &quot;{query}&quot;</p>}
+    {query && data.length === 0 && <p>No results for “{query}”</p>}
 
     {
       data.length > 0 && (
