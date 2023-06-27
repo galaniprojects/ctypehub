@@ -23,8 +23,7 @@ export function CreateForm() {
       try {
         event.preventDefault();
         if (!account) {
-          // TODO better handling
-          throw new Error('Account required');
+          throw new Error('Cannot trigger submit without an account');
         }
 
         const formData = new FormData(event.currentTarget);
