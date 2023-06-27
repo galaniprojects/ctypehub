@@ -5,3 +5,27 @@
 .submit {
   composes: primary from '../Button.module.css';
 }
+
+.modal {
+  background: rgb(27 28 29 / 90%);
+  border: 0;
+}
+
+.modal::backdrop {
+  background: rgb(27 28 29 / 90%);
+}
+
+.output {
+  display: block;
+  margin-block-end: 1.25rem;
+  padding-block-end: 7.5rem;
+  background: url('./circle-xmark.svg') no-repeat center bottom/6.25rem;
+  text-align: center;
+  font-size: 1.375rem;
+  color: var(--color-text-primary);
+}
+
+.retry {
+  composes: primary from '../Button.module.css';
+  width: 100%;
+}

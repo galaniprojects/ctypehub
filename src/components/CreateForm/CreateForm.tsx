@@ -1,4 +1,11 @@
-import { FormEvent, useCallback, useState } from 'react';
+import {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  PropsWithChildren,
+} from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import {
   Blockchain,
@@ -15,8 +22,28 @@ import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 import { generatePath, paths } from '../../paths';
 
+function Modal({ children }: PropsWithChildren) {
+  const ref = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const { current } = ref;
+    current?.showModal();
+    return () => {
+      current?.close();
+    };
+  }, [ref]);
+
+  return (
+    <dialog ref={ref} className={styles.modal}>
+      {children}
+    </dialog>
+  );
+}
+
 export function CreateForm() {
   const [account, setAccount] = useState<InjectedAccount>();
+  const [error, setError] = useState(false);
+  const unsetError = useCallback(() => setError(false), []);
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -71,7 +98,7 @@ export function CreateForm() {
         }
 
         console.error(response);
-        // TODO: handle error
+        setError(true);
       } finally {
         await disconnect();
       }
@@ -93,6 +120,15 @@ export function CreateForm() {
       <button type="submit" className={styles.submit}>
         Create
       </button>
+
+      {error && (
+        <Modal>
+          <output className={styles.output}>Error: Transaction Failed</output>
+          <button type="button" onClick={unsetError} className={styles.retry}>
+            Try again
+          </button>
+        </Modal>
+      )}
     </form>
   );
 }
