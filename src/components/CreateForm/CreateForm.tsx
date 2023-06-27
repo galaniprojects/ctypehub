@@ -95,7 +95,7 @@ export function CreateForm() {
           headers: { 'Content-Type': 'application/json' },
         });
         if (response.ok) {
-          window.location.href = cTypeUrl;
+          window.location.href = `${cTypeUrl}?success`;
           return;
         }
 
