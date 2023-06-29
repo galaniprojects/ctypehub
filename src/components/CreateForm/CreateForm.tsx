@@ -167,6 +167,19 @@ function PropertyFields({ prefix }: { prefix: string }) {
         </Fragment>
       )}
 
+      {['string', 'integer', 'number'].includes(type) && (
+        <p>
+          <label className={styles.label}>
+            Comma-separated list of allowed values, no spaces (optional):
+            <input
+              name={`${prefix}.enum`}
+              className={styles.input}
+              pattern="[^,](,.+)*"
+            />
+          </label>
+        </p>
+      )}
+
       <p>
         <label className={styles.label}>
           <input
@@ -216,6 +229,22 @@ function offsets(length: number) {
   return new Array(length).fill(1).map((dummy, index) => index);
 }
 
+function parseNumbersList(
+  list: string | undefined,
+  parse: (input: string) => number,
+) {
+  if (!list) {
+    return undefined;
+  }
+  const numbersList = list.split(',').map((value) => parse(value));
+  if (numbersList?.some(Number.isNaN)) {
+    const error = `Cannot parse as list of numbers: ${list}`;
+    alert(error);
+    throw new Error(error);
+  }
+  return numbersList;
+}
+
 function getProperties(
   count: number,
   allValues: [string, string][],
@@ -238,24 +267,33 @@ function getProperties(
       if (type === 'reference') {
         data = { $ref: property.$ref };
       }
+
       if (type === 'boolean') {
         data = { type };
       }
+
       if (type === 'string') {
-        const { format, minLength, maxLength } = property;
+        const { format, minLength, maxLength, enum: list } = property;
         data = {
           type,
           ...(format && { format }),
           ...(minLength && { minLength: parseInt(minLength) }),
           ...(maxLength && { maxLength: parseInt(maxLength) }),
+          ...(list && { enum: list.split(',') }),
         };
       }
+
       if (['integer', 'number'].includes(type)) {
-        const { minimum, maximum } = property;
+        const { minimum, maximum, enum: list } = property;
+
+        const parse = type === 'integer' ? parseInt : parseFloat;
+        const numbersList = parseNumbersList(list, parse);
+
         data = {
           type,
           ...(minimum && { minimum: parseFloat(minimum) }),
           ...(maximum && { maximum: parseFloat(maximum) }),
+          ...(numbersList && { enum: numbersList }),
         };
       }
 
