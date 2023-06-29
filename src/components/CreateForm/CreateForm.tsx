@@ -212,12 +212,16 @@ function PropertyFields({ prefix }: { prefix: string }) {
   );
 }
 
+function offsets(length: number) {
+  return new Array(length).fill(1).map((dummy, index) => index);
+}
+
 function getProperties(
   count: number,
   allValues: [string, string][],
 ): ICType['properties'] {
   return Object.fromEntries(
-    new Array(count).fill(1).map((dummy, index) => {
+    offsets(count).map((index) => {
       const prefix = `property[${index}].`;
       const matching = allValues.filter(
         ([name, value]) => name.startsWith(prefix) && value !== '',
@@ -366,7 +370,7 @@ export function CreateForm() {
         </label>
       </p>
 
-      {new Array(propertiesCount).fill(1).map((dummy, index) => (
+      {offsets(propertiesCount).map((index) => (
         <fieldset key={index} className={styles.fieldset}>
           <legend>Property {index + 1}</legend>
           <PropertyFields prefix={`property[${index}]`} />
