@@ -104,30 +104,32 @@ function PropertyFields({ prefix }: { prefix: string }) {
 
       {type === 'string' && (
         <Fragment>
-          <p>
-            <label className={styles.label}>
-              Minimum length (optional):
-              <input
-                name={`${prefix}.minLength`}
-                type="number"
-                min={0}
-                step={1}
-                className={styles.input}
-              />
-            </label>
-          </p>
-          <p>
-            <label className={styles.label}>
-              Maximum length (optional):
-              <input
-                name={`${prefix}.maxLength`}
-                type="number"
-                min={0}
-                step={1}
-                className={styles.input}
-              />
-            </label>
-          </p>
+          <div className={styles.group}>
+            <p>
+              <label className={styles.label}>
+                Minimum length (optional):
+                <input
+                  name={`${prefix}.minLength`}
+                  type="number"
+                  min={0}
+                  step={1}
+                  className={styles.input}
+                />
+              </label>
+            </p>
+            <p>
+              <label className={styles.label}>
+                Maximum length (optional):
+                <input
+                  name={`${prefix}.maxLength`}
+                  type="number"
+                  min={0}
+                  step={1}
+                  className={styles.input}
+                />
+              </label>
+            </p>
+          </div>
           <p>
             <label className={styles.label}>
               Format (optional):
@@ -143,10 +145,10 @@ function PropertyFields({ prefix }: { prefix: string }) {
       )}
 
       {['integer', 'number'].includes(type) && (
-        <Fragment>
+        <div className={styles.group}>
           <p>
             <label className={styles.label}>
-              Minimum (optional):
+              Minimum value (optional):
               <input
                 name={`${prefix}.minimum`}
                 type="number"
@@ -156,7 +158,7 @@ function PropertyFields({ prefix }: { prefix: string }) {
           </p>
           <p>
             <label className={styles.label}>
-              Maximum (optional):
+              Maximum value (optional):
               <input
                 name={`${prefix}.maximum`}
                 type="number"
@@ -164,7 +166,7 @@ function PropertyFields({ prefix }: { prefix: string }) {
               />
             </label>
           </p>
-        </Fragment>
+        </div>
       )}
 
       {['string', 'integer', 'number'].includes(type) && (
@@ -181,12 +183,11 @@ function PropertyFields({ prefix }: { prefix: string }) {
       )}
 
       <p>
-        <label className={styles.label}>
+        <label className={styles.array}>
           <input
             name={`${prefix}.array`}
             type="checkbox"
             value="array"
-            className={styles.input}
             onChange={handleArrayChange}
           />
           is an array of such values
@@ -194,10 +195,10 @@ function PropertyFields({ prefix }: { prefix: string }) {
       </p>
 
       {isArray && (
-        <Fragment>
+        <div className={styles.group}>
           <p>
             <label className={styles.label}>
-              Minimum number of items (optional):
+              Minimum of items (optional):
               <input
                 name={`${prefix}.minItems`}
                 type="number"
@@ -209,7 +210,7 @@ function PropertyFields({ prefix }: { prefix: string }) {
           </p>
           <p>
             <label className={styles.label}>
-              Maximum number of items (optional):
+              Maximum of items (optional):
               <input
                 name={`${prefix}.maxItems`}
                 type="number"
@@ -219,7 +220,7 @@ function PropertyFields({ prefix }: { prefix: string }) {
               />
             </label>
           </p>
-        </Fragment>
+        </div>
       )}
     </Fragment>
   );
@@ -420,7 +421,11 @@ export function CreateForm() {
       <fieldset className={styles.fieldset}>
         <legend>Property {propertiesCount + 1}</legend>
         <p>
-          <button type="button" onClick={handleAddPropertyClick}>
+          <button
+            type="button"
+            onClick={handleAddPropertyClick}
+            className={styles.add}
+          >
             Add Property ➕️
           </button>
         </p>

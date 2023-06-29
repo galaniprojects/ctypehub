@@ -1,6 +1,8 @@
 .container {
   composes: container from '../Container.module.css';
+  max-inline-size: 50rem;
   color: var(--color-text-secondary);
+  font-size: 0.875rem;
 }
 
 .heading {
@@ -8,9 +10,19 @@
 }
 
 .label {
+  margin-block-end: 0.5rem;
+  inline-size: 100%;
   display: inline-flex;
   flex-direction: column;
   gap: 0.5rem;
+  cursor: pointer;
+}
+
+.array {
+  composes: label;
+  margin: 0;
+  flex-direction: row;
+  align-items: center;
 }
 
 .input {
@@ -20,16 +32,44 @@
 .description {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  font-family: inherit;
+  box-sizing: border-box;
   inline-size: 100%;
   block-size: 6rem;
+  font-family: inherit;
 }
 
 .fieldset {
   border: 1px solid var(--color-text-secondary);
   border-radius: var(--border-radius);
+  margin-block-end: 1.5rem;
   padding-block: 0 0.25rem;
   padding-inline: 1.25rem;
+}
+
+@media screen and (width >= 30rem) {
+  .group {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    gap: 1rem;
+  }
+
+  .group > * {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-block-start: 0;
+  }
+
+  .group + * {
+    margin-block-start: 0;
+  }
+}
+
+.add {
+  padding: 0.375rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
 }
 
 .submit {
