@@ -220,18 +220,19 @@ function getProperties(
   count: number,
   allValues: [string, string][],
 ): ICType['properties'] {
-  return Object.fromEntries(
-    offsets(count).map((index) => {
-      const prefix = `property[${index}].`;
-      const matching = allValues.filter(
-        ([name, value]) => name.startsWith(prefix) && value !== '',
-      );
-      const property = Object.fromEntries(
-        matching.map(([name, value]) => [name.replace(prefix, ''), value]),
-      );
+  const rawProperties = offsets(count).map((index) => {
+    const prefix = `property[${index}].`;
+    const matching = allValues.filter(
+      ([name, value]) => name.startsWith(prefix) && value !== '',
+    );
+    return Object.fromEntries(
+      matching.map(([name, value]) => [name.replace(prefix, ''), value]),
+    );
+  });
 
+  return Object.fromEntries(
+    rawProperties.map((property) => {
       const type = property.type as PropertyType;
-      const { name, array } = property;
 
       let data;
       if (type === 'reference') {
@@ -257,11 +258,12 @@ function getProperties(
           ...(maximum && { maximum: parseFloat(maximum) }),
         };
       }
+
+      const { name, array, minItems, maxItems } = property;
       if (!array) {
         return [name, data];
       }
 
-      const { minItems, maxItems } = property;
       return [
         name,
         {
