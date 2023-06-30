@@ -1,13 +1,4 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  Fragment,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, FormEvent, Fragment, useCallback, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import {
   Blockchain,
@@ -22,26 +13,9 @@ import {
 import styles from './CreateForm.module.css';
 
 import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
+import { Modal } from '../Modal/Modal';
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 import { generatePath, paths } from '../../paths';
-
-function Modal({ children }: PropsWithChildren) {
-  const ref = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const { current } = ref;
-    current?.showModal();
-    return () => {
-      current?.close();
-    };
-  }, [ref]);
-
-  return (
-    <dialog ref={ref} className={styles.modal}>
-      {children}
-    </dialog>
-  );
-}
 
 type PropertyType = 'string' | 'integer' | 'number' | 'boolean' | 'reference';
 
@@ -56,7 +30,7 @@ function PropertyFields({ prefix }: { prefix: string }) {
   const [type, setType] = useState<PropertyType>('string');
   const handleTypeChange = useCallback(
     (event: ChangeEvent<HTMLSelectElement>) =>
-      setType(event.currentTarget.value as typeof type),
+      setType(event.currentTarget.value as PropertyType),
     [],
   );
 

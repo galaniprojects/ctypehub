@@ -76,15 +76,6 @@
   composes: primary from '../Button.module.css';
 }
 
-.modal {
-  background: rgb(27 28 29 / 90%);
-  border: 0;
-}
-
-.modal::backdrop {
-  background: rgb(27 28 29 / 90%);
-}
-
 .progress {
   color: var(--color-text-primary);
 }
