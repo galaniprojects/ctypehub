@@ -102,8 +102,8 @@
 .spinner {
   --size: calc(74rem / 16);
 
-  height: var(--size);
-  width: var(--size);
+  block-size: var(--size);
+  inline-size: var(--size);
   display: block;
   margin-block-end: 0.625rem;
   margin-inline: auto;
@@ -123,5 +123,5 @@
 
 .retry {
   composes: primary from '../Button.module.css';
-  width: 100%;
+  inline-size: 100%;
 }
