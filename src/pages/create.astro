@@ -1,7 +1,4 @@
 ---
-import containerStyles from '../components/Container.module.css';
-import inputStyles from '../components/Input/Input.module.css';
-
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 import { CreateForm } from '../components/CreateForm/CreateForm';
@@ -12,9 +9,6 @@ import { configuration } from '../utilities/configuration';
   <Header create={true} />
   <CreateForm client:only="react" />
 </Layout>
-
-<style>
-</style>
 
 <script is:inline data-blockchain-endpoint={configuration.blockchainEndpoint}>
   window.kilt = {};

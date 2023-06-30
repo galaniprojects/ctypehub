@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, Fragment, useCallback, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import {
   Blockchain,
@@ -6,7 +6,6 @@ import {
   CType,
   Did,
   disconnect,
-  ICType,
   KiltAddress,
 } from '@kiltprotocol/sdk-js';
 
@@ -14,279 +13,11 @@ import styles from './CreateForm.module.css';
 
 import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
 import { Modal } from '../Modal/Modal';
+import { PropertyFields } from '../PropertyFields/PropertyFields';
+import { getProperties } from '../PropertyFields/getProperties';
+import { offsets } from '../../utilities/offsets';
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 import { generatePath, paths } from '../../paths';
-
-type PropertyType = 'string' | 'integer' | 'number' | 'boolean' | 'reference';
-
-function PropertyFields({ prefix }: { prefix: string }) {
-  const [isArray, setIsArray] = useState(false);
-  const handleArrayChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) =>
-      setIsArray(event.currentTarget.checked),
-    [],
-  );
-
-  const [type, setType] = useState<PropertyType>('string');
-  const handleTypeChange = useCallback(
-    (event: ChangeEvent<HTMLSelectElement>) =>
-      setType(event.currentTarget.value as PropertyType),
-    [],
-  );
-
-  return (
-    <Fragment>
-      <p>
-        <label className={styles.label}>
-          Name:
-          <input name={`${prefix}.name`} className={styles.input} required />
-        </label>
-      </p>
-      <p>
-        <label className={styles.label}>
-          Type:
-          <select
-            name={`${prefix}.type`}
-            className={styles.input}
-            onChange={handleTypeChange}
-          >
-            <option value="string">string</option>
-            <option value="integer">integer</option>
-            <option value="number">number</option>
-            <option value="boolean">boolean</option>
-            <option value="reference">reference</option>
-          </select>
-        </label>
-      </p>
-
-      {type === 'reference' && (
-        <p>
-          <label className={styles.label}>
-            $id of Referenced Claim Type:
-            <input
-              name={`${prefix}.$ref`}
-              className={styles.input}
-              placeholder="kilt:ctype:0x…"
-              pattern="kilt:ctype:0x[0-9a-f]+"
-              required
-            />
-          </label>
-        </p>
-      )}
-
-      {type === 'string' && (
-        <Fragment>
-          <div className={styles.group}>
-            <p>
-              <label className={styles.label}>
-                Minimum length (optional):
-                <input
-                  name={`${prefix}.minLength`}
-                  type="number"
-                  min={0}
-                  step={1}
-                  className={styles.input}
-                />
-              </label>
-            </p>
-            <p>
-              <label className={styles.label}>
-                Maximum length (optional):
-                <input
-                  name={`${prefix}.maxLength`}
-                  type="number"
-                  min={0}
-                  step={1}
-                  className={styles.input}
-                />
-              </label>
-            </p>
-          </div>
-          <p>
-            <label className={styles.label}>
-              Format (optional):
-              <select name={`${prefix}.format`} className={styles.input}>
-                <option value="">unset</option>
-                <option value="date">date</option>
-                <option value="time">time</option>
-                <option value="uri">URI</option>
-              </select>
-            </label>
-          </p>
-        </Fragment>
-      )}
-
-      {['integer', 'number'].includes(type) && (
-        <div className={styles.group}>
-          <p>
-            <label className={styles.label}>
-              Minimum value (optional):
-              <input
-                name={`${prefix}.minimum`}
-                type="number"
-                className={styles.input}
-              />
-            </label>
-          </p>
-          <p>
-            <label className={styles.label}>
-              Maximum value (optional):
-              <input
-                name={`${prefix}.maximum`}
-                type="number"
-                className={styles.input}
-              />
-            </label>
-          </p>
-        </div>
-      )}
-
-      {['string', 'integer', 'number'].includes(type) && (
-        <p>
-          <label className={styles.label}>
-            Comma-separated list of allowed values, no spaces (optional):
-            <input
-              name={`${prefix}.enum`}
-              className={styles.input}
-              pattern="[^,](,.+)*"
-            />
-          </label>
-        </p>
-      )}
-
-      <p>
-        <label className={styles.array}>
-          <input
-            name={`${prefix}.array`}
-            type="checkbox"
-            value="array"
-            onChange={handleArrayChange}
-          />
-          is an array of such values
-        </label>
-      </p>
-
-      {isArray && (
-        <div className={styles.group}>
-          <p>
-            <label className={styles.label}>
-              Minimum of items (optional):
-              <input
-                name={`${prefix}.minItems`}
-                type="number"
-                min={0}
-                step={1}
-                className={styles.input}
-              />
-            </label>
-          </p>
-          <p>
-            <label className={styles.label}>
-              Maximum of items (optional):
-              <input
-                name={`${prefix}.maxItems`}
-                type="number"
-                min={0}
-                step={1}
-                className={styles.input}
-              />
-            </label>
-          </p>
-        </div>
-      )}
-    </Fragment>
-  );
-}
-
-function offsets(length: number) {
-  return new Array(length).fill(1).map((dummy, index) => index);
-}
-
-function parseNumbersList(
-  list: string | undefined,
-  parse: (input: string) => number,
-) {
-  if (!list) {
-    return undefined;
-  }
-  const numbersList = list.split(',').map((value) => parse(value));
-  if (numbersList?.some(Number.isNaN)) {
-    const error = `Cannot parse as list of numbers: ${list}`;
-    alert(error);
-    throw new Error(error);
-  }
-  return numbersList;
-}
-
-function getProperties(
-  count: number,
-  allValues: [string, string][],
-): ICType['properties'] {
-  const rawProperties = offsets(count).map((index) => {
-    const prefix = `property[${index}].`;
-    const matching = allValues.filter(
-      ([name, value]) => name.startsWith(prefix) && value !== '',
-    );
-    return Object.fromEntries(
-      matching.map(([name, value]) => [name.replace(prefix, ''), value]),
-    );
-  });
-
-  return Object.fromEntries(
-    rawProperties.map((property) => {
-      const type = property.type as PropertyType;
-
-      let data;
-      if (type === 'reference') {
-        data = { $ref: property.$ref };
-      }
-
-      if (type === 'boolean') {
-        data = { type };
-      }
-
-      if (type === 'string') {
-        const { format, minLength, maxLength, enum: list } = property;
-        data = {
-          type,
-          ...(format && { format }),
-          ...(minLength && { minLength: parseInt(minLength) }),
-          ...(maxLength && { maxLength: parseInt(maxLength) }),
-          ...(list && { enum: list.split(',') }),
-        };
-      }
-
-      if (['integer', 'number'].includes(type)) {
-        const { minimum, maximum, enum: list } = property;
-
-        const parse = type === 'integer' ? parseInt : parseFloat;
-        const numbersList = parseNumbersList(list, parse);
-
-        data = {
-          type,
-          ...(minimum && { minimum: parseFloat(minimum) }),
-          ...(maximum && { maximum: parseFloat(maximum) }),
-          ...(numbersList && { enum: numbersList }),
-        };
-      }
-
-      const { name, array, minItems, maxItems } = property;
-      if (!array) {
-        return [name, data];
-      }
-
-      return [
-        name,
-        {
-          type: 'array',
-          items: data,
-          ...(minItems && { minItems: parseInt(minItems) }),
-          ...(maxItems && { maxItems: parseInt(maxItems) }),
-        },
-      ];
-    }),
-  );
-}
 
 export function CreateForm() {
   const [propertiesCount, setPropertiesCount] = useState(0);
@@ -386,7 +117,7 @@ export function CreateForm() {
       {offsets(propertiesCount).map((index) => (
         <fieldset key={index} className={styles.fieldset}>
           <legend>Property {index + 1}</legend>
-          <PropertyFields prefix={`property[${index}]`} />
+          <PropertyFields index={index} />
         </fieldset>
       ))}
 

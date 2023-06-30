@@ -14,3 +14,12 @@
   padding-inline-start: 2.25rem;
   background: white url('magnifying-glass.svg') center left 0.75rem no-repeat;
 }
+
+.label {
+  margin-block-end: 0.5rem;
+  inline-size: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  cursor: pointer;
+}
