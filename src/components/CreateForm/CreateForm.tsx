@@ -60,8 +60,6 @@ function PropertyFields({ prefix }: { prefix: string }) {
     [],
   );
 
-  // TODO: enums
-
   return (
     <Fragment>
       <p>
