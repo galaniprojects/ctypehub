@@ -101,6 +101,28 @@ export function CreateForm() {
       <h3 className={styles.heading}>Create a Claim Type</h3>
 
       <p>
+        To create a Claim Type you need a{' '}
+        <a
+          className={styles.anchor}
+          href="https://kilt-protocol.org/get-did/index.html"
+        >
+          KILT DID
+        </a>{' '}
+        and the{' '}
+        <a className={styles.anchor} href="https://www.sporran.org/">
+          Sporran wallet
+        </a>{' '}
+        (or another wallet supporting the{' '}
+        <a
+          className={styles.anchor}
+          href="https://github.com/KILTprotocol/spec-ext-didsign-api"
+        >
+          DID Sign API Specification v1.1+
+        </a>
+        )
+      </p>
+
+      <p>
         <label className={styles.label}>
           Title:
           <input className={styles.input} name="title" required />

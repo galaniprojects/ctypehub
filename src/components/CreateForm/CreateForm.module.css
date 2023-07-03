@@ -9,6 +9,10 @@
   font-size: 1.375rem;
 }
 
+.anchor {
+  color: inherit;
+}
+
 .label {
   composes: label from '../Input/Input.module.css';
 }

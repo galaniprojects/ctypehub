@@ -55,7 +55,7 @@ export function SelectAccount({ onSelect }: Props) {
   return (
     <p className={styles.label}>
       <button onClick={handleEnableClick} className={styles.load} type="button">
-        Load accounts
+        Detect accounts
       </button>
       and{' '}
       <label>
