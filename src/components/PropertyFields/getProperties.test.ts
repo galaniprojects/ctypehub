@@ -44,14 +44,27 @@ describe('getProperties', () => {
     const properties = getProperties(1, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'string'],
-      ['property[0].format', ''],
-      ['property[0].minLength', ''],
-      ['property[0].maxLength', ''],
-      ['property[0].enum', ''],
       ['property[0].array', ''],
       ...extras,
     ]);
     expect(properties).toEqual({ Name: { type: 'string' } });
+    CType.fromProperties('title', properties);
+  });
+
+  it('should return an enum string property', async () => {
+    const properties = getProperties(1, [
+      ['property[0].name', 'Name'],
+      ['property[0].type', 'string'],
+      ['property[0].enum', 'mailto:a@b,https://www.example.org'],
+      ['property[0].array', ''],
+      ...extras,
+    ]);
+    expect(properties).toEqual({
+      Name: {
+        type: 'string',
+        enum: ['mailto:a@b', 'https://www.example.org'],
+      },
+    });
     CType.fromProperties('title', properties);
   });
 
@@ -62,7 +75,6 @@ describe('getProperties', () => {
       ['property[0].format', 'uri'],
       ['property[0].minLength', '10'],
       ['property[0].maxLength', '50'],
-      ['property[0].enum', 'mailto:a@b,https://www.example.org'],
       ['property[0].array', ''],
       ...extras,
     ]);
@@ -72,7 +84,6 @@ describe('getProperties', () => {
         format: 'uri',
         minLength: 10,
         maxLength: 50,
-        enum: ['mailto:a@b', 'https://www.example.org'],
       },
     });
     CType.fromProperties('title', properties);
@@ -82,10 +93,6 @@ describe('getProperties', () => {
     const properties = getProperties(1, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'string'],
-      ['property[0].format', ''],
-      ['property[0].minLength', ''],
-      ['property[0].maxLength', ''],
-      ['property[0].enum', ''],
       ['property[0].array', 'array'],
       ['property[0].minItems', ''],
       ['property[0].maxItems', ''],
@@ -101,10 +108,6 @@ describe('getProperties', () => {
     const properties = getProperties(1, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'string'],
-      ['property[0].format', ''],
-      ['property[0].minLength', ''],
-      ['property[0].maxLength', ''],
-      ['property[0].enum', ''],
       ['property[0].array', 'array'],
       ['property[0].minItems', '1'],
       ['property[0].maxItems', '5'],
@@ -125,13 +128,27 @@ describe('getProperties', () => {
     const properties = getProperties(1, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'integer'],
-      ['property[0].minimum', ''],
-      ['property[0].maximum', ''],
-      ['property[0].enum', ''],
       ['property[0].array', ''],
       ...extras,
     ]);
     expect(properties).toEqual({ Name: { type: 'integer' } });
+    CType.fromProperties('title', properties);
+  });
+
+  it('should return an enum integer property', async () => {
+    const properties = getProperties(1, [
+      ['property[0].name', 'Name'],
+      ['property[0].type', 'integer'],
+      ['property[0].enum', '20,40'],
+      ['property[0].array', ''],
+      ...extras,
+    ]);
+    expect(properties).toEqual({
+      Name: {
+        type: 'integer',
+        enum: [20, 40],
+      },
+    });
     CType.fromProperties('title', properties);
   });
 
@@ -141,7 +158,6 @@ describe('getProperties', () => {
       ['property[0].type', 'integer'],
       ['property[0].minimum', '10'],
       ['property[0].maximum', '50'],
-      ['property[0].enum', '20,40'],
       ['property[0].array', ''],
       ...extras,
     ]);
@@ -150,7 +166,6 @@ describe('getProperties', () => {
         type: 'integer',
         minimum: 10,
         maximum: 50,
-        enum: [20, 40],
       },
     });
     CType.fromProperties('title', properties);
@@ -160,13 +175,27 @@ describe('getProperties', () => {
     const properties = getProperties(1, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'number'],
-      ['property[0].minimum', ''],
-      ['property[0].maximum', ''],
-      ['property[0].enum', ''],
       ['property[0].array', ''],
       ...extras,
     ]);
     expect(properties).toEqual({ Name: { type: 'number' } });
+    CType.fromProperties('title', properties);
+  });
+
+  it('should return an enum number property', async () => {
+    const properties = getProperties(1, [
+      ['property[0].name', 'Name'],
+      ['property[0].type', 'number'],
+      ['property[0].enum', '2.3,4.5'],
+      ['property[0].array', ''],
+      ...extras,
+    ]);
+    expect(properties).toEqual({
+      Name: {
+        type: 'number',
+        enum: [2.3, 4.5],
+      },
+    });
     CType.fromProperties('title', properties);
   });
 
@@ -176,7 +205,6 @@ describe('getProperties', () => {
       ['property[0].type', 'number'],
       ['property[0].minimum', '1.2'],
       ['property[0].maximum', '5.6'],
-      ['property[0].enum', '2.3,4.5'],
       ['property[0].array', ''],
       ...extras,
     ]);
@@ -185,7 +213,6 @@ describe('getProperties', () => {
         type: 'number',
         minimum: 1.2,
         maximum: 5.6,
-        enum: [2.3, 4.5],
       },
     });
     CType.fromProperties('title', properties);
@@ -195,18 +222,9 @@ describe('getProperties', () => {
     const properties = getProperties(3, [
       ['property[0].name', 'Name'],
       ['property[0].type', 'string'],
-      ['property[0].format', ''],
-      ['property[0].minLength', ''],
-      ['property[0].maxLength', ''],
-      ['property[0].enum', ''],
       ['property[0].array', ''],
-      ['property[0].minItems', ''],
-      ['property[0].maxItems', ''],
       ['property[1].name', 'Age'],
       ['property[1].type', 'integer'],
-      ['property[1].minimum', ''],
-      ['property[1].maximum', ''],
-      ['property[1].enum', ''],
       ['property[1].array', ''],
       ['property[2].name', 'IsCool'],
       ['property[2].type', 'boolean'],

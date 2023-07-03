@@ -25,6 +25,10 @@
   }
 }
 
+.fieldset {
+  composes: fieldset from '../Input/Input.module.css';
+}
+
 .array {
   composes: label;
   margin: 0;

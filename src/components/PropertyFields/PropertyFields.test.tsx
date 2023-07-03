@@ -11,6 +11,9 @@ describe('<PropertyFields />', () => {
     const { container, getByLabelText } = render(<PropertyFields index={0} />);
     expect(container).toMatchSnapshot('string');
 
+    await userEvent.click(getByLabelText('any matching value'));
+    expect(container).toMatchSnapshot('string limitations');
+
     const name = getByLabelText('Name:');
     await userEvent.type(name, 'Name');
 
@@ -27,6 +30,12 @@ describe('<PropertyFields />', () => {
 
     await userEvent.selectOptions(select, 'integer');
     expect(container).toMatchSnapshot('integer');
+
+    await userEvent.click(getByLabelText('any matching value'));
+    expect(container).toMatchSnapshot('integer limitations');
+
+    await userEvent.click(getByLabelText('fixed set of values'));
+    expect(container).toMatchSnapshot('integer enum');
 
     const array = getByLabelText(/array/i);
     await userEvent.click(array);
