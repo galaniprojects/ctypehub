@@ -55,7 +55,7 @@ exports[`CreateForm > should render 1`] = `
       <label
         class="_label_eddc76"
       >
-        Description:
+        Description (optional):
         <textarea
           class="_description_eddc76"
           name="description"
@@ -164,7 +164,7 @@ exports[`CreateForm > should render 2`] = `
       <label
         class="_label_eddc76"
       >
-        Description:
+        Description (optional):
         <textarea
           class="_description_eddc76"
           name="description"

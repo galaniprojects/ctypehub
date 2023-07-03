@@ -276,7 +276,7 @@ exports[`<PropertyFields /> > renders correctly > integer array 1`] = `
       <label
         class="_label_8bc908"
       >
-        Minimum of items (optional):
+        Minimum number of values (optional):
         <input
           class="_input_8bc908"
           min="0"
@@ -290,7 +290,7 @@ exports[`<PropertyFields /> > renders correctly > integer array 1`] = `
       <label
         class="_label_8bc908"
       >
-        Maximum of items (optional):
+        Maximum number of values (optional):
         <input
           class="_input_8bc908"
           min="0"
@@ -505,6 +505,7 @@ exports[`<PropertyFields /> > renders correctly > integer limitations 1`] = `
           <input
             class="_input_8bc908"
             name="property[0].minimum"
+            step="any"
             type="number"
           />
         </label>
@@ -517,6 +518,7 @@ exports[`<PropertyFields /> > renders correctly > integer limitations 1`] = `
           <input
             class="_input_8bc908"
             name="property[0].maximum"
+            step="any"
             type="number"
           />
         </label>

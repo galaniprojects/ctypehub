@@ -151,6 +151,7 @@ export function PropertyFields({ index }: { index: number }) {
                     name={`${prefix}minimum`}
                     type="number"
                     className={styles.input}
+                    step="any"
                   />
                 </label>
               </p>
@@ -161,6 +162,7 @@ export function PropertyFields({ index }: { index: number }) {
                     name={`${prefix}maximum`}
                     type="number"
                     className={styles.input}
+                    step="any"
                   />
                 </label>
               </p>
@@ -198,7 +200,7 @@ export function PropertyFields({ index }: { index: number }) {
         <div className={styles.group}>
           <p>
             <label className={styles.label}>
-              Minimum of items (optional):
+              Minimum number of values (optional):
               <input
                 name={`${prefix}minItems`}
                 type="number"
@@ -210,7 +212,7 @@ export function PropertyFields({ index }: { index: number }) {
           </p>
           <p>
             <label className={styles.label}>
-              Maximum of items (optional):
+              Maximum number of values (optional):
               <input
                 name={`${prefix}maxItems`}
                 type="number"

@@ -57,7 +57,7 @@ export function CreateForm() {
         );
         if (existing.isSome) {
           const redirect = window.confirm(
-            'Such CType already exists. Open its page?',
+            'An identical CType already exists. Open its page?',
           );
           if (redirect) {
             window.location.href = cTypeUrl;
@@ -140,7 +140,7 @@ export function CreateForm() {
 
       <p>
         <label className={styles.label}>
-          Description:
+          Description (optional):
           <textarea className={styles.description} name="description" />
         </label>
       </p>
