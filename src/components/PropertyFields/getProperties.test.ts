@@ -190,4 +190,34 @@ describe('getProperties', () => {
     });
     CType.fromProperties('title', properties);
   });
+
+  it('should return multiple properties', async () => {
+    const properties = getProperties(3, [
+      ['property[0].name', 'Name'],
+      ['property[0].type', 'string'],
+      ['property[0].format', ''],
+      ['property[0].minLength', ''],
+      ['property[0].maxLength', ''],
+      ['property[0].enum', ''],
+      ['property[0].array', ''],
+      ['property[0].minItems', ''],
+      ['property[0].maxItems', ''],
+      ['property[1].name', 'Age'],
+      ['property[1].type', 'integer'],
+      ['property[1].minimum', ''],
+      ['property[1].maximum', ''],
+      ['property[1].enum', ''],
+      ['property[1].array', ''],
+      ['property[2].name', 'IsCool'],
+      ['property[2].type', 'boolean'],
+      ['property[2].array', ''],
+      ...extras,
+    ]);
+    expect(properties).toEqual({
+      Name: { type: 'string' },
+      Age: { type: 'integer' },
+      IsCool: { type: 'boolean' },
+    });
+    CType.fromProperties('title', properties);
+  });
 });
