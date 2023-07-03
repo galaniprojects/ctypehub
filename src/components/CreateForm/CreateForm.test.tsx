@@ -8,7 +8,9 @@ import { CreateForm } from './CreateForm';
 
 describe('CreateForm', () => {
   it('should render', async () => {
-    const { container, queryAllByLabelText, getByText } = render(<CreateForm />);
+    const { container, queryAllByLabelText, getByText } = render(
+      <CreateForm />,
+    );
     expect(container).toMatchSnapshot();
 
     await userEvent.click(getByText(/Add Property/));
