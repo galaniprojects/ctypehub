@@ -1,10 +1,16 @@
 // @vitest-environment jsdom
 
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { CreateForm } from './CreateForm';
+import { useSupportedExtensions } from './useSupportedExtensions';
+
+vi.mock('./useSupportedExtensions');
+vi.mocked(useSupportedExtensions).mockReturnValue([
+  { key: 'sporran', name: 'Sporran' },
+]);
 
 describe('CreateForm', () => {
   it('should render', async () => {

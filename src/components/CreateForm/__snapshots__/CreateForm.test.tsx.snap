@@ -100,8 +100,10 @@ exports[`CreateForm > should render 1`] = `
     <button
       class="_submit_eddc76"
       type="submit"
+      value="sporran"
     >
-      Create Claim Type
+      Create Claim Type via 
+      Sporran
     </button>
   </form>
 </div>
@@ -352,8 +354,10 @@ exports[`CreateForm > should render 2`] = `
     <button
       class="_submit_eddc76"
       type="submit"
+      value="sporran"
     >
-      Create Claim Type
+      Create Claim Type via 
+      Sporran
     </button>
   </form>
 </div>

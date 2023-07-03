@@ -7,6 +7,7 @@ declare global {
     kilt: Record<
       string,
       {
+        name: string;
         signExtrinsicWithDid: (
           extrinsic: string,
           signer: KiltAddress,

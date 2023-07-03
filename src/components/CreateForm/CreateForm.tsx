@@ -19,6 +19,8 @@ import { offsets } from '../../utilities/offsets';
 import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
 import { generatePath, paths } from '../../paths';
 
+import { useSupportedExtensions } from './useSupportedExtensions';
+
 export function CreateForm() {
   const [propertiesCount, setPropertiesCount] = useState(0);
   const handleAddPropertyClick = useCallback(
@@ -63,8 +65,13 @@ export function CreateForm() {
           return;
         }
 
+        const nativeEvent = event.nativeEvent as SubmitEvent;
+        const submitter = nativeEvent.submitter as HTMLButtonElement;
+        const extensionKey = submitter?.value;
+        const extension = window.kilt[extensionKey];
+
         const createTx = api.tx.ctype.add(CType.toChain(cType));
-        const authorized = await window.kilt.sporran.signExtrinsicWithDid(
+        const authorized = await extension.signExtrinsicWithDid(
           createTx.toHex(),
           account.address as KiltAddress,
         );
@@ -95,6 +102,8 @@ export function CreateForm() {
     },
     [account, propertiesCount],
   );
+
+  const extensions = useSupportedExtensions();
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
@@ -158,9 +167,12 @@ export function CreateForm() {
 
       <SelectAccount onSelect={setAccount} />
 
-      <button type="submit" className={styles.submit}>
-        Create Claim Type
-      </button>
+      {extensions.length === 0 && <p>No wallets detected</p>}
+      {extensions.map(({ key, name }) => (
+        <button type="submit" className={styles.submit} value={key} key={key}>
+          Create Claim Type via {name}
+        </button>
+      ))}
 
       {progress && (
         <Modal>
