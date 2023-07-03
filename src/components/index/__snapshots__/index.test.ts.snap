@@ -3,12 +3,14 @@
 exports[`index.astro > should render all CTypes 1`] = `
 <body>
   <header>
+    <span></span>
     <h2><a href="/">CTypeHub</a></h2>
+    <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
   <search>
     <form action="/" method="get" class="_container">
-      <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit">Search</button>
+      <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
     <ul>
@@ -32,12 +34,14 @@ exports[`index.astro > should render all CTypes 1`] = `
 exports[`index.astro > should render search results 1`] = `
 <body>
   <header>
+    <span></span>
     <h2><a href="/">CTypeHub</a></h2>
+    <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
   <search>
     <form action="/" method="get" class="_container">
-      <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" autofocus class="_search _component" /><button type="submit">Search</button>
+      <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" autofocus class="_search _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
     <ul>
@@ -56,15 +60,17 @@ exports[`index.astro > should render search results 1`] = `
 exports[`index.astro > should render when no search results 1`] = `
 <body>
   <header>
+    <span></span>
     <h2><a href="/">CTypeHub</a></h2>
+    <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
   <search>
     <form action="/" method="get" class="_container">
-      <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" autofocus class="_search _component" /><button type="submit">Search</button>
+      <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" autofocus class="_search _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
-    <p>No results for &quot;asdagalasdg&quot;</p>
+    <p>No results for “asdagalasdg”</p>
   </search>
 </body>
 `;

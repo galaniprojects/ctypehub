@@ -1,0 +1,13 @@
+.label {
+  color: var(--color-text-primary);
+}
+
+.load {
+  composes: primary from '../Button.module.css';
+  margin-inline-end: 0.5rem;
+}
+
+.select {
+  composes: component from '../Input/Input.module.css';
+  margin-inline-start: 0.5rem;
+}
