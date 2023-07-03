@@ -39,7 +39,7 @@
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/node": "^18.16.18",
+    "@types/node": "^18.16.19",
     "@types/prettier": "^2.7.3",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
@@ -47,7 +47,7 @@
     "@typescript-eslint/parser": "^5.60.1",
     "buffer": "^6.0.3",
     "cbor-web": "^9.0.0",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-astro": "^0.27.2",
