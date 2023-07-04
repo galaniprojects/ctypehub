@@ -13,7 +13,7 @@
     "test": "tsc --noEmit && astro check && vitest",
     "dev": "astro dev",
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
-    "kill-db": "docker rm -f postgres",
+    "stop-db": "docker rm -f postgres",
     "migrate": "sequelize-cli db:migrate",
     "build": "export $(cat .env.example) && astro build",
     "start": "yarn migrate && node --enable-source-maps dist/server/entry.mjs"
