@@ -20,7 +20,10 @@ export interface CTypeData extends CTypeDataInput {
   attestationsCount: string;
 }
 
-export class CType extends Model<CTypeData, CTypeDataInput> {}
+export class CType extends Model<CTypeData, CTypeDataInput> {
+  // declare Tags?: Tag[];
+  // declare addTags: HasManyAddAssociationsMixin<Tag, string>;
+}
 
 export const CTypeModelDefinition: ModelAttributes = {
   id: {
