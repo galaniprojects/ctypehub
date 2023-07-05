@@ -9,7 +9,6 @@ import {
   it,
   vi,
 } from 'vitest';
-import { got } from 'got';
 import {
   Blockchain,
   ConfigService,
@@ -27,22 +26,11 @@ import {
 import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
 
-import {
-  EventParams,
-  EventsResponseJson,
-  getCTypeEvents,
-  scanCTypes,
-} from './scanCTypes';
+import { EventParams, scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
+import { subScanEventGenerator } from './subScan';
 
-let postResponse: EventsResponseJson;
-vi.mock('got', () => ({
-  got: {
-    post: vi.fn().mockReturnValue({
-      json: () => postResponse,
-    }),
-  },
-}));
+vi.mock('./subScan');
 
 let submitter: KiltKeyringPair;
 let assertionMethod: KiltKeyringPair;
@@ -104,18 +92,13 @@ function mockCTypeEvent() {
     { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
     { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
   ];
-  postResponse = {
-    data: {
-      count: 1,
-      events: [
-        {
-          params: JSON.stringify(mockParams),
-          block_timestamp: 1602732456,
-          extrinsic_hash: extrinsic.hash.toHex(),
-        },
-      ],
-    },
-  };
+  vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
+    yield {
+      params: mockParams,
+      blockTimestampMs: 160273245600,
+      extrinsicHash: extrinsic.hash.toHex(),
+    };
+  });
 }
 
 beforeAll(async () => {
@@ -142,124 +125,83 @@ afterAll(async () => {
 
 beforeEach(async () => {
   await CTypeModel.destroy({ truncate: true });
-  vi.mocked(got.post).mockClear();
+  vi.mocked(subScanEventGenerator).mockClear();
 });
 
 describe('scanCTypes', () => {
-  describe('getCTypeEvents', () => {
-    it('should query the subscan API', async () => {
-      postResponse = { data: { count: 0, events: null } };
-      const cTypeEvents = await getCTypeEvents(10, 0, 0);
-      expect(got.post).toHaveBeenCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: 10,
-            module: 'ctype',
-            page: 0,
-            row: 0,
-          },
-        },
-      );
-      expect(cTypeEvents.count).toBe(0);
-      expect(cTypeEvents.events).toBeUndefined();
-    });
+  it('should add new CType to the database', async () => {
+    mockCTypeEvent();
+
+    await scanCTypes();
+
+    expect(subScanEventGenerator).toHaveBeenLastCalledWith(
+      'ctype',
+      'CTypeCreated',
+      0,
+    );
+    const created = await CTypeModel.findByPk(cType.$id);
+    expect(created).not.toBeNull();
+    expect(created?.dataValues.title).toBe(cType.title);
   });
 
-  describe('scanCTypes', () => {
-    it('should add new CType to the database', async () => {
-      mockCTypeEvent();
+  it('should not add a CType if it already exists', async () => {
+    mockCTypeEvent();
 
-      await scanCTypes();
-      expect(got.post).toHaveBeenCalledTimes(2);
-      expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: 0,
-            module: 'ctype',
-            page: 0,
-            row: 100,
-          },
+    await scanCTypes();
+
+    const latestCType = await CTypeModel.findOne({
+      order: [['createdAt', 'DESC']],
+      where: {
+        block: {
+          [Op.not]: null,
         },
-      );
-      const created = await CTypeModel.findByPk(cType.$id);
-      expect(created).not.toBeNull();
-      expect(created?.dataValues.title).toBe(cType.title);
+      },
     });
 
-    it('should not add a CType if it already exists', async () => {
-      mockCTypeEvent();
+    const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
 
-      await scanCTypes();
-
-      const latestCType = await CTypeModel.findOne({
-        order: [['createdAt', 'DESC']],
-        where: {
-          block: {
-            [Op.not]: null,
-          },
-        },
-      });
-
-      const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
-
-      postResponse = { data: { count: 0, events: [] } };
-
-      await scanCTypes();
-
-      expect(got.post).toHaveBeenCalledTimes(3);
-      expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: expectedFromBlock,
-            module: 'ctype',
-            page: 0,
-            row: 1,
-          },
-        },
-      );
-
-      const { count } = await CTypeModel.findAndCountAll();
-      expect(count).toBe(1);
+    vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
+      // yield nothing
     });
 
-    it('should correctly upsert an existing CType', async () => {
-      const { $id, $schema, title, properties, type } = cType;
-      await CTypeModel.create({
-        id: $id,
-        schema: $schema,
-        title,
-        properties,
-        type,
-        creator: did,
-        createdAt: new Date(),
-        extrinsicHash: extrinsic.hash.toHex(),
-      });
+    await scanCTypes();
 
-      const beforeUpsert = await CTypeModel.findByPk(cType.$id);
+    expect(subScanEventGenerator).toHaveBeenCalledTimes(2);
+    expect(subScanEventGenerator).toHaveBeenLastCalledWith(
+      'ctype',
+      'CTypeCreated',
+      expectedFromBlock,
+    );
 
-      if (!beforeUpsert) {
-        throw new Error('Not found');
-      }
+    const { count } = await CTypeModel.findAndCountAll();
+    expect(count).toBe(1);
+  });
 
-      expect(beforeUpsert.dataValues.block).toBeNull();
-
-      mockCTypeEvent();
-      await scanCTypes();
-
-      await beforeUpsert.reload();
-      expect(beforeUpsert.dataValues.block).not.toBeNull();
+  it('should correctly upsert an existing CType', async () => {
+    const { $id, $schema, title, properties, type } = cType;
+    await CTypeModel.create({
+      id: $id,
+      schema: $schema,
+      title,
+      properties,
+      type,
+      creator: did,
+      createdAt: new Date(),
+      extrinsicHash: extrinsic.hash.toHex(),
     });
+
+    const beforeUpsert = await CTypeModel.findByPk(cType.$id);
+
+    if (!beforeUpsert) {
+      throw new Error('Not found');
+    }
+
+    expect(beforeUpsert.dataValues.block).toBeNull();
+
+    mockCTypeEvent();
+    await scanCTypes();
+
+    await beforeUpsert.reload();
+    expect(beforeUpsert.dataValues.block).not.toBeNull();
   });
 });
