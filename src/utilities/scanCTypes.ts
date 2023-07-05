@@ -4,14 +4,8 @@ import { Op } from 'sequelize';
 
 import { CType as CTypeModel } from '../models/ctype';
 
-import { configuration } from './configuration';
-import { sleep } from './sleep';
 import { logger } from './logger';
 import { subScanEventGenerator } from './subScan';
-
-const SCAN_INTERVAL_MS = 10 * 60 * 1000;
-
-const { isTest } = configuration;
 
 export type EventParams = [
   { type_name: 'CTypeCreatorOf'; value: `0x${string}` },
@@ -28,7 +22,7 @@ export async function scanCTypes() {
     },
   });
 
-  const fromBlock = latestCType ? Number(latestCType.dataValues.block) + 1 : 0;
+  const fromBlock = latestCType ? Number(latestCType.dataValues.block) : 0;
   const eventGenerator = subScanEventGenerator(
     'ctype',
     'CTypeCreated',
@@ -43,7 +37,7 @@ export async function scanCTypes() {
     try {
       cTypeDetails = await CType.fetchFromChain(CType.hashToId(cTypeHash));
     } catch (exception) {
-      logger.error(exception, `Error fetching details for CType ${cTypeHash}`);
+      logger.error(exception, `Error fetching CType ${cTypeHash}`);
       continue;
     }
 
@@ -57,12 +51,5 @@ export async function scanCTypes() {
       block: block.toString(),
       ...rest,
     });
-  }
-}
-
-export async function watchForCTypes() {
-  while (!isTest) {
-    await scanCTypes();
-    await sleep(SCAN_INTERVAL_MS);
   }
 }

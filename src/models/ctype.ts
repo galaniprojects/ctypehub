@@ -70,4 +70,4 @@ CTypeModelDefinition.search = {
 };
 
 CType.init(CTypeModelDefinition, { sequelize });
-sequelize.sync();
+await sequelize.sync();
