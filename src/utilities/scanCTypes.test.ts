@@ -95,6 +95,7 @@ function mockCTypeEvent() {
   vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
     yield {
       params: mockParams,
+      block: 123456,
       blockTimestampMs: 160273245600,
       extrinsicHash: extrinsic.hash.toHex(),
     };
@@ -124,7 +125,7 @@ afterAll(async () => {
 }, 10_000);
 
 beforeEach(async () => {
-  await CTypeModel.destroy({ truncate: true });
+  await CTypeModel.destroy({ where: {} });
   vi.mocked(subScanEventGenerator).mockClear();
 });
 
@@ -158,7 +159,7 @@ describe('scanCTypes', () => {
       },
     });
 
-    const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
+    const expectedFromBlock = Number(latestCType?.dataValues.block);
 
     vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
       // yield nothing

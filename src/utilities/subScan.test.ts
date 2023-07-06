@@ -76,11 +76,13 @@ describe('subScan', () => {
           events: [
             {
               params: '[{ "fake": "JSON" }]',
+              block_num: 123,
               block_timestamp: 123_456,
               extrinsic_hash: '0xCAFECAFE',
             },
             {
               params: '[{ "JSON": "fake" }]',
+              block_num: 789,
               block_timestamp: 789_123,
               extrinsic_hash: '0xFACEFACE',
             },
@@ -100,11 +102,13 @@ describe('subScan', () => {
       expect(cTypeEvents.events).toEqual([
         {
           params: [{ JSON: 'fake' }],
+          block: 789,
           blockTimestampMs: 789_123_000,
           extrinsicHash: '0xFACEFACE',
         },
         {
           params: [{ fake: 'JSON' }],
+          block: 123,
           blockTimestampMs: 123_456_000,
           extrinsicHash: '0xCAFECAFE',
         },

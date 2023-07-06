@@ -5,7 +5,7 @@ import { CType as CTypeModel } from '../../models/ctype';
 import { mockCTypes } from '../../utilities/mockCTypes';
 
 beforeEach(async () => {
-  await CTypeModel.destroy({ truncate: true });
+  await CTypeModel.destroy({ where: {} });
   await CTypeModel.bulkCreate([mockCTypes.example, mockCTypes.nestedProperty]);
 });
 
