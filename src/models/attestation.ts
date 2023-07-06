@@ -11,7 +11,7 @@ export interface AttestationData
   cTypeId: ICType['$id'];
   createdAt: Date;
   extrinsicHash: string;
-  block: string | null;
+  block: string;
 }
 
 export class Attestation extends Model<AttestationData> {}
