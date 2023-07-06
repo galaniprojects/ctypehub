@@ -2,10 +2,12 @@ import { got } from 'got';
 
 import { configuration } from './configuration';
 import { logger } from './logger';
+import { sleep } from './sleep';
 
 const { subscan } = configuration;
 
 const SUBSCAN_MAX_ROWS = 100;
+const QUERY_INTERVAL_MS = 1000;
 
 const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
 
@@ -95,5 +97,7 @@ export async function* subScanEventGenerator(
     for (const event of events) {
       yield event;
     }
+
+    await sleep(QUERY_INTERVAL_MS);
   }
 }

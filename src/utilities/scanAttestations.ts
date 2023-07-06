@@ -1,14 +1,8 @@
-import {
-  Attestation,
-  ConfigService,
-  CType,
-  IAttestation,
-} from '@kiltprotocol/sdk-js';
+import { CType, Did } from '@kiltprotocol/sdk-js';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
 import { subScanEventGenerator } from './subScan';
-import { logger } from './logger';
 
 export type EventParams = [
   { type_name: 'AttesterOf'; value: `0x${string}` },
@@ -31,28 +25,14 @@ export async function scanAttestations() {
     fromBlock,
   );
 
-  const api = ConfigService.get('api');
   for await (const event of eventGenerator) {
     const { block, blockTimestampMs, params, extrinsicHash } = event;
-    const claimHash = params[1].value;
-
-    let attestation: IAttestation;
-    try {
-      const chainData = await api.query.attestation.attestations(claimHash);
-      if (chainData.isNone) {
-        // TODO: consider decoding the event params and using those instead
-        logger.info(`Attestation ${claimHash} was deleted from the blockchain`);
-        continue;
-      }
-      attestation = await Attestation.fromChain(chainData, claimHash);
-    } catch (exception) {
-      logger.error(exception, `Error fetching Attestation ${claimHash}`);
-      continue;
-    }
-
-    const { owner, delegationId, cTypeHash } = attestation;
-    const cTypeId = CType.hashToId(cTypeHash);
     const createdAt = new Date(blockTimestampMs);
+
+    const owner = Did.fromChain(params[0].value);
+    const claimHash = params[1].value;
+    const cTypeId = CType.hashToId(params[2].value);
+    const delegationId = params[3].value;
 
     await AttestationModel.upsert({
       claimHash,
