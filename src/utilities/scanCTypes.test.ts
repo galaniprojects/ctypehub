@@ -1,20 +1,9 @@
-import { Op, Sequelize } from 'sequelize';
+import { Op } from 'sequelize';
 
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  afterAll,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
-import {
-  Blockchain,
-  ConfigService,
   connect,
   CType,
-  Did,
   DidUri,
   disconnect,
   ICType,
@@ -25,6 +14,8 @@ import {
 
 import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
+import { createDid } from '../../testing/createDid';
+import { createCType } from '../../testing/createCType';
 
 import { EventParams, scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
@@ -33,59 +24,10 @@ import { subScanEventGenerator } from './subScan';
 vi.mock('./subScan');
 
 let submitter: KiltKeyringPair;
-let assertionMethod: KiltKeyringPair;
 let did: DidUri;
-
-async function createDid() {
-  const authentication = Utils.Crypto.makeKeypairFromSeed();
-  await endowAccount(authentication.address);
-  const assertionMethod = Utils.Crypto.makeKeypairFromSeed();
-
-  const tx = await Did.getStoreTx(
-    {
-      authentication: [authentication],
-      assertionMethod: [assertionMethod],
-    },
-    authentication.address,
-    async ({ data }) => ({
-      signature: authentication.sign(data, { withType: false }),
-      keyType: authentication.type,
-    }),
-  );
-  await Blockchain.signAndSubmitTx(tx, authentication);
-
-  const did = Did.getFullDidUri(authentication.address);
-
-  return { assertionMethod, did };
-}
 
 let cType: ICType;
 let extrinsic: SubmittableExtrinsic;
-
-async function createCType() {
-  cType = CType.fromProperties('Email', {
-    Email: {
-      type: 'string',
-    },
-  });
-
-  const api = ConfigService.get('api');
-  const tx = api.tx.ctype.add(CType.toChain(cType));
-
-  extrinsic = await Did.authorizeTx(
-    did,
-    tx,
-    async ({ data }) => ({
-      signature: assertionMethod.sign(data, { withType: false }),
-      keyType: assertionMethod.type,
-    }),
-    submitter.address,
-  );
-
-  await Blockchain.signAndSubmitTx(extrinsic, submitter);
-}
-
-let sequelize: Sequelize;
 
 function mockCTypeEvent() {
   const mockParams: EventParams = [
@@ -109,20 +51,23 @@ beforeAll(async () => {
   await endowAccount(submitter.address);
 
   const created = await createDid();
-  assertionMethod = created.assertionMethod;
   did = created.did;
 
-  await createCType();
+  ({ cType, extrinsic } = await createCType(
+    did,
+    created.assertionMethod,
+    submitter,
+  ));
 
-  sequelize = (await import('./sequelize')).sequelize;
+  const { sequelize } = await import('./sequelize');
+
+  return async function teardown() {
+    await sequelize.close();
+    await disconnect();
+    // give the SDK time to log the disconnect message
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  };
 }, 30_000);
-
-afterAll(async () => {
-  await sequelize.close();
-  await disconnect();
-  // give the SDK time to log the disconnect message
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-}, 10_000);
 
 beforeEach(async () => {
   await CTypeModel.destroy({ where: {} });
