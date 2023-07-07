@@ -172,7 +172,7 @@ describe('scanAttestations', () => {
       expectedFromBlock,
     );
 
-    const { count } = await AttestationModel.findAndCountAll();
+    const count = await AttestationModel.count();
     expect(count).toBe(1);
   });
 

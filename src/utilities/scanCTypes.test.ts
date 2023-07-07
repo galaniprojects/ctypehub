@@ -120,7 +120,7 @@ describe('scanCTypes', () => {
       expectedFromBlock,
     );
 
-    const { count } = await CTypeModel.findAndCountAll();
+    const count = await CTypeModel.count();
     expect(count).toBe(1);
   });
 
