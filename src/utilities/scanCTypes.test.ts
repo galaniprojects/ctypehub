@@ -16,6 +16,7 @@ import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
 import { createDid } from '../../testing/createDid';
 import { createCType } from '../../testing/createCType';
+import { resetDatabase } from '../../testing/resetDatabase';
 
 import { EventParams, scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
@@ -70,7 +71,7 @@ beforeAll(async () => {
 }, 30_000);
 
 beforeEach(async () => {
-  await CTypeModel.destroy({ where: {} });
+  await resetDatabase();
   vi.mocked(subScanEventGenerator).mockClear();
 });
 

@@ -22,6 +22,7 @@ import { Attestation as AttestationModel } from '../models/attestation';
 import { endowAccount } from '../../testing/endowAccount';
 import { createDid } from '../../testing/createDid';
 import { createCType } from '../../testing/createCType';
+import { resetDatabase } from '../../testing/resetDatabase';
 
 import { configuration } from './configuration';
 import { subScanEventGenerator } from './subScan';
@@ -114,8 +115,7 @@ beforeAll(async () => {
 }, 30_000);
 
 beforeEach(async () => {
-  await AttestationModel.destroy({ where: {} });
-  await CTypeModel.destroy({ where: {} });
+  await resetDatabase();
 
   const { $id, $schema, title, properties, type } = cType;
   await CTypeModel.create({
@@ -143,7 +143,6 @@ describe('scanAttestations', () => {
       'AttestationCreated',
       0,
     );
-    console.log((await AttestationModel.findOne())?.dataValues.claimHash);
     const created = await AttestationModel.findByPk(attestation.claimHash);
     expect(created).not.toBeNull();
     expect(created?.dataValues.cTypeId).toBe(cType.$id);

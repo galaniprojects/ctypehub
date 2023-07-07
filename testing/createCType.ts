@@ -12,7 +12,7 @@ export async function createCType(
   assertionMethod: KiltKeyringPair,
   submitter: KiltKeyringPair,
 ) {
-  const cType = CType.fromProperties('Email', {
+  const cType = CType.fromProperties(Math.random().toString(), {
     Email: {
       type: 'string',
     },

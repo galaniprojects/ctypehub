@@ -52,4 +52,4 @@ Attestation.init(AttestationModelDefinition, {
 Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
 CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
 
-await sequelize.sync({ force: true });
+await sequelize.sync();

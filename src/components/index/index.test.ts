@@ -3,9 +3,10 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { getSnapshotHtmlForPath } from '../../../testing/getSnapshotHtmlForPath';
 import { CType as CTypeModel } from '../../models/ctype';
 import { mockCTypes } from '../../utilities/mockCTypes';
+import { resetDatabase } from '../../../testing/resetDatabase';
 
 beforeEach(async () => {
-  await CTypeModel.destroy({ where: {} });
+  await resetDatabase();
   await CTypeModel.bulkCreate([mockCTypes.example, mockCTypes.nestedProperty]);
 });
 
