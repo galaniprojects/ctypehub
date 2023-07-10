@@ -83,7 +83,9 @@ export async function* subScanEventGenerator(
     return;
   }
 
-  logger.debug(`Found ${count} new SubScan events for ${call}`);
+  logger.debug(
+    `Found ${count} (really ${count - 1}?) new SubScan events for ${call}`,
+  );
 
   // 10001 items should be split into 101 pages (0 to 100 inclusive)
   // of 100 items each except the last one with 1 item,
