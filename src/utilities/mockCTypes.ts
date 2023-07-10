@@ -12,6 +12,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     extrinsicHash: '0xexamplehash',
     description: 'This is some example cType data',
     block: '123',
+    attestationsCount: '1',
   },
   nestedProperty: {
     id: 'kilt:ctype:0x2',
@@ -27,6 +28,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     extrinsicHash: '0xexamplenestedhash',
     description: 'This is an example of a CType with a nested property',
     block: '321',
+    attestationsCount: '22',
   },
   nestedCType: {
     id: 'kilt:ctype:0x3',
@@ -46,5 +48,6 @@ export const mockCTypes: Record<string, CTypeData> = {
     extrinsicHash: '0xexamplehash',
     description: 'This is an example of a CType with a nested CType',
     block: '456',
+    attestationsCount: '333',
   },
 };

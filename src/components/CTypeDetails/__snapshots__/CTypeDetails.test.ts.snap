@@ -11,6 +11,9 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
     <dt>Description:</dt>
     <dd>This is an example of a CType with a nested CType</dd>
 
+    <dt>Number of Attestations:</dt>
+    <dd>333</dd>
+
     <dt id="/properties/example">Property 1:</dt>
     <dd><a href="/ctype/kilt:ctype:0x1">example</a></dd>
 
@@ -69,6 +72,9 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
     <dt>Description:</dt>
     <dd>This is an example of a CType with a nested property</dd>
 
+    <dt>Number of Attestations:</dt>
+    <dd>22</dd>
+
     <dt id="/properties/example">Property 1:</dt>
     <dd><a href="/ctype/kilt:ctype:0x1#/properties/example">example</a></dd>
 
@@ -126,6 +132,9 @@ exports[`CTypeDetails > should match snapshot 1`] = `
 
     <dt>Description:</dt>
     <dd>This is some example cType data</dd>
+
+    <dt>Number of Attestations:</dt>
+    <dd>1</dd>
 
     <dt id="/properties/example">Property 1:</dt>
     <dd>example</dd>

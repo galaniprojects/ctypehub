@@ -1,10 +1,12 @@
 import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
-import { DataTypes, Model, ModelAttributes } from 'sequelize';
+import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
 import { sequelize } from '../utilities/sequelize';
 
-export interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
+import { Attestation } from './attestation';
+
+export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
   creator: DidUri;
@@ -14,7 +16,11 @@ export interface CTypeData extends Omit<ICType, '$id' | '$schema'> {
   description: string | null;
 }
 
-export class CType extends Model<CTypeData> {}
+export interface CTypeData extends CTypeDataInput {
+  attestationsCount: string;
+}
+
+export class CType extends Model<CTypeData, CTypeDataInput> {}
 
 export const CTypeModelDefinition: ModelAttributes = {
   id: {
@@ -69,5 +75,39 @@ CTypeModelDefinition.search = {
   },
 };
 
-CType.init(CTypeModelDefinition, { sequelize });
+// Cannot be provided as a part of the scope, include it in queries manually
+export const groupForAttestationsCount = ['CType.id', 'Attestations.cTypeId'];
+
+CType.init(CTypeModelDefinition, {
+  sequelize,
+
+  scopes: {
+    stats: {
+      subQuery: false,
+      // Attestation’s attributes array must be empty
+      include: [{ model: Attestation, attributes: [] }],
+      attributes: [
+        // Unfortunately all the CType model’s fields have to be listed explicitly
+        'id',
+        'schema',
+        'title',
+        'description',
+        'properties',
+        'type',
+        'creator',
+        'createdAt',
+        'extrinsicHash',
+        'block',
+        [
+          Sequelize.fn('count', Sequelize.col('Attestations.claimHash')),
+          'attestationsCount',
+        ],
+      ],
+    },
+  },
+});
+
+CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
+Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
+
 await sequelize.sync();

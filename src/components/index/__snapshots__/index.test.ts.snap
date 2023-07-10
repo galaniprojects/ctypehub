@@ -15,16 +15,22 @@ exports[`index.astro > should render all CTypes 1`] = `
 
     <ul>
       <li class="_container">
-        <h2 class="title">
-          <a class="link" href="/ctype/kilt:ctype:0x1"> Example CType </a>
+        <h2>
+          <a href="/ctype/kilt:ctype:0x1"> Example CType </a>
         </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>0</span>
+        </p>
       </li>
       <li class="_container">
-        <h2 class="title">
-          <a class="link" href="/ctype/kilt:ctype:0x2">
-            Example nested CType property
-          </a>
+        <h2>
+          <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
         </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>0</span>
+        </p>
       </li>
     </ul>
   </search>
@@ -46,11 +52,13 @@ exports[`index.astro > should render search results 1`] = `
 
     <ul>
       <li class="_container">
-        <h2 class="title">
-          <a class="link" href="/ctype/kilt:ctype:0x2">
-            Example nested CType property
-          </a>
+        <h2>
+          <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
         </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>0</span>
+        </p>
       </li>
     </ul>
   </search>

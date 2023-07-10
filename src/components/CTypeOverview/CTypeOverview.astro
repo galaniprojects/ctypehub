@@ -9,24 +9,37 @@ interface Props {
   cTypeData: CTypeData;
 }
 
-const { title, id } = Astro.props.cTypeData;
+const { title, id, attestationsCount } = Astro.props.cTypeData;
 ---
 
 <li class={containerStyles.container}>
-  <h2 class="title">
-    <a class="link" href={generatePath(paths.ctypeDetails, id)}>
+  <h2>
+    <a href={generatePath(paths.ctypeDetails, id)}>
       {title}
     </a>
   </h2>
+  <p>
+    <span>Number of Attestations</span>
+    <span>{attestationsCount}</span>
+  </p>
 </li>
 
 <style>
-  .title {
+  h2 {
+    margin-block-start: 0;
     overflow-wrap: break-word;
     font-size: 1rem;
   }
 
-  .link {
+  a {
     color: var(--color-link);
+  }
+
+  p {
+    margin-block-end: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
   }
 </style>

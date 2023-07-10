@@ -4,8 +4,6 @@ import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
 import { sequelize } from '../utilities/sequelize';
 
-import { CType } from './ctype';
-
 export interface AttestationData
   extends Omit<IAttestation, 'cTypeHash' | 'revoked'> {
   cTypeId: ICType['$id'];
@@ -49,7 +47,4 @@ Attestation.init(AttestationModelDefinition, {
   sequelize,
   indexes: [{ fields: ['cTypeId'] }],
 });
-Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
-CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
-
 await sequelize.sync();
