@@ -5,6 +5,7 @@ import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 import { sequelize } from '../utilities/sequelize';
 
 import { Attestation } from './attestation';
+import { Tag } from './tag';
 
 export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
@@ -18,12 +19,10 @@ export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
 
 export interface CTypeData extends CTypeDataInput {
   attestationsCount: string;
+  Tags?: Tag[];
 }
 
-export class CType extends Model<CTypeData, CTypeDataInput> {
-  // declare Tags?: Tag[];
-  // declare addTags: HasManyAddAssociationsMixin<Tag, string>;
-}
+export class CType extends Model<CTypeData, CTypeDataInput> {}
 
 export const CTypeModelDefinition: ModelAttributes = {
   id: {
@@ -112,5 +111,8 @@ CType.init(CTypeModelDefinition, {
 
 CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
 Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
+
+CType.hasMany(Tag, { foreignKey: 'cTypeId' });
+Tag.belongsTo(CType, { foreignKey: 'cTypeId' });
 
 await sequelize.sync();

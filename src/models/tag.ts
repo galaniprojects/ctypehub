@@ -1,20 +1,29 @@
-import type { CType } from './ctype';
+import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes } from 'sequelize';
 
-export interface TagData {
-  name: string;
+import { sequelize } from '../utilities/sequelize';
+
+interface TagData {
+  cTypeId: ICType['$id'];
+  tagName: string;
 }
 
-export class Tag extends Model<TagData> {
-  declare CTypes: CType[];
-}
+export class Tag extends Model<TagData> {}
 
-export const TagModelDefinition: ModelAttributes = {
-  name: {
+const TagModelDefinition: ModelAttributes = {
+  cTypeId: {
     type: DataTypes.STRING,
-    primaryKey: true,
     allowNull: false,
-    unique: true,
+  },
+  tagName: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 };
+
+Tag.init(TagModelDefinition, {
+  sequelize,
+  indexes: [{ fields: ['cTypeId'] }],
+});
+await sequelize.sync();
