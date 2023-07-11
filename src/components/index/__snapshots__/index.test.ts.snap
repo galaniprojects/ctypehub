@@ -20,7 +20,7 @@ exports[`index.astro > should render all CTypes 1`] = `
         </h2>
         <p>
           <span>Number of Attestations</span>
-          <span>0</span>
+          <span>1</span>
         </p>
       </li>
       <li class="_container">
@@ -29,7 +29,7 @@ exports[`index.astro > should render all CTypes 1`] = `
         </h2>
         <p>
           <span>Number of Attestations</span>
-          <span>0</span>
+          <span>2</span>
         </p>
       </li>
     </ul>
@@ -57,7 +57,7 @@ exports[`index.astro > should render search results 1`] = `
         </h2>
         <p>
           <span>Number of Attestations</span>
-          <span>0</span>
+          <span>2</span>
         </p>
       </li>
     </ul>
