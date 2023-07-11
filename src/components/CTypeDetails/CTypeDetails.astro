@@ -40,8 +40,15 @@ interface Props {
   cTypeData: CTypeData;
 }
 
-const { title, creator, properties, createdAt, description, extrinsicHash } =
-  Astro.props.cTypeData;
+const {
+  title,
+  creator,
+  properties,
+  createdAt,
+  description,
+  extrinsicHash,
+  attestationsCount,
+} = Astro.props.cTypeData;
 
 const web3Name = await getWeb3NameForDid(creator);
 
@@ -73,6 +80,9 @@ const { subscan } = configuration;
         </Fragment>
       )
     }
+
+    <dt>Number of Attestations:</dt>
+    <dd>{attestationsCount}</dd>
 
     {
       Object.entries(properties).map(([name, value], index) => {

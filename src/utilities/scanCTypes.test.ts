@@ -1,21 +1,9 @@
-import { Op, Sequelize } from 'sequelize';
+import { Op } from 'sequelize';
 
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  afterAll,
-  beforeAll,
-  beforeEach,
-  describe,
-  expect,
-  it,
-  vi,
-} from 'vitest';
-import { got } from 'got';
-import {
-  Blockchain,
-  ConfigService,
   connect,
   CType,
-  Did,
   DidUri,
   disconnect,
   ICType,
@@ -26,96 +14,35 @@ import {
 
 import { CType as CTypeModel } from '../models/ctype';
 import { endowAccount } from '../../testing/endowAccount';
+import { createDid } from '../../testing/createDid';
+import { createCType } from '../../testing/createCType';
+import { resetDatabase } from '../../testing/resetDatabase';
 
-import {
-  EventParams,
-  EventsResponseJson,
-  getCTypeEvents,
-  scanCTypes,
-} from './scanCTypes';
+import { EventParams, scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
+import { subScanEventGenerator } from './subScan';
 
-let postResponse: EventsResponseJson;
-vi.mock('got', () => ({
-  got: {
-    post: vi.fn().mockReturnValue({
-      json: () => postResponse,
-    }),
-  },
-}));
+vi.mock('./subScan');
 
 let submitter: KiltKeyringPair;
-let assertionMethod: KiltKeyringPair;
 let did: DidUri;
-
-async function createDid() {
-  const authentication = Utils.Crypto.makeKeypairFromSeed();
-  await endowAccount(authentication.address);
-  const assertionMethod = Utils.Crypto.makeKeypairFromSeed();
-
-  const tx = await Did.getStoreTx(
-    {
-      authentication: [authentication],
-      assertionMethod: [assertionMethod],
-    },
-    authentication.address,
-    async ({ data }) => ({
-      signature: authentication.sign(data, { withType: false }),
-      keyType: authentication.type,
-    }),
-  );
-  await Blockchain.signAndSubmitTx(tx, authentication);
-
-  const did = Did.getFullDidUri(authentication.address);
-
-  return { assertionMethod, did };
-}
 
 let cType: ICType;
 let extrinsic: SubmittableExtrinsic;
-
-async function createCType() {
-  cType = CType.fromProperties('Email', {
-    Email: {
-      type: 'string',
-    },
-  });
-
-  const api = ConfigService.get('api');
-  const tx = api.tx.ctype.add(CType.toChain(cType));
-
-  extrinsic = await Did.authorizeTx(
-    did,
-    tx,
-    async ({ data }) => ({
-      signature: assertionMethod.sign(data, { withType: false }),
-      keyType: assertionMethod.type,
-    }),
-    submitter.address,
-  );
-
-  await Blockchain.signAndSubmitTx(extrinsic, submitter);
-}
-
-let sequelize: Sequelize;
 
 function mockCTypeEvent() {
   const mockParams: EventParams = [
     { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
     { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
   ];
-  postResponse = {
-    data: {
-      count: 1,
-      events: [
-        {
-          params: JSON.stringify(mockParams),
-          block_timestamp: 1602732456,
-          extrinsic_hash: extrinsic.hash.toHex(),
-        },
-      ],
-    },
-  };
+  vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
+    yield {
+      params: mockParams,
+      block: 123456,
+      blockTimestampMs: 160273245600,
+      extrinsicHash: extrinsic.hash.toHex(),
+    };
+  });
 }
 
 beforeAll(async () => {
@@ -125,141 +52,103 @@ beforeAll(async () => {
   await endowAccount(submitter.address);
 
   const created = await createDid();
-  assertionMethod = created.assertionMethod;
   did = created.did;
 
-  await createCType();
+  ({ cType, extrinsic } = await createCType(
+    did,
+    created.assertionMethod,
+    submitter,
+  ));
 
-  sequelize = (await import('./sequelize')).sequelize;
+  const { sequelize } = await import('./sequelize');
+
+  return async function teardown() {
+    await sequelize.close();
+    await disconnect();
+    // give the SDK time to log the disconnect message
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  };
 }, 30_000);
 
-afterAll(async () => {
-  await sequelize.close();
-  await disconnect();
-  // give the SDK time to log the disconnect message
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-}, 10_000);
-
 beforeEach(async () => {
-  await CTypeModel.destroy({ truncate: true });
-  vi.mocked(got.post).mockClear();
+  await resetDatabase();
+  vi.mocked(subScanEventGenerator).mockClear();
 });
 
 describe('scanCTypes', () => {
-  describe('getCTypeEvents', () => {
-    it('should query the subscan API', async () => {
-      postResponse = { data: { count: 0, events: null } };
-      const cTypeEvents = await getCTypeEvents(10, 0, 0);
-      expect(got.post).toHaveBeenCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: 10,
-            module: 'ctype',
-            page: 0,
-            row: 0,
-          },
-        },
-      );
-      expect(cTypeEvents.count).toBe(0);
-      expect(cTypeEvents.events).toBeUndefined();
-    });
+  it('should add new CType to the database', async () => {
+    mockCTypeEvent();
+
+    await scanCTypes();
+
+    expect(subScanEventGenerator).toHaveBeenLastCalledWith(
+      'ctype',
+      'CTypeCreated',
+      0,
+    );
+    const created = await CTypeModel.findByPk(cType.$id);
+    expect(created).not.toBeNull();
+    expect(created?.dataValues.title).toBe(cType.title);
   });
 
-  describe('scanCTypes', () => {
-    it('should add new CType to the database', async () => {
-      mockCTypeEvent();
+  it('should not add a CType if it already exists', async () => {
+    mockCTypeEvent();
 
-      await scanCTypes();
-      expect(got.post).toHaveBeenCalledTimes(2);
-      expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: 0,
-            module: 'ctype',
-            page: 0,
-            row: 100,
-          },
+    await scanCTypes();
+
+    const latestCType = await CTypeModel.findOne({
+      order: [['createdAt', 'DESC']],
+      where: {
+        block: {
+          [Op.not]: null,
         },
-      );
-      const created = await CTypeModel.findByPk(cType.$id);
-      expect(created).not.toBeNull();
-      expect(created?.dataValues.title).toBe(cType.title);
+      },
     });
 
-    it('should not add a CType if it already exists', async () => {
-      mockCTypeEvent();
+    const expectedFromBlock = Number(latestCType?.dataValues.block);
 
-      await scanCTypes();
-
-      const latestCType = await CTypeModel.findOne({
-        order: [['createdAt', 'DESC']],
-        where: {
-          block: {
-            [Op.not]: null,
-          },
-        },
-      });
-
-      const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
-
-      postResponse = { data: { count: 0, events: [] } };
-
-      await scanCTypes();
-
-      expect(got.post).toHaveBeenCalledTimes(3);
-      expect(got.post).toHaveBeenLastCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
-        {
-          headers: { 'X-API-Key': configuration.subscan.secret },
-          json: {
-            call: 'CTypeCreated',
-            finalized: true,
-            from_block: expectedFromBlock,
-            module: 'ctype',
-            page: 0,
-            row: 1,
-          },
-        },
-      );
-
-      const { count } = await CTypeModel.findAndCountAll();
-      expect(count).toBe(1);
+    vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
+      // yield nothing
     });
 
-    it('should correctly upsert an existing CType', async () => {
-      const { $id, $schema, title, properties, type } = cType;
-      await CTypeModel.create({
-        id: $id,
-        schema: $schema,
-        title,
-        properties,
-        type,
-        creator: did,
-        createdAt: new Date(),
-        extrinsicHash: extrinsic.hash.toHex(),
-      });
+    await scanCTypes();
 
-      const beforeUpsert = await CTypeModel.findByPk(cType.$id);
+    expect(subScanEventGenerator).toHaveBeenCalledTimes(2);
+    expect(subScanEventGenerator).toHaveBeenLastCalledWith(
+      'ctype',
+      'CTypeCreated',
+      expectedFromBlock,
+    );
 
-      if (!beforeUpsert) {
-        throw new Error('Not found');
-      }
+    const count = await CTypeModel.count();
+    expect(count).toBe(1);
+  });
 
-      expect(beforeUpsert.dataValues.block).toBeNull();
-
-      mockCTypeEvent();
-      await scanCTypes();
-
-      await beforeUpsert.reload();
-      expect(beforeUpsert.dataValues.block).not.toBeNull();
+  it('should correctly upsert an existing CType', async () => {
+    const { $id, $schema, title, properties, type } = cType;
+    await CTypeModel.create({
+      id: $id,
+      schema: $schema,
+      title,
+      properties,
+      type,
+      creator: did,
+      createdAt: new Date(),
+      extrinsicHash: extrinsic.hash.toHex(),
     });
+
+    const beforeUpsert = await CTypeModel.findByPk(cType.$id);
+
+    if (!beforeUpsert) {
+      throw new Error('Not found');
+    }
+
+    expect(beforeUpsert.dataValues.block).toBeNull();
+
+    mockCTypeEvent();
+    await scanCTypes();
+
+    await beforeUpsert.reload();
+    expect(beforeUpsert.dataValues.block).not.toBeNull();
   });
 });

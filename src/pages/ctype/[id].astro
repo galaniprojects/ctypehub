@@ -2,13 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header/Header.astro';
 import CTypeDetails from '../../components/CTypeDetails/CTypeDetails.astro';
-import { CType } from '../../models/ctype';
+import { CType, groupForAttestationsCount as group } from '../../models/ctype';
 import { NotFoundResponse } from '../../utilities/NotFoundResponse';
 
 const { id } = Astro.params;
 const success = Astro.url.searchParams.has('success');
 
-const cType = await CType.findByPk(id);
+const cType = await CType.scope('stats').findByPk(id, { group });
 
 if (!cType) {
   return new NotFoundResponse();
