@@ -44,16 +44,16 @@ const { subscan } = configuration;
 <section class={containerStyles.container}>
   <h1 class="title">{title}</h1>
 
-  {
-    description && (
-      <Fragment>
-        <dt class={propertyStyles.term}>Description:</dt>
-        <dd class={propertyStyles.definition}>{description}</dd>
-      </Fragment>
-    )
-  }
-
   <dl>
+    {
+      description && (
+        <Fragment>
+          <dt class={propertyStyles.term}>Description:</dt>
+          <dd class={propertyStyles.definition}>{description}</dd>
+        </Fragment>
+      )
+    }
+
     <dt class={propertyStyles.term}>Creator:</dt>
     <dd class={propertyStyles.definition}>
       {

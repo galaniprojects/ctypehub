@@ -4,10 +4,10 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 <section class="_container">
   <h1 class="title">Everything everywhere</h1>
 
-  <dt class="_term">Description:</dt>
-  <dd class="_definition3">…all the time</dd>
-
   <dl>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">…all the time</dd>
+
     <dt class="_term">Creator:</dt>
     <dd class="_definition3">
       did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E
@@ -161,12 +161,12 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType</h1>
 
-  <dt class="_term">Description:</dt>
-  <dd class="_definition3">
-    This is an example of a CType with a nested CType
-  </dd>
-
   <dl>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">
+      This is an example of a CType with a nested CType
+    </dd>
+
     <dt class="_term">Creator:</dt>
     <dd class="_definition3">
       did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
@@ -235,12 +235,12 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType property</h1>
 
-  <dt class="_term">Description:</dt>
-  <dd class="_definition3">
-    This is an example of a CType with a nested property
-  </dd>
-
   <dl>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">
+      This is an example of a CType with a nested property
+    </dd>
+
     <dt class="_term">Creator:</dt>
     <dd class="_definition3">
       did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
@@ -309,10 +309,10 @@ exports[`CTypeDetails > should match snapshot 1`] = `
 <section class="_container">
   <h1 class="title">Example CType</h1>
 
-  <dt class="_term">Description:</dt>
-  <dd class="_definition3">This is some example cType data</dd>
-
   <dl>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">This is some example cType data</dd>
+
     <dt class="_term">Creator:</dt>
     <dd class="_definition3">
       did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
