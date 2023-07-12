@@ -10,21 +10,10 @@ import {
 } from '@kiltprotocol/sdk-js';
 
 import containerStyles from '../Container.module.css';
+import propertyStyles from './Property.module.css';
 
-import { generatePath, paths } from '../../paths';
 import { configuration } from '../../utilities/configuration';
-
-function isKiltCTypeRef(ref: string): ref is ICType['$id'] {
-  const regex = /^kilt:ctype:0x([a-fA-F0-9]+)(#\/properties\/.+)?$/;
-  return regex.test(ref);
-}
-
-function $refToHref($ref: string) {
-  if (isKiltCTypeRef($ref)) {
-    return generatePath(paths.ctypeDetails, $ref);
-  }
-  return $ref;
-}
+import { Property } from './Property';
 
 async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
   const api = ConfigService.get('api');
@@ -60,9 +49,18 @@ const { subscan } = configuration;
 <section class={containerStyles.container}>
   <h1 class="title">{title}</h1>
 
+  {
+    description && (
+      <Fragment>
+        <dt class={propertyStyles.term}>Description:</dt>
+        <dd class={propertyStyles.definition}>{description}</dd>
+      </Fragment>
+    )
+  }
+
   <dl>
-    <dt>Creator:</dt>
-    <dd>
+    <dt class={propertyStyles.term}>Creator:</dt>
+    <dd class={propertyStyles.definition}>
       {
         web3Name ? (
           <a href={`https://w3n.id/${web3Name}`}>w3n:{web3Name}</a>
@@ -72,71 +70,54 @@ const { subscan } = configuration;
       }
     </dd>
 
+    <dt class={propertyStyles.term}>Number of Attestations:</dt>
+    <dd class={propertyStyles.definition}>{attestationsCount}</dd>
+
     {
-      description && (
+      Object.entries(properties).map(([name, value], index) => (
         <Fragment>
-          <dt>Description:</dt>
-          <dd>{description}</dd>
+          <dt
+            class={propertyStyles.term}
+            id={`/properties/${name}`}
+          >{`Property ${index + 1}:`}</dt>
+          <dd class={propertyStyles.definition}>
+            {name}
+            <dl class="indent">
+              <Property name={name} value={value} />
+            </dl>
+          </dd>
         </Fragment>
-      )
+      ))
     }
 
-    <dt>Number of Attestations:</dt>
-    <dd>{attestationsCount}</dd>
-
-    {
-      Object.entries(properties).map(([name, value], index) => {
-        const type = 'type' in value ? value.type : undefined;
-        const $ref = '$ref' in value ? value.$ref : undefined;
-        return (
-          <Fragment>
-            <dt id={`/properties/${name}`}>{`Property ${index + 1}:`}</dt>
-            <dd>{$ref ? <a href={$refToHref($ref)}>{name}</a> : name}</dd>
-
-            {type && (
-              <div class="indent">
-                <dt>Type:</dt>
-                <dd>{type}</dd>
-              </div>
-            )}
-          </Fragment>
-        );
-      })
-    }
-
-    <dt>Creation date:</dt>
-    <dd>
+    <dt class={propertyStyles.term}>Creation date:</dt>
+    <dd class={propertyStyles.definition}>
       {createdAt.toLocaleString()}
     </dd>
 
-    <dt>Extrinsic:</dt>
-    <dd>
+    <dt class={propertyStyles.term}>Extrinsic:</dt>
+    <dd class={propertyStyles.definition}>
       <a
+        class={propertyStyles.anchor}
         href={`https://${subscan.network}.subscan.io/extrinsic/${extrinsicHash}`}
       >
         {extrinsicHash}
       </a>
     </dd>
 
-    <dt>
+    <dt class={propertyStyles.term}>
       <a class="showDetails" href="#details">Technical Details:</a>
     </dt>
 
-    <dd id="details">
+    <dd class={propertyStyles.definition} id="details">
       <pre>{JSON.stringify(kiltCType, null, 2)}</pre>
     </dd>
   </dl>
 </section>
 
 <style>
-  h1,
-  dt,
-  dd {
+  h1 {
     overflow-wrap: break-word;
-  }
-
-  a {
-    color: var(--color-link);
   }
 
   pre {
@@ -149,19 +130,8 @@ const { subscan } = configuration;
     color: var(--color-text-primary);
   }
 
-  dt {
-    font-family: 'Lato Bold', sans-serif;
-    color: var(--color-text-secondary);
-    margin-block-end: 0.25rem;
-  }
-
-  dd {
-    margin-inline: 0;
-    margin-block-end: 0.5rem;
-    color: var(--color-text-primary);
-  }
-
   .indent {
+    margin-block-start: 0.5rem;
     margin-inline-start: 1.25rem;
   }
 

@@ -50,4 +50,47 @@ export const mockCTypes: Record<string, CTypeData> = {
     block: '456',
     attestationsCount: '333',
   },
+  everything: {
+    id: 'kilt:ctype:0x060fe62fbe19e99f3440d829dec705f92d35b833d8c8927d8d94462737af2d90',
+    schema:
+      'ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/',
+    title: 'Everything everywhere',
+    description: '…all the time',
+    additionalProperties: false,
+    properties: {
+      Array: {
+        items: {
+          format: 'date',
+          type: 'string',
+        },
+        type: 'array',
+      },
+      Boolean: {
+        type: 'boolean',
+      },
+      Integer: {
+        enum: [1, 10000, 2, 3, 4],
+        type: 'integer',
+      },
+      Number: {
+        maximum: 56.78,
+        minimum: 12.34,
+        type: 'number',
+      },
+      Reference: {
+        $ref: 'kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789',
+      },
+      String: {
+        maxLength: 100,
+        minLength: 1,
+        type: 'string',
+      },
+    },
+    type: 'object',
+    creator: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E',
+    attestationsCount: '4444',
+    extrinsicHash: '0xexamplehash',
+    createdAt: new Date('2023-05-01T12:00:00'),
+    block: '456',
+  },
 };
