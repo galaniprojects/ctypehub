@@ -1,12 +1,7 @@
 ---
 import type { CTypeData } from '../../models/ctype';
 
-import {
-  CType,
-  ConfigService,
-  Did,
-  DidUri,
-} from '@kiltprotocol/sdk-js';
+import { CType, ConfigService, Did, DidUri } from '@kiltprotocol/sdk-js';
 
 import containerStyles from '../Container.module.css';
 import propertyStyles from './Property.module.css';
@@ -83,7 +78,7 @@ const { subscan } = configuration;
           <dd class={propertyStyles.definition}>
             {name}
             <dl class="indent">
-              <Property name={name} value={value} />
+              <Property value={value} />
             </dl>
           </dd>
         </Fragment>
