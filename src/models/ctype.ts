@@ -19,7 +19,7 @@ export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
 
 export interface CTypeData extends CTypeDataInput {
   attestationsCount: string;
-  Tags?: Tag[];
+  tags?: Tag[];
 }
 
 export class CType extends Model<CTypeData, CTypeDataInput> {}
@@ -112,7 +112,7 @@ CType.init(CTypeModelDefinition, {
 CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
 Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
 
-CType.hasMany(Tag, { foreignKey: 'cTypeId' });
+CType.hasMany(Tag, { foreignKey: 'cTypeId', as: 'tags' });
 Tag.belongsTo(CType, { foreignKey: 'cTypeId' });
 
 await sequelize.sync();

@@ -24,6 +24,6 @@ const TagModelDefinition: ModelAttributes = {
 
 Tag.init(TagModelDefinition, {
   sequelize,
-  indexes: [{ fields: ['cTypeId'] }],
+  indexes: [{ fields: ['cTypeId', 'tagName'] }],
 });
 await sequelize.sync();
