@@ -36,7 +36,7 @@ describe('tags', () => {
       throw new Error('CType not found');
     }
 
-    const cTypeTags = foundCType.dataValues.tags;
+    const cTypeTags = foundCType.dataValues.Tags;
 
     expect(cTypeTags?.[0].dataValues).toMatchObject(tags[0].dataValues);
     expect(cTypeTags?.[1].dataValues).toMatchObject(tags[1].dataValues);
