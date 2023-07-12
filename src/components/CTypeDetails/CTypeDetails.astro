@@ -6,13 +6,13 @@ import {
   ConfigService,
   Did,
   DidUri,
-  ICType,
 } from '@kiltprotocol/sdk-js';
 
 import containerStyles from '../Container.module.css';
 import propertyStyles from './Property.module.css';
 
 import { configuration } from '../../utilities/configuration';
+
 import { Property } from './Property';
 
 async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
