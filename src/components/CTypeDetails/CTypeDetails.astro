@@ -31,12 +31,15 @@ const {
   createdAt,
   description,
   extrinsicHash,
+  schema,
   attestationsCount,
 } = Astro.props.cTypeData;
 
 const web3Name = await getWeb3NameForDid(creator);
 
-const kiltCType = CType.fromProperties(title, properties);
+const schemaV1 = CType.fromProperties('', {}).$schema;
+const version = schema === schemaV1 ? 'V1' : 'draft-01';
+const kiltCType = CType.fromProperties(title, properties, version);
 
 const { subscan } = configuration;
 ---
