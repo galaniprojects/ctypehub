@@ -17,4 +17,8 @@ describe('CTypeDetails', () => {
     const html = await getSnapshotHtmlForPath('test/CTypeDetails-nestedCType');
     expect(html).toMatchSnapshot();
   });
+  it('should handle kitchen sink CType', async () => {
+    const html = await getSnapshotHtmlForPath('test/CTypeDetails-everything');
+    expect(html).toMatchSnapshot();
+  });
 });
