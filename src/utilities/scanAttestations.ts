@@ -3,6 +3,7 @@ import { CType, Did } from '@kiltprotocol/sdk-js';
 import { Attestation as AttestationModel } from '../models/attestation';
 
 import { subScanEventGenerator } from './subScan';
+import { logger } from './logger';
 
 export type EventParams = [
   { type_name: 'AttesterOf'; value: `0x${string}` },
@@ -34,14 +35,26 @@ export async function scanAttestations() {
     const cTypeId = CType.hashToId(params[2].value);
     const delegationId = params[3].value;
 
-    await AttestationModel.upsert({
-      claimHash,
-      cTypeId,
-      owner,
-      delegationId,
-      createdAt,
-      extrinsicHash,
-      block: String(block),
-    });
+    try {
+      await AttestationModel.upsert({
+        claimHash,
+        cTypeId,
+        owner,
+        delegationId,
+        createdAt,
+        extrinsicHash,
+        block: String(block),
+      });
+    } catch (exception) {
+      if (
+        exception &&
+        (exception as Error).name === 'SequelizeForeignKeyConstraintError'
+      ) {
+        // Likely a broken CType which we haven’t saved to the database
+        logger.debug(`Ignoring attestation ${claimHash} for unknown CType`);
+        continue;
+      }
+      throw exception;
+    }
   }
 }
