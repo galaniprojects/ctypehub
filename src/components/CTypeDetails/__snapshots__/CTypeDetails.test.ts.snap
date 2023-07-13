@@ -95,7 +95,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
     </dd>
 
     <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
+    <dd class="_definition3">5/1/2023, 12:03:00 PM</dd>
 
     <dt class="_term">Extrinsic:</dt>
     <dd class="_definition3">
@@ -196,7 +196,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
     </dd>
 
     <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
+    <dd class="_definition3">5/1/2023, 12:02:00 PM</dd>
 
     <dt class="_term">Extrinsic:</dt>
     <dd class="_definition3">
@@ -269,7 +269,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
     </dd>
 
     <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
+    <dd class="_definition3">5/1/2023, 12:01:00 PM</dd>
 
     <dt class="_term">Extrinsic:</dt>
     <dd class="_definition3">
