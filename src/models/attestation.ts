@@ -1,8 +1,6 @@
 import type { IAttestation, ICType } from '@kiltprotocol/sdk-js';
 
-import { DataTypes, Model, ModelAttributes } from 'sequelize';
-
-import { sequelize } from '../utilities/sequelize';
+import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
 export interface AttestationData
   extends Omit<IAttestation, 'cTypeHash' | 'revoked'> {
@@ -43,8 +41,9 @@ export const AttestationModelDefinition: ModelAttributes = {
   },
 };
 
-Attestation.init(AttestationModelDefinition, {
-  sequelize,
-  indexes: [{ fields: ['cTypeId'] }],
-});
-await sequelize.sync();
+export function initAttestation(sequelize: Sequelize) {
+  Attestation.init(AttestationModelDefinition, {
+    sequelize,
+    indexes: [{ fields: ['cTypeId'] }],
+  });
+}

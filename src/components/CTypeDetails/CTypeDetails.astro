@@ -61,7 +61,9 @@ const { subscan } = configuration;
     <dd class={propertyStyles.definition}>
       {
         web3Name ? (
-          <a href={`https://w3n.id/${web3Name}`}>w3n:{web3Name}</a>
+          <a class={propertyStyles.anchor} href={`https://w3n.id/${web3Name}`}>
+            w3n:{web3Name}
+          </a>
         ) : (
           creator
         )

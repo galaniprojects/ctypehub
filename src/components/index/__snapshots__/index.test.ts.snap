@@ -16,20 +16,20 @@ exports[`index.astro > should render all CTypes 1`] = `
     <ul>
       <li class="_container">
         <h2>
-          <a href="/ctype/kilt:ctype:0x1"> Example CType </a>
-        </h2>
-        <p>
-          <span>Number of Attestations</span>
-          <span>1</span>
-        </p>
-      </li>
-      <li class="_container">
-        <h2>
           <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
         </h2>
         <p>
           <span>Number of Attestations</span>
           <span>2</span>
+        </p>
+      </li>
+      <li class="_container">
+        <h2>
+          <a href="/ctype/kilt:ctype:0x1"> Example CType </a>
+        </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>1</span>
         </p>
       </li>
     </ul>

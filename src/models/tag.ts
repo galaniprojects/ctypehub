@@ -1,8 +1,6 @@
 import type { ICType } from '@kiltprotocol/sdk-js';
 
-import { DataTypes, Model, ModelAttributes } from 'sequelize';
-
-import { sequelize } from '../utilities/sequelize';
+import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
 interface TagData {
   cTypeId: ICType['$id'];
@@ -22,8 +20,9 @@ const TagModelDefinition: ModelAttributes = {
   },
 };
 
-Tag.init(TagModelDefinition, {
-  sequelize,
-  indexes: [{ fields: ['cTypeId'] }, { fields: ['tagName'] }],
-});
-await sequelize.sync();
+export function initTag(sequelize: Sequelize) {
+  Tag.init(TagModelDefinition, {
+    sequelize,
+    indexes: [{ fields: ['cTypeId'] }, { fields: ['tagName'] }],
+  });
+}
