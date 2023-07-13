@@ -1,47 +1,219 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
+<section class="_container">
+  <h1 class="title">Everything everywhere</h1>
+
+  <dl>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">…all the time</dd>
+
+    <dt class="_term">Creator:</dt>
+    <dd class="_definition3">
+      did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E
+    </dd>
+
+    <dt class="_term">Number of Attestations:</dt>
+    <dd class="_definition3">4444</dd>
+
+    <dt class="_term" id="/properties/Array">Property 1:</dt>
+    <dd class="_definition3">
+      Array
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">array</dd>
+        <dt class="_term">Type of items:</dt>
+        <dd class="_definition3">string</dd>
+        <dt class="_term">Format:</dt>
+        <dd class="_definition3">date</dd>
+      </dl>
+    </dd>
+
+    <dt class="_term" id="/properties/Boolean">Property 2:</dt>
+    <dd class="_definition3">
+      Boolean
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">boolean</dd>
+      </dl>
+    </dd>
+
+    <dt class="_term" id="/properties/Integer">Property 3:</dt>
+    <dd class="_definition3">
+      Integer
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">integer</dd>
+        <dt class="_term">Allowed values:</dt>
+        <dd class="_definition3">
+          <ul>
+            <li>1</li>
+            <li>10000</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+          </ul>
+        </dd>
+      </dl>
+    </dd>
+
+    <dt class="_term" id="/properties/Number">Property 4:</dt>
+    <dd class="_definition3">
+      Number
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">number</dd>
+        <dt class="_term">Minimum value:</dt>
+        <dd class="_definition3">12.34</dd>
+        <dt class="_term">Maximum value:</dt>
+        <dd class="_definition3">56.78</dd>
+      </dl>
+    </dd>
+
+    <dt class="_term" id="/properties/Reference">Property 5:</dt>
+    <dd class="_definition3">
+      Reference
+      <dl class="indent">
+        <dt class="_term">Referenced Claim Type:</dt>
+        <dd class="_definition3">
+          <a class="_anchor" href="/ctype/kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789">kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789</a>
+        </dd>
+      </dl>
+    </dd>
+
+    <dt class="_term" id="/properties/String">Property 6:</dt>
+    <dd class="_definition3">
+      String
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">string</dd>
+        <dt class="_term">Minimum length:</dt>
+        <dd class="_definition3">1</dd>
+        <dt class="_term">Maximum length:</dt>
+        <dd class="_definition3">100</dd>
+      </dl>
+    </dd>
+
+    <dt class="_term">Creation date:</dt>
+    <dd class="_definition3">5/1/2023, 12:03:00 PM</dd>
+
+    <dt class="_term">Extrinsic:</dt>
+    <dd class="_definition3">
+      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
+        0xexamplehash
+      </a>
+    </dd>
+
+    <dt class="_term">
+      <a class="showDetails" href="#details">Technical Details:</a>
+    </dt>
+
+    <dd class="_definition3" id="details">
+      <pre>
+{
+  &quot;$id&quot;: &quot;kilt:ctype:0x060fe62fbe19e99f3440d829dec705f92d35b833d8c8927d8d94462737af2d90&quot;,
+  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
+  &quot;additionalProperties&quot;: false,
+  &quot;properties&quot;: {
+    &quot;Array&quot;: {
+      &quot;items&quot;: {
+        &quot;format&quot;: &quot;date&quot;,
+        &quot;type&quot;: &quot;string&quot;
+      },
+      &quot;type&quot;: &quot;array&quot;
+    },
+    &quot;Boolean&quot;: {
+      &quot;type&quot;: &quot;boolean&quot;
+    },
+    &quot;Integer&quot;: {
+      &quot;enum&quot;: [
+        1,
+        10000,
+        2,
+        3,
+        4
+      ],
+      &quot;type&quot;: &quot;integer&quot;
+    },
+    &quot;Number&quot;: {
+      &quot;maximum&quot;: 56.78,
+      &quot;minimum&quot;: 12.34,
+      &quot;type&quot;: &quot;number&quot;
+    },
+    &quot;Reference&quot;: {
+      &quot;$ref&quot;: &quot;kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789&quot;
+    },
+    &quot;String&quot;: {
+      &quot;maxLength&quot;: 100,
+      &quot;minLength&quot;: 1,
+      &quot;type&quot;: &quot;string&quot;
+    }
+  },
+  &quot;title&quot;: &quot;Everything everywhere&quot;,
+  &quot;type&quot;: &quot;object&quot;
+}</pre>
+    </dd>
+  </dl>
+</section>
+`;
+
 exports[`CTypeDetails > should handle nested CType 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType</h1>
 
   <dl>
-    <dt>Creator:</dt>
-    <dd>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</dd>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">
+      This is an example of a CType with a nested CType
+    </dd>
 
-    <dt>Description:</dt>
-    <dd>This is an example of a CType with a nested CType</dd>
+    <dt class="_term">Creator:</dt>
+    <dd class="_definition3">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
 
-    <dt id="/properties/example">Property 1:</dt>
-    <dd><a href="/ctype/kilt:ctype:0x1">example</a></dd>
+    <dt class="_term">Number of Attestations:</dt>
+    <dd class="_definition3">333</dd>
 
-    <dt id="/properties/hasNestedCType">Property 2:</dt>
-    <dd>hasNestedCType</dd>
+    <dt class="_term" id="/properties/example">Property 1:</dt>
+    <dd class="_definition3">
+      example
+      <dl class="indent">
+        <dt class="_term">Referenced Claim Type:</dt>
+        <dd class="_definition3">
+          <a class="_anchor" href="/ctype/kilt:ctype:0x1">kilt:ctype:0x1</a>
+        </dd>
+      </dl>
+    </dd>
 
-    <div class="indent">
-      <dt>Type:</dt>
-      <dd>boolean</dd>
-    </div>
+    <dt class="_term" id="/properties/hasNestedCType">Property 2:</dt>
+    <dd class="_definition3">
+      hasNestedCType
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">boolean</dd>
+      </dl>
+    </dd>
 
-    <dt>Creation date:</dt>
-    <dd>5/1/2023, 12:00:00 PM</dd>
+    <dt class="_term">Creation date:</dt>
+    <dd class="_definition3">5/1/2023, 12:02:00 PM</dd>
 
-    <dt>Extrinsic:</dt>
-    <dd>
-      <a href="https://example.subscan.io/extrinsic/0xexamplehash">
+    <dt class="_term">Extrinsic:</dt>
+    <dd class="_definition3">
+      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
         0xexamplehash
       </a>
     </dd>
 
-    <dt>
+    <dt class="_term">
       <a class="showDetails" href="#details">Technical Details:</a>
     </dt>
 
-    <dd id="details">
+    <dd class="_definition3" id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0xea8670f43bb28356de7becdac900dd48f60a3d0d863c72b8fa11c841946529b6&quot;,
-  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
-  &quot;additionalProperties&quot;: false,
+  &quot;$id&quot;: &quot;kilt:ctype:0x1692376199a5a74445bec96882d2d0313042d445906e6faa21f30949150a3779&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;$ref&quot;: &quot;kilt:ctype:0x1&quot;
@@ -63,43 +235,58 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   <h1 class="title">Example nested CType property</h1>
 
   <dl>
-    <dt>Creator:</dt>
-    <dd>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</dd>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">
+      This is an example of a CType with a nested property
+    </dd>
 
-    <dt>Description:</dt>
-    <dd>This is an example of a CType with a nested property</dd>
+    <dt class="_term">Creator:</dt>
+    <dd class="_definition3">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
 
-    <dt id="/properties/example">Property 1:</dt>
-    <dd><a href="/ctype/kilt:ctype:0x1#/properties/example">example</a></dd>
+    <dt class="_term">Number of Attestations:</dt>
+    <dd class="_definition3">22</dd>
 
-    <dt id="/properties/hasNestedProperty">Property 2:</dt>
-    <dd>hasNestedProperty</dd>
+    <dt class="_term" id="/properties/example">Property 1:</dt>
+    <dd class="_definition3">
+      example
+      <dl class="indent">
+        <dt class="_term">Referenced Claim Type:</dt>
+        <dd class="_definition3">
+          <a class="_anchor" href="/ctype/kilt:ctype:0x1#/properties/example">kilt:ctype:0x1#/properties/example</a>
+        </dd>
+      </dl>
+    </dd>
 
-    <div class="indent">
-      <dt>Type:</dt>
-      <dd>boolean</dd>
-    </div>
+    <dt class="_term" id="/properties/hasNestedProperty">Property 2:</dt>
+    <dd class="_definition3">
+      hasNestedProperty
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">boolean</dd>
+      </dl>
+    </dd>
 
-    <dt>Creation date:</dt>
-    <dd>5/1/2023, 12:00:00 PM</dd>
+    <dt class="_term">Creation date:</dt>
+    <dd class="_definition3">5/1/2023, 12:01:00 PM</dd>
 
-    <dt>Extrinsic:</dt>
-    <dd>
-      <a href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
+    <dt class="_term">Extrinsic:</dt>
+    <dd class="_definition3">
+      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
         0xexamplenestedhash
       </a>
     </dd>
 
-    <dt>
+    <dt class="_term">
       <a class="showDetails" href="#details">Technical Details:</a>
     </dt>
 
-    <dd id="details">
+    <dd class="_definition3" id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0x12501132c73da08f9aa80abcb2152f242de7b342c0e9a3e12fa8aacda35b89ea&quot;,
-  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
-  &quot;additionalProperties&quot;: false,
+  &quot;$id&quot;: &quot;kilt:ctype:0x9775780b45911ece6e960dcc3eb630ea1579988d0b58c1ee2a19e2b14eeb9904&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;$ref&quot;: &quot;kilt:ctype:0x1#/properties/example&quot;
@@ -121,47 +308,54 @@ exports[`CTypeDetails > should match snapshot 1`] = `
   <h1 class="title">Example CType</h1>
 
   <dl>
-    <dt>Creator:</dt>
-    <dd>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</dd>
+    <dt class="_term">Description:</dt>
+    <dd class="_definition3">This is some example cType data</dd>
 
-    <dt>Description:</dt>
-    <dd>This is some example cType data</dd>
+    <dt class="_term">Creator:</dt>
+    <dd class="_definition3">
+      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
+    </dd>
 
-    <dt id="/properties/example">Property 1:</dt>
-    <dd>example</dd>
+    <dt class="_term">Number of Attestations:</dt>
+    <dd class="_definition3">1</dd>
 
-    <div class="indent">
-      <dt>Type:</dt>
-      <dd>string</dd>
-    </div>
-    <dt id="/properties/isExample">Property 2:</dt>
-    <dd>isExample</dd>
+    <dt class="_term" id="/properties/example">Property 1:</dt>
+    <dd class="_definition3">
+      example
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">string</dd>
+      </dl>
+    </dd>
 
-    <div class="indent">
-      <dt>Type:</dt>
-      <dd>boolean</dd>
-    </div>
+    <dt class="_term" id="/properties/isExample">Property 2:</dt>
+    <dd class="_definition3">
+      isExample
+      <dl class="indent">
+        <dt class="_term">Type:</dt>
+        <dd class="_definition3">boolean</dd>
+      </dl>
+    </dd>
 
-    <dt>Creation date:</dt>
-    <dd>5/1/2023, 12:00:00 PM</dd>
+    <dt class="_term">Creation date:</dt>
+    <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
 
-    <dt>Extrinsic:</dt>
-    <dd>
-      <a href="https://example.subscan.io/extrinsic/0xexamplehash">
+    <dt class="_term">Extrinsic:</dt>
+    <dd class="_definition3">
+      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
         0xexamplehash
       </a>
     </dd>
 
-    <dt>
+    <dt class="_term">
       <a class="showDetails" href="#details">Technical Details:</a>
     </dt>
 
-    <dd id="details">
+    <dd class="_definition3" id="details">
       <pre>
 {
-  &quot;$id&quot;: &quot;kilt:ctype:0xdd49b562c6a808dce6ab1cac484405c1e02a917a178e923e4fcce3f9855834e4&quot;,
-  &quot;$schema&quot;: &quot;ipfs://bafybeiah66wbkhqbqn7idkostj2iqyan2tstc4tpqt65udlhimd7hcxjyq/&quot;,
-  &quot;additionalProperties&quot;: false,
+  &quot;$id&quot;: &quot;kilt:ctype:0xf3b3e856755acaa7f274a15b99baf636a306a2a96e1c324a8cbb12b0bc1716af&quot;,
+  &quot;$schema&quot;: &quot;http://kilt-protocol.org/draft-01/ctype#&quot;,
   &quot;properties&quot;: {
     &quot;example&quot;: {
       &quot;type&quot;: &quot;string&quot;

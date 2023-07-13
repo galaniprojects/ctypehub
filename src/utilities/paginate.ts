@@ -1,7 +1,7 @@
 import type { Page } from 'astro';
 import type { Attributes, WhereOptions } from 'sequelize';
 
-import { CType } from '../models/ctype';
+import { CType, groupForAttestationsCount as group } from '../models/ctype';
 
 export async function paginate(
   url: URL,
@@ -26,11 +26,12 @@ export async function paginate(
   const data =
     currentPage > lastPage
       ? []
-      : await CType.findAll({
+      : await CType.scope('stats').findAll({
           offset,
           limit: size,
           order: [['createdAt', 'DESC']],
           where,
+          group,
         });
 
   const current = url.toString();

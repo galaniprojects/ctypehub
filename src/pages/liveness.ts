@@ -1,5 +1,5 @@
 import { blockchainConnectionState, initKilt } from '../utilities/initKilt';
-import { watchForCTypes } from '../utilities/scanCTypes';
+import { watchSubScan } from '../utilities/watchSubScan';
 import {
   databaseConnectionState,
   trackDatabaseConnection,
@@ -8,7 +8,7 @@ import {
 (async () => {
   trackDatabaseConnection();
   await initKilt();
-  watchForCTypes();
+  watchSubScan();
 })();
 
 export async function get() {
