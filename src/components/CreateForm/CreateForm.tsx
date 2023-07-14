@@ -1,4 +1,11 @@
-import { FormEvent, useCallback, useState } from 'react';
+import {
+  FocusEvent,
+  FormEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useState,
+} from 'react';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import {
   Blockchain,
@@ -26,6 +33,63 @@ export function CreateForm() {
   const handleAddPropertyClick = useCallback(
     () => setPropertiesCount(propertiesCount + 1),
     [propertiesCount],
+  );
+
+  const [tags, setTags] = useState<string[]>([]);
+
+  const addTag = useCallback(
+    (tag: string) => {
+      const trimmed = tag.trim().replace(/,/g, '').toLowerCase();
+      if (!trimmed || trimmed.length < 2 || tags.includes(trimmed)) {
+        return;
+      }
+      setTags([...tags, trimmed]);
+    },
+    [tags],
+  );
+
+  const handleTagInputKeyUp = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key !== ',') {
+        return;
+      }
+      addTag(event.currentTarget.value);
+      event.currentTarget.value = '';
+    },
+    [addTag],
+  );
+  const handleTagInputBlur = useCallback(
+    (event: FocusEvent<HTMLInputElement>) => {
+      addTag(event.currentTarget.value);
+      event.currentTarget.value = '';
+    },
+    [addTag],
+  );
+  const handleTagInputKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (
+        event.key !== 'Backspace' ||
+        event.currentTarget.value ||
+        tags.length === 0
+      ) {
+        return;
+      }
+
+      const lastTag = tags.slice(-1)[0];
+      setTags(tags.slice(0, -1));
+      event.currentTarget.value = lastTag;
+    },
+    [tags],
+  );
+
+  const handleRemoveTag = useCallback(
+    (tagToRemove: string) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      event.preventDefault();
+      console.log('removing');
+      setTags(tags.filter((tag) => tag !== tagToRemove));
+    },
+    [tags],
   );
 
   const [account, setAccount] = useState<InjectedAccount>();
@@ -85,7 +149,13 @@ export function CreateForm() {
         const extrinsicHash = signed.hash.toHex();
         const response = await fetch(paths.ctypes, {
           method: 'POST',
-          body: JSON.stringify({ cType, extrinsicHash, creator, description }),
+          body: JSON.stringify({
+            cType,
+            extrinsicHash,
+            creator,
+            description,
+            tags,
+          }),
           headers: { 'Content-Type': 'application/json' },
         });
         if (response.ok) {
@@ -100,7 +170,7 @@ export function CreateForm() {
         await disconnect();
       }
     },
-    [account, propertiesCount],
+    [account, propertiesCount, tags],
   );
 
   const extensions = useSupportedExtensions();
@@ -164,6 +234,38 @@ export function CreateForm() {
           </button>
         </p>
       </fieldset>
+
+      <label className={styles.label} htmlFor="tagInput">
+        Tags (Optional)
+        <ul className={styles.tags}>
+          {tags.map((tag) => (
+            <li key={tag} className={styles.tag}>
+              {tag}
+              <button
+                type="button"
+                aria-label="remove tag"
+                className={styles.removeTag}
+                onClick={handleRemoveTag(tag)}
+              />
+            </li>
+          ))}
+
+          <li className={styles.tagInputContainer}>
+            <input
+              id="tagInput"
+              className={styles.tagInput}
+              onKeyUp={handleTagInputKeyUp}
+              onKeyDown={handleTagInputKeyDown}
+              onBlur={handleTagInputBlur}
+              maxLength={50}
+              aria-describedby="tagInputDescription"
+            />
+          </li>
+        </ul>
+        <p id="tagInputDescription" className={styles.tagInputDescription}>
+          Enter a comma after each tag
+        </p>
+      </label>
 
       <SelectAccount onSelect={setAccount} />
 

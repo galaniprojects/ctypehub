@@ -2,7 +2,7 @@ import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
-interface TagData {
+export interface TagData {
   cTypeId: ICType['$id'];
   tagName: string;
 }
