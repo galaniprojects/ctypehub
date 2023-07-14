@@ -84,9 +84,7 @@ export function CreateForm() {
 
   const handleRemoveTag = useCallback(
     (tagToRemove: string) => (event: MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
       event.preventDefault();
-      console.log('removing');
       setTags(tags.filter((tag) => tag !== tagToRemove));
     },
     [tags],
