@@ -14,21 +14,18 @@ vi.mocked(useSupportedExtensions).mockReturnValue([
 
 describe('CreateForm', () => {
   it('should render', async () => {
-    const { container, queryAllByLabelText, getByText, getByRole } = render(
-      <CreateForm />,
-    );
+    const { container, queryAllByLabelText, getByText, getByLabelText } =
+      render(<CreateForm />);
     expect(container).toMatchSnapshot();
 
     await userEvent.click(getByText(/Add Property/));
     await waitFor(() => queryAllByLabelText('Type:').length === 1);
-    expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot('adding property');
 
     await userEvent.type(
-      getByRole('textbox', {
-        name: 'Tags (Optional) Enter a comma after each tag',
-      }),
+      getByLabelText('Tags (Optional)'),
       'tag1  ,tag2, x, tag3,',
     );
-    expect(container).toMatchSnapshot();
+    expect(container).toMatchSnapshot('with tags');
   });
 });

@@ -50,14 +50,25 @@ export function CreateForm() {
 
   const handleTagInputKeyUp = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key !== ',') {
+      const { key, currentTarget } = event;
+
+      if (![',', 'Backspace'].includes(key)) {
         return;
       }
-      addTag(event.currentTarget.value);
-      event.currentTarget.value = '';
+
+      if (key === ',' && currentTarget.value) {
+        addTag(currentTarget.value);
+        currentTarget.value = '';
+      }
+      if (key === 'Backspace' && !currentTarget.value && tags.length > 0) {
+        const lastTag = tags.slice(-1)[0];
+        setTags(tags.slice(0, -1));
+        currentTarget.value = lastTag;
+      }
     },
-    [addTag],
+    [addTag, tags],
   );
+
   const handleTagInputBlur = useCallback(
     (event: FocusEvent<HTMLInputElement>) => {
       addTag(event.currentTarget.value);
@@ -65,27 +76,11 @@ export function CreateForm() {
     },
     [addTag],
   );
-  const handleTagInputKeyDown = useCallback(
-    (event: KeyboardEvent<HTMLInputElement>) => {
-      if (
-        event.key !== 'Backspace' ||
-        event.currentTarget.value ||
-        tags.length === 0
-      ) {
-        return;
-      }
-
-      const lastTag = tags.slice(-1)[0];
-      setTags(tags.slice(0, -1));
-      event.currentTarget.value = lastTag;
-    },
-    [tags],
-  );
 
   const handleRemoveTag = useCallback(
-    (tagToRemove: string) => (event: MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      setTags(tags.filter((tag) => tag !== tagToRemove));
+      setTags(tags.filter((tag) => tag !== event.currentTarget.value));
     },
     [tags],
   );
@@ -233,8 +228,8 @@ export function CreateForm() {
         </p>
       </fieldset>
 
-      <label className={styles.label} htmlFor="tagInput">
-        Tags (Optional)
+      <div className={styles.label}>
+        <label htmlFor="tagInput">Tags (Optional)</label>
         <ul className={styles.tags}>
           {tags.map((tag) => (
             <li key={tag} className={styles.tag}>
@@ -243,7 +238,8 @@ export function CreateForm() {
                 type="button"
                 aria-label="remove tag"
                 className={styles.removeTag}
-                onClick={handleRemoveTag(tag)}
+                value={tag}
+                onClick={handleRemoveTag}
               />
             </li>
           ))}
@@ -253,7 +249,6 @@ export function CreateForm() {
               id="tagInput"
               className={styles.tagInput}
               onKeyUp={handleTagInputKeyUp}
-              onKeyDown={handleTagInputKeyDown}
               onBlur={handleTagInputBlur}
               maxLength={50}
               aria-describedby="tagInputDescription"
@@ -263,7 +258,7 @@ export function CreateForm() {
         <p id="tagInputDescription" className={styles.tagInputDescription}>
           Enter a comma after each tag
         </p>
-      </label>
+      </div>
 
       <SelectAccount onSelect={setAccount} />
 

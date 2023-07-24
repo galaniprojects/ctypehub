@@ -36,7 +36,7 @@ const {
   tags,
 } = Astro.props.cTypeData;
 
-const tagNames = tags?.map((tag) => tag.dataValues.tagName);
+const tagNames = tags?.map(({ dataValues }) => dataValues.tagName);
 
 const web3Name = await getWeb3NameForDid(creator);
 
