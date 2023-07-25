@@ -4,7 +4,6 @@ import Header from '../../components/Header/Header.astro';
 import CTypeDetails from '../../components/CTypeDetails/CTypeDetails.astro';
 import { CType, groupForAttestationsCount as group } from '../../models/ctype';
 import { NotFoundResponse } from '../../utilities/NotFoundResponse';
-import { Tag } from '../../models/tag';
 
 const { id } = Astro.params;
 const success = Astro.url.searchParams.has('success');
