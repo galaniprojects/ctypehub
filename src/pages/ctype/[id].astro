@@ -17,12 +17,7 @@ if (!cType) {
   return new NotFoundResponse();
 }
 
-const tags = await Tag.findAll({
-  where: { cTypeId: id },
-  attributes: ['tagName'],
-});
-
-cType.dataValues.tags = tags;
+cType.dataValues.tags = await cType.getTags();
 ---
 
 <Layout>
