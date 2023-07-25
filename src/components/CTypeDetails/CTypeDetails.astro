@@ -33,7 +33,10 @@ const {
   extrinsicHash,
   schema,
   attestationsCount,
+  tags,
 } = Astro.props.cTypeData;
+
+const tagNames = tags?.map(({ dataValues }) => dataValues.tagName);
 
 const web3Name = await getWeb3NameForDid(creator);
 
@@ -95,6 +98,25 @@ const { subscan } = configuration;
       {createdAt.toLocaleString()}
     </dd>
 
+    {
+      tagNames && tagNames.length > 0 && (
+        <Fragment>
+          <dt class={propertyStyles.term}>Tags</dt>
+          <dd class={propertyStyles.definition}>
+            <ul>
+              {tagNames.map((tagName) => (
+                <li>
+                  <a href={`/?query=${tagName}`} class={propertyStyles.anchor}>
+                    #{tagName}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </dd>
+        </Fragment>
+      )
+    }
+
     <dt class={propertyStyles.term}>Extrinsic:</dt>
     <dd class={propertyStyles.definition}>
       <a
@@ -153,5 +175,16 @@ const { subscan } = configuration;
     font-size: 0.75rem;
     padding: 0.75rem;
     margin-block-start: 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline;
+    margin-inline-end: 0.25rem;
   }
 </style>

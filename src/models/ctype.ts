@@ -1,6 +1,12 @@
 import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
-import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
+import {
+  DataTypes,
+  HasManyGetAssociationsMixin,
+  Model,
+  ModelAttributes,
+  Sequelize,
+} from 'sequelize';
 
 import { Attestation } from './attestation';
 import { Tag } from './tag';
@@ -17,10 +23,12 @@ export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
 
 export interface CTypeData extends CTypeDataInput {
   attestationsCount: string;
-  tags?: Tag[];
+  tags?: Pick<Tag, 'dataValues'>[];
 }
 
-export class CType extends Model<CTypeData, CTypeDataInput> {}
+export class CType extends Model<CTypeData, CTypeDataInput> {
+  declare getTags: HasManyGetAssociationsMixin<Tag>;
+}
 
 export const CTypeModelDefinition: ModelAttributes = {
   id: {

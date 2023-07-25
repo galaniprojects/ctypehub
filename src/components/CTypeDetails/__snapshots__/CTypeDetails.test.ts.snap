@@ -340,6 +340,15 @@ exports[`CTypeDetails > should match snapshot 1`] = `
     <dt class="_term">Creation date:</dt>
     <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
 
+    <dt class="_term">Tags</dt>
+    <dd class="_definition3">
+      <ul>
+        <li>
+          <a href="/?query=example" class="_anchor"> #example </a>
+        </li>
+      </ul>
+    </dd>
+
     <dt class="_term">Extrinsic:</dt>
     <dd class="_definition3">
       <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">

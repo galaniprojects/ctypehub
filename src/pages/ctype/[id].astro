@@ -8,11 +8,15 @@ import { NotFoundResponse } from '../../utilities/NotFoundResponse';
 const { id } = Astro.params;
 const success = Astro.url.searchParams.has('success');
 
-const cType = await CType.scope('stats').findByPk(id, { group });
+const cType = await CType.scope('stats').findByPk(id, {
+  group,
+});
 
 if (!cType) {
   return new NotFoundResponse();
 }
+
+cType.dataValues.tags = await cType.getTags();
 ---
 
 <Layout>
