@@ -50,6 +50,10 @@ const keyAgreementMnemonic = import.meta.env.SECRET_KEY_AGREEMENT_MNEMONIC;
 if (!keyAgreementMnemonic) {
   throw new ConfigurationError('SECRET_KEY_AGREEMENT_MNEMONIC is not provided');
 }
+const payerMnemonic = import.meta.env.SECRET_PAYER_MNEMONIC;
+if (!payerMnemonic) {
+  throw new ConfigurationError('SECRET_PAYER_MNEMONIC is not provided');
+}
 
 export const configuration = {
   port: import.meta.env.PORT || 3000,
@@ -65,4 +69,5 @@ export const configuration = {
   authenticationMnemonic,
   assertionMethodMnemonic,
   keyAgreementMnemonic,
+  payerMnemonic,
 };
