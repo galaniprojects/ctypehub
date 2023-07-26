@@ -10,19 +10,12 @@ import {
   handleErrorResponse,
   makeErrorResponse,
 } from '../utilities/errorResponses';
+import { getRequestJson } from '../utilities/getRequestJson';
 
 export async function post({ request, url }: APIContext) {
   try {
-    const contentType = request.headers.get('Content-Type');
-    if (contentType !== 'application/json') {
-      throw makeErrorResponse(
-        'Only JSON is accepted',
-        StatusCodes.UNSUPPORTED_MEDIA_TYPE,
-      );
-    }
-
     const { cType, creator, extrinsicHash, description, tags } =
-      await request.json();
+      await getRequestJson(request);
 
     if (!CType.isICType(cType)) {
       throw makeErrorResponse(
@@ -32,7 +25,7 @@ export async function post({ request, url }: APIContext) {
     }
 
     try {
-      Did.parse(creator);
+      Did.validateUri(creator, 'Did');
     } catch {
       throw makeErrorResponse(
         'Creator is not a valid DID',
