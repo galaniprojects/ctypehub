@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+import type { APIContext } from 'astro';
 
 import { CType, Did } from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
@@ -7,7 +7,7 @@ import { CType as CTypeModel } from '../models/ctype';
 import { generatePath, paths } from '../paths';
 import { TagData, Tag as TagModel } from '../models/tag';
 
-export async function post({ request, url }: Parameters<APIRoute>[0]) {
+export async function post({ request, url }: APIContext) {
   const contentType = request.headers.get('Content-Type');
   if (contentType !== 'application/json') {
     return new Response('Only JSON is accepted', {
