@@ -1,12 +1,6 @@
 import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
 
-import {
-  DataTypes,
-  HasManyGetAssociationsMixin,
-  Model,
-  ModelAttributes,
-  Sequelize,
-} from 'sequelize';
+import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
 import { Attestation } from './attestation';
 import { Tag } from './tag';
@@ -26,9 +20,7 @@ export interface CTypeData extends CTypeDataInput {
   tags?: Pick<Tag, 'dataValues'>[];
 }
 
-export class CType extends Model<CTypeData, CTypeDataInput> {
-  declare getTags: HasManyGetAssociationsMixin<Tag>;
-}
+export class CType extends Model<CTypeData, CTypeDataInput> {}
 
 export const CTypeModelDefinition: ModelAttributes = {
   id: {
@@ -83,25 +75,26 @@ CTypeModelDefinition.search = {
   },
 };
 
-// Cannot be provided as a part of the scope, include it in queries manually
-export const groupForAttestationsCount = ['CType.id', 'Attestations.cTypeId'];
-
 export function initCType(sequelize: Sequelize) {
   CType.init(CTypeModelDefinition, {
     sequelize,
 
     scopes: {
       stats: {
-        subQuery: false,
-        // Attestation’s attributes array must be empty
-        include: [{ model: Attestation, attributes: [] }],
         attributes: [
           // Unfortunately all the CType model’s fields have to be listed explicitly
           ...Object.keys(CTypeModelDefinition).filter(
             (key) => key !== 'search',
           ),
           [
-            Sequelize.fn('count', Sequelize.col('Attestations.claimHash')),
+            Sequelize.literal(
+              `coalesce(
+                (select count(*)
+                from "Attestations"
+                where "Attestations"."cTypeId" = "CType"."id"
+                group by "CType"."id"),
+                0)`,
+            ),
             'attestationsCount',
           ],
         ],
