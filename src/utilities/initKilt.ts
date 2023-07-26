@@ -4,11 +4,20 @@ import { configuration } from './configuration';
 import { logger } from './logger';
 import { trackConnectionState } from './trackConnectionState';
 
-export async function initKilt(): Promise<void> {
+async function initKiltInternal(): Promise<void> {
   const api = await connect(configuration.blockchainEndpoint);
   api.on('disconnected', disconnectHandler);
   api.on('connected', () => blockchainConnectionState.on());
   api.on('error', (error) => logger.error(error));
+}
+
+let initPromise: Promise<void> | undefined;
+
+export async function initKilt() {
+  if (!initPromise) {
+    initPromise = initKiltInternal();
+  }
+  return initPromise;
 }
 
 export const blockchainConnectionState = trackConnectionState(60 * 1000);
