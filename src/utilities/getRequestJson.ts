@@ -1,11 +1,9 @@
-import type { APIContext } from 'astro';
-
 import { StatusCodes } from 'http-status-codes';
 
 import { makeErrorResponse } from './errorResponses';
 import { logger } from './logger';
 
-export async function getRequestJson(request: APIContext['request']) {
+export async function getRequestJson(request: Request) {
   const contentType = request.headers.get('Content-Type');
   if (contentType !== 'application/json') {
     throw makeErrorResponse(
