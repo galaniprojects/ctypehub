@@ -122,7 +122,7 @@ export async function post({ request }: APIContext) {
       } catch (exception) {
         logger.error(exception);
         throw makeErrorResponse(
-          `Cannot resolve encryption key ${uri}`,
+          'Cannot resolve encryption key',
           StatusCodes.UNPROCESSABLE_ENTITY,
         );
       }
