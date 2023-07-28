@@ -45,14 +45,12 @@ const payer = Utils.Crypto.makeKeypairFromUri(SECRET_PAYER_MNEMONIC);
 const assertionMethod = Utils.Crypto.makeKeypairFromUri(
   SECRET_ASSERTION_METHOD_MNEMONIC,
 );
-const assertionMethodKey = (await Did.resolve(DID)).document.assertionMethod[0];
 const authorizedTx = await Did.authorizeTx(
   DID,
   tx,
   async ({ data }) => ({
     signature: assertionMethod.sign(data, { withType: false }),
-    keyType: assertionMethodKey.type,
-    keyUri: `${DID}${assertionMethodKey.id}`,
+    keyType: assertionMethod.type,
   }),
   payer.address,
 );
