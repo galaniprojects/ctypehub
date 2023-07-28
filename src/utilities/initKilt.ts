@@ -1,24 +1,16 @@
 import { connect } from '@kiltprotocol/sdk-js';
+import { memoize } from 'lodash-es';
 
 import { configuration } from './configuration';
 import { logger } from './logger';
 import { trackConnectionState } from './trackConnectionState';
 
-async function initKiltInternal(): Promise<void> {
+export const initKilt = memoize(async () => {
   const api = await connect(configuration.blockchainEndpoint);
   api.on('disconnected', disconnectHandler);
   api.on('connected', () => blockchainConnectionState.on());
   api.on('error', (error) => logger.error(error));
-}
-
-let initPromise: Promise<void> | undefined;
-
-export async function initKilt() {
-  if (!initPromise) {
-    initPromise = initKiltInternal();
-  }
-  return initPromise;
-}
+});
 
 export const blockchainConnectionState = trackConnectionState(60 * 1000);
 

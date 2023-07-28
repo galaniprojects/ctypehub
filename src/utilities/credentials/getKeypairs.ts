@@ -1,9 +1,10 @@
 import { Utils } from '@kiltprotocol/sdk-js';
+import { memoize } from 'lodash-es';
 
 import { configuration } from '../configuration';
 import { initKilt } from '../initKilt';
 
-export const keypairsPromise = (async () => {
+export const getKeypairs = memoize(async () => {
   await initKilt();
 
   const payer = Utils.Crypto.makeKeypairFromUri(configuration.payerMnemonic);
@@ -26,4 +27,4 @@ export const keypairsPromise = (async () => {
     assertionMethod,
     keyAgreement,
   };
-})();
+});

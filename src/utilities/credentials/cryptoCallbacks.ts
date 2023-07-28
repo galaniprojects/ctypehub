@@ -5,12 +5,12 @@ import {
   Utils,
 } from '@kiltprotocol/sdk-js';
 
-import { keypairsPromise } from './keypairs';
-import { didDocumentPromise } from './didDocument';
+import { getKeypairs } from './getKeypairs';
+import { getDidDocument } from './getDidDocument';
 
 export async function signWithAssertionMethod({ data }: { data: Uint8Array }) {
-  const { assertionMethod } = await keypairsPromise;
-  const { did, assertionMethodKey } = await didDocumentPromise;
+  const { assertionMethod } = await getKeypairs();
+  const { did, assertionMethodKey } = await getDidDocument();
 
   return {
     signature: assertionMethod.sign(data, { withType: false }),
@@ -23,9 +23,9 @@ export async function encrypt({
   data,
   peerPublicKey,
 }: Parameters<EncryptCallback>[0]) {
-  const { keyAgreement } = await keypairsPromise;
+  const { keyAgreement } = await getKeypairs();
 
-  const { did, keyAgreementKey } = await didDocumentPromise;
+  const { did, keyAgreementKey } = await getDidDocument();
   const keyUri: DidResourceUri = `${did}${keyAgreementKey.id}`;
 
   const { box, nonce } = Utils.Crypto.encryptAsymmetric(
@@ -46,7 +46,7 @@ export async function decrypt({
   nonce,
   peerPublicKey,
 }: Parameters<DecryptCallback>[0]) {
-  const { keyAgreement } = await keypairsPromise;
+  const { keyAgreement } = await getKeypairs();
 
   const data = Utils.Crypto.decryptAsymmetric(
     { box, nonce },

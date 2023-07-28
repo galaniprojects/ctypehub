@@ -1,15 +1,16 @@
-import type {
+import {
+  Did,
   DidDocument,
   KeyRelationship,
   KiltKeyringPair,
+  Utils,
 } from '@kiltprotocol/sdk-js';
-
-import { Did, Utils } from '@kiltprotocol/sdk-js';
+import { memoize } from 'lodash-es';
 
 import { configuration } from '../configuration';
 import { initKilt } from '../initKilt';
 
-import { keypairsPromise } from './keypairs';
+import { getKeypairs } from './getKeypairs';
 
 async function compareKeys(
   configured: Pick<KiltKeyringPair, 'publicKey'>,
@@ -33,7 +34,7 @@ async function compareKeys(
 }
 
 async function compareAllKeys(fullDid: DidDocument): Promise<void> {
-  const keypairs = await keypairsPromise;
+  const keypairs = await getKeypairs();
 
   await compareKeys(
     keypairs.authentication,
@@ -52,7 +53,7 @@ async function compareAllKeys(fullDid: DidDocument): Promise<void> {
   );
 }
 
-export const didDocumentPromise = (async () => {
+export const getDidDocument = memoize(async () => {
   await initKilt();
 
   const { did } = configuration;
@@ -81,4 +82,4 @@ export const didDocumentPromise = (async () => {
     keyAgreementKey,
     assertionMethodKey,
   };
-})();
+});

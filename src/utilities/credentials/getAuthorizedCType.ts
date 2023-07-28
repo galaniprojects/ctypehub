@@ -1,21 +1,16 @@
-import {
-  Blockchain,
-  ConfigService,
-  CType,
-  Did,
-  ICType,
-} from '@kiltprotocol/sdk-js';
+import { Blockchain, ConfigService, CType, Did } from '@kiltprotocol/sdk-js';
+import { memoize } from 'lodash-es';
 
 import { configuration } from '../configuration';
 import { initKilt } from '../initKilt';
 import { logger } from '../logger';
 
-import { keypairsPromise } from './keypairs';
+import { getKeypairs } from './getKeypairs';
 import { signWithAssertionMethod } from './cryptoCallbacks';
 
 const cType = CType.fromProperties('Authorized', {});
 
-async function getAuthorizedCTypeInternal() {
+export const getAuthorizedCType = memoize(async () => {
   await initKilt();
   const api = ConfigService.get('api');
 
@@ -26,7 +21,7 @@ async function getAuthorizedCTypeInternal() {
 
   logger.warn('Storing Authorized CType on the blockchain');
 
-  const { payer } = await keypairsPromise;
+  const { payer } = await getKeypairs();
 
   const extrinsic = await Did.authorizeTx(
     configuration.did,
@@ -39,13 +34,4 @@ async function getAuthorizedCTypeInternal() {
 
   logger.warn(cType, 'Authorized CType');
   return cType;
-}
-
-let promise: Promise<ICType> | undefined;
-
-export async function getAuthorizedCType() {
-  if (!promise) {
-    promise = getAuthorizedCTypeInternal();
-  }
-  return promise;
-}
+});

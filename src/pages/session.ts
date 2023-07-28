@@ -7,7 +7,7 @@ import { Did, Utils } from '@kiltprotocol/sdk-js';
 
 import { StatusCodes } from 'http-status-codes';
 
-import { didDocumentPromise } from '../utilities/credentials/didDocument';
+import { getDidDocument } from '../utilities/credentials/getDidDocument';
 import { logger } from '../utilities/logger';
 import {
   handleErrorResponse,
@@ -83,7 +83,7 @@ export interface GetSessionOutput {
 }
 
 export async function get() {
-  const { did, keyAgreementKey } = await didDocumentPromise;
+  const { did, keyAgreementKey } = await getDidDocument();
   const dAppEncryptionKeyUri: DidResourceUri = `${did}${keyAgreementKey.id}`;
   const response: GetSessionOutput = {
     dAppEncryptionKeyUri,
@@ -133,7 +133,7 @@ export async function post({ request }: APIContext) {
 
     async function decryptChallenge() {
       try {
-        const { keyAgreementKey, did } = await didDocumentPromise;
+        const { keyAgreementKey, did } = await getDidDocument();
 
         const { data } = await decrypt({
           data: Utils.Crypto.coToUInt8(encryptedChallenge),
