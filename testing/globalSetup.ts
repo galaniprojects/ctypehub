@@ -10,6 +10,11 @@ const env = {
   SECRET_SUBSCAN: 'SECRET_SUBSCAN',
   BLOCKCHAIN_ENDPOINT: '',
   DATABASE_URI: '',
+  DID: 'placeholder',
+  SECRET_PAYER_MNEMONIC: 'placeholder',
+  SECRET_AUTHENTICATION_MNEMONIC: 'placeholder',
+  SECRET_ASSERTION_METHOD_MNEMONIC: 'placeholder',
+  SECRET_KEY_AGREEMENT_MNEMONIC: 'placeholder',
 };
 
 let server: ChildProcess;

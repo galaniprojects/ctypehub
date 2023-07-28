@@ -1,6 +1,8 @@
 import { cwd } from 'node:process';
 import path from 'node:path';
 
+import type { DidUri } from '@kiltprotocol/sdk-js';
+
 import { pino } from 'pino';
 
 class ConfigurationError extends Error {
@@ -27,6 +29,32 @@ if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
 }
 
+const did = import.meta.env.DID as DidUri;
+if (!did) {
+  throw new ConfigurationError('DID is not provided');
+}
+const authenticationMnemonic = import.meta.env.SECRET_AUTHENTICATION_MNEMONIC;
+if (!authenticationMnemonic) {
+  throw new ConfigurationError(
+    'SECRET_AUTHENTICATION_MNEMONIC is not provided',
+  );
+}
+const assertionMethodMnemonic = import.meta.env
+  .SECRET_ASSERTION_METHOD_MNEMONIC;
+if (!assertionMethodMnemonic) {
+  throw new ConfigurationError(
+    'SECRET_ASSERTION_METHOD_MNEMONIC is not provided',
+  );
+}
+const keyAgreementMnemonic = import.meta.env.SECRET_KEY_AGREEMENT_MNEMONIC;
+if (!keyAgreementMnemonic) {
+  throw new ConfigurationError('SECRET_KEY_AGREEMENT_MNEMONIC is not provided');
+}
+const payerMnemonic = import.meta.env.SECRET_PAYER_MNEMONIC;
+if (!payerMnemonic) {
+  throw new ConfigurationError('SECRET_PAYER_MNEMONIC is not provided');
+}
+
 export const configuration = {
   port: import.meta.env.PORT || 3000,
   isProduction: import.meta.env.PROD,
@@ -37,4 +65,9 @@ export const configuration = {
     'postgres://postgres:postgres@localhost:5432/postgres',
   subscan,
   blockchainEndpoint,
+  did,
+  authenticationMnemonic,
+  assertionMethodMnemonic,
+  keyAgreementMnemonic,
+  payerMnemonic,
 };

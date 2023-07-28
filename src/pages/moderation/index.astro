@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header/Header.astro';
+import { Moderation } from '../../components/Moderation/Moderation';
+---
+
+<Layout>
+  <Header />
+  <h1>Moderation</h1>
+  <Moderation client:only="react" />
+</Layout>
+
+<script is:inline>
+  window.kilt = {};
+  Object.defineProperty(window.kilt, 'meta', {
+    value: { versions: { credentials: '3.0' } },
+    enumerable: false,
+  });
+</script>
+
+<style>
+  :global(*) {
+    color: white;
+  }
+</style>
