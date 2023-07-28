@@ -1,0 +1,23 @@
+---
+import containerStyles from '../Container.module.css';
+import inputStyles from '../Input/Input.module.css';
+import buttonStyles from '../Button.module.css';
+
+interface Props {
+  action: string;
+  query: string | null;
+}
+const { action, query } = Astro.props;
+---
+
+<form action={action} method="get" class={containerStyles.container}>
+  <input
+    type="search"
+    name="query"
+    value={query}
+    placeholder="Search query"
+    aria-label="Search query"
+    autofocus={!!query}
+    class={inputStyles.search}
+  /><button type="submit" class={buttonStyles.search}>Search</button>
+</form>

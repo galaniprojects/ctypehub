@@ -1,0 +1,83 @@
+---
+import { Op, fn } from 'sequelize';
+
+import CTypeOverview from '../../components/CTypeOverview/CTypeOverview.astro';
+import { Tag } from '../../models/tag';
+import { paginate } from '../../utilities/paginate';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header/Header.astro';
+import SearchForm from '../../components/SearchForm/SearchForm.astro';
+import PageNav from '../../components/PageNav/PageNav.astro';
+
+const { tag } = Astro.params;
+
+const query = Astro.url.searchParams.get('query');
+
+const where = {
+  block: { [Op.ne]: null },
+  ...(query && {
+    search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) },
+  }),
+};
+
+const include = [{ model: Tag, as: 'tags', where: { '$tags.tagName$': tag } }];
+
+const {
+  data: cTypeResults,
+  currentPage,
+  url: { prev, next },
+} = await paginate(Astro.url, where, include);
+---
+
+<Layout>
+  <Header />
+  <search>
+    <h2>#{tag}</h2>
+
+    <SearchForm action={`/tag/${tag}`} query={query} />
+
+    {
+      cTypeResults.length > 0 && (
+        <ul>
+          {cTypeResults.map(({ dataValues }) => (
+            <CTypeOverview cTypeData={dataValues} />
+          ))}
+        </ul>
+      )
+    }
+
+    {query && cTypeResults.length === 0 && <p>No results for “{query}”</p>}
+
+    <PageNav prev={prev} next={next} currentPage={currentPage} />
+  </search>
+</Layout>
+
+<style>
+  search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+  }
+
+  p,
+  h2 {
+    color: var(--color-text-primary);
+  }
+
+  ul {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  a {
+    text-align: center;
+    color: var(--color-link);
+  }
+</style>

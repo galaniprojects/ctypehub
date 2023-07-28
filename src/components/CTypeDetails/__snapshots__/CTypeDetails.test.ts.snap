@@ -344,7 +344,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
     <dd class="_definition3">
       <ul>
         <li>
-          <a href="/?query=example" class="_anchor"> #example </a>
+          <a href="/tag/example" class="_anchor"> #example </a>
         </li>
       </ul>
     </dd>

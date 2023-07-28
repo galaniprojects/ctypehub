@@ -2,12 +2,16 @@ import type { ICType } from '@kiltprotocol/sdk-js';
 
 import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 
-export interface TagData {
+export interface TagDataInput {
   cTypeId: ICType['$id'];
   tagName: string;
 }
 
-export class Tag extends Model<TagData> {}
+export interface TagData extends TagDataInput {
+  search: string;
+}
+
+export class Tag extends Model<TagData, TagDataInput> {}
 
 const TagModelDefinition: ModelAttributes = {
   cTypeId: {
@@ -17,6 +21,13 @@ const TagModelDefinition: ModelAttributes = {
   tagName: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+};
+
+TagModelDefinition.search = {
+  type: `tsvector generated always as (to_tsvector('english', "tagName")) stored`,
+  set() {
+    throw new Error('search is read-only');
   },
 };
 

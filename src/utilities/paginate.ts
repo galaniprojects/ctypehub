@@ -1,18 +1,19 @@
 import type { Page } from 'astro';
-import type { Attributes, WhereOptions } from 'sequelize';
+import type { Attributes, Includeable, WhereOptions } from 'sequelize';
 
 import { CType } from '../models/ctype';
 
 export async function paginate(
   url: URL,
   where?: WhereOptions<Attributes<CType>>,
+  include?: Includeable[],
   pageLimit = 10,
 ): Promise<Page<CType>> {
   const page = url.searchParams.get('page');
 
   const isHomePage = !page || !Number.isInteger(Number(page));
 
-  const total = await CType.count({ where });
+  const total = await CType.count({ where, include });
   const lastPage = Math.floor(total / pageLimit);
 
   const currentPage = isHomePage ? lastPage : Number(page);
@@ -31,6 +32,7 @@ export async function paginate(
           limit: size,
           order: [['createdAt', 'DESC']],
           where,
+          include,
         });
 
   const current = url.toString();

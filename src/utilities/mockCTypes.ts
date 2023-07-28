@@ -13,7 +13,15 @@ export const mockCTypes: Record<string, CTypeData> = {
     description: 'This is some example cType data',
     block: '123',
     attestationsCount: '1',
-    tags: [{ dataValues: { cTypeId: 'kilt:ctype:0x1', tagName: 'example' } }],
+    tags: [
+      {
+        dataValues: {
+          cTypeId: 'kilt:ctype:0x1',
+          tagName: 'example',
+          search: '',
+        },
+      },
+    ],
   },
   nestedProperty: {
     id: 'kilt:ctype:0x2',

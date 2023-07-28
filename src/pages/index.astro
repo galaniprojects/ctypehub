@@ -1,17 +1,27 @@
 ---
 import { fn, Op } from 'sequelize';
 
-import containerStyles from '../components/Container.module.css';
-import inputStyles from '../components/Input/Input.module.css';
-import buttonStyles from '../components/Button.module.css';
-
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 
 import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
+import PageNav from '../components/PageNav/PageNav.astro';
+import SearchForm from '../components/SearchForm/SearchForm.astro';
 import { paginate } from '../utilities/paginate';
+import { Tag } from '../models/tag';
 
 const query = Astro.url.searchParams.get('query');
+
+const tagResults = await Tag.findAll({
+  where: {
+    search: {
+      [Op.match]: fn('websearch_to_tsquery', 'english', query),
+    },
+  },
+  attributes: ['tagName'],
+  group: ['tagName'],
+});
+
 const where = {
   block: { [Op.ne]: null },
   ...(query && {
@@ -20,7 +30,7 @@ const where = {
 };
 
 const {
-  data,
+  data: cTypeResults,
   currentPage,
   url: { prev, next },
 } = await paginate(Astro.url, where);
@@ -30,47 +40,44 @@ const {
   <Header />
 
   <search>
-    <form action="/" method="get" class={containerStyles.container}>
-      <input
-        type="search"
-        name="query"
-        value={query}
-        placeholder="Search query"
-        aria-label="Search query"
-        autofocus={!!query}
-        class={inputStyles.search}
-      /><button type="submit" class={buttonStyles.search}>Search</button>
-    </form>
+    <SearchForm action="/" query={query} />
 
-    {query && data.length === 0 && <p>No results for “{query}”</p>}
-
+    {query && tagResults.length === 0 && <p>No tag results for “#{query}”</p>}
     {
-      data.length > 0 && (
-        <ul>
-          {data.map(({ dataValues }) => (
-            <CTypeOverview cTypeData={dataValues} />
-          ))}
-        </ul>
+      tagResults.length > 0 && (
+        <Fragment>
+          <p>Tag results for “#{query}”:</p>
+
+          <ul class="tagResults">
+            {tagResults.map(({ dataValues: { tagName } }) => (
+              <li>
+                <a href={`/tag/${tagName}`}>#{tagName}</a>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
       )
     }
 
     {
-      (prev || next) && (
-        <nav>
-          {next && (
-            <a class="newer" href={next} rel="next">
-              Newer
-            </a>
-          )}
-          {next && <p class="page">Page {currentPage}</p>}
-          {prev && (
-            <a class="older" href={prev} rel="prev">
-              Older
-            </a>
-          )}
-        </nav>
+      query && cTypeResults.length === 0 && (
+        <p>No CType results for “{query}”</p>
       )
     }
+    {
+      cTypeResults.length > 0 && (
+        <Fragment>
+          {query && <p>CType results for “{query}”:</p>}
+          <ul class="cTypeResults">
+            {cTypeResults.map(({ dataValues }) => (
+              <CTypeOverview cTypeData={dataValues} />
+            ))}
+          </ul>
+        </Fragment>
+      )
+    }
+
+    <PageNav prev={prev} next={next} currentPage={currentPage} />
   </search>
 </Layout>
 
@@ -92,35 +99,24 @@ const {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  .tagResults {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-block-end: 1rem;
+  }
+
+  .cTypeResults {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  nav {
-    display: grid;
-    grid-template-columns: 1fr 6rem 1fr;
-    gap: 1rem;
-    align-items: center;
-    margin-block: 1rem;
-  }
-
-  .page {
-    grid-column: 2;
-    text-align: center;
-    margin: 0;
-  }
-
   a {
     text-align: center;
     color: var(--color-link);
-  }
-
-  .newer {
-    grid-column: 1;
-  }
-
-  .older {
-    grid-column: 3;
   }
 </style>
