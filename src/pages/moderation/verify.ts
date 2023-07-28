@@ -85,7 +85,7 @@ export async function post({ request }: APIContext) {
 
     if (type !== 'submit-credential') {
       throw makeErrorResponse(
-        'Message contains rejection',
+        'Unexpected message type',
         StatusCodes.BAD_REQUEST,
       );
     }
