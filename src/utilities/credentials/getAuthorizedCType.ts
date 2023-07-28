@@ -6,11 +6,12 @@ import {
   ICType,
 } from '@kiltprotocol/sdk-js';
 
-import { logger } from './logger';
+import { configuration } from '../configuration';
+import { initKilt } from '../initKilt';
+import { logger } from '../logger';
+
 import { keypairsPromise } from './keypairs';
-import { configuration } from './configuration';
 import { signWithAssertionMethod } from './cryptoCallbacks';
-import { initKilt } from './initKilt';
 
 const cType = CType.fromProperties('Authorized', {});
 

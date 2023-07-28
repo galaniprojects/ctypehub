@@ -1,7 +1,7 @@
 import { Utils } from '@kiltprotocol/sdk-js';
 
-import { configuration } from './configuration';
-import { initKilt } from './initKilt';
+import { configuration } from '../configuration';
+import { initKilt } from '../initKilt';
 
 export const keypairsPromise = (async () => {
   await initKilt();

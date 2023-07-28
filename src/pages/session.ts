@@ -7,14 +7,14 @@ import { Did, Utils } from '@kiltprotocol/sdk-js';
 
 import { StatusCodes } from 'http-status-codes';
 
-import { didDocumentPromise } from '../utilities/didDocument';
+import { didDocumentPromise } from '../utilities/credentials/didDocument';
 import { logger } from '../utilities/logger';
 import {
   handleErrorResponse,
   makeErrorResponse,
 } from '../utilities/errorResponses';
 import { getRequestJson } from '../utilities/getRequestJson';
-import { decrypt } from '../utilities/cryptoCallbacks';
+import { decrypt } from '../utilities/credentials/cryptoCallbacks';
 import { sessionHeader } from '../utilities/sessionHeader';
 
 export interface BasicSession {

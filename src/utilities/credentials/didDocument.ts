@@ -6,9 +6,10 @@ import type {
 
 import { Did, Utils } from '@kiltprotocol/sdk-js';
 
+import { configuration } from '../configuration';
+import { initKilt } from '../initKilt';
+
 import { keypairsPromise } from './keypairs';
-import { configuration } from './configuration';
-import { initKilt } from './initKilt';
 
 async function compareKeys(
   configured: Pick<KiltKeyringPair, 'publicKey'>,

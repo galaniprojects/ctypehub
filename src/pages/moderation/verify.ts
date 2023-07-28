@@ -10,10 +10,10 @@ import {
   handleErrorResponse,
   makeErrorResponse,
 } from '../../utilities/errorResponses';
-import { decrypt, encrypt } from '../../utilities/cryptoCallbacks';
+import { decrypt, encrypt } from '../../utilities/credentials/cryptoCallbacks';
 import { configuration } from '../../utilities/configuration';
 import { getSession, sessionStorage } from '../session';
-import { getAuthorizedCType } from '../../utilities/getAuthorizedCType';
+import { getAuthorizedCType } from '../../utilities/credentials/getAuthorizedCType';
 import { getRequestJson } from '../../utilities/getRequestJson';
 
 const trustedAttesters = [configuration.did];
