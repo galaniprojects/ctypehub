@@ -1,0 +1,60 @@
+---
+interface Props {
+  prev?: string;
+  next?: string;
+  currentPage: number;
+}
+
+const { prev, next, currentPage } = Astro.props;
+---
+
+{
+  (prev || next) && (
+    <nav>
+      {next && (
+        <a class="newer" href={next} rel="next">
+          Newer
+        </a>
+      )}
+      {next && <p class="page">Page {currentPage}</p>}
+      {prev && (
+        <a class="older" href={prev} rel="prev">
+          Older
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 6rem 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-block: 1rem;
+  }
+
+  .page {
+    grid-column: 2;
+    text-align: center;
+    margin: 0;
+  }
+
+  p {
+    color: var(--color-text-primary);
+  }
+
+  a {
+    text-align: center;
+    color: var(--color-link);
+  }
+
+  [rel='next'] {
+    grid-column: 1;
+  }
+
+  [rel='prev'] {
+    grid-column: 3;
+  }
+</style>

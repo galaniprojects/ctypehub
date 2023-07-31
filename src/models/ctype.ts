@@ -5,7 +5,7 @@ import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
 import { Attestation } from './attestation';
 import { Tag } from './tag';
 
-export interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
+interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   id: ICType['$id'];
   schema: ICType['$schema'];
   creator: DidUri;

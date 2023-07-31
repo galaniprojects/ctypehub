@@ -8,12 +8,12 @@ exports[`index.astro > should render all CTypes 1`] = `
     <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
-  <search>
+  <search class="_search2">
     <form action="/" method="get" class="_container">
       <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
-    <ul>
+    <ul class="cTypeResults">
       <li class="_container">
         <h2>
           <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
@@ -45,12 +45,15 @@ exports[`index.astro > should render search results 1`] = `
     <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
-  <search>
+  <search class="_search2">
     <form action="/" method="get" class="_container">
-      <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" autofocus class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
+      <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
-    <ul>
+    <p>No tag results for “#nested”</p>
+
+    <p>CType results for “nested”:</p>
+    <ul class="cTypeResults">
       <li class="_container">
         <h2>
           <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
@@ -58,6 +61,52 @@ exports[`index.astro > should render search results 1`] = `
         <p>
           <span>Number of Attestations</span>
           <span>2</span>
+        </p>
+      </li>
+    </ul>
+  </search>
+</body>
+`;
+
+exports[`index.astro > should render tag results 1`] = `
+<body>
+  <header>
+    <span></span>
+    <h2><a href="/">CTypeHub</a></h2>
+    <a href="/create" class="_primary"> Create Claim Type </a>
+  </header>
+
+  <search class="_search2">
+    <form action="/" method="get" class="_container">
+      <input type="search" name="query" value="example" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
+    </form>
+
+    <p>Tag results for “#example”:</p>
+
+    <ul class="tagResults">
+      <li>
+        <a href="/tag/example">#example</a>
+      </li>
+    </ul>
+
+    <p>CType results for “example”:</p>
+    <ul class="cTypeResults">
+      <li class="_container">
+        <h2>
+          <a href="/ctype/kilt:ctype:0x2"> Example nested CType property </a>
+        </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>2</span>
+        </p>
+      </li>
+      <li class="_container">
+        <h2>
+          <a href="/ctype/kilt:ctype:0x1"> Example CType </a>
+        </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>1</span>
         </p>
       </li>
     </ul>
@@ -73,12 +122,14 @@ exports[`index.astro > should render when no search results 1`] = `
     <a href="/create" class="_primary"> Create Claim Type </a>
   </header>
 
-  <search>
+  <search class="_search2">
     <form action="/" method="get" class="_container">
-      <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" autofocus class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
+      <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
 
-    <p>No results for “asdagalasdg”</p>
+    <p>No tag results for “#asdagalasdg”</p>
+
+    <p>No CType results for “asdagalasdg”</p>
   </search>
 </body>
 `;

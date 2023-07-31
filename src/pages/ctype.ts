@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { CType as CTypeModel } from '../models/ctype';
 import { generatePath, paths } from '../paths';
-import { TagData, Tag as TagModel } from '../models/tag';
+import { TagDataInput, Tag as TagModel } from '../models/tag';
 import {
   handleErrorResponse,
   makeErrorResponse,
@@ -51,7 +51,7 @@ export async function post({ request, url }: APIContext) {
       ...rest,
     });
 
-    const cTypeTags: TagData[] = (tags as string[]).map((tag) => ({
+    const cTypeTags: TagDataInput[] = (tags as string[]).map((tag) => ({
       cTypeId: id,
       tagName: tag,
     }));
