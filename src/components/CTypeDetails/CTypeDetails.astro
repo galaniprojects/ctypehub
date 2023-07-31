@@ -8,6 +8,8 @@ import propertyStyles from './Property.module.css';
 
 import { configuration } from '../../utilities/configuration';
 
+import { generatePath, paths } from '../../paths';
+
 import { Property } from './Property';
 
 async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
@@ -106,7 +108,10 @@ const { subscan } = configuration;
             <ul>
               {tagNames.map((tagName) => (
                 <li>
-                  <a href={`/tag/${tagName}`} class={propertyStyles.anchor}>
+                  <a
+                    href={generatePath(paths.tag, tagName)}
+                    class={propertyStyles.anchor}
+                  >
                     #{tagName}
                   </a>
                 </li>

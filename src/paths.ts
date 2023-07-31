@@ -2,6 +2,7 @@ export const paths = {
   home: '/',
   ctypes: '/ctype',
   ctypeDetails: '/ctype/[param]',
+  tag: '/tag/[param]',
   session: '/session',
   moderationVerify: '/moderation/verify',
 };

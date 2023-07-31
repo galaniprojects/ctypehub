@@ -1,6 +1,8 @@
 ---
 import { fn, Op } from 'sequelize';
 
+import containerStyles from '../components/Container.module.css';
+
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header/Header.astro';
 
@@ -9,6 +11,7 @@ import PageNav from '../components/PageNav/PageNav.astro';
 import SearchForm from '../components/SearchForm/SearchForm.astro';
 import { paginate } from '../utilities/paginate';
 import { Tag } from '../models/tag';
+import { generatePath, paths } from '../paths';
 
 const query = Astro.url.searchParams.get('query');
 
@@ -39,7 +42,7 @@ const {
 <Layout>
   <Header />
 
-  <search>
+  <search class={containerStyles.search}>
     <SearchForm action="/" query={query} />
 
     {query && tagResults.length === 0 && <p>No tag results for “#{query}”</p>}
@@ -51,7 +54,7 @@ const {
           <ul class="tagResults">
             {tagResults.map(({ dataValues: { tagName } }) => (
               <li>
-                <a href={`/tag/${tagName}`}>#{tagName}</a>
+                <a href={generatePath(paths.tag, tagName)}>#{tagName}</a>
               </li>
             ))}
           </ul>
@@ -82,14 +85,6 @@ const {
 </Layout>
 
 <style>
-  search {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding-block: 1rem;
-  }
-
   p {
     color: var(--color-text-primary);
   }

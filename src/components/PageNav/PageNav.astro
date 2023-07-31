@@ -41,16 +41,20 @@ const { prev, next, currentPage } = Astro.props;
     margin: 0;
   }
 
+  p {
+    color: var(--color-text-primary);
+  }
+
   a {
     text-align: center;
     color: var(--color-link);
   }
 
-  .newer {
+  [rel='next'] {
     grid-column: 1;
   }
 
-  .older {
+  [rel='prev'] {
     grid-column: 3;
   }
 </style>
