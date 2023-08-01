@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.addColumn(
       'Tags',
       'search',
-      `tsvector generated always as (to_tsvector('english', "tagName") stored`,
+      `tsvector generated always as (to_tsvector('english', "tagName")) stored`,
     );
   },
 
