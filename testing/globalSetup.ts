@@ -3,6 +3,10 @@ import { ChildProcess, exec, spawn } from 'node:child_process';
 import process from 'node:process';
 
 import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
+import {
+  PostgreSqlContainer,
+  StartedPostgreSqlContainer,
+} from '@testcontainers/postgresql';
 
 const env = {
   MODE: 'test',
@@ -19,7 +23,7 @@ const env = {
 
 let server: ChildProcess;
 let blockchainContainer: StartedTestContainer;
-let databaseContainer: StartedTestContainer;
+let databaseContainer: StartedPostgreSqlContainer;
 
 export async function setup() {
   const WS_PORT = 9944;
@@ -44,15 +48,13 @@ export async function setup() {
   // configure the code to use a local blank database
   const DB_PORT = 5432;
   const POSTGRES_PASSWORD = 'postgres';
-  databaseContainer = await new GenericContainer('postgres')
-    .withEnvironment({ POSTGRES_PASSWORD })
+  databaseContainer = await new PostgreSqlContainer()
+    .withPassword(POSTGRES_PASSWORD)
     .withExposedPorts(DB_PORT)
     .start();
 
   {
-    const port = databaseContainer.getMappedPort(DB_PORT);
-    const host = databaseContainer.getHost();
-    const databaseUri = `postgres://postgres:${POSTGRES_PASSWORD}@${host}:${port}/postgres`;
+    const databaseUri = databaseContainer.getConnectionUri();
     env.DATABASE_URI = databaseUri;
     process.env.DATABASE_URI = databaseUri;
   }

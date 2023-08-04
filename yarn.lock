@@ -1258,6 +1258,13 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
+"@testcontainers/postgresql@^10.0.1":
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/@testcontainers/postgresql/-/postgresql-10.0.1.tgz#57ad6c9011a6c643925dd8c0e574c73b5ecadbbb"
+  integrity sha512-nHJBJI2N3NOMQH5kY3r8i5qX6Ta4/fu+oUEIp3QssFTNh/5K25DJrAGiAKDHRHz4ffwlFK82P7dlIBiqNWlskw==
+  dependencies:
+    testcontainers "^10.0.1"
+
 "@testing-library/dom@^9.0.0":
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-9.2.0.tgz#0e1f45e956f2a16f471559c06edd8827c4832f04"
