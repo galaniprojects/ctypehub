@@ -33,10 +33,10 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
         'Content-Type': 'application/json',
         [sessionHeader]: sessionId,
       };
-      const response = await fetch(paths.moderationCType, {
+      const response = await fetch(generatePath(paths.moderationCType, id), {
         method: 'PATCH',
         headers,
-        body: JSON.stringify({ id, isHidden: !isHidden }),
+        body: JSON.stringify({ isHidden: !isHidden }),
       });
 
       if (!response.ok) {

@@ -5,7 +5,7 @@ export const paths = {
   tag: '/tag/[param]',
   session: '/session',
   moderationVerify: '/moderation/verify',
-  moderationCType: '/moderation/ctype',
+  moderationCType: '/moderation/ctype/[param]',
 };
 
 export function generatePath(path: string, param: string) {
