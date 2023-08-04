@@ -13,16 +13,17 @@
 }
 
 .tableRow:nth-child(2n) {
-  background-color: rgb(41 135 205 / 10%);
+  background: rgb(41 135 205 / 10%);
 }
 
 .tableRow:nth-child(2n + 1) {
-  background-color: rgb(41 135 205 / 30%);
+  background: rgb(41 135 205 / 30%);
 }
 
 .tableCell {
   padding: 0.5rem;
-  border: 2px solid rgba(var(--color-black-rgb));
+  border: 2px solid var(--color-background-secondary);
+  background: inherit;
   min-width: 0;
   overflow-wrap: anywhere;
   display: flex;
