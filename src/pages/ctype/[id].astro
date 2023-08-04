@@ -10,7 +10,7 @@ const success = Astro.url.searchParams.has('success');
 
 const cType = await CType.scope('stats').findByPk(id, { include: 'tags' });
 
-if (!cType) {
+if (!cType || cType.dataValues.isHidden) {
   return new NotFoundResponse();
 }
 ---

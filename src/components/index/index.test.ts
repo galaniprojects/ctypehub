@@ -10,13 +10,17 @@ import { Tag } from '../../models/tag';
 
 beforeEach(async () => {
   await resetDatabase();
-  await CTypeModel.bulkCreate([mockCTypes.example, mockCTypes.nestedProperty]);
+  await CTypeModel.bulkCreate([
+    mockCTypes.example,
+    mockCTypes.nestedProperty,
+    mockCTypes.hidden,
+  ]);
   await Tag.create({ tagName: 'example', cTypeId: mockCTypes.example.id });
   await AttestationModel.bulkCreate(mockAttestations);
 });
 
 describe('index.astro', () => {
-  it('should render all CTypes', async () => {
+  it('should render all CTypes except hidden ones', async () => {
     const html = await getSnapshotHtmlForPath('');
     expect(html).toMatchSnapshot();
   });

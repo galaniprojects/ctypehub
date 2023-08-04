@@ -9,7 +9,7 @@ const { isProduction } = configuration;
 
 const cType = mockCTypes[Astro.params.id || ''];
 
-if (!cType || isProduction) {
+if (!cType || cType.isHidden || isProduction) {
   return new NotFoundResponse();
 }
 ---

@@ -22,6 +22,7 @@ export const mockCTypes: Record<string, CTypeData> = {
         },
       },
     ],
+    isHidden: false,
   },
   nestedProperty: {
     id: 'kilt:ctype:0x2',
@@ -38,6 +39,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     description: 'This is an example of a CType with a nested property',
     block: '321',
     attestationsCount: '22',
+    isHidden: false,
   },
   nestedCType: {
     id: 'kilt:ctype:0x3',
@@ -58,6 +60,30 @@ export const mockCTypes: Record<string, CTypeData> = {
     description: 'This is an example of a CType with a nested CType',
     block: '456',
     attestationsCount: '333',
+    isHidden: false,
+  },
+  hidden: {
+    id: 'kilt:ctype:0x4',
+    schema: 'http://kilt-protocol.org/draft-01/ctype#',
+    title: 'Hidden CType',
+    properties: { example: { type: 'string' }, isExample: { type: 'boolean' } },
+    type: 'object',
+    creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
+    createdAt: new Date('2023-05-01T12:00:00'),
+    extrinsicHash: '0xexamplehash',
+    description: 'This is some example cType data',
+    block: '123',
+    attestationsCount: '1',
+    tags: [
+      {
+        dataValues: {
+          cTypeId: 'kilt:ctype:0x1',
+          tagName: 'example',
+          search: '',
+        },
+      },
+    ],
+    isHidden: true,
   },
   everything: {
     id: 'kilt:ctype:0x060fe62fbe19e99f3440d829dec705f92d35b833d8c8927d8d94462737af2d90',
@@ -101,5 +127,6 @@ export const mockCTypes: Record<string, CTypeData> = {
     extrinsicHash: '0xexamplehash',
     createdAt: new Date('2023-05-01T12:03:00'),
     block: '456',
+    isHidden: false,
   },
 };

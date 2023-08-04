@@ -27,6 +27,7 @@ const tagResults = await Tag.findAll({
 
 const where = {
   block: { [Op.ne]: null },
+  isHidden: false,
   ...(query && {
     search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) },
   }),
@@ -45,7 +46,6 @@ const {
   <search class={containerStyles.search}>
     <SearchForm action="/" query={query} />
 
-    {query && tagResults.length === 0 && <p>No tag results for “#{query}”</p>}
     {
       tagResults.length > 0 && (
         <Fragment>
