@@ -46,18 +46,10 @@ export async function setup() {
   }
 
   // configure the code to use a local blank database
-  const DB_PORT = 5432;
-  const POSTGRES_PASSWORD = 'postgres';
-  databaseContainer = await new PostgreSqlContainer()
-    .withPassword(POSTGRES_PASSWORD)
-    .withExposedPorts(DB_PORT)
-    .start();
-
-  {
-    const databaseUri = databaseContainer.getConnectionUri();
-    env.DATABASE_URI = databaseUri;
-    process.env.DATABASE_URI = databaseUri;
-  }
+  databaseContainer = await new PostgreSqlContainer().start();
+  const databaseUri = databaseContainer.getConnectionUri();
+  env.DATABASE_URI = databaseUri;
+  process.env.DATABASE_URI = databaseUri;
 
   // configure the tests to talk to a new Astro instance
   const yarn = (await promisify(exec)('which yarn')).stdout.trim();
