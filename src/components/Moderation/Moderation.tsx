@@ -6,7 +6,7 @@ import styles from './Moderation.module.css';
 import buttonStyles from '../Button.module.css';
 import containerStyles from '../Container.module.css';
 
-import { paths } from '../../paths';
+import { generatePath, paths } from '../../paths';
 import { sessionHeader } from '../../utilities/sessionHeader';
 import { exceptionToError } from '../../utilities/exceptionToError';
 
@@ -34,7 +34,7 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
         [sessionHeader]: sessionId,
       };
       const response = await fetch(paths.moderationCType, {
-        method: 'POST',
+        method: 'PATCH',
         headers,
         body: JSON.stringify({ id, isHidden: !isHidden }),
       });
@@ -61,7 +61,17 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
         {createdAt.toLocaleString()}
       </td>
       <td className={styles.tableDataDetails}>
-        <p className={isHidden ? styles.hidden : ''}>{title}</p>
+        <p className={isHidden ? styles.hidden : ''}>
+          {!isHidden && (
+            <a
+              href={generatePath(paths.ctypeDetails, id)}
+              className={styles.link}
+            >
+              {title}
+            </a>
+          )}
+          {isHidden && title}
+        </p>
         {description && (
           <p className={isHidden ? styles.hidden : ''}>{description}</p>
         )}
@@ -77,6 +87,7 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
           type="button"
           onClick={toggleHidden}
           disabled={processing}
+          aria-busy={processing}
           className={isHidden ? styles.unhide : styles.hide}
           aria-label={isHidden ? 'Unhide CType' : 'Hide CType'}
         />

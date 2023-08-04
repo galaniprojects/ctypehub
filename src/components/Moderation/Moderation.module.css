@@ -1,5 +1,5 @@
 .table {
-  width: 100%;
+  inline-size: 100%;
   border-collapse: collapse;
 }
 
@@ -24,7 +24,7 @@
   padding: 0.5rem;
   border: 2px solid var(--color-background-secondary);
   background: inherit;
-  min-width: 0;
+  min-inline-size: 0;
   overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
@@ -82,6 +82,10 @@
 
 .hidden {
   color: rgb(176 213 251 / 40%);
+}
+
+.link {
+  color: var(--color-link);
 }
 
 .iconButton {
