@@ -24,6 +24,7 @@ export interface BasicSession {
   didChallenge?: string;
   didConfirmed?: boolean;
   requestChallenge?: string;
+  authorized?: boolean;
 }
 
 export type Session = BasicSession & {

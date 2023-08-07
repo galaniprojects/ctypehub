@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`index.astro > should render all CTypes 1`] = `
+exports[`index.astro > should render all CTypes except hidden ones 1`] = `
 <body>
   <header>
     <span></span>
@@ -49,8 +49,6 @@ exports[`index.astro > should render search results 1`] = `
     <form action="/" method="get" class="_container">
       <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
-
-    <p>No tag results for “#nested”</p>
 
     <p>CType results for “nested”:</p>
     <ul class="cTypeResults">
@@ -126,8 +124,6 @@ exports[`index.astro > should render when no search results 1`] = `
     <form action="/" method="get" class="_container">
       <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
     </form>
-
-    <p>No tag results for “#asdagalasdg”</p>
 
     <p>No CType results for “asdagalasdg”</p>
   </search>

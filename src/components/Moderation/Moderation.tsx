@@ -1,12 +1,106 @@
+import type { CTypeData } from '../../models/ctype';
+
 import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
-import { paths } from '../../paths';
+import styles from './Moderation.module.css';
+import buttonStyles from '../Button.module.css';
+import containerStyles from '../Container.module.css';
+
+import { generatePath, paths } from '../../paths';
 import { sessionHeader } from '../../utilities/sessionHeader';
 import { exceptionToError } from '../../utilities/exceptionToError';
 
 import { apiWindow, getCompatibleExtensions, getSession } from './session';
 
-export function Moderation() {
+function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
+  const {
+    id,
+    createdAt,
+    title,
+    properties,
+    description,
+    tags,
+    isHidden: initialIsHidden,
+  } = cType;
+
+  const [isHidden, setIsHidden] = useState(initialIsHidden);
+  const [processing, setProcessing] = useState(false);
+
+  const toggleHidden = useCallback(async () => {
+    try {
+      setProcessing(true);
+      const headers = {
+        'Content-Type': 'application/json',
+        [sessionHeader]: sessionId,
+      };
+      const response = await fetch(generatePath(paths.moderationCType, id), {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({ isHidden: !isHidden }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Unable to moderate CType');
+      }
+      setIsHidden(!isHidden);
+    } catch (exception) {
+      console.error(exception);
+    } finally {
+      setProcessing(false);
+    }
+  }, [id, isHidden, sessionId]);
+
+  const propertyNames = Object.keys(properties).join(', ');
+  const tagNames = tags?.map((tag) => `#${tag}`).join(', ');
+
+  return (
+    <tr className={styles.tableRow}>
+      <td
+        className={`${styles.tableDataDate} ${isHidden ? styles.hidden : ''}`}
+      >
+        {createdAt.toLocaleString()}
+      </td>
+      <td className={styles.tableDataDetails}>
+        <p className={isHidden ? styles.hidden : ''}>
+          {!isHidden && (
+            <a
+              href={generatePath(paths.ctypeDetails, id)}
+              className={styles.link}
+            >
+              {title}
+            </a>
+          )}
+          {isHidden && title}
+        </p>
+        {description && (
+          <p className={isHidden ? styles.hidden : ''}>{description}</p>
+        )}
+        {propertyNames && (
+          <p className={isHidden ? styles.hidden : ''}>{propertyNames}</p>
+        )}
+        {tagNames && (
+          <p className={isHidden ? styles.hidden : ''}>{tagNames}</p>
+        )}
+      </td>
+      <td className={styles.tableDataHidden}>
+        <button
+          type="button"
+          onClick={toggleHidden}
+          disabled={processing}
+          aria-busy={processing}
+          className={isHidden ? styles.unhide : styles.hide}
+          aria-label={isHidden ? 'Unhide CType' : 'Hide CType'}
+        />
+      </td>
+    </tr>
+  );
+}
+
+interface Props {
+  cTypes: CTypeData[];
+}
+
+export function Moderation({ cTypes }: Props) {
   const { kilt } = apiWindow;
 
   const [sessionId, setSessionId] = useState<string>();
@@ -84,6 +178,7 @@ export function Moderation() {
             onClick={handleClick}
             value={extension}
             type="button"
+            className={buttonStyles.primary}
           >
             Sign in with {kilt[extension].name}
           </button>
@@ -94,5 +189,22 @@ export function Moderation() {
     );
   }
 
-  return <div></div>;
+  return (
+    <div className={containerStyles.container}>
+      <table className={styles.table}>
+        <thead className={styles.tableHeader}>
+          <tr className={styles.tableRow}>
+            <th className={styles.tableHeaderDate}>Creation Date</th>
+            <th className={styles.tableHeaderDetails}>Details</th>
+            <th className={styles.tableHeaderHidden}>Hidden</th>
+          </tr>
+        </thead>
+        <tbody className={styles.tableBody}>
+          {cTypes.map((cType) => (
+            <CType key={cType.id} sessionId={sessionId} cType={cType} />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }

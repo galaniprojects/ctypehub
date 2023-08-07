@@ -1,5 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`CTypeDetails > should handle hidden CType 1`] = `
+<body>
+  <h1>Page not found</h1>
+</body>
+`;
+
 exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 <section class="_container">
   <h1 class="title">Everything everywhere</h1>

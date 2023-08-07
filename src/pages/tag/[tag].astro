@@ -28,7 +28,7 @@ const where = {
   }),
 };
 
-const include = [{ model: Tag, as: 'tags', where: { '$tags.tagName$': tag } }];
+const include = [{ model: Tag, as: 'tags', where: { tagName: tag } }];
 
 const {
   data: cTypeResults,

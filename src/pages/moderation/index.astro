@@ -2,12 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header/Header.astro';
 import { Moderation } from '../../components/Moderation/Moderation';
+import { CType } from '../../models/ctype';
+
+const cTypes = (
+  await CType.findAll({
+    order: [['createdAt', 'DESC']],
+    include: 'tags',
+  })
+).map(({ dataValues }) => dataValues);
 ---
 
 <Layout>
   <Header />
   <h1>Moderation</h1>
-  <Moderation client:only="react" />
+  <Moderation client:only="react" cTypes={cTypes} />
 </Layout>
 
 <script is:inline>

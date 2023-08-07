@@ -121,6 +121,8 @@ export async function post({ request }: APIContext) {
       );
     }
 
+    sessionStorage.set(session.sessionId, { ...session, authorized: true });
+
     logger.debug('Verification completed');
     return new Response(null, { status: StatusCodes.NO_CONTENT });
   } catch (exception) {

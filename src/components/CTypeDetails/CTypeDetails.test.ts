@@ -21,4 +21,8 @@ describe('CTypeDetails', () => {
     const html = await getSnapshotHtmlForPath('test/CTypeDetails-everything');
     expect(html).toMatchSnapshot();
   });
+  it('should handle hidden CType', async () => {
+    const html = await getSnapshotHtmlForPath('test/CTypeDetails-hidden');
+    expect(html).toMatchSnapshot();
+  });
 });
