@@ -3,7 +3,7 @@ import type { APIContext } from 'astro';
 import { StatusCodes } from 'http-status-codes';
 
 const credentials: Record<string, unknown> = {
-  'https://dev.ctypehub.galaniprojects.de': {
+  'http://dev.ctypehub.galaniprojects.de': {
     '@context': 'https://identity.foundation/.well-known/did-configuration/v1',
     linked_dids: [
       {
