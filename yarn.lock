@@ -1258,12 +1258,12 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@testcontainers/postgresql@^10.0.2":
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/@testcontainers/postgresql/-/postgresql-10.0.2.tgz#9b70794985dff26126708291d30ac814d88a8c41"
-  integrity sha512-bubJ2bRC8yqJgi6NR8wpMUOhQu43hi4E3eIEypQC/vi6Fv8N9ido4BEshlTFKqvoYw28d75O9mAJwCWjFZkSBg==
+"@testcontainers/postgresql@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@testcontainers/postgresql/-/postgresql-10.1.0.tgz#4bcc9b68d2abdc0b5ded7adc045452406f5235a7"
+  integrity sha512-fueaWqsyRlyTLzQ5Ahfzi3/fbrEbif6vwHVJwRIqdl2LIYVf3Hhf1mUukbt6Mf8tyqUq+JuajH7qGNYIfzb4Qw==
   dependencies:
-    testcontainers "^10.0.2"
+    testcontainers "^10.1.0"
 
 "@testing-library/dom@^9.0.0":
   version "9.2.0"
@@ -7292,10 +7292,10 @@ tar-stream@^3.1.5:
     fast-fifo "^1.2.0"
     streamx "^2.15.0"
 
-testcontainers@^10.0.2:
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/testcontainers/-/testcontainers-10.0.2.tgz#b9a20ba3e1ce89af7af20875285dacd52bff9511"
-  integrity sha512-+NaLTsjy4scWjLCeLeUS8nKcMgQDBse/UDJwRd5U23n14mAWFxU7hBItS6s9bzw0Iv253eDQ2pSEQJO0pbknpw==
+testcontainers@^10.0.2, testcontainers@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/testcontainers/-/testcontainers-10.1.0.tgz#defae733ad8c83fefb0ff78e652f54d754a32b72"
+  integrity sha512-mc8c/xzSDAxt6YUdngpZ2mcCBiuVBie7ABMAkCd3fprb7a0nZ02f1RfbrMplEyO3Y8xy93TDRGUWZUQnEyG2yg==
   dependencies:
     "@balena/dockerignore" "^1.0.2"
     archiver "^5.3.1"
