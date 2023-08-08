@@ -5,10 +5,12 @@ import { CType as CTypeModel } from '../../models/ctype';
 import { Attestation as AttestationModel } from '../../models/attestation';
 import { mockCTypes } from '../../utilities/mockCTypes';
 import { mockAttestations } from '../../utilities/mockAttestations';
+import { initializeDatabase } from '../../utilities/sequelize';
 import { resetDatabase } from '../../../testing/resetDatabase';
 import { Tag } from '../../models/tag';
 
 beforeEach(async () => {
+  await initializeDatabase();
   await resetDatabase();
   await CTypeModel.bulkCreate([
     mockCTypes.example,

@@ -8,7 +8,11 @@ import { CType } from './ctype';
 import { Tag } from './tag';
 
 beforeAll(async () => {
-  const { sequelize } = await import('../utilities/sequelize');
+  const { sequelize, initializeDatabase } = await import(
+    '../utilities/sequelize'
+  );
+  await initializeDatabase();
+
   return async function teardown() {
     await sequelize.close();
   };

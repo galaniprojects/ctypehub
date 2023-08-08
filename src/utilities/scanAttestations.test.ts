@@ -104,7 +104,8 @@ beforeAll(async () => {
     created.assertionMethod,
   ));
 
-  const { sequelize } = await import('./sequelize');
+  const { sequelize, initializeDatabase } = await import('./sequelize');
+  await initializeDatabase();
 
   return async function teardown() {
     await sequelize.close();
