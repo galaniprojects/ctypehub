@@ -38,7 +38,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@testcontainers/postgresql": "^10.0.2",
+    "@testcontainers/postgresql": "^10.1.0",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/lodash-es": "^4.17.8",
