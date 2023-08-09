@@ -15,8 +15,9 @@
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
     "stop-db": "docker rm -f postgres",
     "migrate": "sequelize-cli db:migrate",
+    "seed": "sequelize-cli db:seed:all || exit 0",
     "build": "export $(cat .env.example) && astro build",
-    "start": "yarn migrate && node --enable-source-maps dist/server/entry.mjs"
+    "start": "yarn migrate && yarn seed && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^5.3.2",

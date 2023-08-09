@@ -34,6 +34,10 @@ TagModelDefinition.search = {
 export function initTag(sequelize: Sequelize) {
   Tag.init(TagModelDefinition, {
     sequelize,
-    indexes: [{ fields: ['cTypeId'] }, { fields: ['tagName'] }],
+    indexes: [
+      { fields: ['cTypeId'] },
+      { fields: ['tagName'] },
+      { fields: ['cTypeId', 'tagName'], unique: true },
+    ],
   });
 }
