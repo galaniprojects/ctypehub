@@ -12,11 +12,6 @@ const sequelize = new Sequelize(configuration.databaseUri, {
   logging: (sql) => logger.trace(sql),
 });
 
-initAttestation(sequelize);
-initTag(sequelize);
-initCType(sequelize);
-await sequelize.sync();
-
 export { sequelize };
 
 export const databaseConnectionState = trackConnectionState(2 * 60 * 1000);
@@ -37,4 +32,11 @@ export function trackDatabaseConnection() {
       await checkDatabaseConnection();
     } catch {}
   }, 60 * 1000);
+}
+
+export async function initializeDatabase() {
+  initAttestation(sequelize);
+  initTag(sequelize);
+  initCType(sequelize);
+  await sequelize.sync();
 }
