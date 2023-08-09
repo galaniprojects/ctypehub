@@ -51,7 +51,9 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
   }, [id, isHidden, sessionId]);
 
   const propertyNames = Object.keys(properties).join(', ');
-  const tagNames = tags?.map((tag) => `#${tag}`).join(', ');
+  const tagNames = tags
+    ?.map(({ dataValues: { tagName } }) => `#${tagName}`)
+    .join(', ');
 
   return (
     <tr className={styles.tableRow}>
