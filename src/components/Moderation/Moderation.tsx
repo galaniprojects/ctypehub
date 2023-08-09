@@ -11,6 +11,7 @@ import { sessionHeader } from '../../utilities/sessionHeader';
 import { exceptionToError } from '../../utilities/exceptionToError';
 
 import { apiWindow, getCompatibleExtensions, getSession } from './session';
+import { useCTypes } from './useCTypes';
 
 function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
   const {
@@ -98,11 +99,7 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
   );
 }
 
-interface Props {
-  cTypes: CTypeData[];
-}
-
-export function Moderation({ cTypes }: Props) {
+export function Moderation() {
   const { kilt } = apiWindow;
 
   const [sessionId, setSessionId] = useState<string>();
@@ -169,6 +166,8 @@ export function Moderation({ cTypes }: Props) {
     [kilt],
   );
 
+  const { cTypes, loadMore } = useCTypes(sessionId);
+
   if (!sessionId) {
     return (
       <form>
@@ -207,6 +206,16 @@ export function Moderation({ cTypes }: Props) {
           ))}
         </tbody>
       </table>
+
+      <p>
+        <button
+          type="button"
+          onClick={loadMore}
+          className={buttonStyles.primary}
+        >
+          Load more
+        </button>
+      </p>
     </div>
   );
 }

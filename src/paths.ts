@@ -5,6 +5,7 @@ export const paths = {
   tag: '/tag/[param]',
   session: '/session',
   moderationVerify: '/moderation/verify',
+  moderationCTypes: '/moderation/ctype',
   moderationCType: '/moderation/ctype/[param]',
 };
 
