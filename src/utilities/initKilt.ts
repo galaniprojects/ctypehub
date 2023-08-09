@@ -10,6 +10,7 @@ export const initKilt = memoize(async () => {
   api.on('disconnected', disconnectHandler);
   api.on('connected', () => blockchainConnectionState.on());
   api.on('error', (error) => logger.error(error));
+  blockchainConnectionState.on();
 });
 
 export const blockchainConnectionState = trackConnectionState(60 * 1000);
