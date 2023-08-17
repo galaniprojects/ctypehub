@@ -31,12 +31,19 @@ describe('index.astro', () => {
     const html = await getSnapshotHtmlForPath('?query=nested');
     expect(html).toMatchSnapshot();
   });
+
   it('should render when no search results', async () => {
     const html = await getSnapshotHtmlForPath('?query=asdagalasdg');
     expect(html).toMatchSnapshot();
   });
+
   it('should render tag results', async () => {
     const html = await getSnapshotHtmlForPath('?query=example');
+    expect(html).toMatchSnapshot();
+  });
+
+  it('should render the tag page', async () => {
+    const html = await getSnapshotHtmlForPath('/tag/example');
     expect(html).toMatchSnapshot();
   });
 });

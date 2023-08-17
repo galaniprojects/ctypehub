@@ -112,6 +112,35 @@ exports[`index.astro > should render tag results 1`] = `
 </body>
 `;
 
+exports[`index.astro > should render the tag page 1`] = `
+<body>
+  <header>
+    <span></span>
+    <h2><a href="/">CTypeHub</a></h2>
+    <a href="/create" class="_primary"> Create Claim Type </a>
+  </header>
+  <search class="_search2">
+    <h2>#example</h2>
+
+    <form action="/tag/example" method="get" class="_container">
+      <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search6 _primary">Search</button>
+    </form>
+
+    <ul>
+      <li class="_container">
+        <h2>
+          <a href="/ctype/kilt:ctype:0x1"> Example CType </a>
+        </h2>
+        <p>
+          <span>Number of Attestations</span>
+          <span>1</span>
+        </p>
+      </li>
+    </ul>
+  </search>
+</body>
+`;
+
 exports[`index.astro > should render when no search results 1`] = `
 <body>
   <header>
