@@ -4,13 +4,8 @@ import { configuration } from './configuration';
 
 const { isProduction, isTest } = configuration;
 
-const level = (() => {
-  if (isTest) return 'warn';
-  return 'debug';
-})();
-
 const options: LoggerOptions = {
-  level,
+  level: isTest ? 'warn' : 'debug',
   ...(!isProduction && { transport: { target: 'pino-pretty' } }),
   redact: isProduction
     ? [
