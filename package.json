@@ -22,7 +22,7 @@
   "dependencies": {
     "@astrojs/node": "^5.3.5",
     "@astrojs/react": "^2.3.2",
-    "@kiltprotocol/sdk-js": "^0.33.1",
+    "@kiltprotocol/sdk-js": "^0.34.0",
     "@polkadot/extension-dapp": "^0.46.5",
     "astro": "^2.10.12",
     "got": "^12.6.1",
