@@ -22,7 +22,7 @@
   "dependencies": {
     "@astrojs/node": "^5.3.5",
     "@astrojs/react": "^2.3.2",
-    "@kiltprotocol/sdk-js": "^0.33.1",
+    "@kiltprotocol/sdk-js": "^0.34.0",
     "@polkadot/extension-dapp": "^0.46.5",
     "astro": "^2.10.12",
     "got": "^12.6.1",
@@ -49,8 +49,6 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
-    "buffer": "^6.0.3",
-    "cbor-web": "^9.0.1",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.0",

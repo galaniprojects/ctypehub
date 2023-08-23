@@ -9,12 +9,4 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
-  vite: {
-    resolve: {
-      alias: {
-        buffer: 'buffer/',
-        cbor: 'cbor-web',
-      },
-    },
-  },
 });
