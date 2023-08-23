@@ -11,7 +11,7 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search2 _primary">Search</button>
+          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
         </div>
       </form>
 
@@ -78,7 +78,7 @@ exports[`index.astro > should render search results 1`] = `
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search2 _primary">Search</button>
+          <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
         </div>
       </form>
 
@@ -128,7 +128,7 @@ exports[`index.astro > should render tag results 1`] = `
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="example" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search2 _primary">Search</button>
+          <input type="search" name="query" value="example" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
         </div>
       </form>
 
@@ -204,7 +204,7 @@ exports[`index.astro > should render the tag page 1`] = `
       <form action="/tag/example" method="get" class="_container">
         <h1>#example</h1>
         <div>
-          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search2 _primary">Search</button>
+          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
         </div>
       </form>
 
@@ -255,7 +255,7 @@ exports[`index.astro > should render when no search results 1`] = `
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search2 _primary">Search</button>
+          <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
         </div>
       </form>
 

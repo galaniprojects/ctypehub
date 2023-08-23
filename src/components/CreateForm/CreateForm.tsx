@@ -265,13 +265,7 @@ export function CreateForm() {
 
         {extensions.length === 0 && <p>No wallets detected</p>}
         {extensions.map(({ key, name }) => (
-          <button
-            type="submit"
-            className={styles.submit}
-            value={key}
-            key={key}
-            disabled={!account}
-          >
+          <button type="submit" className={styles.submit} value={key} key={key}>
             Create Claim Type via {name}
           </button>
         ))}

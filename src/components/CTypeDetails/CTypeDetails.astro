@@ -79,7 +79,7 @@ const { subscan } = configuration;
 
   <fieldset>
     <legend>Creation date</legend>
-    <p>{createdAt.toLocaleString()}</p>
+    <time>{createdAt.toLocaleString()}</time>
   </fieldset>
 
   {
@@ -121,7 +121,7 @@ const { subscan } = configuration;
   }
 
   <fieldset>
-    <legend> Technical Details</legend>
+    <legend>Technical Details</legend>
     <div id="details">
       <pre>{JSON.stringify(kiltCType, null, 2)}</pre>
     </div>
@@ -160,7 +160,8 @@ const { subscan } = configuration;
   }
 
   p,
-  a {
+  a,
+  time {
     font-size: 0.875rem;
     display: block;
   }
@@ -175,6 +176,11 @@ const { subscan } = configuration;
     padding-block: 1rem;
     overflow-wrap: anywhere;
     text-decoration: none;
+  }
+
+  time {
+    color: var(--color-text-primary);
+    margin-block: 1rem;
   }
 
   #details {
@@ -219,7 +225,8 @@ const { subscan } = configuration;
 
     p,
     a,
-    legend {
+    legend,
+    time {
       font-size: 1rem;
     }
 

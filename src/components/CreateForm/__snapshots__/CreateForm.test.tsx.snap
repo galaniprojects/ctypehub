@@ -231,7 +231,6 @@ exports[`CreateForm > should render > adding property 1`] = `
       </p>
       <button
         class="_submit_eddc76"
-        disabled=""
         type="submit"
         value="sporran"
       >
@@ -507,7 +506,6 @@ exports[`CreateForm > should render > with tags 1`] = `
       </p>
       <button
         class="_submit_eddc76"
-        disabled=""
         type="submit"
         value="sporran"
       >
@@ -650,7 +648,6 @@ exports[`CreateForm > should render 1`] = `
       </p>
       <button
         class="_submit_eddc76"
-        disabled=""
         type="submit"
         value="sporran"
       >
