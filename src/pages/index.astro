@@ -4,7 +4,6 @@ import { fn, Op } from 'sequelize';
 import containerStyles from '../components/Container.module.css';
 
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header/Header.astro';
 
 import CTypeOverview from '../components/CTypeOverview/CTypeOverview.astro';
 import PageNav from '../components/PageNav/PageNav.astro';
@@ -33,18 +32,18 @@ const where = {
   }),
 };
 
+const include = 'tags';
+
 const {
   data: cTypeResults,
   currentPage,
   url: { prev, next },
-} = await paginate(Astro.url, where);
+} = await paginate(Astro.url, where, include);
 ---
 
 <Layout>
-  <Header />
-
-  <search class={containerStyles.search}>
-    <SearchForm action="/" query={query} />
+  <search>
+    <SearchForm action={paths.home} query={query} heading="CType Hub" />
 
     {
       tagResults.length > 0 && (
@@ -54,7 +53,12 @@ const {
           <ul class="tagResults">
             {tagResults.map(({ dataValues: { tagName } }) => (
               <li>
-                <a href={generatePath(paths.tag, tagName)}>#{tagName}</a>
+                <a
+                  class={containerStyles.container}
+                  href={generatePath(paths.tag, tagName)}
+                >
+                  #{tagName}
+                </a>
               </li>
             ))}
           </ul>
@@ -71,7 +75,7 @@ const {
       cTypeResults.length > 0 && (
         <Fragment>
           {query && <p>CType results for “{query}”:</p>}
-          <ul class="cTypeResults">
+          <ul>
             {cTypeResults.map(({ dataValues }) => (
               <CTypeOverview cTypeData={dataValues} />
             ))}
@@ -87,10 +91,11 @@ const {
 <style>
   p {
     color: var(--color-text-primary);
+    text-align: center;
   }
 
   ul {
-    width: 100%;
+    inline-size: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -98,20 +103,34 @@ const {
 
   .tagResults {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     flex-wrap: wrap;
     justify-content: center;
     margin-block-end: 1rem;
   }
 
-  .cTypeResults {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   a {
+    display: inline-block;
+    padding: 0.5rem;
+    overflow-wrap: anywhere;
     text-align: center;
     color: var(--color-link);
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  a:active {
+    background: var(--color-background-active);
+  }
+
+  @media screen and (width >= 1000px) {
+    a:active {
+      background: var(--color-background-secondary);
+    }
+
+    a:focus,
+    a:hover {
+      text-decoration: underline;
+    }
   }
 </style>

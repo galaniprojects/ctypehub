@@ -1,0 +1,106 @@
+---
+import kiltLogo from './built_on_kilt.svg';
+import galaniLogo from './galaniprojects.svg';
+---
+
+<footer>
+  <nav>
+    <!-- TODO: links to legal docs -->
+  </nav>
+  <p>
+    Made with ♥︎ by <img
+      class="galaniLogo"
+      src={galaniLogo}
+      alt="galaniprojects logo"
+    /> © 2023
+  </p>
+  <img class="kiltLogo" src={kiltLogo} alt="built on KILT logo" />
+</footer>
+
+<style>
+  footer {
+    border: 1px solid rgba(var(--color-white-rgb) / 10%);
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius);
+    margin: 0.75rem var(--responsive-margin-inline) 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 1.5rem 1.25rem;
+    font-size: 0.75rem;
+    align-items: end;
+  }
+
+  nav {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  p {
+    grid-column: 1 / span 2;
+    color: white;
+    margin: 0;
+    text-align: center;
+    padding-block-end: 0.75rem;
+    border-block-end: 1px solid var(--color-background-primary);
+  }
+
+  .galaniLogo {
+    vertical-align: bottom;
+    margin-inline: 0.25rem;
+    inline-size: calc(115rem / 16);
+  }
+
+  .kiltLogo {
+    grid-column: 2;
+    grid-row: 2;
+    inline-size: calc(98rem / 16);
+    justify-self: end;
+    margin: 0;
+    padding-block-start: 0.75rem;
+  }
+
+  @media screen and (width >= 600px) {
+    footer {
+      font-size: 1rem;
+    }
+
+    .galaniLogo {
+      inline-size: auto;
+    }
+
+    .kiltLogo {
+      inline-size: auto;
+    }
+  }
+
+  @media screen and (width >= 1000px) {
+    footer {
+      margin: 0.75rem 0 0;
+      padding-inline: var(--responsive-margin-inline);
+      border-block-end: none;
+      border-inline-start: none;
+      border-inline-end: none;
+      border-radius: 0;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    p {
+      grid-column: 1;
+      grid-row: 1;
+      border: none;
+      padding: 0;
+      text-align: start;
+    }
+
+    nav {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+    }
+
+    .kiltLogo {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+</style>

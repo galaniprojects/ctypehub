@@ -52,144 +52,198 @@ const { subscan } = configuration;
 <section class={containerStyles.container}>
   <h1 class="title">{title}</h1>
 
-  <dl>
+  <fieldset>
+    <legend>Creator</legend>
     {
-      description && (
-        <Fragment>
-          <dt class={propertyStyles.term}>Description:</dt>
-          <dd class={propertyStyles.definition}>{description}</dd>
-        </Fragment>
+      web3Name ? (
+        <a href={`https://w3n.id/${web3Name}`}>w3n:{web3Name}</a>
+      ) : (
+        <p>{creator}</p>
       )
     }
+  </fieldset>
 
-    <dt class={propertyStyles.term}>Creator:</dt>
-    <dd class={propertyStyles.definition}>
-      {
-        web3Name ? (
-          <a class={propertyStyles.anchor} href={`https://w3n.id/${web3Name}`}>
-            w3n:{web3Name}
-          </a>
-        ) : (
-          creator
-        )
-      }
-    </dd>
+  <fieldset>
+    <legend>Number of attestations</legend>
+    <p>{attestationsCount}</p>
+  </fieldset>
 
-    <dt class={propertyStyles.term}>Number of Attestations:</dt>
-    <dd class={propertyStyles.definition}>{attestationsCount}</dd>
+  {
+    description && (
+      <fieldset>
+        <legend>Description:</legend>
+        <p>{description}</p>
+      </fieldset>
+    )
+  }
 
-    {
-      Object.entries(properties).map(([name, value], index) => (
-        <Fragment>
-          <dt
-            class={propertyStyles.term}
-            id={`/properties/${name}`}
-          >{`Property ${index + 1}:`}</dt>
-          <dd class={propertyStyles.definition}>
-            {name}
-            <dl class="indent">
-              <Property value={value} />
-            </dl>
-          </dd>
-        </Fragment>
-      ))
-    }
+  <fieldset>
+    <legend>Creation date</legend>
+    <p>{createdAt.toLocaleString()}</p>
+  </fieldset>
 
-    <dt class={propertyStyles.term}>Creation date:</dt>
-    <dd class={propertyStyles.definition}>
-      {createdAt.toLocaleString()}
-    </dd>
+  {
+    Object.entries(properties).map(([name, value], index) => (
+      <fieldset>
+        <legend>{`Property ${index + 1}`}</legend>
+        <dl>
+          <dt class={propertyStyles.term}>Name:</dt>
+          <dd class={propertyStyles.definition}>{name}</dd>
+          <Property value={value} />
+        </dl>
+      </fieldset>
+    ))
+  }
 
-    {
-      tagNames && tagNames.length > 0 && (
-        <Fragment>
-          <dt class={propertyStyles.term}>Tags</dt>
-          <dd class={propertyStyles.definition}>
-            <ul>
-              {tagNames.map((tagName) => (
-                <li>
-                  <a
-                    href={generatePath(paths.tag, tagName)}
-                    class={propertyStyles.anchor}
-                  >
-                    #{tagName}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </dd>
-        </Fragment>
-      )
-    }
+  <fieldset>
+    <legend>Extrinsic</legend>
 
-    <dt class={propertyStyles.term}>Extrinsic:</dt>
-    <dd class={propertyStyles.definition}>
-      <a
-        class={propertyStyles.anchor}
-        href={`https://${subscan.network}.subscan.io/extrinsic/${extrinsicHash}`}
-      >
-        {extrinsicHash}
-      </a>
-    </dd>
+    <a
+      href={`https://${subscan.network}.subscan.io/extrinsic/${extrinsicHash}`}
+    >
+      {extrinsicHash}
+    </a>
+  </fieldset>
 
-    <dt class={propertyStyles.term}>
-      <a class="showDetails" href="#details">Technical Details:</a>
-    </dt>
+  {
+    tagNames && tagNames.length > 0 && (
+      <fieldset>
+        <legend>Tags</legend>
+        <ul>
+          {tagNames.map((tagName) => (
+            <li>
+              <a href={generatePath(paths.tag, tagName)}>#{tagName}</a>
+            </li>
+          ))}
+        </ul>
+      </fieldset>
+    )
+  }
 
-    <dd class={propertyStyles.definition} id="details">
+  <fieldset>
+    <legend> Technical Details</legend>
+    <div id="details">
       <pre>{JSON.stringify(kiltCType, null, 2)}</pre>
-    </dd>
-  </dl>
+    </div>
+  </fieldset>
 </section>
 
 <style>
+  section {
+    padding: 1.25rem;
+  }
+
   pre {
     margin: 0;
   }
 
+  fieldset {
+    border: 2px solid var(--color-background-primary);
+    border-radius: var(--border-radius);
+    margin-block-start: 1rem;
+    margin-inline: 0;
+    padding: 0 0.75rem;
+    min-inline-size: 0;
+  }
+
+  legend {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    padding-inline: 0.5rem;
+  }
+
   h1 {
     font-size: 1.375rem;
-    margin: 0;
+    margin: 0 0 1.25rem;
+    color: var(--color-text-secondary);
+    overflow-wrap: anywhere;
+  }
+
+  p,
+  a {
+    font-size: 0.875rem;
+    display: block;
+  }
+
+  p {
     color: var(--color-text-primary);
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
-  .indent {
-    margin-block-start: 0.5rem;
-    margin-inline-start: 1.25rem;
-  }
-
-  .showDetails {
-    background: url('chevron-down.svg') no-repeat right;
-    font-family: inherit;
-    color: inherit;
+  a {
+    color: var(--color-link);
+    padding-block: 1rem;
+    overflow-wrap: anywhere;
     text-decoration: none;
-    padding-inline-end: 1.5rem;
   }
 
   #details {
-    display: none;
-  }
-
-  #details:target {
-    display: block;
     color: #b0d5fb;
     background: rgba(var(--color-black-rgb) / 60%);
     border: 1px solid rgba(147 222 141 / 30%);
     overflow: auto;
     font-size: 0.75rem;
     padding: 0.75rem;
-    margin-block-start: 0.5rem;
+    margin-block: 0.5rem;
+    border-radius: var(--border-radius);
   }
 
   ul {
     list-style: none;
-    margin: 0;
-    padding: 0;
+    margin: 0.75rem 0;
+    padding-inline: 0;
   }
 
   li {
-    display: inline;
+    display: inline-block;
     margin-inline-end: 0.25rem;
+  }
+
+  li a {
+    display: inline-block;
+    padding-block: 0.25rem;
+  }
+
+  a:active {
+    background: var(--color-background-active);
+  }
+
+  @media screen and (width >= 600px) {
+    section {
+      padding: 1.75rem;
+    }
+
+    h1 {
+      margin: 0 0 1.75rem;
+    }
+
+    p,
+    a,
+    legend {
+      font-size: 1rem;
+    }
+
+    fieldset > *:not(legend) {
+      padding-inline-start: 2rem;
+    }
+
+    #details {
+      padding-inline-start: 2rem;
+    }
+  }
+
+  @media screen and (width >= 1000px) {
+    section {
+      padding: 2.5rem;
+    }
+
+    a:active {
+      background: revert;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
   }
 </style>

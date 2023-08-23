@@ -2,7 +2,24 @@
 
 exports[`CTypeDetails > should handle hidden CType 1`] = `
 <body>
-  <h1>Page not found</h1>
+  <header>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
+    <a href="/create" class="_primary"> Create Claim Type </a>
+  </header>
+  <main>
+    <h1>Page not found</h1>
+  </main>
+  <footer>
+    <nav>
+      <!-- TODO: links to legal docs -->
+    </nav>
+    <p>
+      Made with ♥︎ by
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
+      © 2023
+    </p>
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+  </footer>
 </body>
 `;
 
@@ -10,111 +27,116 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 <section class="_container">
   <h1 class="title">Everything everywhere</h1>
 
-  <dl>
-    <dt class="_term">Description:</dt>
-    <dd class="_definition3">…all the time</dd>
+  <fieldset>
+    <legend>Creator</legend>
+    <p>did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E</p>
+  </fieldset>
 
-    <dt class="_term">Creator:</dt>
-    <dd class="_definition3">
-      did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E
-    </dd>
+  <fieldset>
+    <legend>Number of attestations</legend>
+    <p>4444</p>
+  </fieldset>
 
-    <dt class="_term">Number of Attestations:</dt>
-    <dd class="_definition3">4444</dd>
+  <fieldset>
+    <legend>Description:</legend>
+    <p>…all the time</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/Array">Property 1:</dt>
-    <dd class="_definition3">
-      Array
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">array</dd>
-        <dt class="_term">Type of items:</dt>
-        <dd class="_definition3">string</dd>
-        <dt class="_term">Format:</dt>
-        <dd class="_definition3">date</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Creation date</legend>
+    <p>5/1/2023, 12:03:00 PM</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/Boolean">Property 2:</dt>
-    <dd class="_definition3">
-      Boolean
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">boolean</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Property 1</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">Array</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">array</dd>
+      <dt class="_term2">Type of items:</dt>
+      <dd class="_definition0">string</dd>
+      <dt class="_term2">Format:</dt>
+      <dd class="_definition0">date</dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 2</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">Boolean</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">boolean</dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 3</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">Integer</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">integer</dd>
+      <dt class="_term2">Allowed values:</dt>
+      <dd class="_definition0">
+        <ul>
+          <li>1</li>
+          <li>10000</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
+        </ul>
+      </dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 4</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">Number</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">number</dd>
+      <dt class="_term2">Minimum value:</dt>
+      <dd class="_definition0">12.34</dd>
+      <dt class="_term2">Maximum value:</dt>
+      <dd class="_definition0">56.78</dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 5</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">Reference</dd>
+      <dt class="_term2">Referenced Claim Type:</dt>
+      <dd class="_definition0">
+        <a class="_anchor" href="/ctype/kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789">kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789</a>
+      </dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 6</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">String</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">string</dd>
+      <dt class="_term2">Minimum length:</dt>
+      <dd class="_definition0">1</dd>
+      <dt class="_term2">Maximum length:</dt>
+      <dd class="_definition0">100</dd>
+    </dl>
+  </fieldset>
 
-    <dt class="_term" id="/properties/Integer">Property 3:</dt>
-    <dd class="_definition3">
-      Integer
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">integer</dd>
-        <dt class="_term">Allowed values:</dt>
-        <dd class="_definition3">
-          <ul>
-            <li>1</li>
-            <li>10000</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-          </ul>
-        </dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Extrinsic</legend>
 
-    <dt class="_term" id="/properties/Number">Property 4:</dt>
-    <dd class="_definition3">
-      Number
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">number</dd>
-        <dt class="_term">Minimum value:</dt>
-        <dd class="_definition3">12.34</dd>
-        <dt class="_term">Maximum value:</dt>
-        <dd class="_definition3">56.78</dd>
-      </dl>
-    </dd>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
+      0xexamplehash
+    </a>
+  </fieldset>
 
-    <dt class="_term" id="/properties/Reference">Property 5:</dt>
-    <dd class="_definition3">
-      Reference
-      <dl class="indent">
-        <dt class="_term">Referenced Claim Type:</dt>
-        <dd class="_definition3">
-          <a class="_anchor" href="/ctype/kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789">kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789</a>
-        </dd>
-      </dl>
-    </dd>
-
-    <dt class="_term" id="/properties/String">Property 6:</dt>
-    <dd class="_definition3">
-      String
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">string</dd>
-        <dt class="_term">Minimum length:</dt>
-        <dd class="_definition3">1</dd>
-        <dt class="_term">Maximum length:</dt>
-        <dd class="_definition3">100</dd>
-      </dl>
-    </dd>
-
-    <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:03:00 PM</dd>
-
-    <dt class="_term">Extrinsic:</dt>
-    <dd class="_definition3">
-      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
-        0xexamplehash
-      </a>
-    </dd>
-
-    <dt class="_term">
-      <a class="showDetails" href="#details">Technical Details:</a>
-    </dt>
-
-    <dd class="_definition3" id="details">
+  <fieldset>
+    <legend>Technical Details</legend>
+    <div id="details">
       <pre>
 {
   &quot;$id&quot;: &quot;kilt:ctype:0x060fe62fbe19e99f3440d829dec705f92d35b833d8c8927d8d94462737af2d90&quot;,
@@ -158,8 +180,8 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   &quot;title&quot;: &quot;Everything everywhere&quot;,
   &quot;type&quot;: &quot;object&quot;
 }</pre>
-    </dd>
-  </dl>
+    </div>
+  </fieldset>
 </section>
 `;
 
@@ -167,55 +189,58 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType</h1>
 
-  <dl>
-    <dt class="_term">Description:</dt>
-    <dd class="_definition3">
-      This is an example of a CType with a nested CType
-    </dd>
+  <fieldset>
+    <legend>Creator</legend>
+    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+  </fieldset>
 
-    <dt class="_term">Creator:</dt>
-    <dd class="_definition3">
-      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
-    </dd>
+  <fieldset>
+    <legend>Number of attestations</legend>
+    <p>333</p>
+  </fieldset>
 
-    <dt class="_term">Number of Attestations:</dt>
-    <dd class="_definition3">333</dd>
+  <fieldset>
+    <legend>Description:</legend>
+    <p>This is an example of a CType with a nested CType</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/example">Property 1:</dt>
-    <dd class="_definition3">
-      example
-      <dl class="indent">
-        <dt class="_term">Referenced Claim Type:</dt>
-        <dd class="_definition3">
-          <a class="_anchor" href="/ctype/kilt:ctype:0x1">kilt:ctype:0x1</a>
-        </dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Creation date</legend>
+    <p>5/1/2023, 12:02:00 PM</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/hasNestedCType">Property 2:</dt>
-    <dd class="_definition3">
-      hasNestedCType
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">boolean</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Property 1</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">example</dd>
+      <dt class="_term2">Referenced Claim Type:</dt>
+      <dd class="_definition0">
+        <a class="_anchor" href="/ctype/kilt:ctype:0x1">kilt:ctype:0x1</a>
+      </dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 2</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">hasNestedCType</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">boolean</dd>
+    </dl>
+  </fieldset>
 
-    <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:02:00 PM</dd>
+  <fieldset>
+    <legend>Extrinsic</legend>
 
-    <dt class="_term">Extrinsic:</dt>
-    <dd class="_definition3">
-      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
-        0xexamplehash
-      </a>
-    </dd>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
+      0xexamplehash
+    </a>
+  </fieldset>
 
-    <dt class="_term">
-      <a class="showDetails" href="#details">Technical Details:</a>
-    </dt>
-
-    <dd class="_definition3" id="details">
+  <fieldset>
+    <legend>Technical Details</legend>
+    <div id="details">
       <pre>
 {
   &quot;$id&quot;: &quot;kilt:ctype:0x1692376199a5a74445bec96882d2d0313042d445906e6faa21f30949150a3779&quot;,
@@ -231,8 +256,8 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
   &quot;title&quot;: &quot;Example nested CType&quot;,
   &quot;type&quot;: &quot;object&quot;
 }</pre>
-    </dd>
-  </dl>
+    </div>
+  </fieldset>
 </section>
 `;
 
@@ -240,55 +265,58 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType property</h1>
 
-  <dl>
-    <dt class="_term">Description:</dt>
-    <dd class="_definition3">
-      This is an example of a CType with a nested property
-    </dd>
+  <fieldset>
+    <legend>Creator</legend>
+    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+  </fieldset>
 
-    <dt class="_term">Creator:</dt>
-    <dd class="_definition3">
-      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
-    </dd>
+  <fieldset>
+    <legend>Number of attestations</legend>
+    <p>22</p>
+  </fieldset>
 
-    <dt class="_term">Number of Attestations:</dt>
-    <dd class="_definition3">22</dd>
+  <fieldset>
+    <legend>Description:</legend>
+    <p>This is an example of a CType with a nested property</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/example">Property 1:</dt>
-    <dd class="_definition3">
-      example
-      <dl class="indent">
-        <dt class="_term">Referenced Claim Type:</dt>
-        <dd class="_definition3">
-          <a class="_anchor" href="/ctype/kilt:ctype:0x1#/properties/example">kilt:ctype:0x1#/properties/example</a>
-        </dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Creation date</legend>
+    <p>5/1/2023, 12:01:00 PM</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/hasNestedProperty">Property 2:</dt>
-    <dd class="_definition3">
-      hasNestedProperty
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">boolean</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Property 1</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">example</dd>
+      <dt class="_term2">Referenced Claim Type:</dt>
+      <dd class="_definition0">
+        <a class="_anchor" href="/ctype/kilt:ctype:0x1#/properties/example">kilt:ctype:0x1#/properties/example</a>
+      </dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 2</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">hasNestedProperty</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">boolean</dd>
+    </dl>
+  </fieldset>
 
-    <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:01:00 PM</dd>
+  <fieldset>
+    <legend>Extrinsic</legend>
 
-    <dt class="_term">Extrinsic:</dt>
-    <dd class="_definition3">
-      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
-        0xexamplenestedhash
-      </a>
-    </dd>
+    <a href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
+      0xexamplenestedhash
+    </a>
+  </fieldset>
 
-    <dt class="_term">
-      <a class="showDetails" href="#details">Technical Details:</a>
-    </dt>
-
-    <dd class="_definition3" id="details">
+  <fieldset>
+    <legend>Technical Details</legend>
+    <div id="details">
       <pre>
 {
   &quot;$id&quot;: &quot;kilt:ctype:0x9775780b45911ece6e960dcc3eb630ea1579988d0b58c1ee2a19e2b14eeb9904&quot;,
@@ -304,8 +332,8 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   &quot;title&quot;: &quot;Example nested CType property&quot;,
   &quot;type&quot;: &quot;object&quot;
 }</pre>
-    </dd>
-  </dl>
+    </div>
+  </fieldset>
 </section>
 `;
 
@@ -313,60 +341,65 @@ exports[`CTypeDetails > should match snapshot 1`] = `
 <section class="_container">
   <h1 class="title">Example CType</h1>
 
-  <dl>
-    <dt class="_term">Description:</dt>
-    <dd class="_definition3">This is some example cType data</dd>
+  <fieldset>
+    <legend>Creator</legend>
+    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+  </fieldset>
 
-    <dt class="_term">Creator:</dt>
-    <dd class="_definition3">
-      did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY
-    </dd>
+  <fieldset>
+    <legend>Number of attestations</legend>
+    <p>1</p>
+  </fieldset>
 
-    <dt class="_term">Number of Attestations:</dt>
-    <dd class="_definition3">1</dd>
+  <fieldset>
+    <legend>Description:</legend>
+    <p>This is some example cType data</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/example">Property 1:</dt>
-    <dd class="_definition3">
-      example
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">string</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Creation date</legend>
+    <p>5/1/2023, 12:00:00 PM</p>
+  </fieldset>
 
-    <dt class="_term" id="/properties/isExample">Property 2:</dt>
-    <dd class="_definition3">
-      isExample
-      <dl class="indent">
-        <dt class="_term">Type:</dt>
-        <dd class="_definition3">boolean</dd>
-      </dl>
-    </dd>
+  <fieldset>
+    <legend>Property 1</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">example</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">string</dd>
+    </dl>
+  </fieldset>
+  <fieldset>
+    <legend>Property 2</legend>
+    <dl>
+      <dt class="_term2">Name:</dt>
+      <dd class="_definition0">isExample</dd>
+      <dt class="_term2">Type:</dt>
+      <dd class="_definition0">boolean</dd>
+    </dl>
+  </fieldset>
 
-    <dt class="_term">Creation date:</dt>
-    <dd class="_definition3">5/1/2023, 12:00:00 PM</dd>
+  <fieldset>
+    <legend>Extrinsic</legend>
 
-    <dt class="_term">Tags</dt>
-    <dd class="_definition3">
-      <ul>
-        <li>
-          <a href="/tag/example" class="_anchor"> #example </a>
-        </li>
-      </ul>
-    </dd>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
+      0xexamplehash
+    </a>
+  </fieldset>
 
-    <dt class="_term">Extrinsic:</dt>
-    <dd class="_definition3">
-      <a class="_anchor" href="https://example.subscan.io/extrinsic/0xexamplehash">
-        0xexamplehash
-      </a>
-    </dd>
+  <fieldset>
+    <legend>Tags</legend>
+    <ul>
+      <li>
+        <a href="/tag/example">#example</a>
+      </li>
+    </ul>
+  </fieldset>
 
-    <dt class="_term">
-      <a class="showDetails" href="#details">Technical Details:</a>
-    </dt>
-
-    <dd class="_definition3" id="details">
+  <fieldset>
+    <legend>Technical Details</legend>
+    <div id="details">
       <pre>
 {
   &quot;$id&quot;: &quot;kilt:ctype:0xf3b3e856755acaa7f274a15b99baf636a306a2a96e1c324a8cbb12b0bc1716af&quot;,
@@ -382,7 +415,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
   &quot;title&quot;: &quot;Example CType&quot;,
   &quot;type&quot;: &quot;object&quot;
 }</pre>
-    </dd>
-  </dl>
+    </div>
+  </fieldset>
 </section>
 `;

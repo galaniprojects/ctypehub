@@ -4,7 +4,6 @@ import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import styles from './Moderation.module.css';
 import buttonStyles from '../Button.module.css';
-import containerStyles from '../Container.module.css';
 
 import { generatePath, paths } from '../../paths';
 import { sessionHeader } from '../../utilities/sessionHeader';
@@ -191,7 +190,7 @@ export function Moderation() {
   }
 
   return (
-    <div className={containerStyles.container}>
+    <div className={styles.container}>
       <table className={styles.table}>
         <thead className={styles.tableHeader}>
           <tr className={styles.tableRow}>

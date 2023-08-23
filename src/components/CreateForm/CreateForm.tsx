@@ -169,123 +169,131 @@ export function CreateForm() {
   const extensions = useSupportedExtensions();
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <h3 className={styles.heading}>Create a Claim Type</h3>
+    <section className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h3 className={styles.heading}>Create a Claim Type</h3>
 
-      <p>
-        To create a Claim Type you need a{' '}
-        <a
-          className={styles.anchor}
-          href="https://kilt-protocol.org/get-did/index.html"
-        >
-          KILT DID
-        </a>{' '}
-        and the{' '}
-        <a className={styles.anchor} href="https://www.sporran.org/">
-          Sporran wallet
-        </a>{' '}
-        (or another wallet supporting the{' '}
-        <a
-          className={styles.anchor}
-          href="https://github.com/KILTprotocol/spec-ext-didsign-api"
-        >
-          DID Sign API Specification v1.1+
-        </a>
-        )
-      </p>
-
-      <p>
-        <label className={styles.label}>
-          Title:
-          <input className={styles.input} name="title" required />
-        </label>
-      </p>
-
-      <p>
-        <label className={styles.label}>
-          Description (optional):
-          <textarea className={styles.description} name="description" />
-        </label>
-      </p>
-
-      {offsets(propertiesCount).map((index) => (
-        <fieldset key={index} className={styles.fieldset}>
-          <legend>Property {index + 1}</legend>
-          <PropertyFields index={index} />
-        </fieldset>
-      ))}
-
-      <fieldset className={styles.fieldset}>
-        <legend>Property {propertiesCount + 1}</legend>
         <p>
-          <button
-            type="button"
-            onClick={handleAddPropertyClick}
-            className={styles.add}
+          To create a Claim Type you need a{' '}
+          <a
+            className={styles.anchor}
+            href="https://kilt-protocol.org/get-did/index.html"
           >
-            Add Property ➕️
-          </button>
+            KILT DID
+          </a>{' '}
+          and the{' '}
+          <a className={styles.anchor} href="https://www.sporran.org/">
+            Sporran wallet
+          </a>{' '}
+          (or another wallet supporting the{' '}
+          <a
+            className={styles.anchor}
+            href="https://github.com/KILTprotocol/spec-ext-didsign-api"
+          >
+            DID Sign API Specification v1.1+
+          </a>
+          )
         </p>
-      </fieldset>
 
-      <div className={styles.label}>
-        <label htmlFor="tagInput">Tags (Optional)</label>
-        <ul className={styles.tags}>
-          {tags.map((tag) => (
-            <li key={tag} className={styles.tag}>
-              {tag}
-              <button
-                type="button"
-                aria-label="remove tag"
-                className={styles.removeTag}
-                value={tag}
-                onClick={handleRemoveTag}
+        <p>
+          <label className={styles.label}>
+            Title:
+            <input className={styles.input} name="title" required />
+          </label>
+        </p>
+
+        <p>
+          <label className={styles.label}>
+            Description (optional):
+            <textarea className={styles.description} name="description" />
+          </label>
+        </p>
+
+        {offsets(propertiesCount).map((index) => (
+          <fieldset key={index} className={styles.fieldset}>
+            <legend>Property {index + 1}</legend>
+            <PropertyFields index={index} />
+          </fieldset>
+        ))}
+
+        <fieldset className={styles.fieldset}>
+          <legend>Property {propertiesCount + 1}</legend>
+          <p>
+            <button
+              type="button"
+              onClick={handleAddPropertyClick}
+              className={styles.add}
+            >
+              Add Property ➕️
+            </button>
+          </p>
+        </fieldset>
+
+        <div className={styles.label}>
+          <label htmlFor="tagInput">Tags (Optional):</label>
+          <ul className={styles.tags}>
+            {tags.map((tag) => (
+              <li key={tag} className={styles.tag}>
+                {tag}
+                <button
+                  type="button"
+                  aria-label="remove tag"
+                  className={styles.removeTag}
+                  value={tag}
+                  onClick={handleRemoveTag}
+                />
+              </li>
+            ))}
+
+            <li className={styles.tagInputContainer}>
+              <input
+                id="tagInput"
+                className={styles.tagInput}
+                onKeyUp={handleTagInputKeyUp}
+                onBlur={handleTagInputBlur}
+                maxLength={50}
+                aria-describedby="tagInputDescription"
               />
             </li>
-          ))}
-
-          <li className={styles.tagInputContainer}>
-            <input
-              id="tagInput"
-              className={styles.tagInput}
-              onKeyUp={handleTagInputKeyUp}
-              onBlur={handleTagInputBlur}
-              maxLength={50}
-              aria-describedby="tagInputDescription"
-            />
-          </li>
-        </ul>
-        <p id="tagInputDescription" className={styles.tagInputDescription}>
-          Enter a comma after each tag
-        </p>
-      </div>
-
-      <SelectAccount onSelect={setAccount} />
-
-      {extensions.length === 0 && <p>No wallets detected</p>}
-      {extensions.map(({ key, name }) => (
-        <button type="submit" className={styles.submit} value={key} key={key}>
-          Create Claim Type via {name}
-        </button>
-      ))}
-
-      {progress && (
-        <Modal>
-          <p className={styles.progress}>
-            <span className={styles.spinner} />
-            Storing the CType on the KILT blockchain
+          </ul>
+          <p id="tagInputDescription" className={styles.tagInputDescription}>
+            Enter a comma after each tag
           </p>
-        </Modal>
-      )}
+        </div>
 
-      {error && (
-        <Modal>
-          <output className={styles.output}>Error: Transaction Failed</output>
-          <button type="button" onClick={unsetError} className={styles.retry}>
-            Try again
+        <SelectAccount onSelect={setAccount} />
+
+        {extensions.length === 0 && <p>No wallets detected</p>}
+        {extensions.map(({ key, name }) => (
+          <button
+            type="submit"
+            className={styles.submit}
+            value={key}
+            key={key}
+            disabled={!account}
+          >
+            Create Claim Type via {name}
           </button>
-        </Modal>
-      )}
-    </form>
+        ))}
+
+        {progress && (
+          <Modal>
+            <p className={styles.progress}>
+              <span className={styles.spinner} />
+              Storing the CType on the KILT blockchain
+            </p>
+          </Modal>
+        )}
+
+        {error && (
+          <Modal>
+            <output className={styles.output}>Error: Transaction Failed</output>
+            <button type="button" onClick={unsetError} className={styles.retry}>
+              Try again
+            </button>
+          </Modal>
+        )}
+      </form>
+    </section>
   );
 }

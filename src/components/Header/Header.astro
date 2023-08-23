@@ -1,6 +1,10 @@
 ---
 import buttonStyles from '../Button.module.css';
 
+import { paths } from '../../paths';
+
+import logo from './logo.svg';
+
 interface Props {
   create?: true;
 }
@@ -9,15 +13,14 @@ const { create } = Astro.props;
 ---
 
 <header>
-  <span></span>
-  <h2><a href="/">CTypeHub</a></h2>
+  <a href={paths.home} class="logo"><img src={logo} alt="CTypeHub logo" /></a>
   {
     create ? (
-      <a href="/" class={buttonStyles.primary}>
-        Search Registry
+      <a href={paths.home} class={buttonStyles.primary}>
+        Search Claim Types
       </a>
     ) : (
-      <a href="/create" class={buttonStyles.primary}>
+      <a href={paths.create} class={buttonStyles.primary}>
         Create Claim Type
       </a>
     )
@@ -27,24 +30,25 @@ const { create } = Astro.props;
 <style>
   header {
     box-sizing: border-box;
-    width: 100%;
-    height: calc(74rem / 16);
+    padding-inline: var(--responsive-margin-inline);
+    padding-block: 1rem;
     border-block-end: 1px solid rgba(var(--color-white-rgb) / 10%);
+    margin-block-end: 0.75rem;
     background: var(--color-background-secondary);
     box-shadow: 0 5px 6px 0 rgba(var(--color-black-rgb) / 30%);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-inline: 0.5rem;
   }
 
-  h2 {
-    margin: 0;
-    font-size: 2rem;
-  }
+  @media screen and (width >= 600px) {
+    header {
+      margin-block-end: 1.5rem;
+    }
 
-  h2 a {
-    text-decoration: none;
-    color: var(--color-text-primary);
+    .logo {
+      padding-inline-end: calc(165rem / 16);
+      background: url('./textLogo.svg') no-repeat center right;
+    }
   }
 </style>

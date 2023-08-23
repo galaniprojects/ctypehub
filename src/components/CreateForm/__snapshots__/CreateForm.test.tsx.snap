@@ -2,647 +2,662 @@
 
 exports[`CreateForm > should render > adding property 1`] = `
 <div>
-  <form
+  <section
     class="_container_eddc76"
   >
-    <h3
-      class="_heading_eddc76"
+    <form
+      class="_form_eddc76"
     >
-      Create a Claim Type
-    </h3>
-    <p>
-      To create a Claim Type you need a
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://kilt-protocol.org/get-did/index.html"
+      <h3
+        class="_heading_eddc76"
       >
-        KILT DID
-      </a>
-       
-      and the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://www.sporran.org/"
-      >
-        Sporran wallet
-      </a>
-       
-      (or another wallet supporting the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://github.com/KILTprotocol/spec-ext-didsign-api"
-      >
-        DID Sign API Specification v1.1+
-      </a>
-      )
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Title:
-        <input
-          class="_input_eddc76"
-          name="title"
-          required=""
-        />
-      </label>
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Description (optional):
-        <textarea
-          class="_description_eddc76"
-          name="description"
-        />
-      </label>
-    </p>
-    <fieldset
-      class="_fieldset_eddc76"
-    >
-      <legend>
-        Property 
-        1
-      </legend>
+        Create a Claim Type
+      </h3>
+      <p>
+        To create a Claim Type you need a
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://kilt-protocol.org/get-did/index.html"
+        >
+          KILT DID
+        </a>
+         
+        and the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://www.sporran.org/"
+        >
+          Sporran wallet
+        </a>
+         
+        (or another wallet supporting the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://github.com/KILTprotocol/spec-ext-didsign-api"
+        >
+          DID Sign API Specification v1.1+
+        </a>
+        )
+      </p>
       <p>
         <label
-          class="_label_8bc908"
+          class="_label_eddc76"
         >
-          Name:
+          Title:
           <input
-            class="_input_8bc908"
-            name="property[0].name"
+            class="_input_eddc76"
+            name="title"
             required=""
           />
         </label>
       </p>
       <p>
         <label
-          class="_label_8bc908"
+          class="_label_eddc76"
         >
-          Type:
-          <select
-            class="_input_8bc908"
-            name="property[0].type"
-          >
-            <option
-              value="string"
-            >
-              string
-            </option>
-            <option
-              value="integer"
-            >
-              integer
-            </option>
-            <option
-              value="number"
-            >
-              number
-            </option>
-            <option
-              value="boolean"
-            >
-              boolean
-            </option>
-            <option
-              value="reference"
-            >
-              reference
-            </option>
-          </select>
+          Description (optional):
+          <textarea
+            class="_description_eddc76"
+            name="description"
+          />
         </label>
       </p>
       <fieldset
-        class="_fieldset_8bc908"
+        class="_fieldset_eddc76"
       >
         <legend>
-          Limitations (optional)
+          Property 
+          1
         </legend>
-        <p
-          class="_group_8bc908"
-        >
+        <p>
           <label
-            class="_array_8bc908"
+            class="_label_8bc908"
           >
+            Name:
             <input
-              name="property[0].limitations"
-              type="radio"
-              value="any"
+              class="_input_8bc908"
+              name="property[0].name"
+              required=""
             />
-            any matching value
           </label>
+        </p>
+        <p>
+          <label
+            class="_label_8bc908"
+          >
+            Type:
+            <select
+              class="_input_8bc908"
+              name="property[0].type"
+            >
+              <option
+                value="string"
+              >
+                string
+              </option>
+              <option
+                value="integer"
+              >
+                integer
+              </option>
+              <option
+                value="number"
+              >
+                number
+              </option>
+              <option
+                value="boolean"
+              >
+                boolean
+              </option>
+              <option
+                value="reference"
+              >
+                reference
+              </option>
+            </select>
+          </label>
+        </p>
+        <fieldset
+          class="_fieldset_8bc908"
+        >
+          <legend>
+            Limitations (optional)
+          </legend>
+          <p
+            class="_group_8bc908"
+          >
+            <label
+              class="_array_8bc908"
+            >
+              <input
+                name="property[0].limitations"
+                type="radio"
+                value="any"
+              />
+              any matching value
+            </label>
+            <label
+              class="_array_8bc908"
+            >
+              <input
+                name="property[0].limitations"
+                type="radio"
+                value="enum"
+              />
+              fixed set of values
+            </label>
+          </p>
+        </fieldset>
+        <p>
           <label
             class="_array_8bc908"
           >
             <input
-              name="property[0].limitations"
-              type="radio"
-              value="enum"
+              name="property[0].array"
+              type="checkbox"
+              value="array"
             />
-            fixed set of values
+            is an array of such values
           </label>
         </p>
       </fieldset>
-      <p>
+      <fieldset
+        class="_fieldset_eddc76"
+      >
+        <legend>
+          Property 
+          2
+        </legend>
+        <p>
+          <button
+            class="_add_eddc76"
+            type="button"
+          >
+            Add Property ➕️
+          </button>
+        </p>
+      </fieldset>
+      <div
+        class="_label_eddc76"
+      >
         <label
-          class="_array_8bc908"
+          for="tagInput"
         >
-          <input
-            name="property[0].array"
-            type="checkbox"
-            value="array"
-          />
-          is an array of such values
+          Tags (Optional):
         </label>
-      </p>
-    </fieldset>
-    <fieldset
-      class="_fieldset_eddc76"
-    >
-      <legend>
-        Property 
-        2
-      </legend>
-      <p>
+        <ul
+          class="_tags_eddc76"
+        >
+          <li
+            class="_tagInputContainer_eddc76"
+          >
+            <input
+              aria-describedby="tagInputDescription"
+              class="_tagInput_eddc76"
+              id="tagInput"
+              maxlength="50"
+            />
+          </li>
+        </ul>
+        <p
+          class="_tagInputDescription_eddc76"
+          id="tagInputDescription"
+        >
+          Enter a comma after each tag
+        </p>
+      </div>
+      <p
+        class="_label_1b3ac1"
+      >
         <button
-          class="_add_eddc76"
+          class="_load_1b3ac1"
           type="button"
         >
-          Add Property ➕️
+          Detect accounts
         </button>
-      </p>
-    </fieldset>
-    <div
-      class="_label_eddc76"
-    >
-      <label
-        for="tagInput"
-      >
-        Tags (Optional)
-      </label>
-      <ul
-        class="_tags_eddc76"
-      >
-        <li
-          class="_tagInputContainer_eddc76"
-        >
-          <input
-            aria-describedby="tagInputDescription"
-            class="_tagInput_eddc76"
-            id="tagInput"
-            maxlength="50"
+        and
+         
+        <label>
+          select payment KILT account:
+          <select
+            class="_select_1b3ac1"
+            required=""
           />
-        </li>
-      </ul>
-      <p
-        class="_tagInputDescription_eddc76"
-        id="tagInputDescription"
-      >
-        Enter a comma after each tag
+        </label>
       </p>
-    </div>
-    <p
-      class="_label_1b3ac1"
-    >
       <button
-        class="_load_1b3ac1"
-        type="button"
+        class="_submit_eddc76"
+        disabled=""
+        type="submit"
+        value="sporran"
       >
-        Detect accounts
+        Create Claim Type via 
+        Sporran
       </button>
-      and
-       
-      <label>
-        select payment KILT account:
-        <select
-          class="_select_1b3ac1"
-          required=""
-        />
-      </label>
-    </p>
-    <button
-      class="_submit_eddc76"
-      type="submit"
-      value="sporran"
-    >
-      Create Claim Type via 
-      Sporran
-    </button>
-  </form>
+    </form>
+  </section>
 </div>
 `;
 
 exports[`CreateForm > should render > with tags 1`] = `
 <div>
-  <form
+  <section
     class="_container_eddc76"
   >
-    <h3
-      class="_heading_eddc76"
+    <form
+      class="_form_eddc76"
     >
-      Create a Claim Type
-    </h3>
-    <p>
-      To create a Claim Type you need a
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://kilt-protocol.org/get-did/index.html"
+      <h3
+        class="_heading_eddc76"
       >
-        KILT DID
-      </a>
-       
-      and the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://www.sporran.org/"
-      >
-        Sporran wallet
-      </a>
-       
-      (or another wallet supporting the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://github.com/KILTprotocol/spec-ext-didsign-api"
-      >
-        DID Sign API Specification v1.1+
-      </a>
-      )
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Title:
-        <input
-          class="_input_eddc76"
-          name="title"
-          required=""
-        />
-      </label>
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Description (optional):
-        <textarea
-          class="_description_eddc76"
-          name="description"
-        />
-      </label>
-    </p>
-    <fieldset
-      class="_fieldset_eddc76"
-    >
-      <legend>
-        Property 
-        1
-      </legend>
+        Create a Claim Type
+      </h3>
+      <p>
+        To create a Claim Type you need a
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://kilt-protocol.org/get-did/index.html"
+        >
+          KILT DID
+        </a>
+         
+        and the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://www.sporran.org/"
+        >
+          Sporran wallet
+        </a>
+         
+        (or another wallet supporting the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://github.com/KILTprotocol/spec-ext-didsign-api"
+        >
+          DID Sign API Specification v1.1+
+        </a>
+        )
+      </p>
       <p>
         <label
-          class="_label_8bc908"
+          class="_label_eddc76"
         >
-          Name:
+          Title:
           <input
-            class="_input_8bc908"
-            name="property[0].name"
+            class="_input_eddc76"
+            name="title"
             required=""
           />
         </label>
       </p>
       <p>
         <label
-          class="_label_8bc908"
+          class="_label_eddc76"
         >
-          Type:
-          <select
-            class="_input_8bc908"
-            name="property[0].type"
-          >
-            <option
-              value="string"
-            >
-              string
-            </option>
-            <option
-              value="integer"
-            >
-              integer
-            </option>
-            <option
-              value="number"
-            >
-              number
-            </option>
-            <option
-              value="boolean"
-            >
-              boolean
-            </option>
-            <option
-              value="reference"
-            >
-              reference
-            </option>
-          </select>
+          Description (optional):
+          <textarea
+            class="_description_eddc76"
+            name="description"
+          />
         </label>
       </p>
       <fieldset
-        class="_fieldset_8bc908"
+        class="_fieldset_eddc76"
       >
         <legend>
-          Limitations (optional)
+          Property 
+          1
         </legend>
-        <p
-          class="_group_8bc908"
-        >
+        <p>
           <label
-            class="_array_8bc908"
+            class="_label_8bc908"
           >
+            Name:
             <input
-              name="property[0].limitations"
-              type="radio"
-              value="any"
+              class="_input_8bc908"
+              name="property[0].name"
+              required=""
             />
-            any matching value
           </label>
+        </p>
+        <p>
+          <label
+            class="_label_8bc908"
+          >
+            Type:
+            <select
+              class="_input_8bc908"
+              name="property[0].type"
+            >
+              <option
+                value="string"
+              >
+                string
+              </option>
+              <option
+                value="integer"
+              >
+                integer
+              </option>
+              <option
+                value="number"
+              >
+                number
+              </option>
+              <option
+                value="boolean"
+              >
+                boolean
+              </option>
+              <option
+                value="reference"
+              >
+                reference
+              </option>
+            </select>
+          </label>
+        </p>
+        <fieldset
+          class="_fieldset_8bc908"
+        >
+          <legend>
+            Limitations (optional)
+          </legend>
+          <p
+            class="_group_8bc908"
+          >
+            <label
+              class="_array_8bc908"
+            >
+              <input
+                name="property[0].limitations"
+                type="radio"
+                value="any"
+              />
+              any matching value
+            </label>
+            <label
+              class="_array_8bc908"
+            >
+              <input
+                name="property[0].limitations"
+                type="radio"
+                value="enum"
+              />
+              fixed set of values
+            </label>
+          </p>
+        </fieldset>
+        <p>
           <label
             class="_array_8bc908"
           >
             <input
-              name="property[0].limitations"
-              type="radio"
-              value="enum"
+              name="property[0].array"
+              type="checkbox"
+              value="array"
             />
-            fixed set of values
+            is an array of such values
           </label>
         </p>
       </fieldset>
-      <p>
+      <fieldset
+        class="_fieldset_eddc76"
+      >
+        <legend>
+          Property 
+          2
+        </legend>
+        <p>
+          <button
+            class="_add_eddc76"
+            type="button"
+          >
+            Add Property ➕️
+          </button>
+        </p>
+      </fieldset>
+      <div
+        class="_label_eddc76"
+      >
         <label
-          class="_array_8bc908"
+          for="tagInput"
         >
-          <input
-            name="property[0].array"
-            type="checkbox"
-            value="array"
-          />
-          is an array of such values
+          Tags (Optional):
         </label>
-      </p>
-    </fieldset>
-    <fieldset
-      class="_fieldset_eddc76"
-    >
-      <legend>
-        Property 
-        2
-      </legend>
-      <p>
+        <ul
+          class="_tags_eddc76"
+        >
+          <li
+            class="_tag_eddc76"
+          >
+            tag1  
+            <button
+              aria-label="remove tag"
+              class="_removeTag_eddc76"
+              type="button"
+              value="tag1  "
+            />
+          </li>
+          <li
+            class="_tag_eddc76"
+          >
+            tag2
+            <button
+              aria-label="remove tag"
+              class="_removeTag_eddc76"
+              type="button"
+              value="tag2"
+            />
+          </li>
+          <li
+            class="_tag_eddc76"
+          >
+            tag3
+            <button
+              aria-label="remove tag"
+              class="_removeTag_eddc76"
+              type="button"
+              value="tag3"
+            />
+          </li>
+          <li
+            class="_tagInputContainer_eddc76"
+          >
+            <input
+              aria-describedby="tagInputDescription"
+              class="_tagInput_eddc76"
+              id="tagInput"
+              maxlength="50"
+            />
+          </li>
+        </ul>
+        <p
+          class="_tagInputDescription_eddc76"
+          id="tagInputDescription"
+        >
+          Enter a comma after each tag
+        </p>
+      </div>
+      <p
+        class="_label_1b3ac1"
+      >
         <button
-          class="_add_eddc76"
+          class="_load_1b3ac1"
           type="button"
         >
-          Add Property ➕️
+          Detect accounts
         </button>
+        and
+         
+        <label>
+          select payment KILT account:
+          <select
+            class="_select_1b3ac1"
+            required=""
+          />
+        </label>
       </p>
-    </fieldset>
-    <div
-      class="_label_eddc76"
-    >
-      <label
-        for="tagInput"
-      >
-        Tags (Optional)
-      </label>
-      <ul
-        class="_tags_eddc76"
-      >
-        <li
-          class="_tag_eddc76"
-        >
-          tag1  
-          <button
-            aria-label="remove tag"
-            class="_removeTag_eddc76"
-            type="button"
-            value="tag1  "
-          />
-        </li>
-        <li
-          class="_tag_eddc76"
-        >
-          tag2
-          <button
-            aria-label="remove tag"
-            class="_removeTag_eddc76"
-            type="button"
-            value="tag2"
-          />
-        </li>
-        <li
-          class="_tag_eddc76"
-        >
-          tag3
-          <button
-            aria-label="remove tag"
-            class="_removeTag_eddc76"
-            type="button"
-            value="tag3"
-          />
-        </li>
-        <li
-          class="_tagInputContainer_eddc76"
-        >
-          <input
-            aria-describedby="tagInputDescription"
-            class="_tagInput_eddc76"
-            id="tagInput"
-            maxlength="50"
-          />
-        </li>
-      </ul>
-      <p
-        class="_tagInputDescription_eddc76"
-        id="tagInputDescription"
-      >
-        Enter a comma after each tag
-      </p>
-    </div>
-    <p
-      class="_label_1b3ac1"
-    >
       <button
-        class="_load_1b3ac1"
-        type="button"
+        class="_submit_eddc76"
+        disabled=""
+        type="submit"
+        value="sporran"
       >
-        Detect accounts
+        Create Claim Type via 
+        Sporran
       </button>
-      and
-       
-      <label>
-        select payment KILT account:
-        <select
-          class="_select_1b3ac1"
-          required=""
-        />
-      </label>
-    </p>
-    <button
-      class="_submit_eddc76"
-      type="submit"
-      value="sporran"
-    >
-      Create Claim Type via 
-      Sporran
-    </button>
-  </form>
+    </form>
+  </section>
 </div>
 `;
 
 exports[`CreateForm > should render 1`] = `
 <div>
-  <form
+  <section
     class="_container_eddc76"
   >
-    <h3
-      class="_heading_eddc76"
+    <form
+      class="_form_eddc76"
     >
-      Create a Claim Type
-    </h3>
-    <p>
-      To create a Claim Type you need a
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://kilt-protocol.org/get-did/index.html"
+      <h3
+        class="_heading_eddc76"
       >
-        KILT DID
-      </a>
-       
-      and the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://www.sporran.org/"
-      >
-        Sporran wallet
-      </a>
-       
-      (or another wallet supporting the
-       
-      <a
-        class="_anchor_eddc76"
-        href="https://github.com/KILTprotocol/spec-ext-didsign-api"
-      >
-        DID Sign API Specification v1.1+
-      </a>
-      )
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Title:
-        <input
-          class="_input_eddc76"
-          name="title"
-          required=""
-        />
-      </label>
-    </p>
-    <p>
-      <label
-        class="_label_eddc76"
-      >
-        Description (optional):
-        <textarea
-          class="_description_eddc76"
-          name="description"
-        />
-      </label>
-    </p>
-    <fieldset
-      class="_fieldset_eddc76"
-    >
-      <legend>
-        Property 
-        1
-      </legend>
+        Create a Claim Type
+      </h3>
       <p>
+        To create a Claim Type you need a
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://kilt-protocol.org/get-did/index.html"
+        >
+          KILT DID
+        </a>
+         
+        and the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://www.sporran.org/"
+        >
+          Sporran wallet
+        </a>
+         
+        (or another wallet supporting the
+         
+        <a
+          class="_anchor_eddc76"
+          href="https://github.com/KILTprotocol/spec-ext-didsign-api"
+        >
+          DID Sign API Specification v1.1+
+        </a>
+        )
+      </p>
+      <p>
+        <label
+          class="_label_eddc76"
+        >
+          Title:
+          <input
+            class="_input_eddc76"
+            name="title"
+            required=""
+          />
+        </label>
+      </p>
+      <p>
+        <label
+          class="_label_eddc76"
+        >
+          Description (optional):
+          <textarea
+            class="_description_eddc76"
+            name="description"
+          />
+        </label>
+      </p>
+      <fieldset
+        class="_fieldset_eddc76"
+      >
+        <legend>
+          Property 
+          1
+        </legend>
+        <p>
+          <button
+            class="_add_eddc76"
+            type="button"
+          >
+            Add Property ➕️
+          </button>
+        </p>
+      </fieldset>
+      <div
+        class="_label_eddc76"
+      >
+        <label
+          for="tagInput"
+        >
+          Tags (Optional):
+        </label>
+        <ul
+          class="_tags_eddc76"
+        >
+          <li
+            class="_tagInputContainer_eddc76"
+          >
+            <input
+              aria-describedby="tagInputDescription"
+              class="_tagInput_eddc76"
+              id="tagInput"
+              maxlength="50"
+            />
+          </li>
+        </ul>
+        <p
+          class="_tagInputDescription_eddc76"
+          id="tagInputDescription"
+        >
+          Enter a comma after each tag
+        </p>
+      </div>
+      <p
+        class="_label_1b3ac1"
+      >
         <button
-          class="_add_eddc76"
+          class="_load_1b3ac1"
           type="button"
         >
-          Add Property ➕️
+          Detect accounts
         </button>
-      </p>
-    </fieldset>
-    <div
-      class="_label_eddc76"
-    >
-      <label
-        for="tagInput"
-      >
-        Tags (Optional)
-      </label>
-      <ul
-        class="_tags_eddc76"
-      >
-        <li
-          class="_tagInputContainer_eddc76"
-        >
-          <input
-            aria-describedby="tagInputDescription"
-            class="_tagInput_eddc76"
-            id="tagInput"
-            maxlength="50"
+        and
+         
+        <label>
+          select payment KILT account:
+          <select
+            class="_select_1b3ac1"
+            required=""
           />
-        </li>
-      </ul>
-      <p
-        class="_tagInputDescription_eddc76"
-        id="tagInputDescription"
-      >
-        Enter a comma after each tag
+        </label>
       </p>
-    </div>
-    <p
-      class="_label_1b3ac1"
-    >
       <button
-        class="_load_1b3ac1"
-        type="button"
+        class="_submit_eddc76"
+        disabled=""
+        type="submit"
+        value="sporran"
       >
-        Detect accounts
+        Create Claim Type via 
+        Sporran
       </button>
-      and
-       
-      <label>
-        select payment KILT account:
-        <select
-          class="_select_1b3ac1"
-          required=""
-        />
-      </label>
-    </p>
-    <button
-      class="_submit_eddc76"
-      type="submit"
-      value="sporran"
-    >
-      Create Claim Type via 
-      Sporran
-    </button>
-  </form>
+    </form>
+  </section>
 </div>
 `;

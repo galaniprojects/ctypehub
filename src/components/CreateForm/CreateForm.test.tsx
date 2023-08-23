@@ -23,7 +23,7 @@ describe('CreateForm', () => {
     expect(container).toMatchSnapshot('adding property');
 
     await userEvent.type(
-      getByLabelText('Tags (Optional)'),
+      getByLabelText('Tags (Optional):'),
       'tag1  ,tag2, x, tag3,',
     );
     expect(container).toMatchSnapshot('with tags');

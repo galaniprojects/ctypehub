@@ -6,17 +6,74 @@ import buttonStyles from '../Button.module.css';
 interface Props {
   action: string;
   query: string | null;
+  heading: string;
 }
-const { action, query } = Astro.props;
+const { action, query, heading } = Astro.props;
 ---
 
 <form action={action} method="get" class={containerStyles.container}>
-  <input
-    type="search"
-    name="query"
-    value={query}
-    placeholder="Search query"
-    aria-label="Search query"
-    class={inputStyles.search}
-  /><button type="submit" class={buttonStyles.search}>Search</button>
+  <h1>{heading}</h1>
+  <div>
+    <input
+      type="search"
+      name="query"
+      value={query}
+      placeholder="Search query"
+      aria-label="Search query"
+      class={inputStyles.search}
+    /><button type="submit" class={buttonStyles.search}>Search</button>
+  </div>
 </form>
+
+<style>
+  form {
+    padding: 1.25rem;
+  }
+
+  h1 {
+    font-size: 1.375rem;
+    color: var(--color-text-secondary);
+    margin-block-start: 0;
+  }
+
+  div {
+    inline-size: 100%;
+    display: flex;
+  }
+
+  input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @media screen and (width >= 600px) {
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: calc(120rem / 16);
+      padding-inline: 2.5rem;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    div {
+      flex: 1;
+    }
+  }
+
+  @media screen and (width >= 1000px) {
+    form {
+      display: grid;
+      grid-template-columns: 1fr calc(600rem / 16) 1fr;
+      gap: 0;
+    }
+
+    div {
+      inline-size: 100%;
+      grid-column: 2;
+    }
+  }
+</style>
