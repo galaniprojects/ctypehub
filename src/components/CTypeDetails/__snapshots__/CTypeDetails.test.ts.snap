@@ -44,7 +44,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 
   <fieldset>
     <legend>Creation date</legend>
-    <time>5/1/2023, 12:03:00 PM</time>
+    <time datetime="2023-05-01T10:03:00.000Z"> 5/1/2023, 12:03:00 PM </time>
   </fieldset>
 
   <fieldset>
@@ -206,7 +206,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
 
   <fieldset>
     <legend>Creation date</legend>
-    <time>5/1/2023, 12:02:00 PM</time>
+    <time datetime="2023-05-01T10:02:00.000Z"> 5/1/2023, 12:02:00 PM </time>
   </fieldset>
 
   <fieldset>
@@ -282,7 +282,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
 
   <fieldset>
     <legend>Creation date</legend>
-    <time>5/1/2023, 12:01:00 PM</time>
+    <time datetime="2023-05-01T10:01:00.000Z"> 5/1/2023, 12:01:00 PM </time>
   </fieldset>
 
   <fieldset>
@@ -358,7 +358,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
 
   <fieldset>
     <legend>Creation date</legend>
-    <time>5/1/2023, 12:00:00 PM</time>
+    <time datetime="2023-05-01T10:00:00.000Z"> 5/1/2023, 12:00:00 PM </time>
   </fieldset>
 
   <fieldset>

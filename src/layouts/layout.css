@@ -24,6 +24,7 @@
   --border-radius: 5px;
   --bold-font: 'Lato Bold', sans-serif;
   --responsive-margin-inline: calc((100% - min(95%, 75rem)) / 2);
+  --responsive-padding-inline: calc(var(--responsive-margin-inline) + 0.75rem);
 }
 
 html,

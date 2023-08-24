@@ -79,7 +79,9 @@ const { subscan } = configuration;
 
   <fieldset>
     <legend>Creation date</legend>
-    <time>{createdAt.toLocaleString()}</time>
+    <time datetime={createdAt.toISOString()}>
+      {createdAt.toLocaleString()}
+    </time>
   </fieldset>
 
   {
