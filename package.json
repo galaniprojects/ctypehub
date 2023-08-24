@@ -10,7 +10,7 @@
     "lint": "yarn run lint-css --formatter github && yarn run lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.astro\" \"src/**/*.ts*\"",
     "lint-css": "stylelint --max-warnings 0 --fix \"src/**/*.astro\" \"src/**/*.css\"",
-    "test": "tsc --noEmit && astro check && vitest",
+    "test": "tsc --noEmit && astro check && LC_ALL=en_US.UTF-8 vitest",
     "dev": "astro dev",
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
     "stop-db": "docker rm -f postgres",
