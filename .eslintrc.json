@@ -18,46 +18,24 @@
     }
   },
   "rules": {
-    "no-restricted-globals": [
-      "error",
-      "describe",
-      "it",
-      "expect",
-      "beforeEach",
-      "afterEach"
-    ],
+    "no-restricted-globals": ["error", "describe", "it", "expect", "beforeEach", "afterEach"],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
-    "import/no-extraneous-dependencies": [
-      "error",
-      { "devDependencies": ["**/*.test.*", "testing/*.*", "vitest.config.ts"] }
-    ],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.*", "testing/*.*", "vitest.config.ts"] }],
     "import/no-unresolved": ["error", { "ignore": ["\\.js$"] }],
-    "import/order": [
-      "error",
-      {
-        "newlines-between": "always-and-inside-groups",
-        "groups": [
-          "builtin",
-          "type",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-          "object"
-        ],
-        "pathGroups": [
-          {
-            "patternOptions": { "matchBase": true },
-            "pattern": "*.module.css",
-            "group": "internal",
-            "position": "before"
-          }
-        ]
-      }
-    ],
+    "import/order": ["error", {
+      "newlines-between": "always-and-inside-groups",
+      "groups": ["builtin", "type", "external", "internal", "parent", "sibling", "index", "object"],
+      "pathGroups": [
+        {
+          "patternOptions": { "matchBase": true },
+          "pattern": "*.module.css",
+          "group": "internal",
+          "position": "before"
+        }
+      ]
+    }],
     "@typescript-eslint/no-unused-vars": "error"
   },
   "settings": {
