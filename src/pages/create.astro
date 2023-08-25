@@ -1,12 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header/Header.astro';
 import { CreateForm } from '../components/CreateForm/CreateForm';
 import { configuration } from '../utilities/configuration';
 ---
 
 <Layout>
-  <Header create={true} />
   <CreateForm client:only="react" />
 </Layout>
 

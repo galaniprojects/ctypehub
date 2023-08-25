@@ -1,18 +1,6 @@
 .container {
   box-sizing: border-box;
-  width: 95%;
-  padding: 1.25rem;
   border: 1px solid rgba(var(--color-white-rgb) / 10%);
-  margin-block-start: 0.25rem;
-  margin-inline: auto;
-  background: rgba(var(--color-black-rgb) / 30%);
+  background: var(--color-background-secondary);
   border-radius: var(--border-radius);
-}
-
-.search {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 1rem;
 }

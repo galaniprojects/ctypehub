@@ -1,4 +1,7 @@
 ---
+import buttonStyles from '../Button.module.css';
+import containerStyles from '../Container.module.css';
+
 interface Props {
   prev?: string;
   next?: string;
@@ -10,15 +13,15 @@ const { prev, next, currentPage } = Astro.props;
 
 {
   (prev || next) && (
-    <nav>
+    <nav class={containerStyles.container}>
       {next && (
-        <a class="newer" href={next} rel="next">
+        <a href={next} rel="next" class={buttonStyles.primary}>
           Newer
         </a>
       )}
       {next && <p class="page">Page {currentPage}</p>}
       {prev && (
-        <a class="older" href={prev} rel="prev">
+        <a href={prev} rel="prev" class={buttonStyles.primary}>
           Older
         </a>
       )}
@@ -29,10 +32,10 @@ const { prev, next, currentPage } = Astro.props;
 <style>
   nav {
     display: grid;
-    grid-template-columns: 1fr 6rem 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr calc(145rem / 16) 1fr;
+    padding: 0.75rem;
+    margin-block-start: 0.75rem;
     align-items: center;
-    margin-block: 1rem;
   }
 
   .page {
@@ -42,19 +45,22 @@ const { prev, next, currentPage } = Astro.props;
   }
 
   p {
-    color: var(--color-text-primary);
+    color: #7f8fa4;
+    font-size: 0.75rem;
   }
 
   a {
-    text-align: center;
-    color: var(--color-link);
+    inline-size: 5rem;
+    font-size: 0.75rem;
   }
 
   [rel='next'] {
     grid-column: 1;
+    justify-self: end;
   }
 
   [rel='prev'] {
     grid-column: 3;
+    justify-self: start;
   }
 </style>

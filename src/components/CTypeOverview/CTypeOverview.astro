@@ -9,37 +9,138 @@ interface Props {
   cTypeData: CTypeData;
 }
 
-const { title, id, attestationsCount } = Astro.props.cTypeData;
+const { title, id, description, attestationsCount, tags } =
+  Astro.props.cTypeData;
 ---
 
-<li class={containerStyles.container}>
+<li class=`${containerStyles.container} container`>
   <h2>
-    <a href={generatePath(paths.ctypeDetails, id)}>
+    <a href={generatePath(paths.ctypeDetails, id)} class="title">
       {title}
     </a>
   </h2>
-  <p>
-    <span>Number of Attestations</span>
+
+  {description && <p class="description">{description}</p>}
+
+  {
+    tags && tags.length > 0 && (
+      <ul class="tags">
+        {tags.map(({ dataValues: { tagName } }) => (
+          <li class="tag">
+            <a href={generatePath(paths.tag, tagName)}>#{tagName}</a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <p class="attestations">
+    <span>Number of Attestations:</span>
     <span>{attestationsCount}</span>
   </p>
 </li>
 
 <style>
+  .container {
+    margin-block-start: calc(10rem / 16);
+    position: relative;
+    padding: 1.25rem;
+  }
+
+  .container:has(a:active) {
+    background: var(--color-background-active);
+  }
+
   h2 {
     margin-block-start: 0;
     overflow-wrap: break-word;
-    font-size: 1rem;
+    font-family: var(--bold-font);
+    font-size: 1.125rem;
+    line-height: 1.5rem;
   }
 
   a {
     color: var(--color-link);
+    text-decoration: none;
+  }
+
+  h2 a::before {
+    /* make the whole block clickable */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    margin-block-end: 1rem;
   }
 
   p {
-    margin-block-end: 0;
-    display: flex;
-    justify-content: space-between;
     font-size: 0.875rem;
     color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .attestations {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .tags {
+    display: none;
+  }
+
+  @media screen and (width >= 600px) {
+    .container {
+      padding: 1.5rem 2.5rem;
+    }
+
+    .attestations {
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+
+    h2 {
+      font-family: revert;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (width >= 1000px) {
+    .container:has(a:active) {
+      background: var(--color-background-secondary);
+    }
+
+    .title::before {
+      display: none;
+    }
+
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
+    .tags {
+      display: block;
+      list-style: none;
+      margin: 0.75rem 0;
+      padding-inline: 0;
+    }
+
+    .tag {
+      display: inline;
+      margin-inline-end: 0.25rem;
+    }
   }
 </style>

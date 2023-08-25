@@ -6,7 +6,7 @@ import { CType } from '../models/ctype';
 export async function paginate(
   url: URL,
   where?: WhereOptions<Attributes<CType>>,
-  include?: Includeable[],
+  include?: Includeable | Includeable[],
   pageLimit = 10,
 ): Promise<Page<CType>> {
   const page = url.searchParams.get('page');

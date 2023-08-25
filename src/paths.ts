@@ -1,6 +1,7 @@
 export const paths = {
   home: '/',
   ctypes: '/ctype',
+  create: '/create',
   ctypeDetails: '/ctype/[param]',
   tag: '/tag/[param]',
   session: '/session',

@@ -3,6 +3,8 @@
   box-sizing: border-box;
   block-size: 2.25rem;
   line-height: 2.25rem;
+  font-family: inherit;
+  font-size: 0.875rem;
   border: var(--color-border);
   border-radius: var(--border-radius);
   background: var(--color-link);
@@ -17,4 +19,10 @@
   composes: primary;
   border-start-start-radius: 0;
   border-end-start-radius: 0;
+}
+
+@media screen and (width >= 600px) {
+  .primary {
+    font-size: 1rem;
+  }
 }

@@ -19,6 +19,7 @@ const env = {
   SECRET_AUTHENTICATION_MNEMONIC: 'placeholder',
   SECRET_ASSERTION_METHOD_MNEMONIC: 'placeholder',
   SECRET_KEY_AGREEMENT_MNEMONIC: 'placeholder',
+  TZ: 'UTC',
 };
 
 let server: ChildProcess;

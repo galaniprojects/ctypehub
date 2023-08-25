@@ -1,5 +1,8 @@
 ---
 import './layout.css';
+import Header from '../components/Header/Header.astro';
+import Footer from '../components/Footer/Footer.astro';
+import { paths } from '../paths';
 
 interface Props {
   title?: string;
@@ -15,9 +18,16 @@ const titleWithDash = title ? `${title} – ` : '';
     <meta charset="UTF-8" />
     <title>{titleWithDash}CTypeHub</title>
     <meta name="viewport" content="width=device-width, viewport-fit=cover" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   </head>
 
   <body>
-    <slot />
+    <Header create={Astro.url.pathname === paths.create ? true : undefined} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

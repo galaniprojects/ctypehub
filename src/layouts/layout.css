@@ -14,14 +14,17 @@
 
   --color-background-primary: #1d3340;
   --color-background-secondary: #14242d;
+  --color-background-active: #2c5a6d;
   --color-text-primary: #ebebeb;
-  --color-text-secondary: #ce9000;
+  --color-text-secondary: #a6deff;
   --color-white-rgb: 255 255 255;
   --color-black-rgb: 0 0 0;
-  --color-link: #2987cd;
+  --color-link: #007dda;
   --color-border: #2ea2f8;
-  --color-tag: #1991eb;
   --border-radius: 5px;
+  --bold-font: 'Lato Bold', sans-serif;
+  --responsive-margin-inline: calc((100% - min(95%, 75rem)) / 2);
+  --responsive-padding-inline: calc(var(--responsive-margin-inline) + 0.75rem);
 }
 
 html,
@@ -35,4 +38,18 @@ html {
 
 body {
   background: var(--color-background-primary);
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100vh;
+}
+
+main {
+  flex: 1;
+  margin-inline: var(--responsive-margin-inline);
+}
+
+@media screen and (width >= 1000px) {
+  body {
+    background: fixed url('./cover.jpg') no-repeat left/cover;
+  }
 }

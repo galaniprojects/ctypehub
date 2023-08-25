@@ -1,13 +1,10 @@
 ---
 import { Op, fn } from 'sequelize';
 
-import containerStyles from '../../components/Container.module.css';
-
 import CTypeOverview from '../../components/CTypeOverview/CTypeOverview.astro';
 import { Tag } from '../../models/tag';
 import { paginate } from '../../utilities/paginate';
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header/Header.astro';
 import SearchForm from '../../components/SearchForm/SearchForm.astro';
 import PageNav from '../../components/PageNav/PageNav.astro';
 import { generatePath, paths } from '../../paths';
@@ -35,14 +32,19 @@ const {
   currentPage,
   url: { prev, next },
 } = await paginate(Astro.url, where, include);
+
+if (cTypeResults.length === 0) {
+  return new NotFoundResponse();
+}
 ---
 
 <Layout>
-  <Header />
-  <search class={containerStyles.search}>
-    <h2>#{tag}</h2>
-
-    <SearchForm action={generatePath(paths.tag, tag)} query={query} />
+  <search>
+    <SearchForm
+      action={generatePath(paths.tag, tag)}
+      query={query}
+      heading={`#${tag}`}
+    />
 
     {
       cTypeResults.length > 0 && (
@@ -64,16 +66,13 @@ const {
   p,
   h2 {
     color: var(--color-text-primary);
+    text-align: center;
   }
 
   ul {
-    width: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   a {
