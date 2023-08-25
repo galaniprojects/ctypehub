@@ -19,16 +19,14 @@ export async function get({ request, url }: APIContext) {
 
     const before = url.searchParams.get('before');
 
-    const cTypes = (
-      await CType.findAll({
-        where: {
-          createdAt: { [Op.lte]: before ? new Date(before) : new Date() },
-        },
-        order: [['createdAt', 'DESC']],
-        include: 'tags',
-        limit: 20,
-      })
-    ).map(({ dataValues }) => dataValues);
+    const cTypes = await CType.findAll({
+      where: {
+        createdAt: { [Op.lte]: before ? new Date(before) : new Date() },
+      },
+      order: [['createdAt', 'DESC']],
+      include: 'tags',
+      limit: 20,
+    });
 
     return new Response(JSON.stringify(cTypes), {
       headers: { 'Content-Type': 'application/json' },
