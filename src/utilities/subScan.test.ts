@@ -45,7 +45,7 @@ describe('subScan', () => {
           json: {
             module,
             call,
-            from_block: 10,
+            block_range: '10-100010',
             page: 0,
             row: 0,
             finalized: true,
