@@ -13,7 +13,7 @@ export async function paginate(
 
   const isHomePage = !page || !Number.isInteger(Number(page));
 
-  const total = await CType.count({ where });
+  const total = await CType.count({ where, include, distinct: true });
   const lastPage = Math.floor(total / pageLimit);
 
   const currentPage = isHomePage ? lastPage : Number(page);
