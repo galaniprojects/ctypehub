@@ -8,6 +8,8 @@
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
     "plugin:astro/recommended",
+    "plugin:svelte/recommended",
+    "plugin:svelte/prettier",
     "plugin:vitest/recommended"
   ],
   "parserOptions": {
@@ -50,14 +52,17 @@
     {
       "files": ["*.astro"],
       "parser": "astro-eslint-parser",
-      "parserOptions": {
-        "parser": "@typescript-eslint/parser",
-        "extraFileExtensions": [".astro"]
-      },
       "rules": {
         "react/jsx-key": "off",
         "react/jsx-no-undef": "off",
         "react/no-unknown-property": "off"
+      }
+    },
+    {
+      "files": ["*.svelte"],
+      "parserOptions": {
+        "parser": "@typescript-eslint/parser",
+        "extraFileExtensions": [".svelte"]
       }
     }
   ]

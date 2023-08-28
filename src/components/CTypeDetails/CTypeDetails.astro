@@ -11,6 +11,7 @@ import { configuration } from '../../utilities/configuration';
 import { generatePath, paths } from '../../paths';
 
 import { Property } from './Property';
+import LocalTime from './LocalTime.svelte';
 
 async function getWeb3NameForDid(did: DidUri): Promise<string | undefined> {
   const api = ConfigService.get('api');
@@ -79,7 +80,7 @@ const { subscan } = configuration;
 
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime={createdAt.toISOString()}>{createdAt.toUTCString()}</time>
+    <LocalTime datetime={createdAt.toISOString()} class="time" client:load />
   </fieldset>
 
   {
@@ -128,11 +129,6 @@ const { subscan } = configuration;
   </fieldset>
 </section>
 
-<script>
-  const time = document.querySelector('time') as HTMLTimeElement;
-  time.textContent = new Date(time.dateTime).toLocaleString();
-</script>
-
 <style>
   section {
     padding: 1.25rem;
@@ -166,7 +162,7 @@ const { subscan } = configuration;
 
   p,
   a,
-  time {
+  .time {
     font-size: 0.875rem;
     display: block;
   }
@@ -183,7 +179,7 @@ const { subscan } = configuration;
     text-decoration: none;
   }
 
-  time {
+  .time {
     color: var(--color-text-primary);
     margin-block: 1rem;
   }
@@ -231,7 +227,7 @@ const { subscan } = configuration;
     p,
     a,
     legend,
-    time {
+    .time {
       font-size: 1rem;
     }
 
