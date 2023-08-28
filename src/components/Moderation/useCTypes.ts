@@ -1,12 +1,18 @@
 import type { CTypeData } from '../../models/ctype';
 
+import type { TagData } from '../../models/tag';
+
 import { useCallback, useEffect, useState } from 'react';
 
 import { sessionHeader } from '../../utilities/sessionHeader';
 import { paths } from '../../paths';
 
+export interface APICTypeData extends Omit<CTypeData, 'tags'> {
+  tags?: TagData[];
+}
+
 export function useCTypes(sessionId: string | undefined) {
-  const [cTypes, setCTypes] = useState<CTypeData[]>([]);
+  const [cTypes, setCTypes] = useState<APICTypeData[]>([]);
 
   const fetchBefore = useCallback(
     async (before?: Date) => {
@@ -29,7 +35,7 @@ export function useCTypes(sessionId: string | undefined) {
         throw new Error('Unable to fetch CTypes');
       }
 
-      const newCTypes: CTypeData[] = await response.json();
+      const newCTypes: APICTypeData[] = await response.json();
       setCTypes((existingCTypes) => {
         const lastKnownId = existingCTypes.at(-1)?.id;
         while (newCTypes.some(({ id }) => id === lastKnownId)) {

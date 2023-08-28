@@ -1,5 +1,3 @@
-import type { CTypeData } from '../../models/ctype';
-
 import { MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import styles from './Moderation.module.css';
@@ -10,9 +8,15 @@ import { sessionHeader } from '../../utilities/sessionHeader';
 import { exceptionToError } from '../../utilities/exceptionToError';
 
 import { apiWindow, getCompatibleExtensions, getSession } from './session';
-import { useCTypes } from './useCTypes';
+import { APICTypeData, useCTypes } from './useCTypes';
 
-function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
+function CType({
+  sessionId,
+  cType,
+}: {
+  sessionId: string;
+  cType: APICTypeData;
+}) {
   const {
     id,
     createdAt,
@@ -51,9 +55,7 @@ function CType({ sessionId, cType }: { sessionId: string; cType: CTypeData }) {
   }, [id, isHidden, sessionId]);
 
   const propertyNames = Object.keys(properties).join(', ');
-  const tagNames = tags
-    ?.map(({ dataValues: { tagName } }) => `#${tagName}`)
-    .join(', ');
+  const tagNames = tags?.map(({ tagName }) => `#${tagName}`).join(', ');
 
   return (
     <tr className={styles.tableRow}>
