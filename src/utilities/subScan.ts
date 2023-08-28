@@ -40,7 +40,7 @@ export async function getEvents({
 }) {
   const json = {
     ...parameters,
-    from_block,
+    block_range: `${from_block}-${from_block + 100_000}`,
     row,
     finalized: true,
   };
