@@ -41,7 +41,9 @@ const {
 } = await paginate(Astro.url, where, include);
 ---
 
-<Layout>
+<Layout
+  description="CType Hub: The attester's toolkit for KILT credentials. Discover and create new claim types and help shape the world of decentralized identity."
+>
   <search>
     <SearchForm action={paths.home} query={query} heading="CType Hub" />
 
