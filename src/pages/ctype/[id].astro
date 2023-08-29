@@ -14,7 +14,7 @@ if (!cType || cType.dataValues.isHidden) {
 }
 ---
 
-<Layout>
+<Layout title={cType.dataValues.title}>
   {success && <output>Success</output>}
 
   <CTypeDetails cTypeData={cType.dataValues} />
