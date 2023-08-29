@@ -9,7 +9,7 @@
     "prettify": "prettier --write \"src/**/*.astro\" \"src/**/*.ts*\" \"src/**/*.css*\"",
     "lint": "yarn run lint-css --formatter github && yarn run lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.astro\" \"src/**/*.ts*\"",
-    "lint-css": "stylelint --max-warnings 0 --fix \"src/**/*.astro\" \"src/**/*.css\"",
+    "lint-css": "stylelint --max-warnings 0 \"src/**/*.astro\" \"src/**/*.css\"",
     "test": "tsc --noEmit && astro check && vitest",
     "dev": "astro dev",
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
