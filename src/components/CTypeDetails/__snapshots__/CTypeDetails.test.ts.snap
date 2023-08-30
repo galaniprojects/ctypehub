@@ -127,7 +127,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   </fieldset>
 
   <fieldset>
-    <legend>Extrinsic</legend>
+    <legend>Transaction</legend>
 
     <a href="https://example.subscan.io/extrinsic/0xexamplehash">
       0xexamplehash
@@ -231,7 +231,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
   </fieldset>
 
   <fieldset>
-    <legend>Extrinsic</legend>
+    <legend>Transaction</legend>
 
     <a href="https://example.subscan.io/extrinsic/0xexamplehash">
       0xexamplehash
@@ -307,7 +307,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   </fieldset>
 
   <fieldset>
-    <legend>Extrinsic</legend>
+    <legend>Transaction</legend>
 
     <a href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
       0xexamplenestedhash
@@ -381,7 +381,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
   </fieldset>
 
   <fieldset>
-    <legend>Extrinsic</legend>
+    <legend>Transaction</legend>
 
     <a href="https://example.subscan.io/extrinsic/0xexamplehash">
       0xexamplehash
