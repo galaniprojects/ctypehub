@@ -71,7 +71,7 @@ const credentials: Record<string, unknown> = {
   },
 };
 
-export async function get({ url }: APIContext) {
+export async function GET({ url }: APIContext) {
   const { origin } = url;
 
   const configuration = credentials[origin];

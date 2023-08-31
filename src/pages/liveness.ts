@@ -1,7 +1,7 @@
 import { blockchainConnectionState } from '../utilities/initKilt';
 import { databaseConnectionState } from '../utilities/sequelize';
 
-export async function get() {
+export async function GET() {
   const result =
     !databaseConnectionState.isOffForTooLong() &&
     !blockchainConnectionState.isOffForTooLong();

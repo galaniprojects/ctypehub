@@ -24,7 +24,7 @@ async function getCTypes() {
   return [{ cTypeHash, trustedAttesters }];
 }
 
-export async function get({ request }: APIContext) {
+export async function GET({ request }: APIContext) {
   try {
     logger.debug('Request credential started');
 
@@ -64,7 +64,7 @@ export async function get({ request }: APIContext) {
   }
 }
 
-export async function post({ request }: APIContext) {
+export async function POST({ request }: APIContext) {
   try {
     logger.debug('Verification started');
 

@@ -11,7 +11,7 @@ import {
 import { getSession } from '../../session';
 import { logger } from '../../../utilities/logger';
 
-export async function patch({ request, params }: APIContext) {
+export async function PATCH({ request, params }: APIContext) {
   try {
     logger.debug('CType moderation started');
 

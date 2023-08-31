@@ -10,7 +10,7 @@ import {
 } from '../../utilities/errorResponses';
 import { CType } from '../../models/ctype';
 
-export async function get({ request, url }: APIContext) {
+export async function GET({ request, url }: APIContext) {
   try {
     const session = getSession(request);
     if (!session.authorized) {

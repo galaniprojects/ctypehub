@@ -11,7 +11,7 @@ import {
 } from '../utilities/errorResponses';
 import { getRequestJson } from '../utilities/getRequestJson';
 
-export async function post({ request, url }: APIContext) {
+export async function POST({ request, url }: APIContext) {
   try {
     const { cType, creator, extrinsicHash, description, tags } =
       await getRequestJson(request);
