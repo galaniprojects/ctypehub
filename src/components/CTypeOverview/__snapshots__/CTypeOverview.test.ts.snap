@@ -2,21 +2,11 @@
 
 exports[`CTypeOverview > should match snapshot 1`] = `
 <li class="_container container">
-  <h2>
-    <a href="/ctype/kilt:ctype:0x1" class="title"> Example CType </a>
-  </h2>
-
+  <h2><a href="/ctype/kilt:ctype:0x1" class="title">Example CType</a></h2>
   <p class="description">This is some example cType data</p>
-
   <ul class="tags">
-    <li class="tag">
-      <a href="/tag/example">#example</a>
-    </li>
+    <li class="tag"><a href="/tag/example">#example</a></li>
   </ul>
-
-  <p class="attestations">
-    <span>Number of Attestations:</span>
-    <span>1</span>
-  </p>
+  <p class="attestations"><span>Number of Attestations:</span><span>1</span></p>
 </li>
 `;
