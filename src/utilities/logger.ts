@@ -1,4 +1,4 @@
-import { LoggerOptions, pino } from 'pino';
+import { type LoggerOptions, pino } from 'pino';
 
 import { configuration } from './configuration';
 

@@ -1,7 +1,7 @@
 import {
-  DecryptCallback,
-  DidResourceUri,
-  EncryptCallback,
+  type DecryptCallback,
+  type DidResourceUri,
+  type EncryptCallback,
   Utils,
 } from '@kiltprotocol/sdk-js';
 

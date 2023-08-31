@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { type PropsWithChildren, useEffect, useRef } from 'react';
 
 import styles from './Modal.module.css';
 

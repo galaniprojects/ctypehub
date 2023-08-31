@@ -1,8 +1,8 @@
 import {
-  FocusEvent,
-  FormEvent,
-  KeyboardEvent,
-  MouseEvent,
+  type FocusEvent,
+  type FormEvent,
+  type KeyboardEvent,
+  type MouseEvent,
   useCallback,
   useState,
 } from 'react';
@@ -13,12 +13,15 @@ import {
   CType,
   Did,
   disconnect,
-  KiltAddress,
+  type KiltAddress,
 } from '@kiltprotocol/sdk-js';
 
 import styles from './CreateForm.module.css';
 
-import { InjectedAccount, SelectAccount } from '../SelectAccount/SelectAccount';
+import {
+  type InjectedAccount,
+  SelectAccount,
+} from '../SelectAccount/SelectAccount';
 import { Modal } from '../Modal/Modal';
 import { PropertyFields } from '../PropertyFields/PropertyFields';
 import { getProperties } from '../PropertyFields/getProperties';

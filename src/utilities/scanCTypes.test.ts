@@ -4,11 +4,11 @@ import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   connect,
   CType,
-  DidUri,
+  type DidUri,
   disconnect,
-  ICType,
-  KiltKeyringPair,
-  SubmittableExtrinsic,
+  type ICType,
+  type KiltKeyringPair,
+  type SubmittableExtrinsic,
   Utils,
 } from '@kiltprotocol/sdk-js';
 
@@ -18,7 +18,7 @@ import { createDid } from '../../testing/createDid';
 import { createCType } from '../../testing/createCType';
 import { resetDatabase } from '../../testing/resetDatabase';
 
-import { EventParams, scanCTypes } from './scanCTypes';
+import { type EventParams, scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
 import { subScanEventGenerator } from './subScan';
 

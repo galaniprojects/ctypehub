@@ -2,7 +2,7 @@ import {
   BalanceUtils,
   Blockchain,
   ConfigService,
-  KiltAddress,
+  type KiltAddress,
   Utils,
 } from '@kiltprotocol/sdk-js';
 

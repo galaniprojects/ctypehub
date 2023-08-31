@@ -1,11 +1,10 @@
-import type { APIContext } from 'astro';
-
+import { type APIContext } from 'astro';
 import { CType, Did } from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
 
 import { CType as CTypeModel } from '../models/ctype';
 import { generatePath, paths } from '../paths';
-import { TagDataInput, Tag as TagModel } from '../models/tag';
+import { type TagDataInput, Tag as TagModel } from '../models/tag';
 import {
   handleErrorResponse,
   makeErrorResponse,

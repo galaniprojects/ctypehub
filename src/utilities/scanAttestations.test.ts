@@ -8,12 +8,12 @@ import {
   Credential,
   CType,
   Did,
-  DidUri,
+  type DidUri,
   disconnect,
-  IAttestation,
-  ICType,
-  KiltKeyringPair,
-  SubmittableExtrinsic,
+  type IAttestation,
+  type ICType,
+  type KiltKeyringPair,
+  type SubmittableExtrinsic,
   Utils,
 } from '@kiltprotocol/sdk-js';
 
@@ -26,7 +26,7 @@ import { resetDatabase } from '../../testing/resetDatabase';
 
 import { configuration } from './configuration';
 import { subScanEventGenerator } from './subScan';
-import { EventParams, scanAttestations } from './scanAttestations';
+import { type EventParams, scanAttestations } from './scanAttestations';
 
 vi.mock('./subScan');
 
