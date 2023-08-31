@@ -11,7 +11,7 @@
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.astro\" \"src/**/*.ts*\"",
     "lint-css": "stylelint --max-warnings 0 \"src/**/*.astro\" \"src/**/*.css\"",
     "test": "tsc --noEmit && astro check && vitest",
-    "dev": "astro dev",
+    "dev": "astro dev --port 3000",
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
     "stop-db": "docker rm -f postgres",
     "migrate": "sequelize-cli db:migrate",
