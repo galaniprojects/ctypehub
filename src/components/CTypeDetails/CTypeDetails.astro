@@ -79,9 +79,7 @@ const { subscan } = configuration;
 
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime={createdAt.toISOString()}>
-      {createdAt.toLocaleString()}
-    </time>
+    <time datetime={createdAt.toISOString()}>{createdAt.toUTCString()}</time>
   </fieldset>
 
   {
@@ -129,6 +127,11 @@ const { subscan } = configuration;
     </div>
   </fieldset>
 </section>
+
+<script>
+  const time = document.querySelector('time') as HTMLTimeElement;
+  time.textContent = new Date(time.dateTime).toLocaleString();
+</script>
 
 <style>
   section {
