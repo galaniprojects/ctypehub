@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { got } from 'got';
 
 import {
-  EventsResponseJson,
+  type EventsResponseJson,
   getEvents,
   subScanEventGenerator,
 } from './subScan';

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { type ChangeEvent, useCallback, useState } from 'react';
 
 import { web3Accounts, web3Enable } from '@polkadot/extension-dapp';
 import { connect, disconnect } from '@kiltprotocol/sdk-js';

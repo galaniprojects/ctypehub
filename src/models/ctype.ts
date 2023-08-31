@@ -1,6 +1,5 @@
-import type { DidUri, ICType } from '@kiltprotocol/sdk-js';
-
-import { DataTypes, Model, ModelAttributes, Sequelize } from 'sequelize';
+import { type DidUri, type ICType } from '@kiltprotocol/sdk-js';
+import { DataTypes, Model, type ModelAttributes, Sequelize } from 'sequelize';
 
 import { Attestation } from './attestation';
 import { Tag } from './tag';

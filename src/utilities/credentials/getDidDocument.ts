@@ -1,8 +1,8 @@
 import {
   Did,
-  DidDocument,
-  KeyRelationship,
-  KiltKeyringPair,
+  type DidDocument,
+  type KeyRelationship,
+  type KiltKeyringPair,
   Utils,
 } from '@kiltprotocol/sdk-js';
 import { memoize } from 'lodash-es';

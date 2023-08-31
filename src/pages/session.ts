@@ -83,7 +83,7 @@ export interface GetSessionOutput {
   challenge: string;
 }
 
-export async function get() {
+export async function GET() {
   const { did, keyAgreementKey } = await getDidDocument();
   const dAppEncryptionKeyUri: DidResourceUri = `${did}${keyAgreementKey.id}`;
   const response: GetSessionOutput = {
@@ -101,7 +101,7 @@ export interface CheckSessionInput {
   nonce: string;
 }
 
-export async function post({ request }: APIContext) {
+export async function POST({ request }: APIContext) {
   try {
     logger.debug('Session confirmation started');
 

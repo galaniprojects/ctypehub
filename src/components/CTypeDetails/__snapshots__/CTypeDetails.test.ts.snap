@@ -3,16 +3,13 @@
 exports[`CTypeDetails > should handle hidden CType 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <h1>Page not found</h1>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
@@ -26,58 +23,53 @@ exports[`CTypeDetails > should handle hidden CType 1`] = `
 exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 <section class="_container">
   <h1 class="title">Everything everywhere</h1>
-
   <fieldset>
     <legend>Creator</legend>
     <p>did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E</p>
   </fieldset>
-
   <fieldset>
     <legend>Number of attestations</legend>
     <p>4444</p>
   </fieldset>
-
   <fieldset>
     <legend>Description:</legend>
     <p>…all the time</p>
   </fieldset>
-
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime="2023-05-01T12:03:00.000Z"> 5/1/2023, 12:03:00 PM </time>
+    <time datetime="2023-05-01T12:03:00.000Z">5/1/2023, 12:03:00 PM</time>
   </fieldset>
-
   <fieldset>
     <legend>Property 1</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">Array</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">array</dd>
-      <dt class="_term2">Type of items:</dt>
-      <dd class="_definition0">string</dd>
-      <dt class="_term2">Format:</dt>
-      <dd class="_definition0">date</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">Array</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">array</dd>
+      <dt class="_term">Type of items:</dt>
+      <dd class="_definition">string</dd>
+      <dt class="_term">Format:</dt>
+      <dd class="_definition">date</dd>
     </dl>
   </fieldset>
   <fieldset>
     <legend>Property 2</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">Boolean</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">boolean</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">Boolean</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">boolean</dd>
     </dl>
   </fieldset>
   <fieldset>
     <legend>Property 3</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">Integer</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">integer</dd>
-      <dt class="_term2">Allowed values:</dt>
-      <dd class="_definition0">
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">Integer</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">integer</dd>
+      <dt class="_term">Allowed values:</dt>
+      <dd class="_definition">
         <ul>
           <li>1</li>
           <li>10000</li>
@@ -91,23 +83,23 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   <fieldset>
     <legend>Property 4</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">Number</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">number</dd>
-      <dt class="_term2">Minimum value:</dt>
-      <dd class="_definition0">12.34</dd>
-      <dt class="_term2">Maximum value:</dt>
-      <dd class="_definition0">56.78</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">Number</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">number</dd>
+      <dt class="_term">Minimum value:</dt>
+      <dd class="_definition">12.34</dd>
+      <dt class="_term">Maximum value:</dt>
+      <dd class="_definition">56.78</dd>
     </dl>
   </fieldset>
   <fieldset>
     <legend>Property 5</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">Reference</dd>
-      <dt class="_term2">Referenced Claim Type:</dt>
-      <dd class="_definition0">
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">Reference</dd>
+      <dt class="_term">Referenced Claim Type:</dt>
+      <dd class="_definition">
         <a class="_anchor" href="/ctype/kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789">kilt:ctype:0xa8e68ac37f1a062b1432840d883e4c8be71deca13d539e0b00a8a74f4e3f6789</a>
       </dd>
     </dl>
@@ -115,25 +107,20 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   <fieldset>
     <legend>Property 6</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">String</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">string</dd>
-      <dt class="_term2">Minimum length:</dt>
-      <dd class="_definition0">1</dd>
-      <dt class="_term2">Maximum length:</dt>
-      <dd class="_definition0">100</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">String</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">string</dd>
+      <dt class="_term">Minimum length:</dt>
+      <dd class="_definition">1</dd>
+      <dt class="_term">Maximum length:</dt>
+      <dd class="_definition">100</dd>
     </dl>
   </fieldset>
-
   <fieldset>
     <legend>Transaction</legend>
-
-    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
-      0xexamplehash
-    </a>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">0xexamplehash</a>
   </fieldset>
-
   <fieldset>
     <legend>Technical Details</legend>
     <div id="details">
@@ -188,34 +175,29 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 exports[`CTypeDetails > should handle nested CType 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType</h1>
-
   <fieldset>
     <legend>Creator</legend>
     <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
   </fieldset>
-
   <fieldset>
     <legend>Number of attestations</legend>
     <p>333</p>
   </fieldset>
-
   <fieldset>
     <legend>Description:</legend>
     <p>This is an example of a CType with a nested CType</p>
   </fieldset>
-
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime="2023-05-01T12:02:00.000Z"> 5/1/2023, 12:02:00 PM </time>
+    <time datetime="2023-05-01T12:02:00.000Z">5/1/2023, 12:02:00 PM</time>
   </fieldset>
-
   <fieldset>
     <legend>Property 1</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">example</dd>
-      <dt class="_term2">Referenced Claim Type:</dt>
-      <dd class="_definition0">
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">example</dd>
+      <dt class="_term">Referenced Claim Type:</dt>
+      <dd class="_definition">
         <a class="_anchor" href="/ctype/kilt:ctype:0x1">kilt:ctype:0x1</a>
       </dd>
     </dl>
@@ -223,21 +205,16 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
   <fieldset>
     <legend>Property 2</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">hasNestedCType</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">boolean</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">hasNestedCType</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">boolean</dd>
     </dl>
   </fieldset>
-
   <fieldset>
     <legend>Transaction</legend>
-
-    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
-      0xexamplehash
-    </a>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">0xexamplehash</a>
   </fieldset>
-
   <fieldset>
     <legend>Technical Details</legend>
     <div id="details">
@@ -264,34 +241,29 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
 exports[`CTypeDetails > should handle nested CType property 1`] = `
 <section class="_container">
   <h1 class="title">Example nested CType property</h1>
-
   <fieldset>
     <legend>Creator</legend>
     <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
   </fieldset>
-
   <fieldset>
     <legend>Number of attestations</legend>
     <p>22</p>
   </fieldset>
-
   <fieldset>
     <legend>Description:</legend>
     <p>This is an example of a CType with a nested property</p>
   </fieldset>
-
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime="2023-05-01T12:01:00.000Z"> 5/1/2023, 12:01:00 PM </time>
+    <time datetime="2023-05-01T12:01:00.000Z">5/1/2023, 12:01:00 PM</time>
   </fieldset>
-
   <fieldset>
     <legend>Property 1</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">example</dd>
-      <dt class="_term2">Referenced Claim Type:</dt>
-      <dd class="_definition0">
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">example</dd>
+      <dt class="_term">Referenced Claim Type:</dt>
+      <dd class="_definition">
         <a class="_anchor" href="/ctype/kilt:ctype:0x1#/properties/example">kilt:ctype:0x1#/properties/example</a>
       </dd>
     </dl>
@@ -299,21 +271,16 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   <fieldset>
     <legend>Property 2</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">hasNestedProperty</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">boolean</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">hasNestedProperty</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">boolean</dd>
     </dl>
   </fieldset>
-
   <fieldset>
     <legend>Transaction</legend>
-
-    <a href="https://example.subscan.io/extrinsic/0xexamplenestedhash">
-      0xexamplenestedhash
-    </a>
+    <a href="https://example.subscan.io/extrinsic/0xexamplenestedhash">0xexamplenestedhash</a>
   </fieldset>
-
   <fieldset>
     <legend>Technical Details</legend>
     <div id="details">
@@ -340,63 +307,50 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
 exports[`CTypeDetails > should match snapshot 1`] = `
 <section class="_container">
   <h1 class="title">Example CType</h1>
-
   <fieldset>
     <legend>Creator</legend>
     <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
   </fieldset>
-
   <fieldset>
     <legend>Number of attestations</legend>
     <p>1</p>
   </fieldset>
-
   <fieldset>
     <legend>Description:</legend>
     <p>This is some example cType data</p>
   </fieldset>
-
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime="2023-05-01T12:00:00.000Z"> 5/1/2023, 12:00:00 PM </time>
+    <time datetime="2023-05-01T12:00:00.000Z">5/1/2023, 12:00:00 PM</time>
   </fieldset>
-
   <fieldset>
     <legend>Property 1</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">example</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">string</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">example</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">string</dd>
     </dl>
   </fieldset>
   <fieldset>
     <legend>Property 2</legend>
     <dl>
-      <dt class="_term2">Name:</dt>
-      <dd class="_definition0">isExample</dd>
-      <dt class="_term2">Type:</dt>
-      <dd class="_definition0">boolean</dd>
+      <dt class="_term">Name:</dt>
+      <dd class="_definition">isExample</dd>
+      <dt class="_term">Type:</dt>
+      <dd class="_definition">boolean</dd>
     </dl>
   </fieldset>
-
   <fieldset>
     <legend>Transaction</legend>
-
-    <a href="https://example.subscan.io/extrinsic/0xexamplehash">
-      0xexamplehash
-    </a>
+    <a href="https://example.subscan.io/extrinsic/0xexamplehash">0xexamplehash</a>
   </fieldset>
-
   <fieldset>
     <legend>Tags</legend>
     <ul>
-      <li>
-        <a href="/tag/example">#example</a>
-      </li>
+      <li><a href="/tag/example">#example</a></li>
     </ul>
   </fieldset>
-
   <fieldset>
     <legend>Technical Details</legend>
     <div id="details">

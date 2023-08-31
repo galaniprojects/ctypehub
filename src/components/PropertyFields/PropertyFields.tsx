@@ -1,9 +1,8 @@
-import type { PropertyType } from './getProperties';
-
-import { ChangeEvent, Fragment, useCallback, useState } from 'react';
+import { type ChangeEvent, Fragment, useCallback, useState } from 'react';
 
 import styles from './PropertyFields.module.css';
 
+import { type PropertyType } from './getProperties';
 import { getPrefixByIndex } from './getPrefixByIndex';
 
 export function PropertyFields({ index }: { index: number }) {

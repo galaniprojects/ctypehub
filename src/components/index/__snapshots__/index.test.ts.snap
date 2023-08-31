@@ -3,60 +3,45 @@
 exports[`index.astro > should render all CTypes except hidden ones 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
+          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search _primary">Search</button>
         </div>
       </form>
-
       <ul>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x2" class="title">
-              Example nested CType property
-            </a>
+            <a href="/ctype/kilt:ctype:0x2" class="title">Example nested CType property</a>
           </h2>
-
           <p class="description">
             This is an example of a CType with a nested property
           </p>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>2</span>
+            <span>Number of Attestations:</span><span>2</span>
           </p>
         </li>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x1" class="title"> Example CType </a>
+            <a href="/ctype/kilt:ctype:0x1" class="title">Example CType</a>
           </h2>
-
           <p class="description">This is some example cType data</p>
-
           <ul class="tags">
-            <li class="tag">
-              <a href="/tag/example">#example</a>
-            </li>
+            <li class="tag"><a href="/tag/example">#example</a></li>
           </ul>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>1</span>
+            <span>Number of Attestations:</span><span>1</span>
           </p>
         </li>
       </ul>
     </search>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
@@ -70,43 +55,34 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
 exports[`index.astro > should render search results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
+          <input type="search" name="query" value="nested" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search _primary">Search</button>
         </div>
       </form>
-
       <p>CType results for “nested”:</p>
       <ul>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x2" class="title">
-              Example nested CType property
-            </a>
+            <a href="/ctype/kilt:ctype:0x2" class="title">Example nested CType property</a>
           </h2>
-
           <p class="description">
             This is an example of a CType with a nested property
           </p>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>2</span>
+            <span>Number of Attestations:</span><span>2</span>
           </p>
         </li>
       </ul>
     </search>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
@@ -120,69 +96,50 @@ exports[`index.astro > should render search results 1`] = `
 exports[`index.astro > should render tag results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="example" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
+          <input type="search" name="query" value="example" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search _primary">Search</button>
         </div>
       </form>
-
       <p>Tag results for “#example”:</p>
-
       <ul class="tagResults">
-        <li>
-          <a class="_container" href="/tag/example"> #example </a>
-        </li>
+        <li><a class="_container" href="/tag/example"> #example</a></li>
       </ul>
-
       <p>CType results for “example”:</p>
       <ul>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x2" class="title">
-              Example nested CType property
-            </a>
+            <a href="/ctype/kilt:ctype:0x2" class="title">Example nested CType property</a>
           </h2>
-
           <p class="description">
             This is an example of a CType with a nested property
           </p>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>2</span>
+            <span>Number of Attestations:</span><span>2</span>
           </p>
         </li>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x1" class="title"> Example CType </a>
+            <a href="/ctype/kilt:ctype:0x1" class="title">Example CType</a>
           </h2>
-
           <p class="description">This is some example cType data</p>
-
           <ul class="tags">
-            <li class="tag">
-              <a href="/tag/example">#example</a>
-            </li>
+            <li class="tag"><a href="/tag/example">#example</a></li>
           </ul>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>1</span>
+            <span>Number of Attestations:</span><span>1</span>
           </p>
         </li>
       </ul>
     </search>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
@@ -196,44 +153,34 @@ exports[`index.astro > should render tag results 1`] = `
 exports[`index.astro > should render the tag page 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
       <form action="/tag/example" method="get" class="_container">
         <h1>#example</h1>
         <div>
-          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
+          <input type="search" name="query" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search _primary">Search</button>
         </div>
       </form>
-
       <ul>
         <li class="_container container">
           <h2>
-            <a href="/ctype/kilt:ctype:0x1" class="title"> Example CType </a>
+            <a href="/ctype/kilt:ctype:0x1" class="title">Example CType</a>
           </h2>
-
           <p class="description">This is some example cType data</p>
-
           <ul class="tags">
-            <li class="tag">
-              <a href="/tag/example">#example</a>
-            </li>
+            <li class="tag"><a href="/tag/example">#example</a></li>
           </ul>
-
           <p class="attestations">
-            <span>Number of Attestations:</span>
-            <span>1</span>
+            <span>Number of Attestations:</span><span>1</span>
           </p>
         </li>
       </ul>
     </search>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
@@ -247,25 +194,21 @@ exports[`index.astro > should render the tag page 1`] = `
 exports[`index.astro > should render when no search results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a>
-    <a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
       <form action="/" method="get" class="_container">
         <h1>CType Hub</h1>
         <div>
-          <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search1 _component" /><button type="submit" class="_search8 _primary">Search</button>
+          <input type="search" name="query" value="asdagalasdg" placeholder="Search query" aria-label="Search query" class="_search _component" /><button type="submit" class="_search _primary">Search</button>
         </div>
       </form>
-
       <p>No CType results for “asdagalasdg”</p>
     </search>
   </main>
   <footer>
-    <nav>
-      <!-- TODO: links to legal docs -->
-    </nav>
+    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />

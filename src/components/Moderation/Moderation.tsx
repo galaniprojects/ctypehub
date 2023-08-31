@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useEffect, useState } from 'react';
+import { type MouseEvent, useCallback, useEffect, useState } from 'react';
 
 import styles from './Moderation.module.css';
 import buttonStyles from '../Button.module.css';
@@ -8,7 +8,7 @@ import { sessionHeader } from '../../utilities/sessionHeader';
 import { exceptionToError } from '../../utilities/exceptionToError';
 
 import { apiWindow, getCompatibleExtensions, getSession } from './session';
-import { APICTypeData, useCTypes } from './useCTypes';
+import { type APICTypeData, useCTypes } from './useCTypes';
 
 function CType({
   sessionId,

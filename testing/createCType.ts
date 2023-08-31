@@ -3,8 +3,8 @@ import {
   ConfigService,
   CType,
   Did,
-  DidUri,
-  KiltKeyringPair,
+  type DidUri,
+  type KiltKeyringPair,
 } from '@kiltprotocol/sdk-js';
 
 export async function createCType(

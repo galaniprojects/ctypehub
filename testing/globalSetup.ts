@@ -2,7 +2,11 @@ import { promisify } from 'node:util';
 import { ChildProcess, exec, spawn } from 'node:child_process';
 import process from 'node:process';
 
-import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
+import {
+  GenericContainer,
+  type StartedTestContainer,
+  Wait,
+} from 'testcontainers';
 import {
   PostgreSqlContainer,
   StartedPostgreSqlContainer,
