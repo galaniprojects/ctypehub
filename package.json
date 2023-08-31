@@ -20,8 +20,8 @@
     "start": "yarn migrate && yarn seed && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
-    "@astrojs/node": "^5.3.6",
-    "@astrojs/react": "^2.3.2",
+    "@astrojs/node": "^6.0.0",
+    "@astrojs/react": "^3.0.0",
     "@kiltprotocol/sdk-js": "^0.34.0",
     "@polkadot/extension-dapp": "^0.46.5",
     "astro": "^3.0.3",
@@ -39,6 +39,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.2.0",
     "@testcontainers/postgresql": "^10.2.1",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
