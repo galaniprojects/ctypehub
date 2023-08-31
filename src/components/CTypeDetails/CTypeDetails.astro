@@ -128,9 +128,9 @@ const { subscan } = configuration;
   </fieldset>
 </section>
 
-<script is:inline>
-  const time = document.querySelector('time');
-  const datetime = time.getAttribute('datetime');
+<script>
+  const time = document.querySelector('time') as HTMLTimeElement;
+  const datetime = time.getAttribute('datetime') as string;
   time.textContent = new Date(datetime).toLocaleString();
 </script>
 
