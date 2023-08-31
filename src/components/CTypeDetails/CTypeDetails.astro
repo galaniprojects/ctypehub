@@ -47,6 +47,8 @@ const version = schema === schemaV1 ? 'V1' : 'draft-01';
 const kiltCType = CType.fromProperties(title, properties, version);
 
 const { subscan } = configuration;
+
+const datetime = createdAt.toISOString()
 ---
 
 <section class={containerStyles.container}>
@@ -79,7 +81,7 @@ const { subscan } = configuration;
 
   <fieldset>
     <legend>Creation date</legend>
-    <time datetime={createdAt.toISOString()}></time>
+    <time datetime={createdAt.toISOString()}>{createdAt.toUTCString()}</time>
   </fieldset>
 
   {
@@ -130,8 +132,7 @@ const { subscan } = configuration;
 
 <script>
   const time = document.querySelector('time') as HTMLTimeElement;
-  const datetime = time.getAttribute('datetime') as string;
-  time.textContent = new Date(datetime).toLocaleString();
+  time.textContent = new Date(time.dateTime).toLocaleString();
 </script>
 
 <style>
