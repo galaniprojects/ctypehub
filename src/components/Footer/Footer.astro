@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+
 import kiltLogo from './built_on_kilt.svg';
 import galaniLogo from './galaniprojects.svg';
 ---
@@ -8,13 +10,13 @@ import galaniLogo from './galaniprojects.svg';
     <!-- TODO: links to legal docs -->
   </nav>
   <p>
-    Made with ♥︎ by <img
+    Made with ♥︎ by <Image
       class="galaniLogo"
-      src={galaniLogo.src}
+      src={galaniLogo}
       alt="galaniprojects logo"
     /> © 2023
   </p>
-  <img class="kiltLogo" src={kiltLogo.src} alt="built on KILT logo" />
+  <Image class="kiltLogo" src={kiltLogo} alt="built on KILT logo" />
 </footer>
 
 <style>
