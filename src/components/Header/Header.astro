@@ -13,7 +13,9 @@ const { create } = Astro.props;
 ---
 
 <header>
-  <a href={paths.home} class="logo"><img src={logo.src} alt="CTypeHub logo" /></a>
+  <a href={paths.home} class="logo">
+    <img src={logo.src} alt="CTypeHub logo" />
+  </a>
   {
     create ? (
       <a href={paths.home} class={buttonStyles.primary}>
