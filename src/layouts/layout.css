@@ -50,6 +50,7 @@ main {
 
 @media screen and (width >= 1000px) {
   body {
-    background: fixed url('./cover.jpg') no-repeat left/cover;
+    background: var(--color-background-primary) fixed url('./cover.jpg')
+      no-repeat left/cover;
   }
 }

@@ -227,7 +227,7 @@ export function CreateForm() {
               onClick={handleAddPropertyClick}
               className={styles.add}
             >
-              Add Property ➕️
+              Add Property
             </button>
           </p>
         </fieldset>
