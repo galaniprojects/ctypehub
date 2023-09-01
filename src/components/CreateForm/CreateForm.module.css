@@ -62,7 +62,6 @@
   background: white;
   margin: 0;
   list-style: none;
-  min-block-size: 2.25rem;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -72,7 +71,6 @@
 .tag {
   box-sizing: border-box;
   display: inline-flex;
-  min-block-size: 1.625rem;
   align-items: center;
   background: var(--color-background-primary);
   color: white;
