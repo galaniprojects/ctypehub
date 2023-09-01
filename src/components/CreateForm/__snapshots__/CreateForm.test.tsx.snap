@@ -177,7 +177,7 @@ exports[`CreateForm > should render > adding property 1`] = `
             class="_add_eddc76"
             type="button"
           >
-            Add Property ➕️
+            Add Property
           </button>
         </p>
       </fieldset>
@@ -419,7 +419,7 @@ exports[`CreateForm > should render > with tags 1`] = `
             class="_add_eddc76"
             type="button"
           >
-            Add Property ➕️
+            Add Property
           </button>
         </p>
       </fieldset>
@@ -594,7 +594,7 @@ exports[`CreateForm > should render 1`] = `
             class="_add_eddc76"
             type="button"
           >
-            Add Property ➕️
+            Add Property
           </button>
         </p>
       </fieldset>
