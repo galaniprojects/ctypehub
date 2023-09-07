@@ -1,6 +1,5 @@
 .container {
-  composes: container from '../Container.module.css';
-  padding: 1.25rem;
+  composes: bigContainer from '../Container.module.css';
 }
 
 .form {
@@ -157,10 +156,6 @@
 }
 
 @media screen and (width >= 600px) {
-  .container {
-    padding: 1.75rem;
-  }
-
   .form {
     font-size: 1rem;
   }
@@ -168,7 +163,6 @@
 
 @media screen and (width >= 1000px) {
   .container {
-    padding: 2.5rem;
     background: var(--color-background-secondary) url('./big-logo.svg')
       no-repeat top 14rem right -3rem;
   }

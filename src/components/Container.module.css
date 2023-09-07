@@ -4,3 +4,20 @@
   background: var(--color-background-secondary);
   border-radius: var(--border-radius);
 }
+
+.bigContainer {
+  composes: container;
+  padding: 1.25rem;
+}
+
+@media screen and (width >= 600px) {
+  .bigContainer {
+    padding: 1.75rem;
+  }
+}
+
+@media screen and (width >= 1000px) {
+  .bigContainer {
+    padding: 2.5rem;
+  }
+}

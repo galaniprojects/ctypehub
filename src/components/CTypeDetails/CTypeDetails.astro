@@ -49,7 +49,7 @@ const kiltCType = CType.fromProperties(title, properties, version);
 const { subscan } = configuration;
 ---
 
-<section class={containerStyles.container}>
+<section class={containerStyles.bigContainer}>
   <h1 class="title">{title}</h1>
 
   <fieldset>
@@ -134,10 +134,6 @@ const { subscan } = configuration;
 </script>
 
 <style>
-  section {
-    padding: 1.25rem;
-  }
-
   pre {
     margin: 0;
   }
@@ -220,10 +216,6 @@ const { subscan } = configuration;
   }
 
   @media screen and (width >= 600px) {
-    section {
-      padding: 1.75rem;
-    }
-
     h1 {
       margin: 0 0 1.75rem;
     }
@@ -245,10 +237,6 @@ const { subscan } = configuration;
   }
 
   @media screen and (width >= 1000px) {
-    section {
-      padding: 2.5rem;
-    }
-
     a:active {
       background: revert;
     }

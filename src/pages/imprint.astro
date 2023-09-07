@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import containerStyles from '../components/Container.module.css';
+---
+
+<Layout title="Imprint">
+  <section class={containerStyles.bigContainer}>
+    <h1>Imprint</h1>
+
+    <address>
+      <p>galaniprojects GmbH</p>
+      <p>Keithstr. 2-4</p>
+      <p>10787 Berlin</p>
+      <p>Germany</p>
+    </address>
+    <br />
+    <p>Register court: Charlottenburg Local Court</p>
+    <p>Registration number: HRB 175723 B</p>
+    <br />
+    <p>Represented by Mrs. Anastasia Galani</p>
+    <br />
+    <p>Phone: +49 (0) 30 2123 2827</p>
+    <p>Fax: +49 (0) 30 2191 3767</p>
+    <p>
+      Email: <a href="mailto:info@galaniprojects.de">info@galaniprojects.de</a>
+    </p>
+    <p>Information according to § 5 TMG (Germany)</p>
+  </section>
+</Layout>
+
+<style>
+  section {
+    color: var(--color-text-primary);
+  }
+
+  p {
+    margin: 0;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  h1 {
+    font-family: var(--bold-font);
+    margin-block: 0 2rem;
+  }
+
+  a {
+    color: var(--color-link);
+  }
+</style>
