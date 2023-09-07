@@ -41,13 +41,16 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
     </search>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
+    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
   </footer>
 </body>
 `;
@@ -82,13 +85,16 @@ exports[`index.astro > should render search results 1`] = `
     </search>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
+    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
   </footer>
 </body>
 `;
@@ -139,13 +145,16 @@ exports[`index.astro > should render tag results 1`] = `
     </search>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
+    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
   </footer>
 </body>
 `;
@@ -180,13 +189,16 @@ exports[`index.astro > should render the tag page 1`] = `
     </search>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
+    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
   </footer>
 </body>
 `;
@@ -208,13 +220,16 @@ exports[`index.astro > should render when no search results 1`] = `
     </search>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
+    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
   </footer>
 </body>
 `;
