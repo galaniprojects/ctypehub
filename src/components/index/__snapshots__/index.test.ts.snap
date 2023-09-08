@@ -3,7 +3,7 @@
 exports[`index.astro > should render all CTypes except hidden ones 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" width="79" height="79" loading="lazy" decoding="async" /></a><a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
@@ -44,10 +44,10 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
     <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
-      <img src="/src/components/Footer/galaniprojects.svg" class="galaniLogo" alt="galaniprojects logo" width="153" height="24" loading="lazy" decoding="async" />
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
-    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;
@@ -55,7 +55,7 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
 exports[`index.astro > should render search results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" width="79" height="79" loading="lazy" decoding="async" /></a><a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
@@ -85,10 +85,10 @@ exports[`index.astro > should render search results 1`] = `
     <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
-      <img src="/src/components/Footer/galaniprojects.svg" class="galaniLogo" alt="galaniprojects logo" width="153" height="24" loading="lazy" decoding="async" />
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
-    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;
@@ -96,7 +96,7 @@ exports[`index.astro > should render search results 1`] = `
 exports[`index.astro > should render tag results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" width="79" height="79" loading="lazy" decoding="async" /></a><a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
@@ -142,10 +142,10 @@ exports[`index.astro > should render tag results 1`] = `
     <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
-      <img src="/src/components/Footer/galaniprojects.svg" class="galaniLogo" alt="galaniprojects logo" width="153" height="24" loading="lazy" decoding="async" />
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
-    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;
@@ -153,7 +153,7 @@ exports[`index.astro > should render tag results 1`] = `
 exports[`index.astro > should render the tag page 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" width="79" height="79" loading="lazy" decoding="async" /></a><a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
@@ -183,10 +183,10 @@ exports[`index.astro > should render the tag page 1`] = `
     <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
-      <img src="/src/components/Footer/galaniprojects.svg" class="galaniLogo" alt="galaniprojects logo" width="153" height="24" loading="lazy" decoding="async" />
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
-    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;
@@ -194,7 +194,7 @@ exports[`index.astro > should render the tag page 1`] = `
 exports[`index.astro > should render when no search results 1`] = `
 <body>
   <header>
-    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" width="79" height="79" loading="lazy" decoding="async" /></a><a href="/create" class="_primary"> Create Claim Type </a>
+    <a href="/" class="logo"><img src="/src/components/Header/logo.svg" alt="CTypeHub logo" /></a><a href="/create" class="_primary"> Create Claim Type </a>
   </header>
   <main>
     <search>
@@ -211,10 +211,10 @@ exports[`index.astro > should render when no search results 1`] = `
     <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
-      <img src="/src/components/Footer/galaniprojects.svg" class="galaniLogo" alt="galaniprojects logo" width="153" height="24" loading="lazy" decoding="async" />
+      <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
-    <img src="/src/components/Footer/built_on_kilt.svg" class="kiltLogo" alt="built on KILT logo" width="114" height="28" loading="lazy" decoding="async" />
+    <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;

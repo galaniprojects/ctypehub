@@ -1,6 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
 import buttonStyles from '../Button.module.css';
 
 import { paths } from '../../paths';
@@ -16,7 +14,7 @@ const { create } = Astro.props;
 
 <header>
   <a href={paths.home} class="logo">
-    <Image src={logo} alt="CTypeHub logo" />
+    <img src={logo.src} alt="CTypeHub logo" />
   </a>
   {
     create ? (
