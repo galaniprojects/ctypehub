@@ -8,8 +8,10 @@ const { subscan } = configuration;
 
 const SUBSCAN_MAX_ROWS = 100;
 const QUERY_INTERVAL_MS = 1000;
+const BLOCK_BATCH_SIZE = 100_000;
 
-const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
+export const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
+export const metadataApi = `https://${subscan.network}.api.subscan.io/api/scan/metadata`;
 
 const headers = {
   'X-API-Key': subscan.secret,
@@ -27,8 +29,12 @@ export interface EventsResponseJson {
   };
 }
 
+export interface MetadataResponseJson {
+  data: { blockNum: string };
+}
+
 export async function getEvents({
-  fromBlock: from_block,
+  fromBlock,
   row = SUBSCAN_MAX_ROWS,
   ...parameters
 }: {
@@ -40,7 +46,7 @@ export async function getEvents({
 }) {
   const json = {
     ...parameters,
-    block_range: `${from_block}-${from_block + 100_000}`,
+    block_range: `${fromBlock}-${fromBlock + BLOCK_BATCH_SIZE}`,
     row,
     finalized: true,
   };
@@ -71,41 +77,60 @@ export async function* subScanEventGenerator(
   call: string,
   fromBlock: number,
 ) {
-  const parameters = {
-    module,
-    call,
-    fromBlock,
-  };
-  const { count } = await getEvents({ ...parameters, page: 0, row: 1 });
+  let startBlock = fromBlock;
 
-  if (count === 0) {
-    logger.debug(`No new SubScan events found for ${call}`);
-    return;
-  }
+  const {
+    data: { blockNum: currentBlock },
+  } = await got.post(metadataApi, { headers }).json<MetadataResponseJson>();
 
-  logger.debug(
-    `Found ${count} (really ${count - 1}?) new SubScan events for ${call}`,
-  );
+  // get events in batches until the current block is reached
+  while (startBlock < Number(currentBlock)) {
+    const parameters = {
+      module,
+      call,
+      fromBlock: startBlock,
+    };
 
-  // 10001 items should be split into 101 pages (0 to 100 inclusive)
-  // of 100 items each except the last one with 1 item,
-  // but SubScan seems to have a bug and returns page 100 without items.
-  const remainder = count % SUBSCAN_MAX_ROWS;
-  const ignoreLastPage = count > SUBSCAN_MAX_ROWS && remainder === 1;
-  const ignoredPages = ignoreLastPage ? 1 : 0;
-  const pages = Math.ceil(count / SUBSCAN_MAX_ROWS) - 1;
+    const { count } = await getEvents({ ...parameters, page: 0, row: 1 });
 
-  for (let page = pages - ignoredPages; page >= 0; page--) {
-    const { events } = await getEvents({ ...parameters, page });
-    if (!events) {
-      throw new Error('No events');
+    const blockBatch = `${startBlock} - ${startBlock + BLOCK_BATCH_SIZE}`;
+
+    if (count === 0) {
+      logger.debug(
+        `No new SubScan events found for ${call} in batch ${blockBatch}`,
+      );
+      startBlock += BLOCK_BATCH_SIZE;
+      continue;
     }
 
-    logger.debug(`Loaded events page ${page} for ${call}`);
-    for (const event of events) {
-      yield event;
+    logger.debug(
+      `Found ${count} (really ${
+        count - 1
+      }?) new SubScan events for ${call} in batch ${blockBatch}`,
+    );
+
+    // 10001 items should be split into 101 pages (0 to 100 inclusive)
+    // of 100 items each except the last one with 1 item,
+    // but SubScan seems to have a bug and returns page 100 without items.
+    const remainder = count % SUBSCAN_MAX_ROWS;
+    const ignoreLastPage = count > SUBSCAN_MAX_ROWS && remainder === 1;
+    const ignoredPages = ignoreLastPage ? 1 : 0;
+    const pages = Math.ceil(count / SUBSCAN_MAX_ROWS) - 1;
+
+    for (let page = pages - ignoredPages; page >= 0; page--) {
+      const { events } = await getEvents({ ...parameters, page });
+      if (!events) {
+        throw new Error('No events');
+      }
+
+      logger.debug(`Loaded events page ${page} for ${call}`);
+      for (const event of events) {
+        yield event;
+      }
+
+      await sleep(QUERY_INTERVAL_MS);
     }
 
-    await sleep(QUERY_INTERVAL_MS);
+    startBlock += BLOCK_BATCH_SIZE;
   }
 }
