@@ -2,12 +2,23 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { got } from 'got';
 
+import { ConfigService, connect } from '@kiltprotocol/sdk-js';
+
 import {
   type EventsResponseJson,
   getEvents,
   subScanEventGenerator,
 } from './subScan';
 import { configuration } from './configuration';
+
+const api = {
+  query: {
+    system: {
+      number: () => ({ toNumber: () => 12345 }),
+    },
+  },
+} as unknown as Awaited<ReturnType<typeof connect>>;
+ConfigService.set({ api });
 
 let postResponse: EventsResponseJson;
 vi.mock('got', () => ({
@@ -195,6 +206,31 @@ describe('subScan', () => {
 
       const timestamps = events.map(({ blockTimestampMs }) => blockTimestampMs);
       expect(timestamps).toEqual([0, 1000, 2000, 3000]);
+    });
+  });
+  it('should get events in batches if current block is higher than block range', async () => {
+    const api = {
+      query: {
+        system: {
+          number: () => ({ toNumber: () => 150000 }),
+        },
+      },
+    } as unknown as Awaited<ReturnType<typeof connect>>;
+    ConfigService.set({ api });
+
+    postResponse = { data: { count: 100, events: [] } };
+
+    const eventGenerator = subScanEventGenerator(module, call, 0);
+
+    for await (const event of eventGenerator) {
+      expect(event).toBeDefined();
+    }
+
+    expect(got.post).toHaveBeenCalledTimes(4);
+    const { calls } = vi.mocked(got.post).mock;
+
+    expect(calls[3][1]).toMatchObject({
+      json: { block_range: '100000-200000', page: 0, row: 100 },
     });
   });
 });
