@@ -12,7 +12,7 @@ const SUBSCAN_MAX_ROWS = 100;
 const QUERY_INTERVAL_MS = 1000;
 const BLOCK_RANGE_SIZE = 100_000;
 
-export const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
+const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
 
 const headers = {
   'X-API-Key': subscan.secret,
