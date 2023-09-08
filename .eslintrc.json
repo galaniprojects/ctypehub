@@ -23,7 +23,7 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
     "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/*.test.*", "testing/*.*", "vitest.config.ts"] }],
-    "import/no-unresolved": ["error", { "ignore": ["\\.js$", "astro:assets"] }],
+    "import/no-unresolved": ["error", { "ignore": ["\\.js$"] }],
     "import/order": ["error", {
       "newlines-between": "always-and-inside-groups",
       "groups": ["builtin", "type", "external", "internal", "parent", "sibling", "index", "object"],
