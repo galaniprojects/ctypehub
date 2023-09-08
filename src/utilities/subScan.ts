@@ -13,7 +13,6 @@ const QUERY_INTERVAL_MS = 1000;
 const BLOCK_RANGE_SIZE = 100_000;
 
 export const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
-export const metadataApi = `https://${subscan.network}.api.subscan.io/api/scan/metadata`;
 
 const headers = {
   'X-API-Key': subscan.secret,
@@ -29,10 +28,6 @@ export interface EventsResponseJson {
       extrinsic_hash: `0x${string}`;
     }> | null;
   };
-}
-
-export interface MetadataResponseJson {
-  data: { blockNum: string };
 }
 
 export async function getEvents({
