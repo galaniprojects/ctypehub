@@ -1,5 +1,7 @@
 import { got } from 'got';
 
+import { ConfigService } from '@kiltprotocol/sdk-js';
+
 import { configuration } from './configuration';
 import { logger } from './logger';
 import { sleep } from './sleep';
@@ -8,7 +10,7 @@ const { subscan } = configuration;
 
 const SUBSCAN_MAX_ROWS = 100;
 const QUERY_INTERVAL_MS = 1000;
-const BLOCK_BATCH_SIZE = 100_000;
+const BLOCK_RANGE_SIZE = 100_000;
 
 export const eventsApi = `https://${subscan.network}.api.subscan.io/api/scan/events`;
 export const metadataApi = `https://${subscan.network}.api.subscan.io/api/scan/metadata`;
@@ -34,7 +36,7 @@ export interface MetadataResponseJson {
 }
 
 export async function getEvents({
-  fromBlock,
+  fromBlock: startBlock,
   row = SUBSCAN_MAX_ROWS,
   ...parameters
 }: {
@@ -46,7 +48,7 @@ export async function getEvents({
 }) {
   const json = {
     ...parameters,
-    block_range: `${fromBlock}-${fromBlock + BLOCK_BATCH_SIZE}`,
+    block_range: `${startBlock}-${startBlock + BLOCK_RANGE_SIZE}`,
     row,
     finalized: true,
   };
@@ -77,14 +79,16 @@ export async function* subScanEventGenerator(
   call: string,
   fromBlock: number,
 ) {
-  let startBlock = fromBlock;
+  const api = ConfigService.get('api');
 
-  const {
-    data: { blockNum: currentBlock },
-  } = await got.post(metadataApi, { headers }).json<MetadataResponseJson>();
+  const currentBlock = (await api.query.system.number()).toNumber();
 
   // get events in batches until the current block is reached
-  while (startBlock < Number(currentBlock)) {
+  for (
+    let startBlock = fromBlock;
+    startBlock < currentBlock;
+    startBlock += BLOCK_RANGE_SIZE
+  ) {
     const parameters = {
       module,
       call,
@@ -93,44 +97,36 @@ export async function* subScanEventGenerator(
 
     const { count } = await getEvents({ ...parameters, page: 0, row: 1 });
 
-    const blockBatch = `${startBlock} - ${startBlock + BLOCK_BATCH_SIZE}`;
+    const blockRange = `${startBlock} - ${startBlock + BLOCK_RANGE_SIZE}`;
 
     if (count === 0) {
       logger.debug(
-        `No new SubScan events found for ${call} in batch ${blockBatch}`,
+        `No new SubScan events found for ${call} in block range ${blockRange}`,
       );
-      startBlock += BLOCK_BATCH_SIZE;
+      await sleep(QUERY_INTERVAL_MS);
       continue;
     }
 
     logger.debug(
-      `Found ${count} (really ${
-        count - 1
-      }?) new SubScan events for ${call} in batch ${blockBatch}`,
+      `Found ${count} new SubScan events for ${call} in block range ${blockRange}`,
     );
 
-    // 10001 items should be split into 101 pages (0 to 100 inclusive)
-    // of 100 items each except the last one with 1 item,
-    // but SubScan seems to have a bug and returns page 100 without items.
-    const remainder = count % SUBSCAN_MAX_ROWS;
-    const ignoreLastPage = count > SUBSCAN_MAX_ROWS && remainder === 1;
-    const ignoredPages = ignoreLastPage ? 1 : 0;
     const pages = Math.ceil(count / SUBSCAN_MAX_ROWS) - 1;
 
-    for (let page = pages - ignoredPages; page >= 0; page--) {
+    for (let page = pages; page >= 0; page--) {
       const { events } = await getEvents({ ...parameters, page });
       if (!events) {
-        throw new Error('No events');
+        continue;
       }
 
-      logger.debug(`Loaded events page ${page} for ${call}`);
+      logger.debug(
+        `Loaded events page ${page} for ${call} in block range ${blockRange}`,
+      );
       for (const event of events) {
         yield event;
       }
 
       await sleep(QUERY_INTERVAL_MS);
     }
-
-    startBlock += BLOCK_BATCH_SIZE;
   }
 }

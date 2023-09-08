@@ -2,28 +2,31 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { got } from 'got';
 
+import { ConfigService, connect } from '@kiltprotocol/sdk-js';
+
 import {
   type EventsResponseJson,
   getEvents,
   subScanEventGenerator,
-  eventsApi,
-  type MetadataResponseJson,
-  metadataApi,
 } from './subScan';
 import { configuration } from './configuration';
 
-let eventsResponse: EventsResponseJson;
-let metadataResponse: MetadataResponseJson;
+const api = {
+  query: {
+    system: {
+      number: () => {
+        return { toNumber: () => 100000 };
+      },
+    },
+  },
+} as unknown as Awaited<ReturnType<typeof connect>>;
+ConfigService.set({ api });
 
+let postResponse: EventsResponseJson;
 vi.mock('got', () => ({
   got: {
-    post: vi.fn().mockImplementation((url) => {
-      if (url === eventsApi) {
-        return { json: () => eventsResponse };
-      }
-      if (url === metadataApi) {
-        return { json: () => metadataResponse };
-      }
+    post: vi.fn().mockReturnValue({
+      json: () => postResponse,
     }),
   },
 }));
@@ -38,7 +41,7 @@ const call = 'CTypeCreated';
 describe('subScan', () => {
   describe('getEvents', () => {
     it('should query the subscan API', async () => {
-      eventsResponse = { data: { count: 0, events: null } };
+      postResponse = { data: { count: 0, events: null } };
 
       await getEvents({
         module,
@@ -65,7 +68,7 @@ describe('subScan', () => {
     });
 
     it('should return the count when no events exist', async () => {
-      eventsResponse = { data: { count: 0, events: null } };
+      postResponse = { data: { count: 0, events: null } };
 
       const cTypeEvents = await getEvents({
         module,
@@ -80,7 +83,7 @@ describe('subScan', () => {
     });
 
     it('should return parsed events in reverse order', async () => {
-      eventsResponse = {
+      postResponse = {
         data: {
           count: 2,
           events: [
@@ -128,8 +131,7 @@ describe('subScan', () => {
 
   describe('subScanEventGenerator', () => {
     it('should iterate through pages in reverse order', async () => {
-      metadataResponse = { data: { blockNum: '100000' } };
-      eventsResponse = { data: { count: 200, events: [] } };
+      postResponse = { data: { count: 200, events: [] } };
 
       const eventGenerator = subScanEventGenerator(module, call, 0);
 
@@ -137,28 +139,21 @@ describe('subScan', () => {
         expect(event).toBeDefined();
       }
 
-      expect(got.post).toHaveBeenCalledTimes(4);
+      expect(got.post).toHaveBeenCalledTimes(3);
       const { calls } = vi.mocked(got.post).mock;
 
-      // get current block number
-      expect(calls[0][1]).toMatchObject({});
-
       // get count
-      expect(calls[1][1]).toMatchObject({ json: { page: 0, row: 1 } });
+      expect(calls[0][1]).toMatchObject({ json: { page: 0, row: 1 } });
 
       // get last page
-      expect(calls[2][1]).toMatchObject({ json: { page: 1, row: 100 } });
+      expect(calls[1][1]).toMatchObject({ json: { page: 1, row: 100 } });
 
       // get first page
-      expect(calls[3][1]).toMatchObject({ json: { page: 0, row: 100 } });
+      expect(calls[2][1]).toMatchObject({ json: { page: 0, row: 100 } });
     });
 
     it('should yield events in reverse order', async () => {
       vi.mocked(got.post)
-        .mockReturnValueOnce({
-          // @ts-expect-error but the code doesn’t care about the other members
-          json: () => ({ data: { blockNum: '100000' } }),
-        })
         .mockReturnValueOnce({
           // @ts-expect-error but the code doesn’t care about the other members
           json: () => ({ data: { count: 200 } }),
@@ -214,15 +209,32 @@ describe('subScan', () => {
       const timestamps = events.map(({ blockTimestampMs }) => blockTimestampMs);
       expect(timestamps).toEqual([0, 1000, 2000, 3000]);
     });
+  });
+  it('should get events in batches if current block is higher than block range', async () => {
+    const api = {
+      query: {
+        system: {
+          number: () => {
+            return { toNumber: () => 150000 };
+          },
+        },
+      },
+    } as unknown as Awaited<ReturnType<typeof connect>>;
+    ConfigService.set({ api });
 
-    it('should get events in batches if current block is higher than block range', async () => {
-      metadataResponse = { data: { blockNum: '150000' } };
-      eventsResponse = { data: { count: 50, events: [] } };
-      const eventGenerator = subScanEventGenerator(module, call, 0);
-      for await (const event of eventGenerator) {
-        expect(event).toBeDefined();
-      }
-      expect(got.post).toHaveBeenCalledTimes(5);
+    postResponse = { data: { count: 100, events: [] } };
+
+    const eventGenerator = subScanEventGenerator(module, call, 0);
+
+    for await (const event of eventGenerator) {
+      expect(event).toBeDefined();
+    }
+
+    expect(got.post).toHaveBeenCalledTimes(4);
+    const { calls } = vi.mocked(got.post).mock;
+
+    expect(calls[3][1]).toMatchObject({
+      json: { block_range: '100000-200000', page: 0, row: 100 },
     });
   });
 });
