@@ -9,19 +9,21 @@ exports[`CTypeDetails > should handle hidden CType 1`] = `
     <h1>Page not found</h1>
   </main>
   <footer>
-    <nav><!-- TODO: links to legal docs --></nav>
     <p>
       Made with ♥︎ by
       <img class="galaniLogo" src="/src/components/Footer/galaniprojects.svg" alt="galaniprojects logo" />
       © 2023
     </p>
+    <nav>
+      <span><a href="/imprint">Imprint</a></span><span><a href="/terms">Terms</a></span><span><a href="/privacy">Privacy</a></span>
+    </nav>
     <img class="kiltLogo" src="/src/components/Footer/built_on_kilt.svg" alt="built on KILT logo" />
   </footer>
 </body>
 `;
 
 exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
-<section class="_container">
+<section class="_bigContainer _container">
   <h1 class="title">Everything everywhere</h1>
   <fieldset>
     <legend>Creator</legend>
@@ -173,7 +175,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
 `;
 
 exports[`CTypeDetails > should handle nested CType 1`] = `
-<section class="_container">
+<section class="_bigContainer _container">
   <h1 class="title">Example nested CType</h1>
   <fieldset>
     <legend>Creator</legend>
@@ -239,7 +241,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
 `;
 
 exports[`CTypeDetails > should handle nested CType property 1`] = `
-<section class="_container">
+<section class="_bigContainer _container">
   <h1 class="title">Example nested CType property</h1>
   <fieldset>
     <legend>Creator</legend>
@@ -305,7 +307,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
 `;
 
 exports[`CTypeDetails > should match snapshot 1`] = `
-<section class="_container">
+<section class="_bigContainer _container">
   <h1 class="title">Example CType</h1>
   <fieldset>
     <legend>Creator</legend>

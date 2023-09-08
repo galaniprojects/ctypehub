@@ -1,12 +1,11 @@
 ---
+import { paths } from '../../paths';
+
 import kiltLogo from './built_on_kilt.svg';
 import galaniLogo from './galaniprojects.svg';
 ---
 
 <footer>
-  <nav>
-    <!-- TODO: links to legal docs -->
-  </nav>
   <p>
     Made with ♥︎ by <img
       class="galaniLogo"
@@ -14,6 +13,11 @@ import galaniLogo from './galaniprojects.svg';
       alt="galaniprojects logo"
     /> © 2023
   </p>
+  <nav>
+    <span><a href={paths.imprint}>Imprint</a></span>
+    <span><a href={paths.terms}>Terms</a></span>
+    <span><a href={paths.privacy}>Privacy</a></span>
+  </nav>
   <img class="kiltLogo" src={kiltLogo.src} alt="built on KILT logo" />
 </footer>
 
@@ -33,6 +37,22 @@ import galaniLogo from './galaniprojects.svg';
   nav {
     grid-column: 1;
     grid-row: 2;
+  }
+
+  nav span:not(:last-child)::after {
+    content: '|';
+    color: var(--color-link);
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+    padding: 0.25rem;
+  }
+
+  a:focus,
+  a:hover {
+    text-decoration: underline;
   }
 
   p {
