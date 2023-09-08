@@ -14,9 +14,7 @@ import { configuration } from './configuration';
 const api = {
   query: {
     system: {
-      number: () => {
-        return { toNumber: () => 100000 };
-      },
+      number: () => ({ toNumber: () => 12345 }),
     },
   },
 } as unknown as Awaited<ReturnType<typeof connect>>;
@@ -214,9 +212,7 @@ describe('subScan', () => {
     const api = {
       query: {
         system: {
-          number: () => {
-            return { toNumber: () => 150000 };
-          },
+          number: () => ({ toNumber: () => 150000 }),
         },
       },
     } as unknown as Awaited<ReturnType<typeof connect>>;
