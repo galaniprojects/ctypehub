@@ -48,6 +48,7 @@
   inline-size: 100%;
   block-size: 2.25rem;
   text-align: start;
+  border-radius: var(--border-radius);
   background: buttonface url('./plus-solid.svg') no-repeat right 1rem
     center/0.75rem;
 }
