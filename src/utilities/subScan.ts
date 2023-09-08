@@ -31,7 +31,7 @@ export interface EventsResponseJson {
 }
 
 export async function getEvents({
-  fromBlock: startBlock,
+  fromBlock,
   row = SUBSCAN_MAX_ROWS,
   ...parameters
 }: {
@@ -43,7 +43,7 @@ export async function getEvents({
 }) {
   const json = {
     ...parameters,
-    block_range: `${startBlock}-${startBlock + BLOCK_RANGE_SIZE}`,
+    block_range: `${fromBlock}-${fromBlock + BLOCK_RANGE_SIZE}`,
     row,
     finalized: true,
   };
@@ -72,7 +72,7 @@ export async function getEvents({
 export async function* subScanEventGenerator(
   module: string,
   call: string,
-  fromBlock: number,
+  startBlock: number,
 ) {
   const api = ConfigService.get('api');
 
@@ -80,19 +80,19 @@ export async function* subScanEventGenerator(
 
   // get events in batches until the current block is reached
   for (
-    let startBlock = fromBlock;
-    startBlock < currentBlock;
-    startBlock += BLOCK_RANGE_SIZE
+    let fromBlock = startBlock;
+    fromBlock < currentBlock;
+    fromBlock += BLOCK_RANGE_SIZE
   ) {
     const parameters = {
       module,
       call,
-      fromBlock: startBlock,
+      fromBlock,
     };
 
     const { count } = await getEvents({ ...parameters, page: 0, row: 1 });
 
-    const blockRange = `${startBlock} - ${startBlock + BLOCK_RANGE_SIZE}`;
+    const blockRange = `${fromBlock} - ${fromBlock + BLOCK_RANGE_SIZE}`;
 
     if (count === 0) {
       logger.debug(
