@@ -32,7 +32,7 @@ export const apiWindow = window as unknown as {
   kilt: Record<string, InjectedWindowProvider>;
 };
 
-export function getCompatibleExtensions(): Array<string> {
+export function getCompatibleExtensions(): string[] {
   return Object.entries(apiWindow.kilt)
     .filter(([, provider]) => provider.specVersion.startsWith('3.'))
     .map(([name]) => name);
@@ -68,7 +68,7 @@ async function checkSession(json: CheckSessionInput, sessionId: string) {
 }
 
 export async function getSession(
-  provider: InjectedWindowProvider,
+  provider?: InjectedWindowProvider,
 ): Promise<Session> {
   if (!provider) {
     throw new Error('No provider');

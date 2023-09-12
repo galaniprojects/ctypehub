@@ -1,4 +1,5 @@
 import { type MouseEvent, useCallback, useEffect, useState } from 'react';
+import { type IEncryptedMessage } from '@kiltprotocol/sdk-js';
 
 import styles from './Moderation.module.css';
 import buttonStyles from '../Button.module.css';
@@ -148,7 +149,7 @@ export function Moderation() {
 
         // encrypt message on the backend
         const response = await fetch(paths.moderationVerify, { headers });
-        const message = await response.json();
+        const message = (await response.json()) as IEncryptedMessage;
 
         // forward the encrypted message to the extension
         await session.send(message);

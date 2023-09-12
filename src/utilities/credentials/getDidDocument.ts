@@ -59,7 +59,7 @@ export const getDidDocument = memoize(async () => {
   const { did } = configuration;
 
   const resolved = await Did.resolve(did);
-  if (!resolved || !resolved.document) {
+  if (!resolved?.document) {
     throw new Error(`Could not resolve the configured DID ${did}`);
   }
 

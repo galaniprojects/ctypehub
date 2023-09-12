@@ -106,7 +106,7 @@ export async function POST({ request }: APIContext) {
     logger.debug('Session confirmation started');
 
     const { encryptionKeyUri, encryptedChallenge, nonce } =
-      (await getRequestJson(request)) as CheckSessionInput;
+      await getRequestJson<CheckSessionInput>(request);
 
     async function getEncryptionKey(uri: DidResourceUri) {
       try {
@@ -147,7 +147,7 @@ export async function POST({ request }: APIContext) {
       } catch (exception) {
         logger.error(exception);
         throw makeErrorResponse(
-          `Could not decrypt challenge: ${exception}`,
+          `Could not decrypt challenge: ${String(exception)}`,
           StatusCodes.FORBIDDEN,
         );
       }

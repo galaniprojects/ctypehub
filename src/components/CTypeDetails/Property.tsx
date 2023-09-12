@@ -45,14 +45,14 @@ export function Property({ ofArray, value }: Props) {
         <dt className={styles.term}>Type:</dt>
         <dd className={styles.definition}>array</dd>
 
-        {minItems && (
+        {minItems !== undefined && (
           <Fragment>
             <dt className={styles.term}>Minimum number of values:</dt>
             <dd className={styles.definition}>{minItems}</dd>
           </Fragment>
         )}
 
-        {maxItems && (
+        {maxItems !== undefined && (
           <Fragment>
             <dt className={styles.term}>Maximum number of values:</dt>
             <dd className={styles.definition}>{maxItems}</dd>
@@ -94,28 +94,28 @@ export function Property({ ofArray, value }: Props) {
         </Fragment>
       )}
 
-      {isString && value.minLength && (
+      {isString && value.minLength !== undefined && (
         <Fragment>
           <dt className={styles.term}>Minimum length:</dt>
           <dd className={styles.definition}>{value.minLength}</dd>
         </Fragment>
       )}
 
-      {isString && value.maxLength && (
+      {isString && value.maxLength !== undefined && (
         <Fragment>
           <dt className={styles.term}>Maximum length:</dt>
           <dd className={styles.definition}>{value.maxLength}</dd>
         </Fragment>
       )}
 
-      {isNumeric && value.minimum && (
+      {isNumeric && value.minimum !== undefined && (
         <Fragment>
           <dt className={styles.term}>Minimum value:</dt>
           <dd className={styles.definition}>{value.minimum}</dd>
         </Fragment>
       )}
 
-      {isNumeric && value.maximum && (
+      {isNumeric && value.maximum !== undefined && (
         <Fragment>
           <dt className={styles.term}>Maximum value:</dt>
           <dd className={styles.definition}>{value.maximum}</dd>

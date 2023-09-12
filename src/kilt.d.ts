@@ -1,5 +1,3 @@
-/// <reference types="astro/client" />
-
 import type { DidResourceUri, KiltAddress } from '@kiltprotocol/sdk-js';
 
 declare global {

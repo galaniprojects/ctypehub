@@ -12,7 +12,7 @@ const { prev, next, currentPage } = Astro.props;
 ---
 
 {
-  (prev || next) && (
+  (prev ?? next) && (
     <nav class={containerStyles.container}>
       {next && (
         <a href={next} rel="next" class={buttonStyles.primary}>

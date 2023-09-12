@@ -13,7 +13,7 @@ module.exports = {
     );
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.removeIndex('Tags', 'tags_c_type_id_tag_name');
   },
 };

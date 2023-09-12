@@ -1,6 +1,6 @@
 import { got } from 'got';
 
-import { ConfigService } from '@kiltprotocol/sdk-js';
+import { ConfigService, type HexString } from '@kiltprotocol/sdk-js';
 
 import { configuration } from './configuration';
 import { logger } from './logger';
@@ -25,7 +25,7 @@ export interface EventsResponseJson {
       params: string;
       block_num: number;
       block_timestamp: number;
-      extrinsic_hash: `0x${string}`;
+      extrinsic_hash: HexString;
     }> | null;
   };
 }
@@ -58,10 +58,11 @@ export async function getEvents({
 
   events.reverse();
   const parsedEvents = events.map(
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     ({ block_num, block_timestamp, extrinsic_hash, params }) => ({
       block: block_num,
       blockTimestampMs: block_timestamp * 1000,
-      params: JSON.parse(params),
+      params: JSON.parse(params) as Array<Record<string, unknown>>,
       extrinsicHash: extrinsic_hash,
     }),
   );

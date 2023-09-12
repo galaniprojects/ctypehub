@@ -37,7 +37,7 @@ module.exports = {
     await sequelize.sync();
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.dropTable('Attestations');
   },
 };

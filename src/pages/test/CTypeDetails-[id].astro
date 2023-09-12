@@ -7,9 +7,13 @@ import { mockCTypes } from '../../utilities/mockCTypes';
 
 const { isProduction } = configuration;
 
-const cType = mockCTypes[Astro.params.id || ''];
+const cType = mockCTypes[Astro.params.id as string];
 
-if (!cType || cType.isHidden || isProduction) {
+if (
+  !(Astro.params.id in mockCTypes) ||
+  Boolean(cType.isHidden) ||
+  isProduction
+) {
   return new NotFoundResponse();
 }
 ---

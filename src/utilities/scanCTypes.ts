@@ -1,4 +1,4 @@
-import { CType } from '@kiltprotocol/sdk-js';
+import { CType, type HexString } from '@kiltprotocol/sdk-js';
 
 import { Op } from 'sequelize';
 
@@ -8,8 +8,8 @@ import { logger } from './logger';
 import { subScanEventGenerator } from './subScan';
 
 export type EventParams = [
-  { type_name: 'CTypeCreatorOf'; value: `0x${string}` },
-  { type_name: 'CTypeHashOf'; value: `0x${string}` },
+  { type_name: 'CTypeCreatorOf'; value: HexString },
+  { type_name: 'CTypeHashOf'; value: HexString },
 ];
 
 export async function scanCTypes() {
@@ -30,7 +30,8 @@ export async function scanCTypes() {
   );
 
   for await (const event of eventGenerator) {
-    const { blockTimestampMs, params, extrinsicHash } = event;
+    const { blockTimestampMs, extrinsicHash } = event;
+    const params = event.params as EventParams;
     const cTypeHash = params[1].value;
 
     let cTypeDetails: CType.ICTypeDetails;

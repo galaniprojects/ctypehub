@@ -14,7 +14,7 @@ export type PropertyType =
 
 export function getProperties(
   count: number,
-  allValues: [string, string][],
+  allValues: Array<[string, string]>,
 ): ICType['properties'] {
   const rawProperties = offsets(count).map((index) => {
     const prefix = getPrefixByIndex(index);
@@ -26,6 +26,8 @@ export function getProperties(
     );
   });
 
+  // I couldn’t fix that
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return Object.fromEntries(
     rawProperties.map((property) => {
       const type = property.type as PropertyType;

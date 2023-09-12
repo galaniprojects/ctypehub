@@ -14,8 +14,8 @@ class ConfigurationError extends Error {
 }
 
 const subscan = {
-  network: import.meta.env.SUBSCAN_NETWORK,
-  secret: import.meta.env.SECRET_SUBSCAN,
+  network: import.meta.env.SUBSCAN_NETWORK as string,
+  secret: import.meta.env.SECRET_SUBSCAN as string,
 };
 if (!subscan.network) {
   throw new ConfigurationError('No subscan network provided');
@@ -24,44 +24,44 @@ if (!subscan.secret) {
   throw new ConfigurationError('No subscan secret provided');
 }
 
-const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT;
+const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT as string;
 if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
 }
 
-const did = import.meta.env.DID as DidUri;
+const did = import.meta.env.DID as DidUri | undefined;
 if (!did) {
   throw new ConfigurationError('DID is not provided');
 }
-const authenticationMnemonic = import.meta.env.SECRET_AUTHENTICATION_MNEMONIC;
+const authenticationMnemonic = import.meta.env
+  .SECRET_AUTHENTICATION_MNEMONIC as string;
 if (!authenticationMnemonic) {
   throw new ConfigurationError(
     'SECRET_AUTHENTICATION_MNEMONIC is not provided',
   );
 }
 const assertionMethodMnemonic = import.meta.env
-  .SECRET_ASSERTION_METHOD_MNEMONIC;
+  .SECRET_ASSERTION_METHOD_MNEMONIC as string;
 if (!assertionMethodMnemonic) {
   throw new ConfigurationError(
     'SECRET_ASSERTION_METHOD_MNEMONIC is not provided',
   );
 }
-const keyAgreementMnemonic = import.meta.env.SECRET_KEY_AGREEMENT_MNEMONIC;
+const keyAgreementMnemonic = import.meta.env
+  .SECRET_KEY_AGREEMENT_MNEMONIC as string;
 if (!keyAgreementMnemonic) {
   throw new ConfigurationError('SECRET_KEY_AGREEMENT_MNEMONIC is not provided');
 }
-const payerMnemonic = import.meta.env.SECRET_PAYER_MNEMONIC;
+const payerMnemonic = import.meta.env.SECRET_PAYER_MNEMONIC as string;
 if (!payerMnemonic) {
   throw new ConfigurationError('SECRET_PAYER_MNEMONIC is not provided');
 }
-
 export const configuration = {
-  port: import.meta.env.PORT || 3000,
   isProduction: import.meta.env.PROD,
   isTest: import.meta.env.MODE === 'test',
   distFolder: path.join(cwd(), 'dist', 'frontend'),
   databaseUri:
-    import.meta.env.DATABASE_URI ||
+    (import.meta.env.DATABASE_URI as string) ||
     'postgres://postgres:postgres@localhost:5432/postgres',
   subscan,
   blockchainEndpoint,

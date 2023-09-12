@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { got } from 'got';
 
-import { ConfigService, connect } from '@kiltprotocol/sdk-js';
+import { ConfigService, type connect } from '@kiltprotocol/sdk-js';
 
 import {
   type EventsResponseJson,

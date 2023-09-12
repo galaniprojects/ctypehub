@@ -15,7 +15,7 @@ export async function signWithAssertionMethod({ data }: { data: Uint8Array }) {
   return {
     signature: assertionMethod.sign(data, { withType: false }),
     keyType: assertionMethodKey.type,
-    keyUri: `${did}${assertionMethodKey.id}` as DidResourceUri,
+    keyUri: `${did}${assertionMethodKey.id}`,
   };
 }
 
@@ -53,7 +53,7 @@ export async function decrypt({
     peerPublicKey,
     keyAgreement.secretKey,
   );
-  if (!data) {
+  if (data === false) {
     throw new Error('Failed to decrypt with given key');
   }
 

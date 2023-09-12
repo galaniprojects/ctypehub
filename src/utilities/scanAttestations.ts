@@ -1,4 +1,4 @@
-import { CType, Did } from '@kiltprotocol/sdk-js';
+import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
@@ -6,10 +6,10 @@ import { subScanEventGenerator } from './subScan';
 import { logger } from './logger';
 
 export type EventParams = [
-  { type_name: 'AttesterOf'; value: `0x${string}` },
-  { type_name: 'ClaimHashOf'; value: `0x${string}` },
-  { type_name: 'CTypeHashOf'; value: `0x${string}` },
-  { type_name: 'DelegationNodeIdOf'; value: `0x${string}` | null },
+  { type_name: 'AttesterOf'; value: Parameters<typeof Did.fromChain>[0] },
+  { type_name: 'ClaimHashOf'; value: HexString },
+  { type_name: 'CTypeHashOf'; value: HexString },
+  { type_name: 'DelegationNodeIdOf'; value: HexString | null },
 ];
 
 export async function scanAttestations() {
@@ -27,7 +27,8 @@ export async function scanAttestations() {
   );
 
   for await (const event of eventGenerator) {
-    const { block, blockTimestampMs, params, extrinsicHash } = event;
+    const { block, blockTimestampMs, extrinsicHash } = event;
+    const params = event.params as EventParams;
     const createdAt = new Date(blockTimestampMs);
 
     const owner = Did.fromChain(params[0].value);
@@ -46,10 +47,7 @@ export async function scanAttestations() {
         block: String(block),
       });
     } catch (exception) {
-      if (
-        exception &&
-        (exception as Error).name === 'SequelizeForeignKeyConstraintError'
-      ) {
+      if ((exception as Error).name === 'SequelizeForeignKeyConstraintError') {
         // Likely a broken CType which we haven’t saved to the database
         logger.debug(`Ignoring attestation ${claimHash} for unknown CType`);
         continue;
