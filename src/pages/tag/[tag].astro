@@ -16,6 +16,14 @@ if (!tag) {
   return new NotFoundResponse();
 }
 
+const foundTag = await Tag.findOne({ where: { tagName: tag } });
+
+if (!foundTag) {
+  return new NotFoundResponse();
+}
+
+const { tagName } = foundTag.dataValues;
+
 const query = Astro.url.searchParams.get('query');
 
 const where = {
@@ -25,17 +33,13 @@ const where = {
   }),
 };
 
-const include = [{ model: Tag, as: 'tags', where: { tagName: tag } }];
+const include = [{ model: Tag, as: 'tags', where: { tagName } }];
 
 const {
   data: cTypeResults,
   currentPage,
   url: { prev, next },
 } = await paginate(Astro.url, where, include);
-
-if (cTypeResults.length === 0) {
-  return new NotFoundResponse();
-}
 ---
 
 <Layout title=`#${tag}`>
