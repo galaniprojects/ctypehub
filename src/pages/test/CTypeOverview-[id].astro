@@ -7,8 +7,9 @@ import { mockCTypes } from '../../utilities/mockCTypes';
 
 const { isProduction } = configuration;
 
-const cType = mockCTypes[Astro.params.id || ''];
-if (!cType || isProduction) {
+const id = Astro.params.id as string;
+const cType = mockCTypes[id];
+if (!(id in mockCTypes) || isProduction) {
   return new NotFoundResponse();
 }
 ---

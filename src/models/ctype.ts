@@ -17,7 +17,7 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
 export interface CTypeData extends CTypeDataInput {
   attestationsCount: string;
   isHidden: boolean;
-  tags?: Pick<Tag, 'dataValues'>[];
+  tags?: Array<Pick<Tag, 'dataValues'>>;
 }
 
 export class CType extends Model<CTypeData, CTypeDataInput> {}

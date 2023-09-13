@@ -1,5 +1,5 @@
 import { promisify } from 'node:util';
-import { ChildProcess, exec, spawn } from 'node:child_process';
+import { type ChildProcess, exec, spawn } from 'node:child_process';
 import process from 'node:process';
 
 import {
@@ -9,7 +9,7 @@ import {
 } from 'testcontainers';
 import {
   PostgreSqlContainer,
-  StartedPostgreSqlContainer,
+  type StartedPostgreSqlContainer,
 } from '@testcontainers/postgresql';
 
 const env = {
@@ -79,7 +79,7 @@ export async function setup() {
 export async function teardown() {
   await new Promise<void>((resolve) => {
     server.on('close', resolve);
-    if (server.pid) {
+    if (server.pid !== undefined) {
       process.kill(-server.pid);
     }
   });

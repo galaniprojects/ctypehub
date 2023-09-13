@@ -35,7 +35,7 @@ describe('paginate', () => {
     const paginated = await paginate(url);
 
     expect(paginated).toMatchObject<Page<CType>>({
-      data: new Array(19),
+      data: new Array(19) as CType[],
       start: 39,
       end: 21,
       total: 39,
@@ -59,7 +59,7 @@ describe('paginate', () => {
     const paginated = await paginate(url);
 
     expect(paginated).toMatchObject<Page<CType>>({
-      data: new Array(10),
+      data: new Array(10) as CType[],
       start: 20,
       end: 11,
       total: 39,
@@ -113,7 +113,7 @@ describe('paginate', () => {
     const paginated = await paginate(url);
 
     expect(paginated).toMatchObject<Page<CType>>({
-      data: new Array(6),
+      data: new Array(6) as CType[],
       start: 6,
       end: 1,
       total: 6,

@@ -35,7 +35,7 @@ export function useCTypes(sessionId: string | undefined) {
         throw new Error('Unable to fetch CTypes');
       }
 
-      const newCTypes: APICTypeData[] = await response.json();
+      const newCTypes = (await response.json()) as APICTypeData[];
       setCTypes((existingCTypes) => {
         const lastKnownId = existingCTypes.at(-1)?.id;
         while (newCTypes.some(({ id }) => id === lastKnownId)) {

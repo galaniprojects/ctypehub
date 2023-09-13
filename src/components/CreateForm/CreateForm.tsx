@@ -105,7 +105,7 @@ export function CreateForm() {
         const formData = new FormData(event.currentTarget);
         const title = formData.get('title') as string;
         const description = formData.get('description') as string | undefined;
-        const values = [...formData.entries()] as [string, string][];
+        const values = [...formData.entries()] as Array<[string, string]>;
 
         const properties = getProperties(propertiesCount, values);
         const cType = CType.fromProperties(title, properties);
@@ -127,7 +127,7 @@ export function CreateForm() {
 
         const nativeEvent = event.nativeEvent as SubmitEvent;
         const submitter = nativeEvent.submitter as HTMLButtonElement;
-        const extensionKey = submitter?.value;
+        const extensionKey = submitter.value;
         const extension = window.kilt[extensionKey];
 
         const createTx = api.tx.ctype.add(CType.toChain(cType));

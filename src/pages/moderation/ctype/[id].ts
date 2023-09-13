@@ -16,9 +16,7 @@ export async function PATCH({ request, params }: APIContext) {
     logger.debug('CType moderation started');
 
     const { id } = params;
-    const { isHidden } = (await getRequestJson(request)) as {
-      isHidden: boolean;
-    };
+    const { isHidden } = await getRequestJson<{ isHidden: boolean }>(request);
 
     const session = getSession(request);
     if (!session.authorized) {

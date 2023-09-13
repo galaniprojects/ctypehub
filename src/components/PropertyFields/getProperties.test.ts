@@ -3,7 +3,7 @@ import { CType } from '@kiltprotocol/sdk-js';
 
 import { getProperties } from './getProperties';
 
-const extras: [string, string][] = [
+const extras: Array<[string, string]> = [
   ['title', 'Title'],
   ['description', ''],
 ];

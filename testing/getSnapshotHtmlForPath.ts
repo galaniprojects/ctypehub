@@ -10,5 +10,5 @@ export async function getSnapshotHtmlForPath(path: string) {
     .replace(/_[a-z0-9]{5}_\d+/g, '')
     .replace('</head>', '')
     .replace('</html>', '');
-  return format(pure, { parser: 'html' });
+  return await format(pure, { parser: 'html' });
 }

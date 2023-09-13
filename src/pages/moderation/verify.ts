@@ -2,7 +2,13 @@ import { randomBytes } from 'node:crypto';
 
 import type { APIContext } from 'astro';
 
-import { Credential, CType, Did, Message } from '@kiltprotocol/sdk-js';
+import {
+  Credential,
+  CType,
+  Did,
+  type IEncryptedMessage,
+  Message,
+} from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
 
 import { logger } from '../../utilities/logger';
@@ -68,7 +74,7 @@ export async function POST({ request }: APIContext) {
   try {
     logger.debug('Verification started');
 
-    const payload = await getRequestJson(request);
+    const payload = await getRequestJson<IEncryptedMessage>(request);
     const message = await Message.decrypt(payload, decrypt);
     const messageBody = message.body;
     logger.debug('Message decrypted');

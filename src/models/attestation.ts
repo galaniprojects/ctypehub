@@ -1,5 +1,10 @@
 import { type IAttestation, type ICType } from '@kiltprotocol/sdk-js';
-import { DataTypes, Model, type ModelAttributes, Sequelize } from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  type ModelAttributes,
+  type Sequelize,
+} from 'sequelize';
 
 export interface AttestationData
   extends Omit<IAttestation, 'cTypeHash' | 'revoked'> {

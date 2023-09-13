@@ -1,5 +1,5 @@
 import { type APIContext } from 'astro';
-import { CType, Did } from '@kiltprotocol/sdk-js';
+import { CType, Did, type DidUri, type HexString } from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
 
 import { CType as CTypeModel } from '../models/ctype';
@@ -11,10 +11,18 @@ import {
 } from '../utilities/errorResponses';
 import { getRequestJson } from '../utilities/getRequestJson';
 
+interface Input {
+  cType: unknown;
+  creator: DidUri;
+  extrinsicHash: HexString;
+  description: string;
+  tags: string[];
+}
+
 export async function POST({ request, url }: APIContext) {
   try {
     const { cType, creator, extrinsicHash, description, tags } =
-      await getRequestJson(request);
+      await getRequestJson<Input>(request);
 
     if (!CType.isICType(cType)) {
       throw makeErrorResponse(
@@ -50,7 +58,7 @@ export async function POST({ request, url }: APIContext) {
       ...rest,
     });
 
-    const cTypeTags: TagDataInput[] = (tags as string[]).map((tag) => ({
+    const cTypeTags: TagDataInput[] = tags.map((tag) => ({
       cTypeId: id,
       tagName: tag,
     }));

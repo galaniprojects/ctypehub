@@ -7,10 +7,15 @@ const { isTest } = configuration;
 
 const SCAN_INTERVAL_MS = 10 * 60 * 1000;
 
-export async function watchSubScan() {
-  while (!isTest) {
-    await scanCTypes();
-    await scanAttestations();
-    await sleep(SCAN_INTERVAL_MS);
+export function watchSubScan() {
+  if (isTest) {
+    return;
   }
+  (async () => {
+    while (true) {
+      await scanCTypes();
+      await scanAttestations();
+      await sleep(SCAN_INTERVAL_MS);
+    }
+  })();
 }
