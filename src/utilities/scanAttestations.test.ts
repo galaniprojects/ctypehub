@@ -73,7 +73,7 @@ function mockAttestationEvent() {
       type_name: 'AttesterOf',
       value: Utils.Crypto.u8aToHex(
         Utils.Crypto.decodeAddress(Did.toChain(did)),
-      ),
+      ) as unknown as EventParams[0]['value'],
     },
     { type_name: 'ClaimHashOf', value: attestation.claimHash },
     { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
