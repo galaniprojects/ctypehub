@@ -4,16 +4,27 @@
   "postUpdateOptions": ["yarnDedupeHighest"],
   "packageRules": [
     {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
       "matchPackagePatterns": ["kiltprotocol"],
-      "groupName": "kiltprotocol"
+      "groupName": "kiltprotocol",
+      "automerge": false
     },
     {
       "matchPackagePatterns": ["parcel"],
-      "groupName": "parcel"
+      "groupName": "parcel",
+      "automerge": false
     },
     {
       "matchPackagePatterns": ["polkadot"],
-      "groupName": "polkadot"
+      "groupName": "polkadot",
+      "automerge": false
     }
   ]
 }
