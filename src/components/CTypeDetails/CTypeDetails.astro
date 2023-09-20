@@ -46,7 +46,7 @@ const schemaV1 = CType.fromProperties('', {}).$schema;
 const version = schema === schemaV1 ? 'V1' : 'draft-01';
 const kiltCType = CType.fromProperties(title, properties, version);
 
-const { subscan } = configuration;
+const { subscan, w3nOrigin } = configuration;
 ---
 
 <section class={containerStyles.bigContainer}>
@@ -56,7 +56,7 @@ const { subscan } = configuration;
     <legend>Creator</legend>
     {
       web3Name ? (
-        <a href={`https://w3n.id/${web3Name}`}>w3n:{web3Name}</a>
+        <a href={`${w3nOrigin}/${web3Name}`}>w3n:{web3Name}</a>
       ) : (
         <p>{creator}</p>
       )

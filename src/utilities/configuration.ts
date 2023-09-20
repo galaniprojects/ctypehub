@@ -56,6 +56,13 @@ const payerMnemonic = import.meta.env.SECRET_PAYER_MNEMONIC as string;
 if (!payerMnemonic) {
   throw new ConfigurationError('SECRET_PAYER_MNEMONIC is not provided');
 }
+
+const w3nOrigins: Record<string, string> = {
+  'wss://peregrine.kilt.io': 'https://test.w3n.id',
+  'wss://peregrine-stg.kilt.io/para': 'https://smoke.w3n.id',
+  'wss://kilt-rpc.dwellir.com': 'https://w3n.id',
+};
+
 export const configuration = {
   isProduction: import.meta.env.PROD,
   isTest: import.meta.env.MODE === 'test',
@@ -70,4 +77,5 @@ export const configuration = {
   assertionMethodMnemonic,
   keyAgreementMnemonic,
   payerMnemonic,
+  w3nOrigin: w3nOrigins[blockchainEndpoint] || 'https://w3n.id',
 };
