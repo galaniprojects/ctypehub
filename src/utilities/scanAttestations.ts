@@ -17,7 +17,7 @@ export async function scanAttestations() {
     order: [['createdAt', 'DESC']],
   });
   const fromBlock = latestAttestation
-    ? Number(latestAttestation.dataValues.block)
+    ? Number(latestAttestation.dataValues.block) + 1
     : 0;
 
   const eventGenerator = subScanEventGenerator(

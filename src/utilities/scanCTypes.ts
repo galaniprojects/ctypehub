@@ -22,7 +22,7 @@ export async function scanCTypes() {
     },
   });
 
-  const fromBlock = latestCType ? Number(latestCType.dataValues.block) : 0;
+  const fromBlock = latestCType ? Number(latestCType.dataValues.block) + 1 : 0;
   const eventGenerator = subScanEventGenerator(
     'ctype',
     'CTypeCreated',

@@ -106,7 +106,7 @@ describe('scanCTypes', () => {
       },
     });
 
-    const expectedFromBlock = Number(latestCType?.dataValues.block);
+    const expectedFromBlock = Number(latestCType?.dataValues.block) + 1;
 
     vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
       // yield nothing

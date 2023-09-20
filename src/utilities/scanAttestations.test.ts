@@ -158,7 +158,7 @@ describe('scanAttestations', () => {
       order: [['createdAt', 'DESC']],
     });
 
-    const expectedFromBlock = Number(latestAttestation?.dataValues.block);
+    const expectedFromBlock = Number(latestAttestation?.dataValues.block) + 1;
 
     vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
       // yield nothing
