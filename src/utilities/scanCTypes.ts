@@ -42,27 +42,6 @@ export async function scanCTypes() {
       continue;
     }
 
-    if ('$id' in cTypeDetails) {
-      // TODO: remove this `if` once the Spiritnet is updated
-      const {
-        $id,
-        $schema,
-        createdAt: block,
-        ...rest
-      } = cTypeDetails as unknown as CType.ICTypeDetails['cType'] &
-        CType.ICTypeDetails;
-
-      await CTypeModel.upsert({
-        id: $id,
-        schema: $schema,
-        createdAt: new Date(blockTimestampMs),
-        extrinsicHash,
-        block: block.toString(),
-        ...rest,
-      });
-      continue;
-    }
-
     const { $id, $schema, ...rest } = cTypeDetails.cType;
     const { creator, createdAt: block } = cTypeDetails;
 
