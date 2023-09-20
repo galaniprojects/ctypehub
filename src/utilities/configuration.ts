@@ -77,5 +77,5 @@ export const configuration = {
   assertionMethodMnemonic,
   keyAgreementMnemonic,
   payerMnemonic,
-  w3nOrigin: w3nOrigins[blockchainEndpoint],
+  w3nOrigin: w3nOrigins[blockchainEndpoint] || 'https://w3n.id',
 };
