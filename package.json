@@ -1,6 +1,6 @@
 {
   "repository": "git@github.com:galaniprojects/ctypehub.git",
-  "license": "UNLICENSED",
+  "license": "BSD-4-Clause",
   "type": "module",
   "engines": {
     "node": ">= v18.17.1"
