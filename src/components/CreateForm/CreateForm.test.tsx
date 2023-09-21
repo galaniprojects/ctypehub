@@ -2,7 +2,7 @@
 
 import { describe, expect, it, vi } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { userEvent } from '@testing-library/user-event';
 
 import { CreateForm } from './CreateForm';
 import { useSupportedExtensions } from './useSupportedExtensions';
