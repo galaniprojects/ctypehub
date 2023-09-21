@@ -3,7 +3,7 @@
   "license": "BSD-4-Clause",
   "type": "module",
   "engines": {
-    "node": ">= v18.17.1"
+    "node": ">= 18.18.0"
   },
   "scripts": {
     "prettify": "prettier --write \"src/**/*.astro\" \"src/**/*.ts*\" \"src/**/*.css*\"",
@@ -45,7 +45,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/lodash-es": "^4.17.9",
-    "@types/node": "^18.17.15",
+    "@types/node": "^18.17.18",
     "@types/prettier": "^2.7.3",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
