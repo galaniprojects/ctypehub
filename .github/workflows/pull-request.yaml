@@ -11,16 +11,16 @@ jobs:
         uses: actions/setup-node@v3.8.1
         with:
           node-version-file: 'package.json'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Run linter
-        run: yarn lint
+        run: pnpm lint
 
       - name: Run tests
-        run: yarn test
+        run: pnpm test
 
       - name: Build code
-        run: yarn build
+        run: pnpm build
