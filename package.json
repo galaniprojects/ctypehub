@@ -75,7 +75,7 @@
     "stylelint-config-standard": "^34.0.0",
     "testcontainers": "^10.2.1",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.4",
+    "vitest": "^0.34.5",
     "vitest-github-actions-reporter": "^0.10.0"
   }
 }
