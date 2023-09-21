@@ -105,10 +105,10 @@
     unist-util-visit "^4.1.2"
     vfile "^5.3.7"
 
-"@astrojs/node@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/node/-/node-6.0.0.tgz#1c3626dde18846512abb3a6490a0b67b3874f868"
-  integrity sha512-06x5UBt+g0EIUpOdtCdnTxRJhOTLxUnjzmGwIHp9RNBlIEpzd/dJs6pwvfiM2zuPolTLI53T8VOsdw3EMh2V+w==
+"@astrojs/node@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@astrojs/node/-/node-6.0.1.tgz#3adae40a17f4202c96ab2565b955c7c8f52ccbba"
+  integrity sha512-EtGzV4ZoY6eMTsTNxT8EeYHjZL0ypJyZE2vU/oswkPeR/AK23K4jgdjxxa9xipptlQEBH0ZuRHVAste/dwfyUA==
   dependencies:
     send "^0.18.0"
     server-destroy "^1.0.1"
