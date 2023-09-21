@@ -104,7 +104,9 @@ export async function* subScanEventGenerator(
     }
 
     logger.debug(
-      `Found ${count} new SubScan events for ${call} in block range ${blockRange}`,
+      `Found ${count} (really ${
+        count - 1
+      }?) new SubScan events for ${call} in block range ${blockRange}`,
     );
 
     const pages = Math.ceil(count / SUBSCAN_MAX_ROWS) - 1;
@@ -115,9 +117,6 @@ export async function* subScanEventGenerator(
         continue;
       }
 
-      logger.debug(
-        `Loaded events page ${page} for ${call} in block range ${blockRange}`,
-      );
       for (const event of events) {
         yield event;
       }
