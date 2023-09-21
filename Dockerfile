@@ -5,10 +5,11 @@ WORKDIR /app
 FROM base AS builder
 
 # get the dependencies and sources
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn ./.yarn/
 
 # install build dependencies, build the app
-RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
+RUN yarn install --immutable && yarn cache clean --all
 
 COPY src ./src
 COPY public ./public
@@ -27,15 +28,16 @@ ENV PORT 4000
 ENV NODE_ENV production
 
 # get the dependencies and migrations stuff
-COPY package.json yarn.lock .sequelizerc ./
+COPY package.json yarn.lock .yarnrc.yml .sequelizerc ./
+COPY .yarn ./.yarn/
 COPY src/migrations ./src/migrations
 COPY src/seeders ./src/seeders
 # install the production dependencies only (depends on NODE_ENV)
-RUN yarn install --frozen-lockfile --ignore-optional && yarn cache clean --all
+RUN yarn install --immutable && yarn cache clean --all
 
 # carry over the built code
 COPY --from=builder /app/dist dist
 
 EXPOSE 3000
 
-ENTRYPOINT nginx; exec yarn --silent start
+ENTRYPOINT nginx; exec yarn start

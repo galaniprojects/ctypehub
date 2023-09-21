@@ -77,5 +77,6 @@
     "typescript": "^5.2.2",
     "vitest": "^0.34.4",
     "vitest-github-actions-reporter": "^0.10.0"
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
