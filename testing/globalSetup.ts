@@ -24,6 +24,7 @@ const env = {
   SECRET_ASSERTION_METHOD_MNEMONIC: 'placeholder',
   SECRET_KEY_AGREEMENT_MNEMONIC: 'placeholder',
   TZ: 'UTC',
+  PATH: process.env.PATH,
 };
 
 let server: ChildProcess;
@@ -57,8 +58,8 @@ export async function setup() {
   process.env.DATABASE_URI = databaseUri;
 
   // configure the tests to talk to a new Astro instance
-  const yarn = (await promisify(exec)('which yarn')).stdout.trim();
-  server = spawn(yarn, ['dev'], { detached: true, env });
+  const pnpm = (await promisify(exec)('which pnpm')).stdout.trim();
+  server = spawn(pnpm, ['dev'], { detached: true, env });
   process.env.URL = await new Promise((resolve) => {
     server.stderr?.on('data', (buffer: Buffer) => {
       console.log(buffer.toString('utf-8'));

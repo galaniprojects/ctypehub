@@ -7,7 +7,7 @@
   },
   "scripts": {
     "prettify": "prettier --write \"src/**/*.astro\" \"src/**/*.ts*\" \"src/**/*.css*\"",
-    "lint": "yarn run lint-css --formatter github && yarn run lint-js",
+    "lint": "pnpm lint-css --formatter github && pnpm lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.astro\" \"src/**/*.ts\" \"src/**/*.tsx\"",
     "lint-css": "stylelint --max-warnings 0 \"src/**/*.astro\" \"src/**/*.css\"",
     "test": "tsc --noEmit && astro check && vitest",
@@ -17,7 +17,7 @@
     "migrate": "sequelize-cli db:migrate",
     "seed": "sequelize-cli db:seed:all || exit 0",
     "build": "export $(cat .env.example) && astro build",
-    "start": "yarn migrate && yarn seed && node --enable-source-maps dist/server/entry.mjs"
+    "start": "pnpm migrate && pnpm seed && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^6.0.1",

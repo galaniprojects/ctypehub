@@ -1,7 +1,7 @@
 {
   "extends": ["config:base"],
   "rangeStrategy": "bump",
-  "postUpdateOptions": ["yarnDedupeHighest"],
+  "postUpdateOptions": ["pnpmDedupe"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
