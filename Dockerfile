@@ -1,7 +1,7 @@
 FROM node:18.18.0-alpine AS base
 WORKDIR /app
 
-RUN npm i -g pnpm
+RUN npm install --global pnpm
 
 FROM base AS builder
 
