@@ -65,7 +65,7 @@ export async function setup() {
     });
     server.stdout?.on('data', async (buffer: Buffer) => {
       const text = buffer.toString('utf-8');
-      // console.log(text);
+      console.log(text);
       const match = text.match(/http:\S+/);
       if (!match) {
         return;
