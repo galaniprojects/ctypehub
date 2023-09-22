@@ -10,7 +10,7 @@ jobs:
       - name: Configure package manager
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: latest
 
       - name: Configure Node
         uses: actions/setup-node@v3.8.1
