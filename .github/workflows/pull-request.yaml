@@ -7,12 +7,12 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Configure package manager
         uses: pnpm/action-setup@v2
         with:
           version: 8
 
-      - name: Configure Node and package manager
+      - name: Configure Node
         uses: actions/setup-node@v3.8.1
         with:
           node-version-file: 'package.json'
