@@ -40,7 +40,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.2.0",
+    "@astrojs/check": "^0.2.1",
     "@testcontainers/postgresql": "^10.2.1",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
