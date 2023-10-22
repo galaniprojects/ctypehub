@@ -128,8 +128,8 @@ devDependencies:
     specifier: ^4.6.0
     version: 4.6.0(eslint@8.52.0)
   eslint-plugin-vitest:
-    specifier: ^0.3.3
-    version: 0.3.3(@typescript-eslint/eslint-plugin@6.8.0)(eslint@8.52.0)(typescript@5.2.2)(vitest@0.34.6)
+    specifier: ^0.3.6
+    version: 0.3.6(@typescript-eslint/eslint-plugin@6.8.0)(eslint@8.52.0)(typescript@5.2.2)(vitest@0.34.6)
   jest-serializer-vue:
     specifier: ^3.1.0
     version: 3.1.0
@@ -4023,8 +4023,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
-  /eslint-plugin-vitest@0.3.3(@typescript-eslint/eslint-plugin@6.8.0)(eslint@8.52.0)(typescript@5.2.2)(vitest@0.34.6):
-    resolution: {integrity: sha512-w/+mypb8hSPrzbjPd9iNg/M72xthoZtMcUTMdIZtzP/+G1OdqqZ1QPCEAk/k27Otfuen7bjs0cUVNMDcfpsODg==}
+  /eslint-plugin-vitest@0.3.6(@typescript-eslint/eslint-plugin@6.8.0)(eslint@8.52.0)(typescript@5.2.2)(vitest@0.34.6):
+    resolution: {integrity: sha512-W3H5tIvFncwX8NmsyxHwnJICZ8XIVbuXWxUZ5pfuOLkMgd6Jh5t0f/JDl9IzxyuV690c3zTazcwRX0Ez0/QrOg==}
     engines: {node: 14.x || >= 16}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': '*'
