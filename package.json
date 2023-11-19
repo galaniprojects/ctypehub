@@ -76,6 +76,6 @@
     "testcontainers": "^10.2.2",
     "typescript": "^5.2.2",
     "vitest": "^0.34.6",
-    "vitest-github-actions-reporter": "^0.10.0"
+    "vitest-github-actions-reporter": "^0.11.0"
   }
 }
