@@ -134,8 +134,8 @@ devDependencies:
     specifier: ^3.1.0
     version: 3.1.0
   jsdom:
-    specifier: ^23.0.0
-    version: 23.0.0
+    specifier: ^23.0.1
+    version: 23.0.1
   pino-pretty:
     specifier: ^10.2.3
     version: 10.2.3
@@ -168,7 +168,7 @@ devDependencies:
     version: 5.3.2
   vitest:
     specifier: ^0.34.6
-    version: 0.34.6(jsdom@23.0.0)
+    version: 0.34.6(jsdom@23.0.1)
   vitest-github-actions-reporter:
     specifier: ^0.11.0
     version: 0.11.0(vitest@0.34.6)
@@ -4245,7 +4245,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)(typescript@5.3.2)
       '@typescript-eslint/utils': 6.13.1(eslint@8.54.0)(typescript@5.3.2)
       eslint: 8.54.0
-      vitest: 0.34.6(jsdom@23.0.0)
+      vitest: 0.34.6(jsdom@23.0.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -5515,11 +5515,11 @@ packages:
     dependencies:
       argparse: 2.0.1
 
-  /jsdom@23.0.0:
-    resolution: {integrity: sha512-cbL/UCtohJguhFC7c2/hgW6BeZCNvP7URQGnx9tSJRYKCdnfbfWOrtuLTMfiB2VxKsx5wPHVsh/J0aBy9lIIhQ==}
+  /jsdom@23.0.1:
+    resolution: {integrity: sha512-2i27vgvlUsGEBO9+/kJQRbtqtm+191b5zAZrU/UezVmnC2dlDAFLgDYJvAEi94T4kjsRKkezEtLQTgsNEsW2lQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      canvas: ^3.0.0
+      canvas: ^2.11.2
     peerDependenciesMeta:
       canvas:
         optional: true
@@ -9018,10 +9018,10 @@ packages:
       vitest: '>=0.28.5'
     dependencies:
       '@actions/core': 1.10.0
-      vitest: 0.34.6(jsdom@23.0.0)
+      vitest: 0.34.6(jsdom@23.0.1)
     dev: true
 
-  /vitest@0.34.6(jsdom@23.0.0):
+  /vitest@0.34.6(jsdom@23.0.1):
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -9065,7 +9065,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.10
       debug: 4.3.4
-      jsdom: 23.0.0
+      jsdom: 23.0.1
       local-pkg: 0.4.3
       magic-string: 0.30.3
       pathe: 1.1.1
