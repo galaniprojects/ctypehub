@@ -62,7 +62,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-vitest": "^0.3.12",
+    "eslint-plugin-vitest": "^0.3.13",
     "jest-serializer-vue": "^3.1.0",
     "jsdom": "^23.0.1",
     "pino-pretty": "^10.2.3",
