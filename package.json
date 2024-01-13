@@ -67,7 +67,7 @@
     "jsdom": "^23.2.0",
     "pino-pretty": "^10.3.1",
     "postcss-html": "^1.6.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.1",
     "prettier-plugin-astro": "^0.12.3",
     "stylelint": "^16.1.0",
     "stylelint-config-css-modules": "^4.4.0",
