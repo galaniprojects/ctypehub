@@ -13,7 +13,7 @@ jobs:
           version: latest
 
       - name: Configure Node
-        uses: actions/setup-node@v4.0.1
+        uses: actions/setup-node@v4.0.2
         with:
           node-version-file: 'package.json'
           cache: 'pnpm'
