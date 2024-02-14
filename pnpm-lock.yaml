@@ -12,8 +12,8 @@ dependencies:
     specifier: ^3.0.10
     version: 3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9)
   '@kiltprotocol/sdk-js':
-    specifier: ^0.34.0
-    version: 0.34.0
+    specifier: ^0.35.0
+    version: 0.35.0
   '@polkadot/extension-dapp':
     specifier: ^0.46.5
     version: 0.46.5(@polkadot/api@10.9.1)(@polkadot/util-crypto@12.3.2)(@polkadot/util@12.3.2)
@@ -1327,32 +1327,32 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: false
 
-  /@kiltprotocol/asset-did@0.34.0:
-    resolution: {integrity: sha512-oY2uGj+QnzkUHzFNR/qil6qD1LH+YNw5Bgp4B/1XYpSeOiNrmrlDj8MGScBm+R7bhvNGAWH0+aOtnSlSyEeNaw==}
+  /@kiltprotocol/asset-did@0.35.0:
+    resolution: {integrity: sha512-72JA/RX+snTzEH4IequM4xK3bOqmFees90d2d6FqMzgtK2TMsTew4U4CwpffzQwBlhGMV6awN6KNyQJTMOjsXA==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/augment-api@0.34.0:
-    resolution: {integrity: sha512-0dLLShwFLmc95L8yGKWHvZ6X/EooVJfOLmb8mL/ioG8mwEjmDz9g1FC0eAUcPtJfjVaHTuRYJUcV8w04BuhU+g==}
+  /@kiltprotocol/augment-api@0.35.0:
+    resolution: {integrity: sha512-yjpUkuBzTfrLQyjDF1cxQP1+kH++Yxkv5Tq143RuPDYDclsdBDZ87vp7Dc0x9odbFDiZ9FaHq4rE/1391AHtSw==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/type-definitions': 0.34.0
+      '@kiltprotocol/type-definitions': 0.35.0
     dev: false
 
-  /@kiltprotocol/chain-helpers@0.34.0:
-    resolution: {integrity: sha512-rky1q9bIKgVYCOA6HcVaJJapU8EWuHPqXqDxGnUcKAFwVu8MMQ44MSvgqv6+JGvmMcGwe7m57lPGKpEhSYFr6w==}
+  /@kiltprotocol/chain-helpers@0.35.0:
+    resolution: {integrity: sha512-iAIFWO+0wAySz9Ew0dKvwnSMPYgDaMzwJCvUxcQmpsadWiBD74m/yxJn7ef5hwVpIaIIVwGy4w4oYYCd8+avcg==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/config': 0.34.0
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/config': 0.35.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
       '@polkadot/api': 10.9.1
       '@polkadot/types': 10.9.1
     transitivePeerDependencies:
@@ -1361,11 +1361,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/config@0.34.0:
-    resolution: {integrity: sha512-eAupi3kWksWkbsphPGRo75Q8uAIlmHJWo/LDxUotuQyuo2tlo+TTLaBGzBgoF4P/6ItVPI+c5c4ie/686+PhSw==}
+  /@kiltprotocol/config@0.35.0:
+    resolution: {integrity: sha512-LSM9a42NzJQTuaIllD9H6JVkveSpgGdxcL3NFvTipynQLVX4rNhwVyHGMgh8f1CTNqAGaJwd/3e+9vosmu0LQg==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/types': 0.34.0
+      '@kiltprotocol/types': 0.35.0
       '@polkadot/api': 10.9.1
       typescript-logging: 1.0.1
     transitivePeerDependencies:
@@ -1374,18 +1374,18 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/core@0.34.0:
-    resolution: {integrity: sha512-yAdHdljHupwuFFV6Qq0IUxQAe3VtdqcjOe/D7whMOQBRcoSLJ8ffb2Wu+RuPQXaGFTCF0d0KUurfFmOSsq14Yg==}
+  /@kiltprotocol/core@0.35.0:
+    resolution: {integrity: sha512-ifsLQzYROFtuoUDGl8ma2vsR6DuiQrSZZE25YZxxxGuMuNFzJh4xpFTUhF92H6SUzHF4+FVgtuBNLFNP65JfvQ==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/asset-did': 0.34.0
-      '@kiltprotocol/augment-api': 0.34.0
-      '@kiltprotocol/chain-helpers': 0.34.0
-      '@kiltprotocol/config': 0.34.0
-      '@kiltprotocol/did': 0.34.0
-      '@kiltprotocol/type-definitions': 0.34.0
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/asset-did': 0.35.0
+      '@kiltprotocol/augment-api': 0.35.0
+      '@kiltprotocol/chain-helpers': 0.35.0
+      '@kiltprotocol/config': 0.35.0
+      '@kiltprotocol/did': 0.35.0
+      '@kiltprotocol/type-definitions': 0.35.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
       '@polkadot/api': 10.9.1
       '@polkadot/keyring': 12.3.2(@polkadot/util-crypto@12.3.2)(@polkadot/util@12.3.2)
       '@polkadot/types': 10.9.1
@@ -1397,14 +1397,14 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/did@0.34.0:
-    resolution: {integrity: sha512-i+E+BLRAYQ1qBysx3dK5WhagZHYrtxI6b79B+qoAo73LJJhHrk0te4mzrmNkPB8VAWFABuy/oXhZ1v7JqA02bQ==}
+  /@kiltprotocol/did@0.35.0:
+    resolution: {integrity: sha512-kBlBJLffnyvZPcm7j9ZDUyDWV7EiocifCgWp8Pq/8UNjrgTlKbroP0jd/AvEL8o8/Q1N1g91qooms/qFjk2r2A==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/augment-api': 0.34.0
-      '@kiltprotocol/config': 0.34.0
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/augment-api': 0.35.0
+      '@kiltprotocol/config': 0.35.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
       '@polkadot/api': 10.9.1
       '@polkadot/keyring': 12.3.2(@polkadot/util-crypto@12.3.2)(@polkadot/util@12.3.2)
       '@polkadot/types': 10.9.1
@@ -1417,14 +1417,14 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/messaging@0.34.0:
-    resolution: {integrity: sha512-SGguJfEtO7/HTTMQj+Qhzv//R6e5VbtNdY8qfkbiRhncA4yGwbiqrBHkQzLorAc/911AYlBWvLkhAjrk6hC1yg==}
+  /@kiltprotocol/messaging@0.35.0:
+    resolution: {integrity: sha512-Pa910KWNEFgll7IYZaDhNr5mUccxPyGKLgjLLMiR2XJg+j//cOlkVMFQD/qlnW9NrnHwzuaW6juX9RloyGl/LQ==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/core': 0.34.0
-      '@kiltprotocol/did': 0.34.0
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/core': 0.35.0
+      '@kiltprotocol/did': 0.35.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
       '@polkadot/util': 12.3.2
     transitivePeerDependencies:
       - bufferutil
@@ -1432,30 +1432,30 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/sdk-js@0.34.0:
-    resolution: {integrity: sha512-FCyN2+byCSA1UMd7n7Y86Vcr6rBi0Ficny5iXmHvKSyR8edV3ptDzUEP2JJUsJ6dQZtj7JKNZ4VXrKywKw0KAA==}
+  /@kiltprotocol/sdk-js@0.35.0:
+    resolution: {integrity: sha512-ENySAfZ9aB/AyqJovtyMFpADXIBYYX1ki4y6VS4fnjCh63+wcVSFlCOljw8YF8SOniUVCF/UHt2+TwZJYY22CQ==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/chain-helpers': 0.34.0
-      '@kiltprotocol/config': 0.34.0
-      '@kiltprotocol/core': 0.34.0
-      '@kiltprotocol/did': 0.34.0
-      '@kiltprotocol/messaging': 0.34.0
-      '@kiltprotocol/types': 0.34.0
-      '@kiltprotocol/utils': 0.34.0
+      '@kiltprotocol/chain-helpers': 0.35.0
+      '@kiltprotocol/config': 0.35.0
+      '@kiltprotocol/core': 0.35.0
+      '@kiltprotocol/did': 0.35.0
+      '@kiltprotocol/messaging': 0.35.0
+      '@kiltprotocol/types': 0.35.0
+      '@kiltprotocol/utils': 0.35.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/type-definitions@0.34.0:
-    resolution: {integrity: sha512-LMQ7HtIq8n/M/G9sg77xGJVJFVXCA/9w+PWMTK+TGR3KvbM9qmQSnhIPJ2KOU4WFe+62HlJ0V1sOoTZDFr7QNw==}
+  /@kiltprotocol/type-definitions@0.35.0:
+    resolution: {integrity: sha512-Dm6qL3qp8Tb05mIQi7Ez/niQe31Yn3RQxNIbUdHWDTVaeNe664ftJtfwWgOekh1MTVmSjim93UE0djxWSIqXPQ==}
     engines: {node: '>=16.0'}
     dev: false
 
-  /@kiltprotocol/types@0.34.0:
-    resolution: {integrity: sha512-tbxWr5Z7j29O1zgmqmrAxJEKGUrDEBdQPsFiYuQw7KyJCJjd0TPb+gqg8fHzjTSm+oJCffVLAU/KGAds1vLqZA==}
+  /@kiltprotocol/types@0.35.0:
+    resolution: {integrity: sha512-uqIQifoCUtlFxnl39vL1MVIj0XuJf23hfKxhiNBvSpEA3tMvXdIm8QjPuMAaadKJhtcEv2aRwNJv1+Au64eNjQ==}
     engines: {node: '>=16.0'}
     dependencies:
       '@polkadot/api': 10.9.1
@@ -1469,11 +1469,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@kiltprotocol/utils@0.34.0:
-    resolution: {integrity: sha512-FzIoRSElxTXBaHF8706+tnye0iFvs0t/7A3XMDJ59ssLfjTZFhB0cANY6Zr/vR+PCdl00XWxKJ7iZJlAtFDy9w==}
+  /@kiltprotocol/utils@0.35.0:
+    resolution: {integrity: sha512-G8a0bdKssPHXLlNyY75rKn1EivxvCRNatfYcoF5hR3lCaHpw25fAUN9NN58w77P7OM8gcWLziui1x8UPfSBx5A==}
     engines: {node: '>=16.0'}
     dependencies:
-      '@kiltprotocol/types': 0.34.0
+      '@kiltprotocol/types': 0.35.0
       '@polkadot/api': 10.9.1
       '@polkadot/keyring': 12.3.2(@polkadot/util-crypto@12.3.2)(@polkadot/util@12.3.2)
       '@polkadot/util': 12.3.2
