@@ -5,12 +5,22 @@ import { Op } from 'sequelize';
 import { CType as CTypeModel } from '../models/ctype';
 
 import { logger } from './logger';
-import { subScanEventGenerator } from './subScan';
+import { subScanEventGenerator, type ParsedEvent } from './subScan';
 
-export type EventParams = [
-  { type_name: 'CTypeCreatorOf'; value: HexString },
-  { type_name: 'CTypeHashOf'; value: HexString },
-];
+/** Extends the `event` with the parameters parsed,
+ *  so that the parameters value extraction is easier and more elegant.
+ *
+ * @param event
+ * @returns the extended event
+ */
+function parseParams(event: ParsedEvent) {
+  return {
+    ...event,
+    parsedParams: Object.fromEntries(
+      event.params.map((param) => [param.type_name, param.value]),
+    ),
+  };
+}
 
 export async function scanCTypes() {
   const latestCType = await CTypeModel.findOne({
@@ -27,12 +37,13 @@ export async function scanCTypes() {
     'ctype',
     'CTypeCreated',
     fromBlock,
+    async (events: ParsedEvent[]) => events, // no transformation
   );
 
   for await (const event of eventGenerator) {
     const { blockTimestampMs, extrinsicHash } = event;
-    const params = event.params as EventParams;
-    const cTypeHash = params[1].value;
+    const params = parseParams(event).parsedParams;
+    const cTypeHash = params.CtypeHashOf as HexString;
 
     let cTypeDetails: CType.ICTypeDetails;
     try {
