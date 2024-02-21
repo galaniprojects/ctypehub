@@ -1,4 +1,4 @@
-import { Did, type HexString, type ICType } from '@kiltprotocol/sdk-js';
+import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
@@ -46,7 +46,8 @@ export async function scanAttestations() {
       params.AttesterOf as Parameters<typeof Did.fromChain>[0],
     );
     const claimHash = params.ClaimHashOf as HexString;
-    const cTypeId: ICType['$id'] = `kilt:ctype:${params.CtypeHashOf as HexString}`;
+    const cTypeHash = params.CtypeHashOf as HexString;
+    const cTypeId = CType.hashToId(cTypeHash);
     const delegationId = params[
       'Option<DelegationNodeIdOf>'
     ] as HexString | null;
