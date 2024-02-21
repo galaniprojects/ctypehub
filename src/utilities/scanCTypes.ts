@@ -7,21 +7,6 @@ import { CType as CTypeModel } from '../models/ctype';
 import { logger } from './logger';
 import { subScanEventGenerator, type ParsedEvent } from './subScan';
 
-/** Extends the `event` with the parameters parsed,
- *  so that the parameters value extraction is easier and more elegant.
- *
- * @param event
- * @returns the extended event
- */
-function parseParams(event: ParsedEvent) {
-  return {
-    ...event,
-    parsedParams: Object.fromEntries(
-      event.params.map((param) => [param.type_name, param.value]),
-    ),
-  };
-}
-
 export async function scanCTypes() {
   const latestCType = await CTypeModel.findOne({
     order: [['createdAt', 'DESC']],
@@ -42,7 +27,7 @@ export async function scanCTypes() {
 
   for await (const event of eventGenerator) {
     const { blockTimestampMs, extrinsicHash } = event;
-    const params = parseParams(event).parsedParams;
+    const params = event.parsedParams;
     const cTypeHash = params.CtypeHashOf as HexString;
 
     let cTypeDetails: CType.ICTypeDetails;

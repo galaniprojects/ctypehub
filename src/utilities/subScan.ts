@@ -144,6 +144,21 @@ export interface ParsedEvent {
   extrinsicHash: string;
 }
 
+/** Extends the `event` with the parameters parsed,
+ *  so that the parameters value extraction is easier and more elegant.
+ *
+ * @param event
+ * @returns the extended event
+ */
+function parseParams(event: ParsedEvent) {
+  return {
+    ...event,
+    parsedParams: Object.fromEntries(
+      event.params.map((param) => [param.type_name, param.value]),
+    ),
+  };
+}
+
 export async function* subScanEventGenerator(
   module: string,
   eventId: string,
@@ -198,7 +213,7 @@ export async function* subScanEventGenerator(
         `Loaded page ${page} of "${eventId}" events in block range ${blockRange}.`,
       );
       for (const event of await transform(events)) {
-        yield event;
+        yield parseParams(event);
       }
 
       await sleep(QUERY_INTERVAL_MS);

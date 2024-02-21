@@ -5,21 +5,6 @@ import { Attestation as AttestationModel } from '../models/attestation';
 import { subScanEventGenerator, type ParsedEvent } from './subScan';
 import { logger } from './logger';
 
-/** Extends the `event` with the parameters parsed,
- *  so that the parameters value extraction is easier and more elegant.
- *
- * @param event
- * @returns the extended event
- */
-function parseParams(event: ParsedEvent) {
-  return {
-    ...event,
-    parsedParams: Object.fromEntries(
-      event.params.map((param) => [param.type_name, param.value]),
-    ),
-  };
-}
-
 export async function scanAttestations() {
   const latestAttestation = await AttestationModel.findOne({
     order: [['createdAt', 'DESC']],
@@ -37,8 +22,7 @@ export async function scanAttestations() {
 
   for await (const event of eventGenerator) {
     const { block, blockTimestampMs, extrinsicHash } = event;
-    // extract the parameters
-    const params = parseParams(event).parsedParams;
+    const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
 
