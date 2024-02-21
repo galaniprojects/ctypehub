@@ -1,16 +1,24 @@
-import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
+import { Did, type HexString, type ICType } from '@kiltprotocol/sdk-js';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
-import { subScanEventGenerator } from './subScan';
+import { subScanEventGenerator, type ParsedEvent } from './subScan';
 import { logger } from './logger';
 
-export type EventParams = [
-  { type_name: 'AttesterOf'; value: Parameters<typeof Did.fromChain>[0] },
-  { type_name: 'ClaimHashOf'; value: HexString },
-  { type_name: 'CTypeHashOf'; value: HexString },
-  { type_name: 'DelegationNodeIdOf'; value: HexString | null },
-];
+/** Extends the `event` with the parameters parsed,
+ *  so that the parameters value extraction is easier and more elegant.
+ *
+ * @param event
+ * @returns the extended event
+ */
+function parseParams(event: ParsedEvent) {
+  return {
+    ...event,
+    parsedParams: Object.fromEntries(
+      event.params.map((param) => [param.type_name, param.value]),
+    ),
+  };
+}
 
 export async function scanAttestations() {
   const latestAttestation = await AttestationModel.findOne({
@@ -24,17 +32,24 @@ export async function scanAttestations() {
     'attestation',
     'AttestationCreated',
     fromBlock,
+    async (events: ParsedEvent[]) => events, // no transformation
   );
 
   for await (const event of eventGenerator) {
     const { block, blockTimestampMs, extrinsicHash } = event;
-    const params = event.params as EventParams;
+    // extract the parameters
+    const params = parseParams(event).parsedParams;
+
     const createdAt = new Date(blockTimestampMs);
 
-    const owner = Did.fromChain(params[0].value);
-    const claimHash = params[1].value;
-    const cTypeId = CType.hashToId(params[2].value);
-    const delegationId = params[3].value;
+    const owner = Did.fromChain(
+      params.AttesterOf as Parameters<typeof Did.fromChain>[0],
+    );
+    const claimHash = params.ClaimHashOf as HexString;
+    const cTypeId: ICType['$id'] = `kilt:ctype:${params.CtypeHashOf as HexString}`;
+    const delegationId = params[
+      'Option<DelegationNodeIdOf>'
+    ] as HexString | null;
 
     try {
       await AttestationModel.upsert({
