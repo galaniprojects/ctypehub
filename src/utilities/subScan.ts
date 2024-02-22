@@ -2,9 +2,9 @@ import { got } from 'got';
 
 import { ConfigService } from '@kiltprotocol/sdk-js';
 
-import { configuration } from '../utilities/configuration';
-import { logger } from '../utilities/logger';
-import { sleep } from '../utilities/sleep';
+import { configuration } from './configuration';
+import { logger } from './logger';
+import { sleep } from './sleep';
 
 const { subscan } = configuration;
 
