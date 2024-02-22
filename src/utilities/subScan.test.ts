@@ -25,6 +25,7 @@ let postResponse: EventsListJSON | EventsParamsJSON;
 vi.mock('got', () => ({
   got: {
     post: vi.fn().mockReturnValue({
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       json: () => postResponse,
     }),
   },
