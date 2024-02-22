@@ -25,7 +25,7 @@ import { createCType } from '../../testing/createCType';
 import { resetDatabase } from '../../testing/resetDatabase';
 
 import { configuration } from './configuration';
-import { subScanEventGenerator } from './subScan';
+import { subScanEventGenerator, type ParsedEvent } from './subScan';
 import { scanAttestations } from './scanAttestations';
 
 vi.mock('./subScan');
@@ -181,6 +181,7 @@ describe('scanAttestations', () => {
       'attestation',
       'AttestationCreated',
       expectedFromBlock,
+      async (events: ParsedEvent[]) => events,
     );
 
     const count = await AttestationModel.count();

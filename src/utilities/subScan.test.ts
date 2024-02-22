@@ -52,7 +52,7 @@ describe('subScan', () => {
       });
 
       expect(got.post).toHaveBeenCalledWith(
-        'https://example.api.subscan.io/api/scan/events',
+        'https://example.api.subscan.io/api/v2/scan/events',
         {
           headers: { 'X-API-Key': configuration.subscan.secret },
           json: {
@@ -135,7 +135,7 @@ describe('subScan', () => {
       expect(event).toBeDefined();
     }
 
-    expect(got.post).toHaveBeenCalledTimes(4);
+    expect(got.post).toHaveBeenCalledTimes(8);
     const { calls } = vi.mocked(got.post).mock;
 
     expect(calls[3][1]).toMatchObject({
