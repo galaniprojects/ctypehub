@@ -20,7 +20,7 @@ import { resetDatabase } from '../../testing/resetDatabase';
 
 import { scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
-import { subScanEventGenerator, type ParsedEvent } from './subScan';
+import { subScanEventGenerator } from './subScan';
 
 vi.mock('./subScan');
 
@@ -91,7 +91,6 @@ describe('scanCTypes', () => {
       'ctype',
       'CTypeCreated',
       0,
-      async (events: ParsedEvent[]) => events,
     );
     const created = await CTypeModel.findByPk(cType.$id);
     expect(created).not.toBeNull();

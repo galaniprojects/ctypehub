@@ -5,7 +5,7 @@ import { Op } from 'sequelize';
 import { CType as CTypeModel } from '../models/ctype';
 
 import { logger } from './logger';
-import { subScanEventGenerator, type ParsedEvent } from './subScan';
+import { subScanEventGenerator } from './subScan';
 
 export async function scanCTypes() {
   const latestCType = await CTypeModel.findOne({
@@ -22,7 +22,6 @@ export async function scanCTypes() {
     'ctype',
     'CTypeCreated',
     fromBlock,
-    async (events: ParsedEvent[]) => events, // no transformation
   );
 
   for await (const event of eventGenerator) {

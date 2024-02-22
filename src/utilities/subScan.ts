@@ -163,7 +163,7 @@ export async function* subScanEventGenerator(
   module: string,
   eventId: string,
   startBlock: number,
-  transform: (events: ParsedEvent[]) => Promise<ParsedEvent[]>,
+  transform?: (events: ParsedEvent[]) => Promise<ParsedEvent[]>,
 ) {
   if (subscan.network === 'NONE') {
     return;
@@ -212,7 +212,9 @@ export async function* subScanEventGenerator(
       logger.debug(
         `Loaded page ${page} of "${eventId}" events in block range ${blockRange}.`,
       );
-      for (const event of await transform(events)) {
+      // if defined, the transform function could modify (f.ex. add parameters)
+      // the events, before yielding them
+      for (const event of transform ? await transform(events) : events) {
         yield parseParams(event);
       }
 

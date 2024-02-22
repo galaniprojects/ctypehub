@@ -2,7 +2,7 @@ import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
-import { subScanEventGenerator, type ParsedEvent } from './subScan';
+import { subScanEventGenerator } from './subScan';
 import { logger } from './logger';
 
 export async function scanAttestations() {
@@ -17,7 +17,6 @@ export async function scanAttestations() {
     'attestation',
     'AttestationCreated',
     fromBlock,
-    async (events: ParsedEvent[]) => events, // no transformation
   );
 
   for await (const event of eventGenerator) {

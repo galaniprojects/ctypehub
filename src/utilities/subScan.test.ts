@@ -88,12 +88,7 @@ describe('subScan', () => {
     it('should iterate through pages in reverse order', async () => {
       postResponse = { data: { count: 200, events: [] } };
 
-      const eventGenerator = subScanEventGenerator(
-        module,
-        eventId,
-        0,
-        async (events) => events,
-      );
+      const eventGenerator = subScanEventGenerator(module, eventId, 0);
 
       for await (const event of eventGenerator) {
         expect(event).toBeDefined();
