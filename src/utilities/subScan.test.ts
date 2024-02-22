@@ -82,53 +82,6 @@ describe('subScan', () => {
       expect(cTypeEvents.count).toBe(0);
       expect(cTypeEvents.events).toBeUndefined();
     });
-
-    // eslint-disable-next-line vitest/no-commented-out-tests
-    // it('should return parsed events in reverse order', async () => {
-    //   postResponse = {
-    //     data: {
-    //       count: 2,
-    //       events: [
-    //         {
-    //           params: '[{ "fake": "JSON" }]',
-    //           block_num: 123,
-    //           block_timestamp: 123_456,
-    //           extrinsic_hash: '0xCAFECAFE',
-    //         },
-    //         {
-    //           params: '[{ "JSON": "fake" }]',
-    //           block_num: 789,
-    //           block_timestamp: 789_123,
-    //           extrinsic_hash: '0xFACEFACE',
-    //         },
-    //       ],
-    //     },
-    //   };
-
-    //   const cTypeEvents = await getEvents({
-    //     module,
-    //     eventId,
-    //     fromBlock: 10,
-    //     page: 0,
-    //     row: 0,
-    //   });
-
-    //   expect(cTypeEvents.count).toBe(2);
-    //   expect(cTypeEvents.events).toEqual([
-    //     {
-    //       params: [{ JSON: 'fake' }],
-    //       block: 789,
-    //       blockTimestampMs: 789_123_000,
-    //       extrinsicHash: '0xFACEFACE',
-    //     },
-    //     {
-    //       params: [{ fake: 'JSON' }],
-    //       block: 123,
-    //       blockTimestampMs: 123_456_000,
-    //       extrinsicHash: '0xCAFECAFE',
-    //     },
-    //   ]);
-    // });
   });
 
   describe('subScanEventGenerator', () => {
@@ -158,70 +111,6 @@ describe('subScan', () => {
       // get first page
       expect(calls[4][1]).toMatchObject({ json: { page: 0, row: 100 } });
     });
-
-    // eslint-disable-next-line vitest/no-commented-out-tests
-    // it('should yield events in reverse order', async () => {
-    //   vi.mocked(got.post)
-    //     .mockReturnValueOnce({
-    //       // @ts-expect-error but the code doesn’t care about the other members
-    //       json: () => ({ data: { count: 200 } }),
-    //     })
-    //     .mockReturnValueOnce({
-    //       // @ts-expect-error but the code doesn’t care about the other members
-    //       json: () => ({
-    //         data: {
-    //           count: 200,
-    //           events: [
-    //             {
-    //               block_timestamp: 1,
-    //               params: '"JSON"',
-    //               extrinsic_hash: '0xCAFECAFE',
-    //             },
-    //             {
-    //               block_timestamp: 0,
-    //               params: '"JSON"',
-    //               extrinsic_hash: '0xFACEFACE',
-    //             },
-    //           ],
-    //         },
-    //       }),
-    //     })
-    //     .mockReturnValueOnce({
-    //       // @ts-expect-error but the code doesn’t care about the other members
-    //       json: () => ({
-    //         data: {
-    //           count: 200,
-    //           events: [
-    //             {
-    //               block_timestamp: 3,
-    //               params: '"JSON"',
-    //               extrinsic_hash: '0xCAFECAFE',
-    //             },
-    //             {
-    //               block_timestamp: 2,
-    //               params: '"JSON"',
-    //               extrinsic_hash: '0xFACEFACE',
-    //             },
-    //           ],
-    //         },
-    //       }),
-    //     });
-
-    //   const eventGenerator = subScanEventGenerator(
-    //     module,
-    //     eventId,
-    //     0,
-    //     async (events) => events,
-    //   );
-
-    //   const events = [];
-    //   for await (const event of eventGenerator) {
-    //     events.push(event);
-    //   }
-
-    //   const timestamps = events.map(({ blockTimestampMs }) => blockTimestampMs);
-    //   expect(timestamps).toEqual([0, 1000, 2000, 3000]);
-    // });
   });
   it('should get events in batches if current block is higher than block range', async () => {
     const api = {
