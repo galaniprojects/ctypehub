@@ -76,16 +76,16 @@ function mockAttestationEvent() {
       ),
     },
     { type_name: 'ClaimHashOf', value: attestation.claimHash },
-    { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
-    { type_name: 'DelegationNodeIdOf', value: null },
+    { type_name: 'CtypeHashOf', value: CType.idToHash(cType.$id) },
+    { type_name: 'Option<DelegationNodeIdOf>', value: null },
   ];
   const mockParsedParams = {
     AttesterOf: Utils.Crypto.u8aToHex(
       Utils.Crypto.decodeAddress(Did.toChain(did)),
     ),
     ClaimHashOf: attestation.claimHash,
-    CTypeHashOf: CType.idToHash(cType.$id),
-    DelegationNodeIdOf: null,
+    CtypeHashOf: CType.idToHash(cType.$id),
+    'Option<DelegationNodeIdOf>': null,
   };
 
   vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
