@@ -26,7 +26,7 @@ import { resetDatabase } from '../../testing/resetDatabase';
 
 import { configuration } from './configuration';
 import { subScanEventGenerator } from './subScan';
-import { type EventParams, scanAttestations } from './scanAttestations';
+import { scanAttestations } from './scanAttestations';
 
 vi.mock('./subScan');
 
@@ -68,20 +68,30 @@ async function createAttestation(assertionMethod: KiltKeyringPair) {
 }
 
 function mockAttestationEvent() {
-  const mockParams: EventParams = [
+  const mockParams = [
     {
       type_name: 'AttesterOf',
       value: Utils.Crypto.u8aToHex(
         Utils.Crypto.decodeAddress(Did.toChain(did)),
-      ) as unknown as EventParams[0]['value'],
+      ),
     },
     { type_name: 'ClaimHashOf', value: attestation.claimHash },
     { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
     { type_name: 'DelegationNodeIdOf', value: null },
   ];
+  const mockParsedParams = {
+    AttesterOf: Utils.Crypto.u8aToHex(
+      Utils.Crypto.decodeAddress(Did.toChain(did)),
+    ),
+    ClaimHashOf: attestation.claimHash,
+    CTypeHashOf: CType.idToHash(cType.$id),
+    DelegationNodeIdOf: null,
+  };
+
   vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
     yield {
       params: mockParams,
+      parsedParams: mockParsedParams,
       block: 123456,
       blockTimestampMs: 160273245600,
       extrinsicHash: extrinsic.hash.toHex(),
