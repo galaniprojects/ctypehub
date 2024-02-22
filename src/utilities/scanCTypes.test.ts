@@ -18,7 +18,7 @@ import { createDid } from '../../testing/createDid';
 import { createCType } from '../../testing/createCType';
 import { resetDatabase } from '../../testing/resetDatabase';
 
-import { type EventParams, scanCTypes } from './scanCTypes';
+import { scanCTypes } from './scanCTypes';
 import { configuration } from './configuration';
 import { subScanEventGenerator } from './subScan';
 
@@ -31,13 +31,18 @@ let cType: ICType;
 let extrinsic: SubmittableExtrinsic;
 
 function mockCTypeEvent() {
-  const mockParams: EventParams = [
-    { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
-    { type_name: 'CTypeHashOf', value: CType.idToHash(cType.$id) },
+  const mockParams = [
+    { type_name: 'CtypeCreatorOf', value: '0xexamplecreator' },
+    { type_name: 'CtypeHashOf', value: CType.idToHash(cType.$id) },
   ];
+  const mockParsedParams = {
+    CtypeCreatorOf: '0xexamplecreator',
+    CtypeHashOf: CType.idToHash(cType.$id),
+  };
   vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
     yield {
       params: mockParams,
+      parsedParams: mockParsedParams,
       block: 123456,
       blockTimestampMs: 160273245600,
       extrinsicHash: extrinsic.hash.toHex(),

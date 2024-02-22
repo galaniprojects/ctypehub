@@ -7,11 +7,6 @@ import { CType as CTypeModel } from '../models/ctype';
 import { logger } from './logger';
 import { subScanEventGenerator } from './subScan';
 
-export type EventParams = [
-  { type_name: 'CTypeCreatorOf'; value: HexString },
-  { type_name: 'CTypeHashOf'; value: HexString },
-];
-
 export async function scanCTypes() {
   const latestCType = await CTypeModel.findOne({
     order: [['createdAt', 'DESC']],
@@ -31,8 +26,8 @@ export async function scanCTypes() {
 
   for await (const event of eventGenerator) {
     const { blockTimestampMs, extrinsicHash } = event;
-    const params = event.params as EventParams;
-    const cTypeHash = params[1].value;
+    const params = event.parsedParams;
+    const cTypeHash = params.CtypeHashOf as HexString;
 
     let cTypeDetails: CType.ICTypeDetails;
     try {
