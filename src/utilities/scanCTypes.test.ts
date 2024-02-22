@@ -32,11 +32,11 @@ let extrinsic: SubmittableExtrinsic;
 
 function mockCTypeEvent() {
   const mockParams = [
-    { type_name: 'CTypeCreatorOf', value: '0xexamplecreator' },
+    { type_name: 'CtypeCreatorOf', value: '0xexamplecreator' },
     { type_name: 'CtypeHashOf', value: CType.idToHash(cType.$id) },
   ];
   const mockParsedParams = {
-    CTypeCreatorOf: '0xexamplecreator',
+    CtypeCreatorOf: '0xexamplecreator',
     CtypeHashOf: CType.idToHash(cType.$id),
   };
   vi.mocked(subScanEventGenerator).mockImplementation(async function* () {
