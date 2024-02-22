@@ -119,12 +119,7 @@ describe('subScan', () => {
 
     postResponse = { data: { count: 100, events: [] } };
 
-    const eventGenerator = subScanEventGenerator(
-      module,
-      eventId,
-      0,
-      async (events) => events,
-    );
+    const eventGenerator = subScanEventGenerator(module, eventId, 0);
 
     for await (const event of eventGenerator) {
       expect(event).toBeDefined();
@@ -133,7 +128,7 @@ describe('subScan', () => {
     expect(got.post).toHaveBeenCalledTimes(8);
     const { calls } = vi.mocked(got.post).mock;
 
-    expect(calls[3][1]).toMatchObject({
+    expect(calls[6][1]).toMatchObject({
       json: { block_range: '100000-200000', page: 0, row: 100 },
     });
   });
