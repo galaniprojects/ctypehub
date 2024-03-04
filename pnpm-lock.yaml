@@ -10,7 +10,7 @@ dependencies:
     version: 6.1.0(astro@3.6.5)
   '@astrojs/react':
     specifier: ^3.0.10
-    version: 3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9)
+    version: 3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9)
   '@kiltprotocol/sdk-js':
     specifier: ^0.35.0
     version: 0.35.0
@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^2.7.3
     version: 2.7.3
   '@types/react':
-    specifier: ^18.2.61
-    version: 18.2.61
+    specifier: ^18.2.62
+    version: 18.2.62
   '@types/react-dom':
     specifier: ^18.2.19
     version: 18.2.19
@@ -311,7 +311,7 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/react@3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9):
+  /@astrojs/react@3.0.10(@types/react-dom@18.2.19)(@types/react@18.2.62)(react-dom@18.2.0)(react@18.2.0)(vite@4.4.9):
     resolution: {integrity: sha512-uGRIwKMAn7tva2vxXMyoVIGxWFr0rjZ8ZWIlkTG/vIpnAjD2nM8Cz6B8j7yzj176jvl6gZ6xTbTVPm09aeK0Yw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -320,7 +320,7 @@ packages:
       react: ^17.0.2 || ^18.0.0
       react-dom: ^17.0.2 || ^18.0.0
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.2.62
       '@types/react-dom': 18.2.19
       '@vitejs/plugin-react': 4.2.1(vite@4.4.9)
       react: 18.2.0
@@ -1648,7 +1648,7 @@ packages:
       '@polkadot/types': 10.9.1
       '@polkadot/util': 12.6.2
       '@polkadot/util-crypto': 12.3.2(@polkadot/util@12.6.2)
-      '@polkadot/x-global': 12.3.2
+      '@polkadot/x-global': 12.6.2
       tslib: 2.6.2
     transitivePeerDependencies:
       - bufferutil
@@ -1718,7 +1718,7 @@ packages:
       '@polkadot/util': 12.6.2
       '@polkadot/util-crypto': 12.3.2(@polkadot/util@12.6.2)
       '@polkadot/x-fetch': 12.3.2
-      '@polkadot/x-global': 12.3.2
+      '@polkadot/x-global': 12.6.2
       '@polkadot/x-ws': 12.3.2
       eventemitter3: 5.0.1
       mock-socket: 9.2.1
@@ -1747,7 +1747,7 @@ packages:
     engines: {node: '>=16'}
     dependencies:
       '@polkadot/util': 12.6.2
-      '@polkadot/x-bigint': 12.3.2
+      '@polkadot/x-bigint': 12.6.2
       tslib: 2.6.2
     dev: false
 
@@ -1820,7 +1820,7 @@ packages:
       '@polkadot/x-global': 12.3.2
       '@polkadot/x-textdecoder': 12.3.2
       '@polkadot/x-textencoder': 12.3.2
-      '@types/bn.js': 5.1.1
+      '@types/bn.js': 5.1.5
       bn.js: 5.2.1
       tslib: 2.6.2
     dev: false
@@ -2133,12 +2133,6 @@ packages:
       '@babel/types': 7.23.5
     dev: false
 
-  /@types/bn.js@5.1.1:
-    resolution: {integrity: sha512-qNrYbZqMx0uJAfKnKclPh+dTwK33KfLHYqtyODwd5HnXOjnkhc4qgn3BrK6RWyGZm5+sIFE7Q7Vz6QQtJB7w7g==}
-    dependencies:
-      '@types/node': 20.11.24
-    dev: false
-
   /@types/bn.js@5.1.5:
     resolution: {integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==}
     dependencies:
@@ -2254,10 +2248,10 @@ packages:
   /@types/react-dom@18.2.19:
     resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.2.62
 
-  /@types/react@18.2.61:
-    resolution: {integrity: sha512-NURTN0qNnJa7O/k4XUkEW2yfygA+NxS0V5h1+kp9jPwhzZy95q3ADoGMP0+JypMhrZBTTgjKAUlTctde1zzeQA==}
+  /@types/react@18.2.62:
+    resolution: {integrity: sha512-l3f57BbaEKP0xcFzf+5qRG8/PXykZiuVM6eEoPtqBPCp6dxO3HhDkLIgIyXPhPKNAeXn3KO2pEaNgzaEo/asaw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
