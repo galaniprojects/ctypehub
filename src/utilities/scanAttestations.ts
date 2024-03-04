@@ -25,7 +25,7 @@ export async function scanAttestations() {
     const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
-    const didU8a = hexToU8a(params.AttesterOf as HexString);
+    const didU8a = hexToU8a(params.AttesterOf as string);
     const decodedAddress = Utils.Crypto.decodeAddress(didU8a);
 
     const owner = Did.fromChain(
