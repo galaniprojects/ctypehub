@@ -25,12 +25,12 @@ export async function scanAttestations() {
     const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
-    const didU8a = hexToU8a(
-      params.AttesterOf as Parameters<typeof Did.fromChain>[0],
-    );
+    const didU8a = hexToU8a(params.AttesterOf as HexString);
     const decodedAddress = Utils.Crypto.decodeAddress(didU8a);
 
-    const owner = Did.fromChain(decodedAddress);
+    const owner = Did.fromChain(
+      decodedAddress as Parameters<typeof Did.fromChain>[0],
+    );
     const claimHash = params.ClaimHashOf as HexString;
     const cTypeHash = params.CtypeHashOf as HexString;
     const cTypeId = CType.hashToId(cTypeHash);
