@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@astrojs/node": "^6.1.0",
-    "@astrojs/react": "^3.0.10",
+    "@astrojs/react": "^3.1.0",
     "@kiltprotocol/sdk-js": "^0.35.0",
     "@polkadot/extension-dapp": "^0.46.5",
     "@polkadot/util": "^12.6.2",
