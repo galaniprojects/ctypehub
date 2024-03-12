@@ -1,4 +1,4 @@
-import { CType, Did, type HexString, Utils } from '@kiltprotocol/sdk-js';
+import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
 import { hexToU8a } from '@polkadot/util';
 
 import { Attestation as AttestationModel } from '../models/attestation';
@@ -25,12 +25,10 @@ export async function scanAttestations() {
     const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
-    const didU8a = hexToU8a(params.AttesterOf as string);
-    const decodedAddress = Utils.Crypto.decodeAddress(didU8a);
 
-    const owner = Did.fromChain(
-      decodedAddress as Parameters<typeof Did.fromChain>[0],
-    );
+    const didU8a = hexToU8a(params.AttesterOf as string);
+    const owner = Did.fromChain(didU8a as Parameters<typeof Did.fromChain>[0]);
+
     const claimHash = params.ClaimHashOf as HexString;
     const cTypeHash = params.CtypeHashOf as HexString;
     const cTypeId = CType.hashToId(cTypeHash);
