@@ -6,6 +6,15 @@ import { Attestation as AttestationModel } from '../models/attestation';
 import { subScanEventGenerator } from './subScan';
 import { logger } from './logger';
 
+function getDidUriFromAccountHex(didAccount: HexString) {
+  logger.debug('DID as HexString of Account Address: ' + didAccount);
+  const didU8a = hexToU8a(didAccount);
+
+  const didUri = Did.fromChain(didU8a as Parameters<typeof Did.fromChain>[0]);
+  logger.debug('Corresponding DID-URI: ' + didUri);
+  return didUri;
+}
+
 export async function scanAttestations() {
   const latestAttestation = await AttestationModel.findOne({
     order: [['createdAt', 'DESC']],
@@ -25,10 +34,7 @@ export async function scanAttestations() {
     const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
-
-    const didU8a = hexToU8a(params.AttesterOf as string);
-    const owner = Did.fromChain(didU8a as Parameters<typeof Did.fromChain>[0]);
-
+    const owner = getDidUriFromAccountHex(params.AttesterOf as HexString);
     const claimHash = params.ClaimHashOf as HexString;
     const cTypeHash = params.CtypeHashOf as HexString;
     const cTypeId = CType.hashToId(cTypeHash);
