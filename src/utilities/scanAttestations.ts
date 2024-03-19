@@ -8,6 +8,8 @@ import { logger } from './logger';
 
 function getDidUriFromAccountHex(didAccount: HexString) {
   logger.debug('DID as HexString of Account Address: ' + didAccount);
+  // SubScan returns some AttesterOf values as hex without the "0x" prefix.
+  // So we first parsed to a Uint8Array via `hexToU8a`, which can handle HexStrings with or without the prefix.
   const didU8a = hexToU8a(didAccount);
 
   const didUri = Did.fromChain(didU8a as Parameters<typeof Did.fromChain>[0]);
