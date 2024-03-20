@@ -1,10 +1,21 @@
-import { CType, Did, type HexString, Utils } from '@kiltprotocol/sdk-js';
+import { CType, Did, type HexString } from '@kiltprotocol/sdk-js';
 import { hexToU8a } from '@polkadot/util';
 
 import { Attestation as AttestationModel } from '../models/attestation';
 
 import { subScanEventGenerator } from './subScan';
 import { logger } from './logger';
+
+function getDidUriFromAccountHex(didAccount: HexString) {
+  logger.debug('DID as HexString of Account Address: ' + didAccount);
+  // SubScan returns some AttesterOf values as hex without the "0x" prefix.
+  // So we first parsed to a Uint8Array via `hexToU8a`, which can handle HexStrings with or without the prefix.
+  const didU8a = hexToU8a(didAccount);
+
+  const didUri = Did.fromChain(didU8a as Parameters<typeof Did.fromChain>[0]);
+  logger.debug('Corresponding DID-URI: ' + didUri);
+  return didUri;
+}
 
 export async function scanAttestations() {
   const latestAttestation = await AttestationModel.findOne({
@@ -25,12 +36,7 @@ export async function scanAttestations() {
     const params = event.parsedParams;
 
     const createdAt = new Date(blockTimestampMs);
-    const didU8a = hexToU8a(params.AttesterOf as string);
-    const decodedAddress = Utils.Crypto.decodeAddress(didU8a);
-
-    const owner = Did.fromChain(
-      decodedAddress as Parameters<typeof Did.fromChain>[0],
-    );
+    const owner = getDidUriFromAccountHex(params.AttesterOf as HexString);
     const claimHash = params.ClaimHashOf as HexString;
     const cTypeHash = params.CtypeHashOf as HexString;
     const cTypeId = CType.hashToId(cTypeHash);
