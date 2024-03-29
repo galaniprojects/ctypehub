@@ -34,7 +34,7 @@
     "pino": "^8.19.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sequelize": "^6.37.1",
+    "sequelize": "^6.37.2",
     "sequelize-cli": "^6.6.2",
     "sharp": "^0.33.3",
     "slash": "^4.0.0",
