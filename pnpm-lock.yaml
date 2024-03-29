@@ -68,8 +68,8 @@ devDependencies:
     specifier: ^0.3.4
     version: 0.3.4(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.4.3)
   '@testcontainers/postgresql':
-    specifier: ^10.7.2
-    version: 10.7.2
+    specifier: ^10.8.0
+    version: 10.8.0
   '@testing-library/react':
     specifier: ^14.2.2
     version: 14.2.2(react-dom@18.2.0)(react@18.2.0)
@@ -164,8 +164,8 @@ devDependencies:
     specifier: ^36.0.0
     version: 36.0.0(stylelint@16.3.1)
   testcontainers:
-    specifier: ^10.7.2
-    version: 10.7.2
+    specifier: ^10.8.0
+    version: 10.8.0
   typescript:
     specifier: ^5.4.3
     version: 5.4.3
@@ -2058,10 +2058,10 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@testcontainers/postgresql@10.7.2:
-    resolution: {integrity: sha512-BB1C4SUDhWYY4X9afHtVYXDcYpvtRz7M4CtNEI3gA5A8Zm09msg5NUmhDSJiNAO8/xILv5LHcMJ0NZPBjgM9Jg==}
+  /@testcontainers/postgresql@10.8.0:
+    resolution: {integrity: sha512-2Wt+aWYnqR6HErLjID+g9yY29sqnCrPLIKO4Ue1D59u74Wb9hkbo8ha1L+r8W/59yZe/nJhqpRywP07BAcLocg==}
     dependencies:
-      testcontainers: 10.7.2
+      testcontainers: 10.8.0
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8692,8 +8692,8 @@ packages:
       fast-fifo: 1.3.0
       streamx: 2.15.0
 
-  /testcontainers@10.7.2:
-    resolution: {integrity: sha512-7d+LVd/4YKp/cutiVMLL5cnj/8p8oYELAVRRyNUM4FyUDz1OLQuwW868nDl7Vd1ZAQxzGeCR+F86FlR9Yw9fMA==}
+  /testcontainers@10.8.0:
+    resolution: {integrity: sha512-C8wXze2go5NVQyzYtI8XhTJ+iVvpojuyTiG1AWIRE1C8vojCx9Za3tQ5qEx/43WWgVGYE9UVz2Qo0u9IvLE3Hw==}
     dependencies:
       '@balena/dockerignore': 1.0.2
       '@types/dockerode': 3.3.24
