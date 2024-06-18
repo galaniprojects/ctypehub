@@ -10,7 +10,7 @@ dependencies:
     version: 6.1.0(astro@3.6.5)
   '@astrojs/react':
     specifier: ^3.1.1
-    version: 3.1.1(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(vite@4.4.9)
+    version: 3.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(vite@4.4.9)
   '@kiltprotocol/sdk-js':
     specifier: ^0.35.0
     version: 0.35.0
@@ -86,8 +86,8 @@ devDependencies:
     specifier: ^3.0.0
     version: 3.0.0
   '@types/react':
-    specifier: ^18.3.1
-    version: 18.3.1
+    specifier: ^18.3.3
+    version: 18.3.3
   '@types/react-dom':
     specifier: ^18.3.0
     version: 18.3.0
@@ -311,7 +311,7 @@ packages:
       prismjs: 1.29.0
     dev: false
 
-  /@astrojs/react@3.1.1(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1)(react@18.3.1)(vite@4.4.9):
+  /@astrojs/react@3.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)(vite@4.4.9):
     resolution: {integrity: sha512-Uc4zY8UxkZrSKmiFGPyy+0uUKGgVETJSra5c/65Z2ZckJEHtgLYW0ZqGUoItGr0wJFMv+h1g3Z4OJGapGgcUyA==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -320,7 +320,7 @@ packages:
       react: ^17.0.2 || ^18.0.0
       react-dom: ^17.0.2 || ^18.0.0
     dependencies:
-      '@types/react': 18.3.1
+      '@types/react': 18.3.3
       '@types/react-dom': 18.3.0
       '@vitejs/plugin-react': 4.2.1(vite@4.4.9)
       react: 18.3.1
@@ -2258,10 +2258,10 @@ packages:
   /@types/react-dom@18.3.0:
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
     dependencies:
-      '@types/react': 18.3.1
+      '@types/react': 18.3.3
 
-  /@types/react@18.3.1:
-    resolution: {integrity: sha512-V0kuGBX3+prX+DQ/7r2qsv1NsdfnCLnTgnRJ1pYnxykBhGMz+qj+box5lq7XsO5mtZsBqpjwwTu/7wszPfMBcw==}
+  /@types/react@18.3.3:
+    resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
     dependencies:
       '@types/prop-types': 15.7.5
       csstype: 3.1.2
