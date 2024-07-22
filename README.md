@@ -2,6 +2,14 @@
 
 The source code of https://ctypehub.galaniprojects.de
 
+### Prerequisites
+
+Make sure you installed these required software before running this project:
+
+- [Node.js](https://nodejs.org/en/download/prebuilt-installer)
+- [pnpm](https://pnpm.io/installation#using-corepack)
+- [Docker](https://docs.docker.com/engine/install/)
+
 
 ## Start the app locally:
 
