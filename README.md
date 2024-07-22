@@ -28,6 +28,8 @@ After having [cloned the repository](https://docs.github.com/en/repositories/cre
    ```
 _The Docker daemon needs to be running for this to work_
 
+If there is already a postgres container running, with an incompatible database, you can stop it with `pnpm stop-db`.
+
 3. Enter the dev watch mode from astro, running:
 
    ```
