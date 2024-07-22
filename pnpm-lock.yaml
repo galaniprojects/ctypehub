@@ -137,8 +137,8 @@ devDependencies:
     specifier: ^3.1.0
     version: 3.1.0
   jsdom:
-    specifier: ^24.1.0
-    version: 24.1.0
+    specifier: ^24.1.1
+    version: 24.1.1
   pino-pretty:
     specifier: ^11.2.1
     version: 11.2.1
@@ -171,7 +171,7 @@ devDependencies:
     version: 5.4.5
   vitest:
     specifier: ^0.34.6
-    version: 0.34.6(jsdom@24.1.0)
+    version: 0.34.6(jsdom@24.1.1)
   vitest-github-actions-reporter:
     specifier: ^0.11.1
     version: 0.11.1(vitest@0.34.6)
@@ -1998,7 +1998,7 @@ packages:
     dependencies:
       '@polkadot/x-global': 12.3.2
       tslib: 2.6.2
-      ws: 8.17.1
+      ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -4555,7 +4555,7 @@ packages:
       '@typescript-eslint/eslint-plugin': 7.2.0(@typescript-eslint/parser@7.2.0)(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/utils': 7.4.0(eslint@8.57.0)(typescript@5.4.5)
       eslint: 8.57.0
-      vitest: 0.34.6(jsdom@24.1.0)
+      vitest: 0.34.6(jsdom@24.1.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -5424,8 +5424,8 @@ packages:
       resolve-alpn: 1.2.1
     dev: false
 
-  /https-proxy-agent@7.0.4:
-    resolution: {integrity: sha512-wlwpilI7YdjSkWaQ/7omYBMTliDcmCN8OLihO6I9B86g06lMyAoqgoDpV0XqoaPOKj+0DIdAvnsWfyAAhmimcg==}
+  /https-proxy-agent@7.0.5:
+    resolution: {integrity: sha512-1e4Wqeblerz+tMKPIq2EMGiiWW1dIjZOksyHWSUm1rmuvw/how9hBHZ38lAGj5ID4Ik6EdkOw7NmWPy6LAwalw==}
     engines: {node: '>= 14'}
     dependencies:
       agent-base: 7.1.0
@@ -5842,8 +5842,8 @@ packages:
     dependencies:
       argparse: 2.0.1
 
-  /jsdom@24.1.0:
-    resolution: {integrity: sha512-6gpM7pRXCwIOKxX47cgOyvyQDN/Eh0f1MeKySBV2xGdKtqJBLj8P25eY3EVCWo2mglDDzozR2r2MW4T+JiNUZA==}
+  /jsdom@24.1.1:
+    resolution: {integrity: sha512-5O1wWV99Jhq4DV7rCLIoZ/UIhyQeDR7wHVyZAHAshbrvZsLs+Xzz7gtwnlJTJDjleiTKh54F4dXrX70vJQTyJQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -5857,9 +5857,9 @@ packages:
       form-data: 4.0.0
       html-encoding-sniffer: 4.0.0
       http-proxy-agent: 7.0.2
-      https-proxy-agent: 7.0.4
+      https-proxy-agent: 7.0.5
       is-potential-custom-element-name: 1.0.1
-      nwsapi: 2.2.10
+      nwsapi: 2.2.12
       parse5: 7.1.2
       rrweb-cssom: 0.7.1
       saxes: 6.0.0
@@ -5870,7 +5870,7 @@ packages:
       whatwg-encoding: 3.1.1
       whatwg-mimetype: 4.0.0
       whatwg-url: 14.0.0
-      ws: 8.17.1
+      ws: 8.18.0
       xml-name-validator: 5.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -6843,8 +6843,8 @@ packages:
     dependencies:
       path-key: 4.0.0
 
-  /nwsapi@2.2.10:
-    resolution: {integrity: sha512-QK0sRs7MKv0tKe1+5uZIQk/C8XGza4DAnztJG8iD+TpJIORARrCxczA738awHrZoHeTjSSoHqao2teO0dC/gFQ==}
+  /nwsapi@2.2.12:
+    resolution: {integrity: sha512-qXDmcVlZV4XRtKFzddidpfVP4oMSGhga+xdMc25mv8kaLUHtgzCDhUxkrN8exkGdTlLNaXj7CV3GtON7zuGZ+w==}
     dev: true
 
   /object-assign@4.1.1:
@@ -8166,6 +8166,7 @@ packages:
 
   /shikiji@0.6.10:
     resolution: {integrity: sha512-WE+A5Y2ntM5hL3iJQujk97qr5Uj7PSIRXpQfrZ6h+JWPXZ8KBEDhFXc4lqNriaRq1WGOVPUT83XMOzmHiH3W8A==}
+    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
     dependencies:
       hast-util-to-html: 9.0.0
     dev: false
@@ -8244,7 +8245,7 @@ packages:
     requiresBuild: true
     dependencies:
       pako: 2.1.0
-      ws: 8.17.1
+      ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -9319,10 +9320,10 @@ packages:
       vitest: '>=0.28.5'
     dependencies:
       '@actions/core': 1.10.0
-      vitest: 0.34.6(jsdom@24.1.0)
+      vitest: 0.34.6(jsdom@24.1.1)
     dev: true
 
-  /vitest@0.34.6(jsdom@24.1.0):
+  /vitest@0.34.6(jsdom@24.1.1):
     resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -9366,7 +9367,7 @@ packages:
       cac: 6.7.14
       chai: 4.3.10
       debug: 4.3.4
-      jsdom: 24.1.0
+      jsdom: 24.1.1
       local-pkg: 0.4.3
       magic-string: 0.30.3
       pathe: 1.1.1
@@ -9714,8 +9715,8 @@ packages:
       signal-exit: 4.1.0
     dev: true
 
-  /ws@8.17.1:
-    resolution: {integrity: sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==}
+  /ws@8.18.0:
+    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
