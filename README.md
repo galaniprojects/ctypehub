@@ -28,7 +28,7 @@ After having [cloned the repository](https://docs.github.com/en/repositories/cre
    ```
 _The Docker daemon needs to be running for this to work_
 
-3. Enter the dev watch mode from astro (builds as well), running:
+3. Enter the dev watch mode from astro, running:
 
    ```
    pnpm dev
@@ -36,3 +36,7 @@ _The Docker daemon needs to be running for this to work_
 
  Now you can see the logs of the backend on the terminal and visit the frontend under the URL specified by the variable `URL` from the `.env`-file.
  (By default http://localhost:3000)
+
+ The database should start to populate from the configured indexer.
+
+
