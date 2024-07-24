@@ -7,7 +7,7 @@ export async function initialize() {
   await initializeDatabase();
   await initKilt();
 
-  await queryFromIndexer('foo');
+  await queryFromIndexer();
 
   trackDatabaseConnection();
   // watchSubScan(); // don't use subscan
