@@ -23,7 +23,12 @@ if (!subscan.network) {
 if (!subscan.secret) {
   throw new ConfigurationError('No subscan secret provided');
 }
-
+const indexer = {
+  graphqlEndpoint: import.meta.env.GRAPHQL_ENDPOINT as string,
+};
+if (!indexer.graphqlEndpoint) {
+  throw new ConfigurationError('No endpoint for the GraphQL server provided');
+}
 const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT as string;
 if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
@@ -78,4 +83,5 @@ export const configuration = {
   keyAgreementMnemonic,
   payerMnemonic,
   w3nOrigin: w3nOrigins[blockchainEndpoint] || 'https://w3n.id',
+  indexer,
 };
