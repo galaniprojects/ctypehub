@@ -1,6 +1,9 @@
 import { got } from 'got';
 
-const graphqlEndpoint = 'http://localhost:7777/';
+import { configuration } from '../configuration';
+
+const { indexer } = configuration;
+
 const queryBlocks = `
   query {
     blocks(orderBy: TIME_STAMP_DESC, first: 3) {
@@ -14,11 +17,11 @@ const queryBlocks = `
   }
 `;
 
-export async function queryFromIndexer(query: string) {
+export async function queryFromIndexer(query: string = queryBlocks) {
   try {
-    const response = await got.post(graphqlEndpoint, {
+    const response = await got.post(indexer.graphqlEndpoint, {
       json: {
-        query: queryBlocks,
+        query,
       },
       responseType: 'json',
     });
