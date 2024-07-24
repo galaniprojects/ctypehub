@@ -2,8 +2,11 @@ import { got } from 'got';
 
 import { configuration } from '../configuration';
 import { logger } from '../logger';
+// import { sleep } from '../sleep';
 
 const { indexer } = configuration;
+
+// const QUERY_INTERVAL_MS = 1000;
 
 const queryBlocks = `
   query {
@@ -29,47 +32,63 @@ export interface FetchedData {
 }
 
 export async function queryFromIndexer(query: string = queryBlocks) {
-  try {
-    // logger.info('indexer endpoint: ' + indexer.graphqlEndpoint);
+  // logger.info('indexer endpoint: ' + indexer.graphqlEndpoint);
 
-    const response = await got
-      .post(indexer.graphqlEndpoint, {
-        json: {
-          query,
-        },
-      })
-      .json<FetchedData>();
+  const response = await got
+    .post(indexer.graphqlEndpoint, {
+      json: {
+        query,
+      },
+    })
+    .json<FetchedData>();
 
-    const entities = Object.entries(response.data);
+  const entities = Object.entries(response.data);
 
-    entities.length > 1 &&
-      logger.error('Please, avoid multiple queries in a single request.');
+  entities.length > 1 &&
+    logger.error('Please, avoid multiple queries in a single request.');
 
-    const [name, { totalCount, nodes: matches }] = entities[0];
+  const [name, { totalCount, nodes: matches }] = entities[0];
 
-    totalCount ??
-      logger.error(
-        'The query did not ask for total count. Please add field "totalCount" to your query.',
-      );
-
-    logger.info(
-      `Completed querying '${name}' from GraphQL under ${indexer.graphqlEndpoint}.`,
+  totalCount ??
+    logger.error(
+      'The query did not ask for total count. Please add field "totalCount" to your query.',
     );
 
-    // logger.info('Response from GraphQL: ' + JSON.stringify(response, null, 2));
+  logger.info(
+    `Completed querying '${name}' from GraphQL under ${indexer.graphqlEndpoint}.`,
+  );
 
-    logger.info(
-      `Got ${matches.length} out of ${totalCount} '${name}' matching query.`,
+  // logger.info('Response from GraphQL: ' + JSON.stringify(response, null, 2));
+
+  logger.info(
+    `Got ${matches.length} out of ${totalCount} '${name}' matching query.`,
+  );
+
+  // matches.forEach((match, index) => {
+  //   logger.info(
+  //     `#${index} match from query: ${JSON.stringify(match, null, 2)}`,
+  //   );
+  // });
+
+  return { totalCount, matches };
+}
+
+export async function* matchesGenerator(query: string = queryBlocks) {
+  if (indexer.graphqlEndpoint === 'NONE') {
+    return;
+  }
+  const { totalCount: count, matches } = await queryFromIndexer(query);
+
+  // const blockRange = `${fromBlock} - ${fromBlock + BLOCK_RANGE_SIZE}`;
+
+  if (count === 0) {
+    logger.debug(
+      `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${query}.`,
     );
-
-    // matches.forEach((match, index) => {
-    //   logger.info(
-    //     `#${index} match from query: ${JSON.stringify(match, null, 2)}`,
-    //   );
-    // });
-
-    return { totalCount, matches };
-  } catch (error) {
-    console.error(`Error Querying from ${indexer.graphqlEndpoint}:`, error);
+    // await sleep(QUERY_INTERVAL_MS);
+    // continue;
+  }
+  for (const match of matches) {
+    yield match;
   }
 }
