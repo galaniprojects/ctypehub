@@ -32,6 +32,22 @@ export interface FetchedData {
   >;
 }
 
+interface BadQueryError {
+  error: {
+    errors: Array<{
+      message: string;
+      extensions: {
+        code: string;
+        exception: { stacktrace: string[] };
+      };
+    }>;
+  };
+}
+
+function isBadQueryError(response: object): response is BadQueryError {
+  const responseFields = Object.keys(response);
+  return responseFields.includes('error');
+}
 export async function queryFromIndexer(query: string = queryBlocks) {
   // logger.info('indexer endpoint: ' + indexer.graphqlEndpoint);
 
@@ -41,7 +57,18 @@ export async function queryFromIndexer(query: string = queryBlocks) {
         query,
       },
     })
-    .json<FetchedData>();
+    .json<FetchedData | BadQueryError>();
+
+  if (isBadQueryError(response)) {
+    response.error.errors.forEach((err) => {
+      logger.error(
+        `Query to endpoint "${indexer.graphqlEndpoint}" resulted on Error: "${err.message}"`,
+      );
+    });
+    throw new Error(
+      `Bad Query to endpoint "${indexer.graphqlEndpoint}". Please, check the logs ad correct the query.`,
+    );
+  }
 
   const entities = Object.entries(response.data);
 
