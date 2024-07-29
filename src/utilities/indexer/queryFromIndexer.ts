@@ -2,6 +2,7 @@ import { got } from 'got';
 
 import { configuration } from '../configuration';
 import { logger } from '../logger';
+
 // import { sleep } from '../sleep';
 
 const { indexer } = configuration;
@@ -26,7 +27,7 @@ export interface FetchedData {
     string,
     {
       totalCount?: number;
-      nodes: Array<Record<string, unknown>>;
+      nodes?: Array<Record<string, unknown>>;
     }
   >;
 }
@@ -54,6 +55,11 @@ export async function queryFromIndexer(query: string = queryBlocks) {
       'The query did not ask for total count. Please add field "totalCount" to your query.',
     );
 
+  matches ??
+    logger.error(
+      'You need to include "nodes" as a field (with subfields) on your query to get matches.',
+    );
+
   logger.info(
     `Completed querying '${name}' from GraphQL under ${indexer.graphqlEndpoint}.`,
   );
@@ -61,7 +67,7 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   // logger.info('Response from GraphQL: ' + JSON.stringify(response, null, 2));
 
   logger.info(
-    `Got ${matches.length} out of ${totalCount} '${name}' matching query.`,
+    `Got ${matches ? matches.length : 'none'} out of ${totalCount} '${name}' matching query.`,
   );
 
   // matches.forEach((match, index) => {
@@ -78,6 +84,12 @@ export async function* matchesGenerator(query: string = queryBlocks) {
     return;
   }
   const { totalCount: count, matches } = await queryFromIndexer(query);
+
+  if (matches === undefined) {
+    throw new Error(
+      'You need to include "nodes" as a field (with subfields) on your query to get matches.',
+    );
+  }
 
   // const blockRange = `${fromBlock} - ${fromBlock + BLOCK_RANGE_SIZE}`;
 
