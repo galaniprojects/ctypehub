@@ -83,6 +83,8 @@ export async function* matchesGenerator(query: string = queryBlocks) {
   }
   const { totalCount: count, matches } = await queryFromIndexer(query);
 
+  // TODO: handle queries that have more than 100 matches
+
   if (matches === undefined) {
     throw new Error(
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
