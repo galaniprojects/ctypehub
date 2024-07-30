@@ -11,17 +11,6 @@ import { matchesGenerator } from './queryFromIndexer';
 const QUERY_SIZE = 50;
 
 export async function updateAttestationsCount() {
-  const savedCTypes = await CTypeModel.findAll({
-    order: [['createdAt', 'ASC']],
-    where: {
-      block: {
-        [Op.not]: null,
-      },
-    },
-  });
-
-  logger.info(`Updating Attestation Count for ${savedCTypes.length} CTypes.`);
-
   // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
   const writtenQuery = `
   query {
