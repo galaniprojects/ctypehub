@@ -27,6 +27,8 @@ export async function queryCTypes() {
     cTypes(
       filter: { registrationBlock: { id: { greaterThan: "${fromBlock}" } } }
       orderBy: REGISTRATION_BLOCK_ID_ASC
+      # BlockIDs are strings, this means that "42" > "1000"
+      # Sadly, time_stamps can only be use to order queries of blocks.
     ) {
       totalCount
       nodes {
