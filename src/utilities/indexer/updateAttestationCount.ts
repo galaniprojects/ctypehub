@@ -41,6 +41,8 @@ export async function updateAttestationsCount() {
       where: {
         id: {
           [Op.eq]: cTypeId,
+        },
+        attestationsCount: {
           [Op.ne]: attestationsCreated,
         },
       },
