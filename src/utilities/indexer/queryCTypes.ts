@@ -9,7 +9,7 @@ import { logger } from '../logger';
 import { matchesGenerator } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
 
-export async function scanCTypes() {
+export async function queryCTypes() {
   const latestCType = await CTypeModel.findOne({
     order: [['createdAt', 'DESC']],
     where: {
@@ -21,6 +21,7 @@ export async function scanCTypes() {
 
   const fromBlock = latestCType ? Number(latestCType.dataValues.block) : 0;
 
+  // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
   const writtenQuery = `
   query {
     cTypes(
@@ -93,6 +94,8 @@ export async function scanCTypes() {
       block: registrationBlock.id,
       ...rest,
     });
-    logger.info(`Added new CType to data base: ${JSON.stringify(newCType)}`);
+    logger.info(
+      `Added new CType to data base: ${JSON.stringify(newCType, null, 2)}`,
+    );
   }
 }
