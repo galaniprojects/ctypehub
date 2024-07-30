@@ -73,6 +73,7 @@ export async function queryCTypes() {
       author,
       registrationBlock,
       definition,
+      attestationsCreated,
     } = entity as unknown as QueriedCType;
     // const cTypeHash = cTypeId.split(':')[2] as HexString;
     const { id: creator } = author;
@@ -93,6 +94,7 @@ export async function queryCTypes() {
         '0xdbb285e26e9c214dc70ffbe8cb1e04a2dec19161f4ba6314b9828252accf3c50', // foo until deleting this field
       block: registrationBlock.id,
       ...rest,
+      attestationsCount: attestationsCreated.toString(10),
     });
     logger.info(
       `Added new CType to data base: ${JSON.stringify(newCType, null, 2)}`,

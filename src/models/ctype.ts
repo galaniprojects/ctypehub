@@ -1,7 +1,11 @@
 import { type DidUri, type ICType } from '@kiltprotocol/sdk-js';
-import { DataTypes, Model, type ModelAttributes, Sequelize } from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  type ModelAttributes,
+  type Sequelize,
+} from 'sequelize';
 
-import { Attestation } from './attestation';
 import { Tag } from './tag';
 
 interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
@@ -12,10 +16,10 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   extrinsicHash: string;
   block: string | null;
   description: string | null;
+  attestationsCount: string;
 }
 
 export interface CTypeData extends CTypeDataInput {
-  attestationsCount: string;
   isHidden: boolean;
   tags?: Array<Pick<Tag, 'dataValues'>>;
 }
@@ -66,6 +70,11 @@ export const CTypeModelDefinition: ModelAttributes = {
     allowNull: false,
     defaultValue: false,
   },
+  attestationsCount: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
 };
 
 const fields = Object.keys(CTypeModelDefinition)
@@ -91,24 +100,10 @@ export function initCType(sequelize: Sequelize) {
           ...Object.keys(CTypeModelDefinition).filter(
             (key) => key !== 'search',
           ),
-          [
-            Sequelize.literal(
-              `coalesce(
-                (select count(*)
-                from "Attestations"
-                where "Attestations"."cTypeId" = "CType"."id"
-                group by "CType"."id"),
-                0)`,
-            ),
-            'attestationsCount',
-          ],
         ],
       },
     },
   });
-
-  CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
-  Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
 
   CType.hasMany(Tag, { foreignKey: 'cTypeId', as: 'tags' });
   Tag.belongsTo(CType, { foreignKey: 'cTypeId' });
