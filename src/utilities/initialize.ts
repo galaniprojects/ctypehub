@@ -1,14 +1,13 @@
 import { initializeDatabase, trackDatabaseConnection } from './sequelize';
 import { initKilt } from './initKilt';
 // import { watchSubScan } from './watchSubScan';
-import { queryFromIndexer } from './indexer/queryFromIndexer';
+import { watchIndexer } from './indexer/watchIndexer';
 
 export async function initialize() {
   await initializeDatabase();
   await initKilt();
 
-  await queryFromIndexer();
-
   trackDatabaseConnection();
   // watchSubScan(); // don't use subscan
+  watchIndexer();
 }
