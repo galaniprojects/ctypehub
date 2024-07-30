@@ -3,9 +3,9 @@ import { got } from 'got';
 import { configuration } from '../configuration';
 import { logger } from '../logger';
 
-// import { sleep } from '../sleep';
-
 const { indexer } = configuration;
+
+// import { sleep } from '../sleep';
 
 // const QUERY_INTERVAL_MS = 1000;
 
@@ -33,8 +33,6 @@ export interface FetchedData {
 }
 
 export async function queryFromIndexer(query: string = queryBlocks) {
-  // logger.info('indexer endpoint: ' + indexer.graphqlEndpoint);
-
   const response = await got
     .post(indexer.graphqlEndpoint, {
       json: {
@@ -90,8 +88,6 @@ export async function* matchesGenerator(query: string = queryBlocks) {
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
     );
   }
-
-  // const blockRange = `${fromBlock} - ${fromBlock + BLOCK_RANGE_SIZE}`;
 
   if (count === 0) {
     logger.debug(
