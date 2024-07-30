@@ -82,7 +82,7 @@ export async function queryCTypes() {
     const newCType = await CTypeModel.upsert({
       id: cTypeId,
       schema: $schema,
-      createdAt: new Date(registrationBlock.timeStamp),
+      createdAt: new Date(registrationBlock.timeStamp + 'Z'),
       creator,
       extrinsicHash:
         '0xdbb285e26e9c214dc70ffbe8cb1e04a2dec19161f4ba6314b9828252accf3c50', // foo until deleting this field
