@@ -2,6 +2,7 @@ import { configuration } from '../configuration';
 import { sleep } from '../sleep';
 
 import { queryCTypes } from './queryCTypes';
+import { updateAttestationsCount } from './updateAttestationCount';
 
 const { isTest } = configuration;
 
@@ -14,6 +15,7 @@ export function watchIndexer() {
   (async () => {
     while (true) {
       await queryCTypes();
+      await updateAttestationsCount();
       await sleep(SCAN_INTERVAL_MS);
     }
   })();
