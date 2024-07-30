@@ -75,15 +75,9 @@ export async function queryCTypes() {
       definition,
       attestationsCreated,
     } = entity as unknown as QueriedCType;
-    // const cTypeHash = cTypeId.split(':')[2] as HexString;
+
     const { id: creator } = author;
-
-    // const { blockTimestampMs, extrinsicHash } = event;
-    // const params = event.parsedParams;
-    // const cTypeHash = params.CtypeHashOf as HexString;
-
     const { $schema, ...rest } = JSON.parse(definition) as Omit<ICType, '$id'>;
-    // const { $id, $schema, ...rest } = cTypeDetails.cType;
 
     const newCType = await CTypeModel.upsert({
       id: cTypeId,
