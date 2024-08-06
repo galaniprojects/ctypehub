@@ -13,7 +13,6 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   schema: ICType['$schema'];
   creator: DidUri;
   createdAt: Date;
-  extrinsicHash: string;
   block: string | null;
   description: string | null;
   attestationsCount: string;
@@ -53,10 +52,6 @@ export const CTypeModelDefinition: ModelAttributes = {
   },
   createdAt: {
     type: DataTypes.DATE,
-    allowNull: false,
-  },
-  extrinsicHash: {
-    type: DataTypes.STRING,
     allowNull: false,
   },
   block: {
