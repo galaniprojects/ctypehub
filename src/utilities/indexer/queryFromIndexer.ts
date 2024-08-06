@@ -9,7 +9,7 @@ import { writeQuery } from './writeQuery';
 const { indexer } = configuration;
 
 const QUERY_INTERVAL_MS = 1000;
-export const QUERY_SIZE = 10;
+export const QUERY_SIZE = 50;
 
 /** Example Query. */
 const queryBlocks = `
