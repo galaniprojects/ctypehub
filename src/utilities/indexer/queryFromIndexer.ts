@@ -11,6 +11,7 @@ const { indexer } = configuration;
 const QUERY_INTERVAL_MS = 1000;
 export const QUERY_SIZE = 10;
 
+/** Example Query. */
 const queryBlocks = `
   query {
     blocks(orderBy: TIME_STAMP_DESC, first: 3) {

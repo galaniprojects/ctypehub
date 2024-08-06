@@ -1,3 +1,6 @@
+// GraphQL provides reusable units called fragments.
+// Fragments let you construct sets of fields, and then include them in queries where needed.
+
 export const wholeBlock = `
 fragment wholeBlock on Block {
   id
@@ -5,6 +8,7 @@ fragment wholeBlock on Block {
   timeStamp
 }`;
 
+/** If used, 'wholeBlock' also needs to be included. */
 export const wholeAttestation = `
 fragment wholeAttestation on Attestation {
   id
