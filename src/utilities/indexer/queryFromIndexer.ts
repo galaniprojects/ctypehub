@@ -9,7 +9,7 @@ import { writeQuery } from './writeQuery';
 const { indexer } = configuration;
 
 const QUERY_INTERVAL_MS = 1000;
-export const QUERY_SIZE = 4;
+export const QUERY_SIZE = 10;
 
 const queryBlocks = `
   query {
@@ -91,8 +91,6 @@ export async function* matchesGenerator<T extends Record<string, unknown>>(
   const writtenQuery = writeQuery(queryParams);
   const { totalCount, matches } = await queryFromIndexer(writtenQuery);
 
-  // TODO: handle queries that have more than 100 matches
-
   if (matches === undefined) {
     throw new Error(
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
@@ -109,9 +107,8 @@ export async function* matchesGenerator<T extends Record<string, unknown>>(
       `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${writtenQuery}.`,
     );
     return;
-    // await sleep(QUERY_INTERVAL_MS);
-    // continue;
   }
+
   if (totalCount === matches.length) {
     for (const match of matches) {
       yield match as T;
@@ -127,7 +124,7 @@ export async function* matchesGenerator<T extends Record<string, unknown>>(
 
       if (!matches) {
         continue;
-        // maybe 'break' instead
+        // maybe 'break' instead?
       }
 
       for (const match of matches) {
