@@ -37,7 +37,7 @@ export interface FetchedData {
 
 export async function queryFromIndexer(query: string = queryBlocks) {
   logger.debug(
-    `From GraphQL under ${indexer.graphqlEndpoint}, querying: ${query} `,
+    `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
   const response = await got
     .post(indexer.graphqlEndpoint, {
