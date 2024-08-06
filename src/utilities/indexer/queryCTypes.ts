@@ -19,7 +19,7 @@ export async function queryCTypes() {
     },
   });
 
-  const fromBlock = latestCType ? Number(latestCType.dataValues.block) : 0;
+  const fromDate = latestCType ? latestCType.dataValues.createdAt : new Date(0);
 
   // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
   // const writtenQuery = `
@@ -64,7 +64,7 @@ export async function queryCTypes() {
   const queryParams = {
     entity: 'cTypes',
     fields: fieldsToQuery,
-    filter: `{ registrationBlock: { id: { greaterThan: "${fromBlock}" } } }`,
+    filter: `{ registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } } }`,
     fragments: [wholeBlock, DidNames],
   };
 
