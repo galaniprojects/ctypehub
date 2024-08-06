@@ -7,7 +7,7 @@ import { CType as CTypeModel } from '../../models/ctype';
 import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
-import { writeQuery } from './writeQuery';
+// import { writeQuery } from './writeQuery';
 
 export async function updateAttestationsCount() {
   // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
@@ -25,18 +25,20 @@ export async function updateAttestationsCount() {
   // }
   // `;
   const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
-  const writtenQuery = writeQuery({
+  // const writtenQuery = writeQuery();
+
+  const queryParams = {
     entity: 'cTypes',
     alias: 'attestationsCount',
     fields,
-  });
+  };
 
   interface QueriedAttestationCount {
     cTypeId: ICType['$id'];
     attestationsCreated: number;
     registrationBlockId: string; // Block Ordinal Number, without punctuation
   }
-  const entitiesGenerator = matchesGenerator(writtenQuery);
+  const entitiesGenerator = matchesGenerator(queryParams);
 
   for await (const entity of entitiesGenerator) {
     const { cTypeId, attestationsCreated } =

@@ -12,9 +12,9 @@ export function writeQuery({
   entity: string;
   alias?: string;
   fields: string[];
+  filter?: string;
   querySize?: number;
   offset?: number;
-  filter?: string;
   fragments?: string[];
 }) {
   // BlockIDs are strings, this means that "42" > "1000"
@@ -25,7 +25,7 @@ export function writeQuery({
   return `
   query {
     ${alias ? alias + ':' : ''} ${entity}(orderBy: ID_ASC, first: ${querySize}, offset: ${offset}, ${filter ? 'filter: ' + filter : ''}) {
-    totalCount
+      totalCount
       nodes {
         ${fields.join('\n        ')}
       }

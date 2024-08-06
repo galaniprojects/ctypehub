@@ -6,7 +6,8 @@ import { updateAttestationsCount } from './updateAttestationCount';
 
 const { isTest } = configuration;
 
-const SCAN_INTERVAL_MS = 10 * 60 * 1000;
+// const SCAN_INTERVAL_MS = 10 * 60 * 1000;
+const SCAN_INTERVAL_MS = 1 * 1000;
 
 export function watchIndexer() {
   if (isTest) {

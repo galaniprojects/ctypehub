@@ -8,7 +8,6 @@ import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
-import { writeQuery } from './writeQuery';
 
 export async function queryCTypes() {
   const latestCType = await CTypeModel.findOne({
@@ -62,12 +61,12 @@ export async function queryCTypes() {
     'validAttestations',
     'definition',
   ];
-  const writtenQuery = writeQuery({
+  const queryParams = {
     entity: 'cTypes',
     fields: fieldsToQuery,
     filter: `{ registrationBlock: { id: { greaterThan: "${fromBlock}" } } }`,
     fragments: [wholeBlock, DidNames],
-  });
+  };
 
   type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
 
@@ -85,7 +84,7 @@ export async function queryCTypes() {
     };
     definition: string; // stringified JSON of cType Schema
   }
-  const entitiesGenerator = matchesGenerator(writtenQuery);
+  const entitiesGenerator = matchesGenerator(queryParams);
 
   for await (const entity of entitiesGenerator) {
     const {

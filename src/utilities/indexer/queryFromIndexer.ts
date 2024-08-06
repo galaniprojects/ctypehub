@@ -2,13 +2,14 @@ import { got } from 'got';
 
 import { configuration } from '../configuration';
 import { logger } from '../logger';
+import { sleep } from '../sleep';
+
+import { writeQuery } from './writeQuery';
 
 const { indexer } = configuration;
 
-// import { sleep } from '../sleep';
-
-// const QUERY_INTERVAL_MS = 1000;
-export const QUERY_SIZE = 50;
+const QUERY_INTERVAL_MS = 1000;
+export const QUERY_SIZE = 4;
 
 const queryBlocks = `
   query {
@@ -34,6 +35,9 @@ export interface FetchedData {
 }
 
 export async function queryFromIndexer(query: string = queryBlocks) {
+  logger.debug(
+    `From GraphQL under ${indexer.graphqlEndpoint}, querying: ${query} `,
+  );
   const response = await got
     .post(indexer.graphqlEndpoint, {
       json: {
@@ -78,11 +82,14 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   return { totalCount, matches };
 }
 
-export async function* matchesGenerator(query: string = queryBlocks) {
+export async function* matchesGenerator<T extends Record<string, unknown>>(
+  queryParams: Parameters<typeof writeQuery>[0],
+): AsyncGenerator<T, void> {
   if (indexer.graphqlEndpoint === 'NONE') {
     return;
   }
-  const { totalCount, matches } = await queryFromIndexer(query);
+  const writtenQuery = writeQuery(queryParams);
+  const { totalCount, matches } = await queryFromIndexer(writtenQuery);
 
   // TODO: handle queries that have more than 100 matches
 
@@ -91,15 +98,42 @@ export async function* matchesGenerator(query: string = queryBlocks) {
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
     );
   }
+  if (totalCount === undefined) {
+    throw new Error(
+      'Please, include "totalCount" as a field on your query for better handling.',
+    );
+  }
 
   if (totalCount === 0) {
     logger.debug(
-      `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${query}.`,
+      `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${writtenQuery}.`,
     );
+    return;
     // await sleep(QUERY_INTERVAL_MS);
     // continue;
   }
-  for (const match of matches) {
-    yield match;
+  if (totalCount === matches.length) {
+    for (const match of matches) {
+      yield match as T;
+    }
+  } else {
+    for (
+      let index = queryParams.offset ?? 0;
+      index < totalCount;
+      index += QUERY_SIZE
+    ) {
+      queryParams.offset = index;
+      const { matches } = await queryFromIndexer(writeQuery(queryParams));
+
+      if (!matches) {
+        continue;
+        // maybe 'break' instead
+      }
+
+      for (const match of matches) {
+        yield match as T;
+      }
+      await sleep(QUERY_INTERVAL_MS);
+    }
   }
 }
