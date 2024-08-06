@@ -21,35 +21,7 @@ export async function queryCTypes() {
 
   const fromDate = latestCType ? latestCType.dataValues.createdAt : new Date(0);
 
-  // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
-  // const writtenQuery = `
-  // query {
-  //   cTypes(
-  //     filter: { registrationBlock: { id: { greaterThan: "${fromBlock}" } } }
-  //     orderBy: REGISTRATION_BLOCK_ID_ASC
-  //     # BlockIDs are strings, this means that "42" > "1000"
-  //     # Sadly, time_stamps can only be use to order queries of blocks.
-  //   ) {
-  //     totalCount
-  //     nodes {
-  //       id
-  //       author {
-  //         ...DidNames
-  //       }
-  //       registrationBlock {
-  //         ...wholeBlock
-  //       }
-  //       attestationsCreated
-  //       attestationsRevoked
-  //       attestationsRemoved
-  //       validAttestations
-  //       definition
-  //     }
-  //   }
-  // }
-  //   ${wholeBlock}
-  //   ${DidNames}
-  // `;
+  // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
 
   const fieldsToQuery = [
     'id',

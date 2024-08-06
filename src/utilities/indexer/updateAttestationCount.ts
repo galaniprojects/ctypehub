@@ -7,25 +7,9 @@ import { CType as CTypeModel } from '../../models/ctype';
 import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
-// import { writeQuery } from './writeQuery';
 
 export async function updateAttestationsCount() {
-  // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
-  // const writtenQuery = `
-  // query {
-  //   attestationsCount: cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: 0 ) {
-  //   # It does not matter what the order criterion is as long as it is consistent.
-  //     totalCount
-  //     nodes {
-  //       cTypeId: id
-  //       attestationsCreated
-  //       registrationBlockId
-  //     }
-  //   }
-  // }
-  // `;
   const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
-  // const writtenQuery = writeQuery();
 
   const queryParams = {
     entity: 'cTypes',
