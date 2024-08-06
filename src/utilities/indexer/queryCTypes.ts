@@ -8,6 +8,7 @@ import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
+import { writeQuery } from './writeQuery';
 
 export async function queryCTypes() {
   const latestCType = await CTypeModel.findOne({
@@ -22,34 +23,51 @@ export async function queryCTypes() {
   const fromBlock = latestCType ? Number(latestCType.dataValues.block) : 0;
 
   // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
-  const writtenQuery = `
-  query {
-    cTypes(
-      filter: { registrationBlock: { id: { greaterThan: "${fromBlock}" } } }
-      orderBy: REGISTRATION_BLOCK_ID_ASC
-      # BlockIDs are strings, this means that "42" > "1000"
-      # Sadly, time_stamps can only be use to order queries of blocks.
-    ) {
-      totalCount
-      nodes {
-        id
-        author {
-          ...DidNames
-        }
-        registrationBlock {
-          ...wholeBlock
-        }
-        attestationsCreated
-        attestationsRevoked
-        attestationsRemoved
-        validAttestations
-        definition
-      }
-    }
-  }
-    ${wholeBlock}
-    ${DidNames}
-  `;
+  // const writtenQuery = `
+  // query {
+  //   cTypes(
+  //     filter: { registrationBlock: { id: { greaterThan: "${fromBlock}" } } }
+  //     orderBy: REGISTRATION_BLOCK_ID_ASC
+  //     # BlockIDs are strings, this means that "42" > "1000"
+  //     # Sadly, time_stamps can only be use to order queries of blocks.
+  //   ) {
+  //     totalCount
+  //     nodes {
+  //       id
+  //       author {
+  //         ...DidNames
+  //       }
+  //       registrationBlock {
+  //         ...wholeBlock
+  //       }
+  //       attestationsCreated
+  //       attestationsRevoked
+  //       attestationsRemoved
+  //       validAttestations
+  //       definition
+  //     }
+  //   }
+  // }
+  //   ${wholeBlock}
+  //   ${DidNames}
+  // `;
+
+  const fieldsToQuery = [
+    'id',
+    'author {...DidNames}',
+    `registrationBlock {...wholeBlock}`,
+    'attestationsCreated',
+    'attestationsRevoked',
+    'attestationsRemoved',
+    'validAttestations',
+    'definition',
+  ];
+  const writtenQuery = writeQuery({
+    entity: 'cTypes',
+    fields: fieldsToQuery,
+    filter: `{ registrationBlock: { id: { greaterThan: "${fromBlock}" } } }`,
+    fragments: [wholeBlock, DidNames],
+  });
 
   type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
 

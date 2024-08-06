@@ -8,6 +8,7 @@ const { indexer } = configuration;
 // import { sleep } from '../sleep';
 
 // const QUERY_INTERVAL_MS = 1000;
+export const QUERY_SIZE = 50;
 
 const queryBlocks = `
   query {
@@ -81,7 +82,7 @@ export async function* matchesGenerator(query: string = queryBlocks) {
   if (indexer.graphqlEndpoint === 'NONE') {
     return;
   }
-  const { totalCount: count, matches } = await queryFromIndexer(query);
+  const { totalCount, matches } = await queryFromIndexer(query);
 
   // TODO: handle queries that have more than 100 matches
 
@@ -91,7 +92,7 @@ export async function* matchesGenerator(query: string = queryBlocks) {
     );
   }
 
-  if (count === 0) {
+  if (totalCount === 0) {
     logger.debug(
       `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${query}.`,
     );

@@ -9,8 +9,6 @@ import { logger } from '../logger';
 import { matchesGenerator } from './queryFromIndexer';
 import { writeQuery } from './writeQuery';
 
-const QUERY_SIZE = 50;
-
 export async function updateAttestationsCount() {
   // When modifying this query, first try it out on the https://indexer.kilt.io/ (or dev-indexer) and click on "Prettify"
   // const writtenQuery = `
@@ -26,16 +24,12 @@ export async function updateAttestationsCount() {
   //   }
   // }
   // `;
-  const fields = `cTypeId: id
-        attestationsCreated
-        registrationBlockId`;
-  const writtenQuery = writeQuery(
-    'cTypes',
+  const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
+  const writtenQuery = writeQuery({
+    entity: 'cTypes',
+    alias: 'attestationsCount',
     fields,
-    QUERY_SIZE,
-    0,
-    'attestationsCount',
-  );
+  });
 
   interface QueriedAttestationCount {
     cTypeId: ICType['$id'];
