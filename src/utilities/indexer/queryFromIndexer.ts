@@ -83,7 +83,7 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   return { totalCount, matches };
 }
 
-export async function* matchesGenerator<T extends Record<string, unknown>>(
+export async function* matchesGenerator<T>(
   queryParams: Parameters<typeof writeQuery>[0],
 ): AsyncGenerator<T, void> {
   if (indexer.graphqlEndpoint === 'NONE') {

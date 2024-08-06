@@ -38,11 +38,11 @@ export async function updateAttestationsCount() {
     attestationsCreated: number;
     registrationBlockId: string; // Block Ordinal Number, without punctuation
   }
-  const entitiesGenerator = matchesGenerator(queryParams);
+  const entitiesGenerator =
+    matchesGenerator<QueriedAttestationCount>(queryParams);
 
   for await (const entity of entitiesGenerator) {
-    const { cTypeId, attestationsCreated } =
-      entity as unknown as QueriedAttestationCount;
+    const { cTypeId, attestationsCreated } = entity;
 
     const cTypeToUpdate = await CTypeModel.findOne({
       where: {

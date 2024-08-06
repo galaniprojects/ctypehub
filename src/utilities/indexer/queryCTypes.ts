@@ -84,7 +84,7 @@ export async function queryCTypes() {
     };
     definition: string; // stringified JSON of cType Schema
   }
-  const entitiesGenerator = matchesGenerator(queryParams);
+  const entitiesGenerator = matchesGenerator<QueriedCType>(queryParams);
 
   for await (const entity of entitiesGenerator) {
     const {
@@ -93,7 +93,7 @@ export async function queryCTypes() {
       registrationBlock,
       definition,
       attestationsCreated,
-    } = entity as unknown as QueriedCType;
+    } = entity;
 
     const { id: creator } = author;
     const { $schema, ...rest } = JSON.parse(definition) as Omit<ICType, '$id'>;
