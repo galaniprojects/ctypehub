@@ -30,9 +30,9 @@ const {
   title,
   creator,
   properties,
+  block,
   createdAt,
   description,
-  extrinsicHash,
   schema,
   attestationsCount,
   tags,
@@ -46,7 +46,7 @@ const schemaV1 = CType.fromProperties('', {}).$schema;
 const version = schema === schemaV1 ? 'V1' : 'draft-01';
 const kiltCType = CType.fromProperties(title, properties, version);
 
-const { subscan, w3nOrigin } = configuration;
+const { w3nOrigin } = configuration;
 ---
 
 <section class={containerStyles.bigContainer}>
@@ -96,12 +96,12 @@ const { subscan, w3nOrigin } = configuration;
   }
 
   <fieldset>
-    <legend>Transaction</legend>
+    <legend>Registration Block</legend>
 
     <a
-      href={`https://${subscan.network}.subscan.io/extrinsic/${extrinsicHash}`}
+      href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkilt.dotters.network#/explorer/query/${block}`}
     >
-      {extrinsicHash}
+      {block}
     </a>
   </fieldset>
 
