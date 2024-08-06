@@ -2,9 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import { getSnapshotHtmlForPath } from '../../../testing/getSnapshotHtmlForPath';
 import { CType as CTypeModel } from '../../models/ctype';
-import { Attestation as AttestationModel } from '../../models/attestation';
 import { mockCTypes } from '../../utilities/mockCTypes';
-import { mockAttestations } from '../../utilities/mockAttestations';
 import { initializeDatabase } from '../../utilities/sequelize';
 import { resetDatabase } from '../../../testing/resetDatabase';
 import { Tag } from '../../models/tag';
@@ -18,7 +16,6 @@ beforeEach(async () => {
     mockCTypes.hidden,
   ]);
   await Tag.create({ tagName: 'example', cTypeId: mockCTypes.example.id });
-  await AttestationModel.bulkCreate(mockAttestations);
 });
 
 describe('index.astro', () => {
