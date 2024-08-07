@@ -14,14 +14,14 @@ import { getRequestJson } from '../utilities/getRequestJson';
 interface Input {
   cType: unknown;
   creator: DidUri;
-  extrinsicHash: HexString;
+  attestationsCount: number;
   description: string;
   tags: string[];
 }
 
 export async function POST({ request, url }: APIContext) {
   try {
-    const { cType, creator, extrinsicHash, description, tags } =
+    const { cType, creator, attestationsCount, description, tags } =
       await getRequestJson<Input>(request);
 
     if (!CType.isICType(cType)) {
@@ -52,8 +52,8 @@ export async function POST({ request, url }: APIContext) {
       id,
       schema,
       creator,
-      extrinsicHash,
       description,
+      attestationsCount,
       createdAt: new Date(),
       ...rest,
     });

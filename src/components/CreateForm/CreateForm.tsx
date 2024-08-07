@@ -142,12 +142,11 @@ export function CreateForm() {
         const signed = await authorizedTx.signAsync(account.address, injected);
         await Blockchain.submitSignedTx(signed);
 
-        const extrinsicHash = signed.hash.toHex();
         const response = await fetch(paths.ctypes, {
           method: 'POST',
           body: JSON.stringify({
             cType,
-            extrinsicHash,
+            attestationsCount: 0,
             creator,
             description,
             tags,
