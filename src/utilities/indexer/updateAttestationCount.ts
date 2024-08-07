@@ -46,7 +46,7 @@ export async function updateAttestationsCount() {
     logger.info(
       `Updating Attestation Count of cType "${cTypeToUpdate.getDataValue('id')}" from ${cTypeToUpdate.getDataValue('attestationsCount')} to ${attestationsCreated}`,
     );
-    cTypeToUpdate.set('attestationsCount', attestationsCreated.toString(10));
+    cTypeToUpdate.set('attestationsCount', attestationsCreated);
     await cTypeToUpdate.save();
   }
 }

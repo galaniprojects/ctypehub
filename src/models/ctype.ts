@@ -15,7 +15,7 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   createdAt: Date;
   block: string | null;
   description: string | null;
-  attestationsCount: string;
+  attestationsCount: number;
 }
 
 export interface CTypeData extends CTypeDataInput {
