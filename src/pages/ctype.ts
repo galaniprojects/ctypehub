@@ -1,5 +1,5 @@
 import { type APIContext } from 'astro';
-import { CType, Did, type DidUri, type HexString } from '@kiltprotocol/sdk-js';
+import { CType, Did, type DidUri } from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
 
 import { CType as CTypeModel } from '../models/ctype';
