@@ -9,7 +9,7 @@ interface Props {
   cTypeData: CTypeData;
 }
 
-const { title, id, description, attestationsCount, tags } =
+const { title, id, description, attestationsCreated, tags } =
   Astro.props.cTypeData;
 ---
 
@@ -36,7 +36,7 @@ const { title, id, description, attestationsCount, tags } =
 
   <p class="attestations">
     <span>Number of Attestations:</span>
-    <span>{attestationsCount}</span>
+    <span>{attestationsCreated}</span>
   </p>
 </li>
 

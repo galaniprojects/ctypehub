@@ -14,7 +14,7 @@ vi.mock('../models/ctype', () => ({
     findAll: vi.fn(),
     count: vi.fn(),
   },
-  groupForAttestationsCount: [],
+  groupForAttestationsCreated: [],
 }));
 
 const baseUrl = process.env.URL as string;

@@ -34,7 +34,7 @@ const {
   createdAt,
   description,
   schema,
-  attestationsCount,
+  attestationsCreated,
   tags,
 } = Astro.props.cTypeData;
 
@@ -71,7 +71,7 @@ const polkadotExplorerRPC =
 
   <fieldset>
     <legend>Number of attestations</legend>
-    <p>{attestationsCount}</p>
+    <p>{attestationsCreated}</p>
   </fieldset>
 
   {

@@ -144,7 +144,7 @@ export function CreateForm() {
           method: 'POST',
           body: JSON.stringify({
             cType,
-            attestationsCount: 0,
+            attestationsCreated: 0,
             creator,
             description,
             tags,

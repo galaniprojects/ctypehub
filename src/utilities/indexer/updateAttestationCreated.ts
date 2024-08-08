@@ -8,12 +8,12 @@ import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
 
-export async function updateAttestationsCount() {
+export async function updateAttestationsCreated() {
   const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
 
   const queryParams = {
     entity: 'cTypes',
-    alias: 'attestationsCount',
+    alias: 'attestationsCreated',
     fields,
   };
 
@@ -33,7 +33,7 @@ export async function updateAttestationsCount() {
         id: {
           [Op.eq]: cTypeId,
         },
-        attestationsCount: {
+        attestationsCreated: {
           [Op.ne]: attestationsCreated,
         },
       },
@@ -44,9 +44,9 @@ export async function updateAttestationsCount() {
     }
 
     logger.info(
-      `Updating Attestation Count of cType "${cTypeToUpdate.getDataValue('id')}" from ${cTypeToUpdate.getDataValue('attestationsCount')} to ${attestationsCreated}`,
+      `Updating Attestation Count of cType "${cTypeToUpdate.getDataValue('id')}" from ${cTypeToUpdate.getDataValue('attestationsCreated')} to ${attestationsCreated}`,
     );
-    cTypeToUpdate.set('attestationsCount', attestationsCreated);
+    cTypeToUpdate.set('attestationsCreated', attestationsCreated);
     await cTypeToUpdate.save();
   }
 }

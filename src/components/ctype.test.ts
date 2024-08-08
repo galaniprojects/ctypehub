@@ -12,7 +12,7 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const attestationsCount = 0;
+    const attestationsCreated = 0;
     const description = 'A CType';
 
     const response = await fetch(endpoint, {
@@ -21,7 +21,7 @@ describe('endpoint /ctype', () => {
       body: JSON.stringify({
         cType,
         creator,
-        attestationsCount,
+        attestationsCreated,
         description,
         tags: ['test', 'example'],
       }),
@@ -44,7 +44,7 @@ describe('endpoint /ctype', () => {
       title: cType.title,
       properties,
       creator,
-      attestationsCount,
+      attestationsCreated,
       description,
       block: null,
       isHidden: false,
@@ -63,9 +63,9 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const attestationsCount = 0;
+    const attestationsCreated = 0;
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, attestationsCount, tags });
+    const body = JSON.stringify({ cType, creator, attestationsCreated, tags });
 
     const created = await fetch(endpoint, { method, headers, body });
     expect(created.status).toBe(StatusCodes.CREATED);
@@ -78,9 +78,9 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'invalid';
-    const attestationsCount = 0;
+    const attestationsCreated = 0;
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, attestationsCount, tags });
+    const body = JSON.stringify({ cType, creator, attestationsCreated, tags });
 
     const response = await fetch(endpoint, { method, headers, body });
     expect(response.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);
@@ -89,9 +89,9 @@ describe('endpoint /ctype', () => {
   it('should return an error if the CType is not valid', async () => {
     const cType = { invalid: 'CType' };
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const attestationsCount = 0;
+    const attestationsCreated = 0;
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, attestationsCount, tags });
+    const body = JSON.stringify({ cType, creator, attestationsCreated, tags });
 
     const response = await fetch(endpoint, { method, headers, body });
     expect(response.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);

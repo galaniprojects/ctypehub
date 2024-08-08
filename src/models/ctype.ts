@@ -15,7 +15,7 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   createdAt: Date;
   block: string | null;
   description: string | null;
-  attestationsCount: number;
+  attestationsCreated: number;
 }
 
 export interface CTypeData extends CTypeDataInput {
@@ -65,7 +65,7 @@ export const CTypeModelDefinition: ModelAttributes = {
     allowNull: false,
     defaultValue: false,
   },
-  attestationsCount: {
+  attestationsCreated: {
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0,
