@@ -1,0 +1,98 @@
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  extends: [
+    'love',
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:astro/recommended',
+    'plugin:vitest/recommended',
+    'prettier',
+    'plugin:prettier/recommended',
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['react'],
+  rules: {
+    'no-inner-declarations': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react-hooks/exhaustive-deps': 'error',
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'always-and-inside-groups',
+        groups: [
+          'builtin',
+          'type',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+          'object',
+        ],
+        pathGroups: [
+          {
+            patternOptions: { matchBase: true },
+            pattern: '*.module.css',
+            group: 'internal',
+            position: 'before',
+          },
+        ],
+      },
+    ],
+    '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-unnecessary-condition': [
+      'error',
+      { allowConstantLoopConditions: true },
+    ],
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      { checksVoidReturn: false },
+    ],
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreIIFE: true }],
+    '@typescript-eslint/strict-boolean-expressions': [
+      'error',
+      {
+        allowNumber: false,
+        allowNullableString: true,
+        allowNullableBoolean: true,
+      },
+    ],
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/resolver': {
+      typescript: {},
+    },
+  },
+  overrides: [
+    {
+      files: ['*.astro'],
+      parser: 'astro-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
+      },
+      rules: {
+        'react/jsx-key': 'off',
+        'react/jsx-no-undef': 'off',
+        'react/no-unknown-property': 'off',
+      },
+    },
+  ],
+};
