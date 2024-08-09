@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up(queryInterface) {
     /**
      * Reverts (combines `down` functions of) following migrations:
      * - `20230712145719-foreignKeys.cjs`
