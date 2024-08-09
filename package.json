@@ -21,7 +21,6 @@
     "start": "pnpm migrate && pnpm seed && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.1",
     "@astrojs/node": "^6.1.0",
     "@astrojs/react": "^3.6.0",
     "@kiltprotocol/sdk-js": "^0.35.2",
