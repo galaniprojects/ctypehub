@@ -80,6 +80,7 @@ export default {
       typescript: {},
     },
   },
+  ignores: ['!src/**/*.astro'],
   overrides: [
     {
       files: ['*.astro'],
