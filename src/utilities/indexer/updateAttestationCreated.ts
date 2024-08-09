@@ -29,25 +29,24 @@ export async function updateAttestationsCreated() {
   for await (const entity of entitiesGenerator) {
     const { cTypeId, attestationsCreated } = entity;
 
-    const cTypeToUpdate = await CTypeModel.findOne({
-      where: {
-        id: {
-          [Op.eq]: cTypeId,
-        },
-        attestationsCreated: {
-          [Op.ne]: attestationsCreated,
+    const [affectedCount] = await CTypeModel.update(
+      { attestationsCreated },
+      {
+        where: {
+          id: {
+            [Op.eq]: cTypeId,
+          },
+          attestationsCreated: {
+            [Op.ne]: attestationsCreated,
+          },
         },
       },
-    });
-
-    if (!cTypeToUpdate) {
-      continue;
-    }
-
-    logger.info(
-      `Updating Attestation Count of cType "${cTypeToUpdate.getDataValue('id')}" from ${cTypeToUpdate.getDataValue('attestationsCreated')} to ${attestationsCreated}`,
     );
-    cTypeToUpdate.set('attestationsCreated', attestationsCreated);
-    await cTypeToUpdate.save();
+
+    if (affectedCount !== 0) {
+      logger.info(
+        `Updating count of Attestation Created of cType "${cTypeId}" to ${attestationsCreated}`,
+      );
+    }
   }
 }
