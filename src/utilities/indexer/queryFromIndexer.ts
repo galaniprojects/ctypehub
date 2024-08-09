@@ -83,9 +83,9 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   return { totalCount, matches };
 }
 
-export async function* matchesGenerator<T>(
+export async function* matchesGenerator<ExpectedQueryResults>(
   queryParams: Parameters<typeof writeQuery>[0],
-): AsyncGenerator<T, void> {
+): AsyncGenerator<ExpectedQueryResults, void> {
   if (indexer.graphqlEndpoint === 'NONE') {
     return;
   }
@@ -112,7 +112,7 @@ export async function* matchesGenerator<T>(
 
   if (totalCount === matches.length) {
     for (const match of matches) {
-      yield match as T;
+      yield match as ExpectedQueryResults;
     }
   } else {
     for (
@@ -129,7 +129,7 @@ export async function* matchesGenerator<T>(
       }
 
       for (const match of matches) {
-        yield match as T;
+        yield match as ExpectedQueryResults;
       }
       await sleep(QUERY_INTERVAL_MS);
     }
