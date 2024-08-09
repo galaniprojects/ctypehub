@@ -9,7 +9,7 @@
   "scripts": {
     "prettify": "prettier --write \"src/**/*.astro\" \"src/**/*.ts*\" \"src/**/*.css*\"",
     "lint": "pnpm lint-css --formatter stylelint-actions-formatters && pnpm lint-js",
-    "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.json \"src/**/*.astro\" \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.cjs \"src/**/*.astro\" \"src/**/*.ts\" \"src/**/*.tsx\"",
     "lint-css": "stylelint --max-warnings 0 \"src/**/*.astro\" \"src/**/*.css\"",
     "test": "tsc --noEmit && astro check && vitest",
     "dev": "astro dev --port 3000",
