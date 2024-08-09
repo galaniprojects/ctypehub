@@ -156,9 +156,6 @@ importers:
       stylelint:
         specifier: ^16.8.1
         version: 16.8.1(typescript@5.5.4)
-      stylelint-actions-formatters:
-        specifier: ^16.3.1
-        version: 16.3.1(stylelint@16.8.1(typescript@5.5.4))
       stylelint-config-css-modules:
         specifier: ^4.4.0
         version: 4.4.0(stylelint@16.8.1(typescript@5.5.4))
@@ -4345,11 +4342,6 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  stylelint-actions-formatters@16.3.1:
-    resolution: {integrity: sha512-fZjh5YQEAPaRW7rncxufHhc4HQFTDaaeJT8nKuTqzQOX9j7kZEmfDwu92E3e9ThPhrFQbC/z3eGH1QUqA3VlUw==}
-    peerDependencies:
-      stylelint: ^16.3.1
 
   stylelint-config-css-modules@4.4.0:
     resolution: {integrity: sha512-J93MtxPjRzs/TjwbJ5y9SQy4iIqULXwL1CF1yx2tQCJfS/VZUcDAmoGOwqlLbhHXSQtZO5XQiA75NVWUR3KDCQ==}
@@ -10187,15 +10179,6 @@ snapshots:
   strip-final-newline@3.0.0: {}
 
   strip-json-comments@3.1.1: {}
-
-  stylelint-actions-formatters@16.3.1(stylelint@16.8.1(typescript@5.5.4)):
-    dependencies:
-      is-plain-object: 5.0.0
-      picocolors: 1.0.1
-      string-width: 4.2.3
-      stylelint: 16.8.1(typescript@5.5.4)
-      supports-hyperlinks: 3.0.0
-      table: 6.8.2
 
   stylelint-config-css-modules@4.4.0(stylelint@16.8.1(typescript@5.5.4)):
     dependencies:

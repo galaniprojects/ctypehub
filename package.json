@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prettify": "prettier --write \"src/**/*.astro\" \"src/**/*.ts*\" \"src/**/*.css*\"",
-    "lint": "pnpm lint-css --formatter stylelint-actions-formatters && pnpm lint-js",
+    "lint": "pnpm lint-css --formatter github && pnpm lint-js",
     "lint-js": "eslint --max-warnings 0 --config ./.eslintrc.cjs \"src/**/*.astro\" \"src/**/*.ts\" \"src/**/*.tsx\"",
     "lint-css": "stylelint --max-warnings 0 \"src/**/*.astro\" \"src/**/*.css\"",
     "test": "tsc --noEmit && astro check && vitest",
@@ -72,7 +72,6 @@
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "stylelint": "^16.8.1",
-    "stylelint-actions-formatters": "^16.3.1",
     "stylelint-config-css-modules": "^4.4.0",
     "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard": "^36.0.1",
