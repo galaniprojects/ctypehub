@@ -69,17 +69,9 @@ export async function queryFromIndexer(query: string = queryBlocks) {
     `Completed querying '${name}' from GraphQL under ${indexer.graphqlEndpoint}.`,
   );
 
-  // logger.info('Response from GraphQL: ' + JSON.stringify(response, null, 2));
-
   logger.info(
     `Got ${matches ? matches.length : 'none'} out of ${totalCount} '${name}' matching query.`,
   );
-
-  // matches.forEach((match, index) => {
-  //   logger.info(
-  //     `#${index} match from query: ${JSON.stringify(match, null, 2)}`,
-  //   );
-  // });
 
   return { totalCount, matches };
 }

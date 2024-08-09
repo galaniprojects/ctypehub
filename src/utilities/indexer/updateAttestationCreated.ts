@@ -15,6 +15,8 @@ interface QueriedAttestationCount {
 }
 
 export async function updateAttestationsCreated() {
+  // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
+
   const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
 
   const queryParams = {
