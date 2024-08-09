@@ -39,7 +39,7 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   logger.debug(
     `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
-  const response = await got
+  const { data } = await got
     .post(indexer.graphqlEndpoint, {
       json: {
         query,
@@ -47,23 +47,24 @@ export async function queryFromIndexer(query: string = queryBlocks) {
     })
     .json<FetchedData>();
 
-  const entities = Object.entries(response.data);
+  const entities = Object.entries(data);
 
-  entities.length > 1 &&
+  if (entities.length > 1) {
     logger.error('Please, avoid multiple queries in a single request.');
+  }
 
   const [name, { totalCount, nodes: matches }] = entities[0];
 
-  totalCount ??
+  if (totalCount === undefined) {
     logger.error(
       'The query did not ask for total count. Please add field "totalCount" to your query.',
     );
-
-  matches ??
+  }
+  if (matches === undefined) {
     logger.error(
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
     );
-
+  }
   logger.info(
     `Completed querying '${name}' from GraphQL under ${indexer.graphqlEndpoint}.`,
   );
