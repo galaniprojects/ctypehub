@@ -114,25 +114,26 @@ export async function* matchesGenerator<ExpectedQueryResults>(
     for (const match of matches) {
       yield match as ExpectedQueryResults;
     }
-  } else {
-    for (
-      let index = queryParams.offset ?? 0;
-      index < totalCount;
-      index += QUERY_SIZE
-    ) {
-      queryParams.offset = index;
-      const { matches } = await queryFromIndexer(writeQuery(queryParams));
+    return;
+  }
 
-      if (!matches) {
-        // Impossible, but TypeScript does not know.
-        // Can only happen if "nodes" is not included as a field on the query.
-        continue;
-      }
+  for (
+    let index = queryParams.offset ?? 0;
+    index < totalCount;
+    index += QUERY_SIZE
+  ) {
+    queryParams.offset = index;
+    const { matches } = await queryFromIndexer(writeQuery(queryParams));
 
-      for (const match of matches) {
-        yield match as ExpectedQueryResults;
-      }
-      await sleep(QUERY_INTERVAL_MS);
+    if (!matches) {
+      // Impossible, but TypeScript does not know.
+      // Can only happen if "nodes" is not included as a field on the query.
+      continue;
     }
+
+    for (const match of matches) {
+      yield match as ExpectedQueryResults;
+    }
+    await sleep(QUERY_INTERVAL_MS);
   }
 }
