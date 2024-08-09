@@ -124,8 +124,9 @@ export async function* matchesGenerator<ExpectedQueryResults>(
       const { matches } = await queryFromIndexer(writeQuery(queryParams));
 
       if (!matches) {
+        // Impossible, but TypeScript does not know.
+        // Can only happen if "nodes" is not included as a field on the query.
         continue;
-        // maybe 'break' instead?
       }
 
       for (const match of matches) {
