@@ -9,6 +9,23 @@ import { logger } from '../logger';
 import { matchesGenerator } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
 
+type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
+
+interface QueriedCType {
+  id: ICType['$id'];
+  attestationsCreated: number;
+  author: {
+    id: DidUri;
+    web3NameId: string;
+  };
+  registrationBlock: {
+    id: string; // Block Ordinal Number, without punctuation
+    hash: HexString;
+    timeStamp: ISO8601DateString;
+  };
+  definition: string; // stringified JSON of cType Schema
+}
+
 export async function queryCTypes() {
   const latestCType = await CTypeModel.findOne({
     order: [['createdAt', 'DESC']],
@@ -40,22 +57,6 @@ export async function queryCTypes() {
     fragments: [wholeBlock, DidNames],
   };
 
-  type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
-
-  interface QueriedCType {
-    id: ICType['$id'];
-    attestationsCreated: number;
-    author: {
-      id: DidUri;
-      web3NameId: string;
-    };
-    registrationBlock: {
-      id: string; // Block Ordinal Number, without punctuation
-      hash: HexString;
-      timeStamp: ISO8601DateString;
-    };
-    definition: string; // stringified JSON of cType Schema
-  }
   const entitiesGenerator = matchesGenerator<QueriedCType>(queryParams);
 
   for await (const entity of entitiesGenerator) {

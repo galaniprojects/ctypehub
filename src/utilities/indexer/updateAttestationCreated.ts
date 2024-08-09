@@ -8,6 +8,12 @@ import { logger } from '../logger';
 
 import { matchesGenerator } from './queryFromIndexer';
 
+interface QueriedAttestationCount {
+  cTypeId: ICType['$id'];
+  attestationsCreated: number;
+  registrationBlockId: string; // Block Ordinal Number, without punctuation
+}
+
 export async function updateAttestationsCreated() {
   const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
 
@@ -17,11 +23,6 @@ export async function updateAttestationsCreated() {
     fields,
   };
 
-  interface QueriedAttestationCount {
-    cTypeId: ICType['$id'];
-    attestationsCreated: number;
-    registrationBlockId: string; // Block Ordinal Number, without punctuation
-  }
   const entitiesGenerator =
     matchesGenerator<QueriedAttestationCount>(queryParams);
 

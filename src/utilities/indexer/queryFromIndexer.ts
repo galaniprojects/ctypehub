@@ -25,7 +25,7 @@ const queryBlocks = `
   }
 `;
 
-export interface FetchedData {
+interface FetchedData {
   data: Record<
     string,
     {
