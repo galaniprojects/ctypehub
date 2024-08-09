@@ -5,7 +5,7 @@
     "node": true
   },
   "extends": [
-    "standard-with-typescript",
+    "love",
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -21,33 +21,59 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "rules": {
     "no-inner-declarations": "off",
     "react/react-in-jsx-scope": "off",
     "react-hooks/exhaustive-deps": "error",
-    "import/order": ["error", {
-      "newlines-between": "always-and-inside-groups",
-      "groups": ["builtin", "type", "external", "internal", "parent", "sibling", "index", "object"],
-      "pathGroups": [
-        {
-          "patternOptions": { "matchBase": true },
-          "pattern": "*.module.css",
-          "group": "internal",
-          "position": "before"
-        }
-      ]
-    }],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always-and-inside-groups",
+        "groups": [
+          "builtin",
+          "type",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "pathGroups": [
+          {
+            "patternOptions": { "matchBase": true },
+            "pattern": "*.module.css",
+            "group": "internal",
+            "position": "before"
+          }
+        ]
+      }
+    ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/unbound-method": "off",
-    "@typescript-eslint/no-unnecessary-condition": ["error", { "allowConstantLoopConditions": true }],
-    "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
-    "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true }],
-    "@typescript-eslint/strict-boolean-expressions": ["error", { "allowNumber": false, "allowNullableString": true, "allowNullableBoolean": true }]
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { "allowConstantLoopConditions": true }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      { "checksVoidReturn": false }
+    ],
+    "@typescript-eslint/no-floating-promises": [
+      "error",
+      { "ignoreIIFE": true }
+    ],
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      {
+        "allowNumber": false,
+        "allowNullableString": true,
+        "allowNullableBoolean": true
+      }
+    ]
   },
   "settings": {
     "react": {
