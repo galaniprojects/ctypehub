@@ -4,7 +4,7 @@ import { configuration } from '../configuration';
 import { logger } from '../logger';
 import { sleep } from '../sleep';
 
-import { writeQuery } from './writeQuery';
+import { buildQuery } from './buildQuery';
 
 const { indexer } = configuration;
 
@@ -85,13 +85,13 @@ export async function queryFromIndexer(query: string = queryBlocks) {
 }
 
 export async function* matchesGenerator<ExpectedQueryResults>(
-  queryParams: Parameters<typeof writeQuery>[0],
+  queryParams: Parameters<typeof buildQuery>[0],
 ): AsyncGenerator<ExpectedQueryResults, void> {
   if (indexer.graphqlEndpoint === 'NONE') {
     return;
   }
-  const writtenQuery = writeQuery(queryParams);
-  const { totalCount, matches } = await queryFromIndexer(writtenQuery);
+  const query = buildQuery(queryParams);
+  const { totalCount, matches } = await queryFromIndexer(query);
 
   if (matches === undefined) {
     throw new Error(
@@ -106,7 +106,7 @@ export async function* matchesGenerator<ExpectedQueryResults>(
 
   if (totalCount === 0) {
     logger.debug(
-      `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${writtenQuery}.`,
+      `The Indexed Data under "${indexer.graphqlEndpoint}" has no matches for query: ${query}.`,
     );
     return;
   }
@@ -124,7 +124,7 @@ export async function* matchesGenerator<ExpectedQueryResults>(
     index += QUERY_SIZE
   ) {
     queryParams.offset = index;
-    const { matches } = await queryFromIndexer(writeQuery(queryParams));
+    const { matches } = await queryFromIndexer(buildQuery(queryParams));
 
     if (!matches) {
       // Impossible, but TypeScript does not know.
