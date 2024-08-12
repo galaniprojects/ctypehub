@@ -73,7 +73,7 @@ export const CTypeModelDefinition: ModelAttributes = {
 };
 
 const fields = Object.keys(CTypeModelDefinition)
-  .filter((name) => name !== 'createdAt')
+  .filter((name) => !['createdAt', 'isHidden'].includes(name))
   .map((name) => `coalesce("${name}"::text, '')`)
   .join(` || ' ' || `);
 
