@@ -28,7 +28,6 @@
     "@polkadot/util": "^12.6.2",
     "astro": "^3.6.5",
     "got": "^12.6.1",
-    "graphql": "^16.9.0",
     "http-status-codes": "^2.3.0",
     "lodash-es": "^4.17.21",
     "pg": "^8.12.0",
