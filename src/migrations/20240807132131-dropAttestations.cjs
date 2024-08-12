@@ -13,7 +13,7 @@ module.exports = {
       'Attestations_cTypeId_fkey',
     );
 
-    await queryInterface.dropTable('Attestation');
+    await queryInterface.dropTable('Attestations');
   },
 
   async down(queryInterface, Sequelize) {
