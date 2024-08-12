@@ -11,19 +11,19 @@ const { indexer } = configuration;
 const QUERY_INTERVAL_MS = 1000;
 export const QUERY_SIZE = 50;
 
-/** Example Query. */
-const queryBlocks = `
-  query {
-    blocks(orderBy: TIME_STAMP_DESC, first: 3) {
-    totalCount
-      nodes {
-        id
-        timeStamp
-        hash
-      }
-    }
-  }
-`;
+// /** Example Query. */
+// const queryBlocks = `
+//   query {
+//     blocks(orderBy: TIME_STAMP_DESC, first: 3) {
+//     totalCount
+//       nodes {
+//         id
+//         timeStamp
+//         hash
+//       }
+//     }
+//   }
+// `;
 
 interface FetchedData {
   data: Record<
@@ -35,7 +35,7 @@ interface FetchedData {
   >;
 }
 
-export async function queryFromIndexer(query: string = queryBlocks) {
+export async function queryFromIndexer(query: string) {
   logger.debug(
     `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
