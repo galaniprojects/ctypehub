@@ -15,14 +15,13 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   createdAt: Date;
   block: string | null;
   description: string | null;
-  attestationsCreated: number;
 }
 
 export interface CTypeData extends CTypeDataInput {
   isHidden: boolean;
   tags?: Array<Pick<Tag, 'dataValues'>>;
+  attestationsCreated: number;
 }
-
 export class CType extends Model<CTypeData, CTypeDataInput> {}
 
 export const CTypeModelDefinition: ModelAttributes = {
