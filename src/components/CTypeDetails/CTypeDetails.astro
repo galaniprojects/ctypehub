@@ -47,10 +47,6 @@ const version = schema === schemaV1 ? 'V1' : 'draft-01';
 const kiltCType = CType.fromProperties(title, properties, version);
 
 const { w3nOrigin, indexer } = configuration;
-
-const polkadotExplorerRPC =
-  indexer.polkadotRPCEndpoint +
-  (indexer.polkadotRPCEndpoint.split('.').at(-1) === 'network' ? '' : '%2F');
 ---
 
 <section class={containerStyles.bigContainer}>
@@ -103,7 +99,7 @@ const polkadotExplorerRPC =
     <legend>Registration Block</legend>
 
     <a
-      href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2F${polkadotExplorerRPC}#/explorer/query/${block}`}
+      href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2F${indexer.polkadotRPCEndpoint}#/explorer/query/${block}`}
     >
       {block}
     </a>
