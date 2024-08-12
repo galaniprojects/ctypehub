@@ -78,7 +78,7 @@ export async function queryCTypes() {
       creator,
       block: registrationBlock.id,
       ...rest,
-      attestationsCreated, // problem here
+      attestationsCreated,
     });
     logger.info(
       `Added new CType to data base: ${JSON.stringify(newCType, null, 2)}`,
