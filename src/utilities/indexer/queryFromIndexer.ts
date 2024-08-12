@@ -49,19 +49,21 @@ export async function queryFromIndexer(query: string = queryBlocks) {
 
   const entities = Object.entries(data);
 
-  if (entities.length > 1) {
-    logger.error('Please, avoid multiple queries in a single request.');
-  }
-
   const [name, { totalCount, nodes: matches }] = entities[0];
 
-  if (totalCount === undefined) {
+  if (entities.length > 1) {
     logger.error(
+      `Please, avoid multiple queries in a single request. Processing just '${name}' from here.`,
+    );
+  }
+
+  if (totalCount === undefined) {
+    throw new Error(
       'The query did not ask for total count. Please add field "totalCount" to your query.',
     );
   }
   if (matches === undefined) {
-    logger.error(
+    throw new Error(
       'You need to include "nodes" as a field (with subfields) on your query to get matches.',
     );
   }
@@ -70,7 +72,7 @@ export async function queryFromIndexer(query: string = queryBlocks) {
   );
 
   logger.info(
-    `Got ${matches ? matches.length : 'none'} out of ${totalCount} '${name}' matching query.`,
+    `Got ${matches.length} out of ${totalCount} '${name}' matching query.`,
   );
 
   return { totalCount, matches };
@@ -84,17 +86,6 @@ export async function* matchesGenerator<ExpectedQueryResults>(
   }
   const query = buildQuery(queryParams);
   const { totalCount, matches } = await queryFromIndexer(query);
-
-  if (matches === undefined) {
-    throw new Error(
-      'You need to include "nodes" as a field (with subfields) on your query to get matches.',
-    );
-  }
-  if (totalCount === undefined) {
-    throw new Error(
-      'Please, include "totalCount" as a field on your query for better handling.',
-    );
-  }
 
   if (totalCount === 0) {
     logger.debug(
@@ -117,12 +108,6 @@ export async function* matchesGenerator<ExpectedQueryResults>(
   ) {
     queryParams.offset = index;
     const { matches } = await queryFromIndexer(buildQuery(queryParams));
-
-    if (!matches) {
-      // Impossible, but TypeScript does not know.
-      // Can only happen if "nodes" is not included as a field on the query.
-      continue;
-    }
 
     for (const match of matches) {
       yield match as ExpectedQueryResults;
