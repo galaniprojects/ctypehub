@@ -6,9 +6,9 @@ import { CType as CTypeModel } from '../../models/ctype';
 
 import { logger } from '../logger';
 
-import { matchesGenerator } from './queryFromIndexer';
+import { matchesGenerator, QUERY_SIZE } from './queryFromIndexer';
 
-interface QueriedAttestationCount {
+interface QueriedAttestationCreated {
   cTypeId: ICType['$id'];
   attestationsCreated: number;
   registrationBlockId: string; // Block Ordinal Number, without punctuation
@@ -16,17 +16,20 @@ interface QueriedAttestationCount {
 
 export async function updateAttestationsCreated() {
   // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
-
-  const fields = ['cTypeId: id', 'attestationsCreated', 'registrationBlockId'];
-
-  const queryParams = {
-    entity: 'cTypes',
-    alias: 'attestationsCreated',
-    fields,
-  };
-
-  const entitiesGenerator =
-    matchesGenerator<QueriedAttestationCount>(queryParams);
+  const entitiesGenerator = matchesGenerator<QueriedAttestationCreated>(
+    (offset) => `
+      query {
+        attestationsCreated: cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}) {
+          totalCount
+          nodes {
+            cTypeId: id
+            attestationsCreated
+            registrationBlockId
+          }
+        }
+      }
+    `,
+  );
 
   for await (const entity of entitiesGenerator) {
     const { cTypeId, attestationsCreated } = entity;

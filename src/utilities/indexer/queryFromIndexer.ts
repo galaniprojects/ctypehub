@@ -4,8 +4,6 @@ import { configuration } from '../configuration';
 import { logger } from '../logger';
 import { sleep } from '../sleep';
 
-import { buildQuery } from './buildQuery';
-
 const { indexer } = configuration;
 
 const QUERY_INTERVAL_MS = 1000;
@@ -79,12 +77,12 @@ export async function queryFromIndexer(query: string) {
 }
 
 export async function* matchesGenerator<ExpectedQueryResults>(
-  queryParams: Parameters<typeof buildQuery>[0],
+  buildQuery: (offset: number) => string,
 ): AsyncGenerator<ExpectedQueryResults, void> {
   if (indexer.graphqlEndpoint === 'NONE') {
     return;
   }
-  const query = buildQuery(queryParams);
+  const query = buildQuery(0);
   const { totalCount, matches } = await queryFromIndexer(query);
 
   if (totalCount === 0) {
@@ -101,13 +99,8 @@ export async function* matchesGenerator<ExpectedQueryResults>(
     return;
   }
 
-  for (
-    let index = queryParams.offset ?? 0;
-    index < totalCount;
-    index += QUERY_SIZE
-  ) {
-    queryParams.offset = index;
-    const { matches } = await queryFromIndexer(buildQuery(queryParams));
+  for (let offset = 0; offset < totalCount; offset += QUERY_SIZE) {
+    const { matches } = await queryFromIndexer(buildQuery(offset));
 
     for (const match of matches) {
       yield match as ExpectedQueryResults;

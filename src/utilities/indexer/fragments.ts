@@ -11,27 +11,6 @@ fragment wholeBlock on Block {
   timeStamp
 }`;
 
-/** If used, 'wholeBlock' also needs to be included. */
-export const wholeAttestation = `
-fragment wholeAttestation on Attestation {
-  id
-  claimHash
-  cTypeId
-  issuerId
-  payer
-  delegationID
-  valid
-  creationBlock {
-    ...wholeBlock
-  }
-  revocationBlock {
-    ...wholeBlock
-  }
-  removalBlock {
-    ...wholeBlock
-  }
-}`;
-
 export const DidNames = `
 fragment DidNames on Did {
   id

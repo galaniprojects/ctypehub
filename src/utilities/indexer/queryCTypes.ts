@@ -6,7 +6,7 @@ import { CType as CTypeModel } from '../../models/ctype';
 
 import { logger } from '../logger';
 
-import { matchesGenerator } from './queryFromIndexer';
+import { matchesGenerator, QUERY_SIZE } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
 
 type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
@@ -39,25 +39,27 @@ export async function queryCTypes() {
   const fromDate = latestCType ? latestCType.dataValues.createdAt : new Date(0);
 
   // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
-
-  const fieldsToQuery = [
-    'id',
-    'author {...DidNames}',
-    `registrationBlock {...wholeBlock}`,
-    'attestationsCreated',
-    'attestationsRevoked',
-    'attestationsRemoved',
-    'validAttestations',
-    'definition',
-  ];
-  const queryParams = {
-    entity: 'cTypes',
-    fields: fieldsToQuery,
-    filter: `{ registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } } }`,
-    fragments: [wholeBlock, DidNames],
-  };
-
-  const entitiesGenerator = matchesGenerator<QueriedCType>(queryParams);
+  const entitiesGenerator = matchesGenerator<QueriedCType>(
+    (offset) => `
+      query {
+        cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}, filter: { registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } }) {
+          totalCount
+          nodes {
+            id
+            author {...DidNames}
+            registrationBlock {...wholeBlock}
+            attestationsCreated
+            attestationsRevoked
+            attestationsRemoved
+            validAttestations
+            definition
+          }
+        }
+      }
+      ${wholeBlock}
+      ${DidNames}
+    `,
+  );
 
   for await (const entity of entitiesGenerator) {
     const {
