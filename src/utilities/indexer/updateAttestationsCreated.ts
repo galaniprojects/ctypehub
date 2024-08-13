@@ -8,7 +8,7 @@ import { logger } from '../logger';
 
 import { matchesGenerator, QUERY_SIZE } from './queryFromIndexer';
 
-interface QueriedAttestationCreated {
+interface QueriedAttestationsCreated {
   cTypeId: ICType['$id'];
   attestationsCreated: number;
   registrationBlockId: string; // Block Ordinal Number, without punctuation
@@ -16,7 +16,7 @@ interface QueriedAttestationCreated {
 
 export async function updateAttestationsCreated() {
   // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
-  const entitiesGenerator = matchesGenerator<QueriedAttestationCreated>(
+  const entitiesGenerator = matchesGenerator<QueriedAttestationsCreated>(
     (offset) => `
       query {
         attestationsCreated: cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}) {

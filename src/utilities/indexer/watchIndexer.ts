@@ -2,7 +2,7 @@ import { configuration } from '../configuration';
 import { sleep } from '../sleep';
 
 import { queryCTypes } from './queryCTypes';
-import { updateAttestationsCreated } from './updateAttestationCreated';
+import { updateAttestationsCreated } from './updateAttestationsCreated';
 
 const { isTest } = configuration;
 
