@@ -8,16 +8,10 @@ import { logger } from '../logger';
 
 import { matchesGenerator, QUERY_SIZE } from './queryFromIndexer';
 
-interface QueriedAttestationsCreated {
-  cTypeId: ICType['$id'];
-  attestationsCreated: number;
-  registrationBlockId: string; // Block Ordinal Number, without punctuation
-}
+// When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
 
-export async function updateAttestationsCreated() {
-  // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
-  const entitiesGenerator = matchesGenerator<QueriedAttestationsCreated>(
-    (offset) => `
+function buildQueriesForAttestationsCreated() {
+  return (offset: number) => `
       query {
         attestationsCreated: cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}) {
           totalCount
@@ -28,7 +22,19 @@ export async function updateAttestationsCreated() {
           }
         }
       }
-    `,
+    `;
+}
+
+/** Expected structure of responses for queries defined above. */
+interface QueriedAttestationsCreated {
+  cTypeId: ICType['$id'];
+  attestationsCreated: number;
+  registrationBlockId: string; // Block Ordinal Number, without punctuation
+}
+
+export async function updateAttestationsCreated() {
+  const entitiesGenerator = matchesGenerator<QueriedAttestationsCreated>(
+    buildQueriesForAttestationsCreated(),
   );
 
   for await (const entity of entitiesGenerator) {

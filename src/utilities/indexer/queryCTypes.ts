@@ -9,8 +9,31 @@ import { logger } from '../logger';
 import { matchesGenerator, QUERY_SIZE } from './queryFromIndexer';
 import { DidNames, wholeBlock } from './fragments';
 
-type ISO8601DateString = string; // like 2022-02-09T13:09:18.217
+// When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
 
+function buildCTypeQueries(fromDate: Date) {
+  return (offset: number) => `
+  query {
+    cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}, filter: { registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } }) {
+      totalCount
+      nodes {
+        id
+        author {...DidNames}
+        registrationBlock {...wholeBlock}
+        attestationsCreated
+        attestationsRevoked
+        attestationsRemoved
+        validAttestations
+        definition
+      }
+    }
+  }
+  ${wholeBlock}
+  ${DidNames}
+`;
+}
+
+/** Expected structure of responses for queries defined above. */
 interface QueriedCType {
   id: ICType['$id'];
   attestationsCreated: number;
@@ -21,7 +44,7 @@ interface QueriedCType {
   registrationBlock: {
     id: string; // Block Ordinal Number, without punctuation
     hash: HexString;
-    timeStamp: ISO8601DateString;
+    timeStamp: string; // ISO8601 Date String, like 2022-02-09T13:09:18.217
   };
   definition: string; // stringified JSON of cType Schema
 }
@@ -38,27 +61,8 @@ export async function queryCTypes() {
 
   const fromDate = latestCType ? latestCType.dataValues.createdAt : new Date(0);
 
-  // When modifying queries, first try them out on https://indexer.kilt.io/ or https://dev-indexer.kilt.io/
   const entitiesGenerator = matchesGenerator<QueriedCType>(
-    (offset) => `
-      query {
-        cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}, filter: { registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } }) {
-          totalCount
-          nodes {
-            id
-            author {...DidNames}
-            registrationBlock {...wholeBlock}
-            attestationsCreated
-            attestationsRevoked
-            attestationsRemoved
-            validAttestations
-            definition
-          }
-        }
-      }
-      ${wholeBlock}
-      ${DidNames}
-    `,
+    buildCTypeQueries(fromDate),
   );
 
   for await (const entity of entitiesGenerator) {
