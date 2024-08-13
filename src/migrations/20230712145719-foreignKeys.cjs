@@ -18,10 +18,7 @@ module.exports = {
   },
 
   async down(queryInterface) {
-    await queryInterface.removeConstraint(
-      'Attestations',
-      'Attestations_cTypeId_fkey',
-    );
+    await queryInterface.removeConstraint('Attestations', 'Attestations_cTypeId_fkey');
     await queryInterface.removeConstraint('Attestations', 'Tags_cTypeId_fkey');
   },
 };
