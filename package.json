@@ -17,7 +17,7 @@
     "stop-db": "docker rm -f postgres",
     "migrate": "sequelize-cli db:migrate",
     "seed": "sequelize-cli db:seed:all || exit 0",
-    "build": "export $(cat .env.example) && astro build",
+    "build": "export $(grep -v '^#' .env.example | xargs) && astro build",
     "start": "pnpm migrate && pnpm seed && node --enable-source-maps dist/server/entry.mjs"
   },
   "dependencies": {
