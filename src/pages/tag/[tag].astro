@@ -28,6 +28,7 @@ const query = Astro.url.searchParams.get('query');
 
 const where = {
   block: { [Op.ne]: null },
+  isHidden: false,
   ...(query && {
     search: { [Op.match]: fn('websearch_to_tsquery', 'english', query) },
   }),
