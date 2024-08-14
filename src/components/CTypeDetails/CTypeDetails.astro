@@ -98,9 +98,7 @@ const { w3nOrigin, indexer } = configuration;
   <fieldset>
     <legend>Registration Block</legend>
 
-    <a
-      href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2F${indexer.polkadotRPCEndpoint}#/explorer/query/${block}`}
-    >
+    <a href={`${indexer.polkadotRPCEndpoint}${block}`}>
       {block}
     </a>
   </fieldset>
