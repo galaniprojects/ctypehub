@@ -22,7 +22,7 @@ exports[`index.astro > should render all CTypes except hidden ones 1`] = `
             This is an example of a CType with a nested property
           </p>
           <p class="attestations">
-            <span>Number of Attestations:</span><span>2</span>
+            <span>Number of Attestations:</span><span>22</span>
           </p>
         </li>
         <li class="_container container">
@@ -77,7 +77,7 @@ exports[`index.astro > should render search results 1`] = `
             This is an example of a CType with a nested property
           </p>
           <p class="attestations">
-            <span>Number of Attestations:</span><span>2</span>
+            <span>Number of Attestations:</span><span>22</span>
           </p>
         </li>
       </ul>
@@ -124,7 +124,7 @@ exports[`index.astro > should render tag results 1`] = `
             This is an example of a CType with a nested property
           </p>
           <p class="attestations">
-            <span>Number of Attestations:</span><span>2</span>
+            <span>Number of Attestations:</span><span>22</span>
           </p>
         </li>
         <li class="_container container">
