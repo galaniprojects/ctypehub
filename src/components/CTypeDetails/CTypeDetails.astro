@@ -58,7 +58,7 @@ const { w3nOrigin, blockchainEndpoint } = configuration;
       web3Name ? (
         <a href={`${w3nOrigin}/${web3Name}`}>w3n:{web3Name}</a>
       ) : (
-        <p>{creator}</p>
+        <a href={`${w3nOrigin}/${creator}`}>{creator}</a>
       )
     }
   </fieldset>
