@@ -33,6 +33,7 @@ module.exports = {
     await queryInterface.addColumn('CTypes', 'extrinsicHash', {
       type: Sequelize.STRING,
       allowNull: false,
+      defaultValue: '0x1ABE11ABEBECAFE501A',
     });
     await queryInterface.addColumn(
       'CTypes',
