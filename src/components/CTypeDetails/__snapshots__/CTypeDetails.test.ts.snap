@@ -121,7 +121,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   </fieldset>
   <fieldset>
     <legend>Registration Block</legend>
-    <a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fplaceholder#/explorer/query/456">456</a>
+    <a href="https://polkadot.js.org/apps/?rpc=ws://localhost:32769#/explorer/query/456">456</a>
   </fieldset>
   <fieldset>
     <legend>Technical Details</legend>
@@ -215,7 +215,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
   </fieldset>
   <fieldset>
     <legend>Registration Block</legend>
-    <a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fplaceholder#/explorer/query/456">456</a>
+    <a href="https://polkadot.js.org/apps/?rpc=ws://localhost:32769#/explorer/query/456">456</a>
   </fieldset>
   <fieldset>
     <legend>Technical Details</legend>
@@ -281,7 +281,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   </fieldset>
   <fieldset>
     <legend>Registration Block</legend>
-    <a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fplaceholder#/explorer/query/321">321</a>
+    <a href="https://polkadot.js.org/apps/?rpc=ws://localhost:32769#/explorer/query/321">321</a>
   </fieldset>
   <fieldset>
     <legend>Technical Details</legend>
@@ -345,7 +345,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
   </fieldset>
   <fieldset>
     <legend>Registration Block</legend>
-    <a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fplaceholder#/explorer/query/123">123</a>
+    <a href="https://polkadot.js.org/apps/?rpc=ws://localhost:32769#/explorer/query/123">123</a>
   </fieldset>
   <fieldset>
     <legend>Tags</legend>
