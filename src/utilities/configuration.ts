@@ -14,16 +14,11 @@ class ConfigurationError extends Error {
 }
 const indexer = {
   graphqlEndpoint: import.meta.env.GRAPHQL_ENDPOINT as string,
-  polkadotRPCEndpoint: import.meta.env.POLKADOT_RPC_ENDPOINT as string,
 };
 if (!indexer.graphqlEndpoint) {
   throw new ConfigurationError('No endpoint for the GraphQL server provided');
 }
-if (!indexer.polkadotRPCEndpoint) {
-  throw new ConfigurationError(
-    'No R.P.C. endpoint for the polkadot.js explorer provided',
-  );
-}
+
 const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT as string;
 if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
