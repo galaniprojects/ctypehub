@@ -14,7 +14,7 @@ import { DidNames, wholeBlock } from './fragments';
 function buildCTypeQueries(fromDate: Date) {
   return (offset: number) => `
   query {
-    cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}, filter: { registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } }) {
+    cTypes(orderBy: ID_ASC, first: ${QUERY_SIZE}, offset: ${offset}, filter: { registrationBlock: { timeStamp: { greaterThan: "${fromDate.toISOString()}" } }}) {
       totalCount
       nodes {
         id
