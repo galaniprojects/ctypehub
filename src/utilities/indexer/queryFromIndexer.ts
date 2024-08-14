@@ -6,8 +6,8 @@ import { sleep } from '../sleep';
 
 const { indexer } = configuration;
 
-const QUERY_INTERVAL_MS = 1000;
-export const QUERY_SIZE = 50;
+const QUERY_INTERVAL_MS = 2000;
+export const QUERY_SIZE = 100;
 
 // /** Example Query. */
 // const queryBlocks = `
