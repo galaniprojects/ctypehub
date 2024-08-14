@@ -27,7 +27,7 @@ exports[`CTypeDetails > should handle kitchen sink CType 1`] = `
   <h1 class="title">Everything everywhere</h1>
   <fieldset>
     <legend>Creator</legend>
-    <p>did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E</p>
+    <a href="https://w3n.id/did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E">did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E</a>
   </fieldset>
   <fieldset>
     <legend>Number of attestations</legend>
@@ -179,7 +179,7 @@ exports[`CTypeDetails > should handle nested CType 1`] = `
   <h1 class="title">Example nested CType</h1>
   <fieldset>
     <legend>Creator</legend>
-    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+    <a href="https://w3n.id/did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY">did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</a>
   </fieldset>
   <fieldset>
     <legend>Number of attestations</legend>
@@ -245,7 +245,7 @@ exports[`CTypeDetails > should handle nested CType property 1`] = `
   <h1 class="title">Example nested CType property</h1>
   <fieldset>
     <legend>Creator</legend>
-    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+    <a href="https://w3n.id/did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY">did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</a>
   </fieldset>
   <fieldset>
     <legend>Number of attestations</legend>
@@ -311,7 +311,7 @@ exports[`CTypeDetails > should match snapshot 1`] = `
   <h1 class="title">Example CType</h1>
   <fieldset>
     <legend>Creator</legend>
-    <p>did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</p>
+    <a href="https://w3n.id/did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY">did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY</a>
   </fieldset>
   <fieldset>
     <legend>Number of attestations</legend>
