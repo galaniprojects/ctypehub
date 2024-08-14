@@ -9,10 +9,9 @@ export const mockCTypes: Record<string, CTypeData> = {
     type: 'object',
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:00:00'),
-    extrinsicHash: '0xexamplehash',
     description: 'This is some example cType data',
     block: '123',
-    attestationsCount: '1',
+    attestationsCreated: 1,
     tags: [
       {
         dataValues: {
@@ -35,10 +34,9 @@ export const mockCTypes: Record<string, CTypeData> = {
     type: 'object',
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:01:00'),
-    extrinsicHash: '0xexamplenestedhash',
     description: 'This is an example of a CType with a nested property',
     block: '321',
-    attestationsCount: '22',
+    attestationsCreated: 22,
     isHidden: false,
   },
   nestedCType: {
@@ -56,10 +54,9 @@ export const mockCTypes: Record<string, CTypeData> = {
     type: 'object',
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:02:00'),
-    extrinsicHash: '0xexamplehash',
     description: 'This is an example of a CType with a nested CType',
     block: '456',
-    attestationsCount: '333',
+    attestationsCreated: 333,
     isHidden: false,
   },
   hidden: {
@@ -70,10 +67,9 @@ export const mockCTypes: Record<string, CTypeData> = {
     type: 'object',
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:00:00'),
-    extrinsicHash: '0xexamplehash',
     description: 'This is some example cType data',
     block: '123',
-    attestationsCount: '1',
+    attestationsCreated: 1,
     tags: [
       {
         dataValues: {
@@ -123,8 +119,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     },
     type: 'object',
     creator: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E',
-    attestationsCount: '4444',
-    extrinsicHash: '0xexamplehash',
+    attestationsCreated: 4444,
     createdAt: new Date('2023-05-01T12:03:00'),
     block: '456',
     isHidden: false,

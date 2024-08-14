@@ -1,5 +1,5 @@
 import { type APIContext } from 'astro';
-import { CType, Did, type DidUri, type HexString } from '@kiltprotocol/sdk-js';
+import { CType, Did, type DidUri } from '@kiltprotocol/sdk-js';
 import { StatusCodes } from 'http-status-codes';
 
 import { CType as CTypeModel } from '../models/ctype';
@@ -14,14 +14,13 @@ import { getRequestJson } from '../utilities/getRequestJson';
 interface Input {
   cType: unknown;
   creator: DidUri;
-  extrinsicHash: HexString;
   description: string;
   tags: string[];
 }
 
 export async function POST({ request, url }: APIContext) {
   try {
-    const { cType, creator, extrinsicHash, description, tags } =
+    const { cType, creator, description, tags } =
       await getRequestJson<Input>(request);
 
     if (!CType.isICType(cType)) {
@@ -52,7 +51,6 @@ export async function POST({ request, url }: APIContext) {
       id,
       schema,
       creator,
-      extrinsicHash,
       description,
       createdAt: new Date(),
       ...rest,

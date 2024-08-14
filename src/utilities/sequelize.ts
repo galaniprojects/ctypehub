@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize';
 
 import { initCType } from '../models/ctype';
-import { initAttestation } from '../models/attestation';
 import { initTag } from '../models/tag';
 
 import { configuration } from './configuration';
@@ -35,7 +34,6 @@ export function trackDatabaseConnection() {
 }
 
 export async function initializeDatabase() {
-  initAttestation(sequelize);
   initTag(sequelize);
   initCType(sequelize);
   await sequelize.sync();

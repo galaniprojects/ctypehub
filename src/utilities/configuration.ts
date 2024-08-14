@@ -12,18 +12,18 @@ class ConfigurationError extends Error {
     process.exit(1);
   }
 }
-
-const subscan = {
-  network: import.meta.env.SUBSCAN_NETWORK as string,
-  secret: import.meta.env.SECRET_SUBSCAN as string,
+const indexer = {
+  graphqlEndpoint: import.meta.env.GRAPHQL_ENDPOINT as string,
+  polkadotRPCEndpoint: import.meta.env.POLKADOT_RPC_ENDPOINT as string,
 };
-if (!subscan.network) {
-  throw new ConfigurationError('No subscan network provided');
+if (!indexer.graphqlEndpoint) {
+  throw new ConfigurationError('No endpoint for the GraphQL server provided');
 }
-if (!subscan.secret) {
-  throw new ConfigurationError('No subscan secret provided');
+if (!indexer.polkadotRPCEndpoint) {
+  throw new ConfigurationError(
+    'No R.P.C. endpoint for the polkadot.js explorer provided',
+  );
 }
-
 const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT as string;
 if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
@@ -70,7 +70,6 @@ export const configuration = {
   databaseUri:
     (import.meta.env.DATABASE_URI as string) ||
     'postgres://postgres:postgres@localhost:5432/postgres',
-  subscan,
   blockchainEndpoint,
   did,
   authenticationMnemonic,
@@ -78,4 +77,5 @@ export const configuration = {
   keyAgreementMnemonic,
   payerMnemonic,
   w3nOrigin: w3nOrigins[blockchainEndpoint] || 'https://w3n.id',
+  indexer,
 };

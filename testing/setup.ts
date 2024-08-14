@@ -13,9 +13,9 @@ vi.mock('../src/utilities/configuration', () => ({
     isTest: true,
     databaseUri: import.meta.env.DATABASE_URI as string,
     blockchainEndpoint: import.meta.env.BLOCKCHAIN_ENDPOINT as string,
-    subscan: {
-      network: 'example',
-      secret: 'SECRET_SUBSCAN',
+    indexer: {
+      graphqlEndpoint: 'placeholder',
+      polkadotRPCEndpoint: 'placeholder',
     },
   },
 }));

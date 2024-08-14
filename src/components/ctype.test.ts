@@ -12,7 +12,6 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const extrinsicHash = '0x1234';
     const description = 'A CType';
 
     const response = await fetch(endpoint, {
@@ -21,7 +20,6 @@ describe('endpoint /ctype', () => {
       body: JSON.stringify({
         cType,
         creator,
-        extrinsicHash,
         description,
         tags: ['test', 'example'],
       }),
@@ -44,7 +42,7 @@ describe('endpoint /ctype', () => {
       title: cType.title,
       properties,
       creator,
-      extrinsicHash,
+      attestationsCreated: 0,
       description,
       block: null,
       isHidden: false,
@@ -63,9 +61,8 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const extrinsicHash = '0x1234';
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, extrinsicHash, tags });
+    const body = JSON.stringify({ cType, creator, tags });
 
     const created = await fetch(endpoint, { method, headers, body });
     expect(created.status).toBe(StatusCodes.CREATED);
@@ -78,9 +75,8 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'invalid';
-    const extrinsicHash = '0x1234';
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, extrinsicHash, tags });
+    const body = JSON.stringify({ cType, creator, tags });
 
     const response = await fetch(endpoint, { method, headers, body });
     expect(response.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);
@@ -89,9 +85,8 @@ describe('endpoint /ctype', () => {
   it('should return an error if the CType is not valid', async () => {
     const cType = { invalid: 'CType' };
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
-    const extrinsicHash = '0x1234';
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, extrinsicHash, tags });
+    const body = JSON.stringify({ cType, creator, tags });
 
     const response = await fetch(endpoint, { method, headers, body });
     expect(response.status).toBe(StatusCodes.UNPROCESSABLE_ENTITY);

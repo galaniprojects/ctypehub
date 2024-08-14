@@ -1,4 +1,12 @@
 import {
+  connect,
+  CType,
+  Did,
+  disconnect,
+  type KiltAddress,
+} from '@kiltprotocol/sdk-js';
+import { web3FromSource } from '@polkadot/extension-dapp';
+import {
   type FocusEvent,
   type FormEvent,
   type KeyboardEvent,
@@ -6,28 +14,19 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { web3FromSource } from '@polkadot/extension-dapp';
-import {
-  Blockchain,
-  connect,
-  CType,
-  Did,
-  disconnect,
-  type KiltAddress,
-} from '@kiltprotocol/sdk-js';
 
 import styles from './CreateForm.module.css';
 
+import { generatePath, paths } from '../../paths';
+import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
+import { offsets } from '../../utilities/offsets';
+import { Modal } from '../Modal/Modal';
+import { PropertyFields } from '../PropertyFields/PropertyFields';
+import { getProperties } from '../PropertyFields/getProperties';
 import {
   type InjectedAccount,
   SelectAccount,
 } from '../SelectAccount/SelectAccount';
-import { Modal } from '../Modal/Modal';
-import { PropertyFields } from '../PropertyFields/PropertyFields';
-import { getProperties } from '../PropertyFields/getProperties';
-import { offsets } from '../../utilities/offsets';
-import { getBlockchainEndpoint } from '../../utilities/getBlockchainEndpoint';
-import { generatePath, paths } from '../../paths';
 
 import { useSupportedExtensions } from './useSupportedExtensions';
 
@@ -139,15 +138,12 @@ export function CreateForm() {
         const authorizedTx = api.tx(authorized.signed);
 
         const injected = await web3FromSource(account.meta.source);
-        const signed = await authorizedTx.signAsync(account.address, injected);
-        await Blockchain.submitSignedTx(signed);
+        await authorizedTx.signAndSend(account.address, injected);
 
-        const extrinsicHash = signed.hash.toHex();
         const response = await fetch(paths.ctypes, {
           method: 'POST',
           body: JSON.stringify({
             cType,
-            extrinsicHash,
             creator,
             description,
             tags,

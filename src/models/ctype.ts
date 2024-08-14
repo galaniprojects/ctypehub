@@ -1,7 +1,11 @@
 import { type DidUri, type ICType } from '@kiltprotocol/sdk-js';
-import { DataTypes, Model, type ModelAttributes, Sequelize } from 'sequelize';
+import {
+  DataTypes,
+  Model,
+  type ModelAttributes,
+  type Sequelize,
+} from 'sequelize';
 
-import { Attestation } from './attestation';
 import { Tag } from './tag';
 
 interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
@@ -9,13 +13,12 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   schema: ICType['$schema'];
   creator: DidUri;
   createdAt: Date;
-  extrinsicHash: string;
   block: string | null;
   description: string | null;
+  attestationsCreated?: number;
 }
 
 export interface CTypeData extends CTypeDataInput {
-  attestationsCount: string;
   isHidden: boolean;
   tags?: Array<Pick<Tag, 'dataValues'>>;
 }
@@ -51,10 +54,6 @@ export const CTypeModelDefinition: ModelAttributes = {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  extrinsicHash: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   block: {
     type: DataTypes.STRING,
   },
@@ -66,10 +65,15 @@ export const CTypeModelDefinition: ModelAttributes = {
     allowNull: false,
     defaultValue: false,
   },
+  attestationsCreated: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
 };
 
 const fields = Object.keys(CTypeModelDefinition)
-  .filter((name) => name !== 'createdAt')
+  .filter((name) => !['createdAt', 'isHidden'].includes(name))
   .map((name) => `coalesce("${name}"::text, '')`)
   .join(` || ' ' || `);
 
@@ -91,24 +95,10 @@ export function initCType(sequelize: Sequelize) {
           ...Object.keys(CTypeModelDefinition).filter(
             (key) => key !== 'search',
           ),
-          [
-            Sequelize.literal(
-              `coalesce(
-                (select count(*)
-                from "Attestations"
-                where "Attestations"."cTypeId" = "CType"."id"
-                group by "CType"."id"),
-                0)`,
-            ),
-            'attestationsCount',
-          ],
         ],
       },
     },
   });
-
-  CType.hasMany(Attestation, { foreignKey: 'cTypeId' });
-  Attestation.belongsTo(CType, { foreignKey: 'cTypeId' });
 
   CType.hasMany(Tag, { foreignKey: 'cTypeId', as: 'tags' });
   Tag.belongsTo(CType, { foreignKey: 'cTypeId' });

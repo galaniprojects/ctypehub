@@ -14,8 +14,8 @@ import {
 
 const env = {
   MODE: 'test',
-  SUBSCAN_NETWORK: 'example',
-  SECRET_SUBSCAN: 'SECRET_SUBSCAN',
+  GRAPHQL_ENDPOINT: 'placeholder',
+  POLKADOT_RPC_ENDPOINT: 'placeholder',
   BLOCKCHAIN_ENDPOINT: '',
   DATABASE_URI: '',
   DID: 'placeholder',
