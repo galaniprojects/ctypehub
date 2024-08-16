@@ -53,7 +53,7 @@ if (!payerMnemonic) {
 }
 
 function deductW3nOrigin(blockchainEndpoint: string) {
-  const endpoint = blockchainEndpoint.toLocaleLowerCase();
+  const endpoint = blockchainEndpoint.toLowerCase();
   if (endpoint.includes('peregrine-stg')) {
     return 'https://smoke.w3n.id';
   }
