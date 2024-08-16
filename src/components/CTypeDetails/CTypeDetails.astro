@@ -48,10 +48,12 @@ const kiltCType = CType.fromProperties(title, properties, version);
 
 const { w3nOrigin, blockchainEndpoint } = configuration;
 
-const linkToW3N = new URL(`${w3nOrigin}/${web3Name ?? creator}`);
-const linkToBlock = new URL(
-  `https://polkadot.js.org/apps/?rpc=${blockchainEndpoint}#/explorer/query/${block}`,
-);
+const linkToW3N = new URL(w3nOrigin);
+linkToW3N.pathname = web3Name ?? creator;
+
+const linkToBlock = new URL(`https://polkadot.js.org/apps/`);
+linkToBlock.searchParams.set('rpc', blockchainEndpoint);
+linkToBlock.hash = `/explorer/query/${block}`;
 ---
 
 <section class={containerStyles.bigContainer}>
@@ -59,13 +61,7 @@ const linkToBlock = new URL(
 
   <fieldset>
     <legend>Creator</legend>
-    {
-      (
-        <a href={linkToW3N.toString()}>
-          {web3Name ? `w3n:${web3Name}` : creator}
-        </a>
-      )
-    }
+    {(<a href={linkToW3N}>{web3Name ? `w3n:${web3Name}` : creator}</a>)}
   </fieldset>
 
   <fieldset>
@@ -103,7 +99,7 @@ const linkToBlock = new URL(
   <fieldset>
     <legend>Registration Block</legend>
 
-    <a href={linkToBlock.toString()}>
+    <a href={linkToBlock}>
       {block}
     </a>
   </fieldset>
