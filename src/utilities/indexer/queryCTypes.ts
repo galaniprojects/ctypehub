@@ -93,7 +93,7 @@ export async function queryCTypes() {
     } catch (error) {
       logger.error(
         error,
-        `Could not add cType ${cTypeId} to database. Probably bad formatted, see it's definition: ${definition}`,
+        `Could not add cType ${cTypeId} to database. Probably bad formatted, see its definition: ${definition}`,
       );
       continue;
     }
