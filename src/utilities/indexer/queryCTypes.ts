@@ -77,17 +77,25 @@ export async function queryCTypes() {
     const { id: creator } = author;
     const { $schema, ...rest } = JSON.parse(definition) as Omit<ICType, '$id'>;
 
-    const newCType = await CTypeModel.upsert({
-      id: cTypeId,
-      schema: $schema,
-      createdAt: new Date(registrationBlock.timeStamp + 'Z'),
-      creator,
-      block: registrationBlock.id,
-      ...rest,
-      attestationsCreated,
-    });
-    logger.info(
-      `Added new CType to data base: ${JSON.stringify(newCType, null, 2)}`,
-    );
+    try {
+      const newCType = await CTypeModel.upsert({
+        id: cTypeId,
+        schema: $schema,
+        createdAt: new Date(registrationBlock.timeStamp + 'Z'),
+        creator,
+        block: registrationBlock.id,
+        ...rest,
+        attestationsCreated,
+      });
+      logger.info(
+        `Added new CType to data base: ${JSON.stringify(newCType, null, 2)}`,
+      );
+    } catch (error) {
+      logger.error(
+        error,
+        `Could not add cType ${cTypeId} to database. Probably bad formatted, see its definition: ${definition}`,
+      );
+      continue;
+    }
   }
 }

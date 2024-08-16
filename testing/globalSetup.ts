@@ -15,7 +15,6 @@ import {
 const env = {
   MODE: 'test',
   GRAPHQL_ENDPOINT: 'placeholder',
-  POLKADOT_RPC_ENDPOINT: 'placeholder',
   BLOCKCHAIN_ENDPOINT: '',
   DATABASE_URI: '',
   DID: 'placeholder',

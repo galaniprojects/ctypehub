@@ -46,7 +46,14 @@ const schemaV1 = CType.fromProperties('', {}).$schema;
 const version = schema === schemaV1 ? 'V1' : 'draft-01';
 const kiltCType = CType.fromProperties(title, properties, version);
 
-const { w3nOrigin, indexer } = configuration;
+const { w3nOrigin, blockchainEndpoint } = configuration;
+
+const linkToW3N = new URL(w3nOrigin);
+linkToW3N.pathname = web3Name ?? creator;
+
+const linkToBlock = new URL(`https://polkadot.js.org/apps/`);
+linkToBlock.searchParams.set('rpc', blockchainEndpoint);
+linkToBlock.hash = `/explorer/query/${block}`;
 ---
 
 <section class={containerStyles.bigContainer}>
@@ -54,13 +61,7 @@ const { w3nOrigin, indexer } = configuration;
 
   <fieldset>
     <legend>Creator</legend>
-    {
-      web3Name ? (
-        <a href={`${w3nOrigin}/${web3Name}`}>w3n:{web3Name}</a>
-      ) : (
-        <p>{creator}</p>
-      )
-    }
+    {(<a href={linkToW3N}>{web3Name ? `w3n:${web3Name}` : creator}</a>)}
   </fieldset>
 
   <fieldset>
@@ -98,9 +99,7 @@ const { w3nOrigin, indexer } = configuration;
   <fieldset>
     <legend>Registration Block</legend>
 
-    <a
-      href={`https://polkadot.js.org/apps/?rpc=wss%3A%2F%2F${indexer.polkadotRPCEndpoint}#/explorer/query/${block}`}
-    >
+    <a href={linkToBlock}>
       {block}
     </a>
   </fieldset>

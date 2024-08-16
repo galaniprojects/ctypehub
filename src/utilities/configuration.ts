@@ -14,16 +14,11 @@ class ConfigurationError extends Error {
 }
 const indexer = {
   graphqlEndpoint: import.meta.env.GRAPHQL_ENDPOINT as string,
-  polkadotRPCEndpoint: import.meta.env.POLKADOT_RPC_ENDPOINT as string,
 };
 if (!indexer.graphqlEndpoint) {
   throw new ConfigurationError('No endpoint for the GraphQL server provided');
 }
-if (!indexer.polkadotRPCEndpoint) {
-  throw new ConfigurationError(
-    'No R.P.C. endpoint for the polkadot.js explorer provided',
-  );
-}
+
 const blockchainEndpoint = import.meta.env.BLOCKCHAIN_ENDPOINT as string;
 if (!blockchainEndpoint) {
   throw new ConfigurationError('No blockchain endpoint provided');
@@ -57,11 +52,16 @@ if (!payerMnemonic) {
   throw new ConfigurationError('SECRET_PAYER_MNEMONIC is not provided');
 }
 
-const w3nOrigins: Record<string, string> = {
-  'wss://peregrine.kilt.io': 'https://test.w3n.id',
-  'wss://peregrine-stg.kilt.io/para': 'https://smoke.w3n.id',
-  'wss://kilt-rpc.dwellir.com': 'https://w3n.id',
-};
+function deductW3nOrigin(blockchainEndpoint: string) {
+  const endpoint = blockchainEndpoint.toLowerCase();
+  if (endpoint.includes('peregrine-stg')) {
+    return 'https://smoke.w3n.id';
+  }
+  if (endpoint.includes('peregrine')) {
+    return 'https://test.w3n.id';
+  }
+  return 'https://w3n.id';
+}
 
 export const configuration = {
   isProduction: import.meta.env.PROD,
@@ -76,6 +76,6 @@ export const configuration = {
   assertionMethodMnemonic,
   keyAgreementMnemonic,
   payerMnemonic,
-  w3nOrigin: w3nOrigins[blockchainEndpoint] || 'https://w3n.id',
+  w3nOrigin: deductW3nOrigin(blockchainEndpoint),
   indexer,
 };
