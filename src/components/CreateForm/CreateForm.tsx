@@ -30,6 +30,8 @@ import {
 
 import { useSupportedExtensions } from './useSupportedExtensions';
 
+// TODO: trigger the queryCTypes() or the watchIndexer() after the ctype was submitted to get the block in which it was written on chain
+
 export function CreateForm() {
   const [propertiesCount, setPropertiesCount] = useState(0);
   const handleAddPropertyClick = useCallback(
