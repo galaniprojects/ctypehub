@@ -95,15 +95,15 @@ linkToBlock.hash = `/explorer/query/${block}`;
       </fieldset>
     ))
   }
+  {
+    block && (
+      <fieldset>
+        <legend>Registration Block</legend>
 
-  <fieldset>
-    <legend>Registration Block</legend>
-
-    <a href={linkToBlock}>
-      {block}
-    </a>
-  </fieldset>
-
+        <a href={linkToBlock}>{block}</a>
+      </fieldset>
+    )
+  }
   {
     tagNames && tagNames.length > 0 && (
       <fieldset>
