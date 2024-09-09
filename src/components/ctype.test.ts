@@ -12,6 +12,7 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
+    const block = 4269;
     const description = 'A CType';
 
     const response = await fetch(endpoint, {
@@ -20,6 +21,7 @@ describe('endpoint /ctype', () => {
       body: JSON.stringify({
         cType,
         creator,
+        block,
         description,
         tags: ['test', 'example'],
       }),
@@ -44,7 +46,7 @@ describe('endpoint /ctype', () => {
       creator,
       attestationsCreated: 0,
       description,
-      block: null,
+      block: block.toString(),
       isHidden: false,
       type: 'object',
     });
@@ -61,8 +63,9 @@ describe('endpoint /ctype', () => {
     const properties = {};
     const cType = CType.fromProperties('New CType', properties);
     const creator = 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E';
+    const block = 370;
     const tags = [] as string[];
-    const body = JSON.stringify({ cType, creator, tags });
+    const body = JSON.stringify({ cType, creator, block, tags });
 
     const created = await fetch(endpoint, { method, headers, body });
     expect(created.status).toBe(StatusCodes.CREATED);
