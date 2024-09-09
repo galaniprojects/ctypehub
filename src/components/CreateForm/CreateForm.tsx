@@ -141,9 +141,11 @@ export function CreateForm() {
 
         const injected = await web3FromSource(account.meta.source);
 
+        // wrap the submission on a promise to be able to subscribe to its result
         const block = await new Promise<number>((resolve, reject) => {
           (async () => {
             try {
+              // Send the transaction
               await authorizedTx.signAndSend(
                 account.address,
                 injected,
