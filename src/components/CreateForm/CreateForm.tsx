@@ -143,8 +143,6 @@ export function CreateForm() {
 
         const block = await new Promise<number>((resolve, reject) => {
           (async () => {
-            const start = new Date().getTime();
-
             try {
               await authorizedTx.signAndSend(
                 account.address,
@@ -152,7 +150,6 @@ export function CreateForm() {
                 // call back function to get the block where the cType is being written on chain
                 async (submission) => {
                   const { status } = submission;
-                  const duration = new Date().getTime() - start;
 
                   if (status.isInvalid) {
                     reject(new Error('Invalid transaction sent'));
@@ -164,13 +161,10 @@ export function CreateForm() {
 
                     const blockHeader =
                       await api.rpc.chain.getHeader(blockHash);
-
-                    console.log(
-                      `Extrinsic to create cType written on finalized block: "${blockHeader.number.toNumber()}" after ${duration} ms.`,
-                    );
                     resolve(blockHeader.number.toNumber());
                     // In theory, there is the possibility of this block never getting finalized.
                     // But, wouldn't it be a bad user experience to wait more than 12s?
+                    // On previous versions, not even "InBlock" was awaited.
                   }
                 },
               );
