@@ -3,6 +3,7 @@ import {
   CType,
   Did,
   disconnect,
+  // type ISubmittableResult,
   type KiltAddress,
 } from '@kiltprotocol/sdk-js';
 import { web3FromSource } from '@polkadot/extension-dapp';
@@ -140,13 +141,78 @@ export function CreateForm() {
         const authorizedTx = api.tx(authorized.signed);
 
         const injected = await web3FromSource(account.meta.source);
-        await authorizedTx.signAndSend(account.address, injected);
+        // let block: number = 42;
+
+        const block = await new Promise<number>((resolve, reject) => {
+          (async () => {
+            const start = new Date().getTime();
+
+            try {
+              await authorizedTx.signAndSend(
+                account.address,
+                injected,
+                // call back function to get the block where the cType is being written on chain
+                async (submission) => {
+                  const { status } = submission;
+                  const duration = new Date().getTime() - start;
+
+                  if (status.isInvalid) {
+                    reject(new Error('Invalid transaction sent'));
+                  }
+
+                  if (status.isInBlock) {
+                    // extrinsic is now in block, let's return the block number
+                    const blockHash = status.asInBlock.toHex();
+
+                    const blockHeader =
+                      await api.rpc.chain.getHeader(blockHash);
+
+                    console.log(
+                      `Extrinsic to create cType written on finalized block: "${blockHeader.number.toNumber()}" after ${duration} ms.`,
+                    );
+                    resolve(blockHeader.number.toNumber());
+                    // In theory, there is the possibility of this block never getting finalized.
+                    // But, wouldn't it be a bad user experience to wait more than 12s?
+                  }
+                  if (status.isFinalized) {
+                    // extrinsic is now in a finalized, let's return the block number
+                    const blockHash = status.asFinalized.toHex();
+
+                    const blockHeader =
+                      await api.rpc.chain.getHeader(blockHash);
+
+                    console.log(
+                      `Extrinsic to create cType written on finalized block: "${blockHeader.number.toNumber()}" after ${duration} ms.`,
+                    );
+
+                    resolve(blockHeader.number.toNumber());
+                  }
+                },
+              );
+            } catch (error) {
+              reject(new Error('Failed to sent transaction.'));
+            }
+          })();
+        });
+
+        // async function getBlock(submission:ISubmittableResult) {
+
+        //   if (submission.status.isInBlock) {
+        //     // extrinsic is now in block, lets update the status to InBlock and set the block hash
+        //     const blockHash = submission.status.asInBlock.toString();
+
+        //     const blockHeader = await api.rpc.chain.getHeader(blockHash);
+
+        //     const blockNumber = blockHeader.number.toNumber();
+        //   }
+        // }
 
         const response = await fetch(paths.ctypes, {
           method: 'POST',
           body: JSON.stringify({
             cType,
             creator,
+            block,
             description,
             tags,
           }),
