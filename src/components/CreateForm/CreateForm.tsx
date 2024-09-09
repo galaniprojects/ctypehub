@@ -148,9 +148,7 @@ export function CreateForm() {
                 account.address,
                 injected,
                 // call back function to get the block where the cType is being written on chain
-                async (submission) => {
-                  const { status } = submission;
-
+                async ({ status }) => {
                   if (status.isInvalid) {
                     reject(new Error('Invalid transaction sent'));
                   }
