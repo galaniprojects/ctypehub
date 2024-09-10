@@ -138,46 +138,13 @@ export function CreateForm() {
         const authorizedTx = api.tx(authorized.signed);
 
         const injected = await web3FromSource(account.meta.source);
-
-        // wrap the submission on a promise to be able to subscribe to its result
-        const block = await new Promise<number>((resolve, reject) => {
-          (async () => {
-            try {
-              // Send the transaction
-              await authorizedTx.signAndSend(
-                account.address,
-                injected,
-                // call back function to get the block where the cType is being written on chain
-                async ({ status }) => {
-                  if (status.isInvalid) {
-                    reject(new Error('Invalid transaction sent'));
-                  }
-
-                  if (status.isInBlock) {
-                    // extrinsic is now in block, let's return the block number
-                    const blockHash = status.asInBlock.toHex();
-
-                    const blockHeader =
-                      await api.rpc.chain.getHeader(blockHash);
-                    resolve(blockHeader.number.toNumber());
-                    // In theory, there is the possibility of this block never getting finalized.
-                    // But, wouldn't it be a bad user experience to wait more than 12s?
-                    // On previous versions, not even "InBlock" was awaited.
-                  }
-                },
-              );
-            } catch (error) {
-              reject(new Error('Failed to sent transaction.'));
-            }
-          })();
-        });
+        await authorizedTx.signAndSend(account.address, injected);
 
         const response = await fetch(paths.ctypes, {
           method: 'POST',
           body: JSON.stringify({
             cType,
             creator,
-            block,
             description,
             tags,
           }),
