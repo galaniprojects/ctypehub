@@ -16,7 +16,7 @@ const { title, id, description, attestationsCreated, tags } =
 <li class=`${containerStyles.container} container`>
   <h2>
     <a href={generatePath(paths.ctypeDetails, id)} class="title">
-      {title.length > 0 ? title : '∅'}
+      {title || '∅'}
     </a>
   </h2>
 
