@@ -13,7 +13,7 @@ interface CTypeDataInput extends Omit<ICType, '$id' | '$schema'> {
   schema: ICType['$schema'];
   creator: DidUri;
   createdAt: Date;
-  block: string | null;
+  block: number | null;
   description: string | null;
   attestationsCreated?: number;
 }
@@ -55,7 +55,7 @@ export const CTypeModelDefinition: ModelAttributes = {
     allowNull: false,
   },
   block: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
   },
   description: {
     type: DataTypes.STRING,
