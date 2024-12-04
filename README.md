@@ -80,6 +80,7 @@ export DATABASE_URI=postgres://postgres:postgres@localhost:5432/postgres
    ```
    pnpm dev
    ```
+   _After a while, you can stop the project, but the postgres container should continue running._
 4. Add the seeds to the database:
    ```
    pnpm seed
