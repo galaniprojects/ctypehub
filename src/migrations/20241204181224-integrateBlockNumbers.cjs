@@ -3,6 +3,10 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // First, drop the 'search' column since it depends on 'block'
+    await queryInterface.removeColumn('CTypes', 'search');
+
+    // Generalized column modification
     const tableName = 'CTypes';
     const columnName = 'block';
 
@@ -32,9 +36,29 @@ module.exports = {
 
     // Step 4: Rename the new column to the original name
     await queryInterface.renameColumn(tableName, 'temporary_col', columnName);
+
+    // recreate the 'search' column
+    await queryInterface.addColumn(
+      'CTypes',
+      'search',
+      `tsvector generated always as (to_tsvector('english',
+        coalesce("id"::text, '') || ' ' ||
+        coalesce("schema"::text, '') || ' ' ||
+        coalesce("title"::text, '') || ' ' ||
+        coalesce("properties"::text, '') || ' ' ||
+        coalesce("type"::text, '') || ' ' ||
+        coalesce("creator"::text, '') || ' ' ||
+        coalesce("block"::text, '') || ' ' ||
+        coalesce("description"::text, ''))
+      ) stored`,
+    );
   },
 
   async down(queryInterface, Sequelize) {
+    // First, drop the 'search' column since it depends on 'block'
+    await queryInterface.removeColumn('CTypes', 'search');
+
+    // Generalized column modification
     const tableName = 'CTypes';
     const columnName = 'block';
 
@@ -60,5 +84,21 @@ module.exports = {
 
     // Reverse Step 4: Rename the temp column back to the original name
     await queryInterface.renameColumn(tableName, 'temporary_col', columnName);
+
+    // recreate the 'search' column
+    await queryInterface.addColumn(
+      'CTypes',
+      'search',
+      `tsvector generated always as (to_tsvector('english',
+        coalesce("id"::text, '') || ' ' ||
+        coalesce("schema"::text, '') || ' ' ||
+        coalesce("title"::text, '') || ' ' ||
+        coalesce("properties"::text, '') || ' ' ||
+        coalesce("type"::text, '') || ' ' ||
+        coalesce("creator"::text, '') || ' ' ||
+        coalesce("block"::text, '') || ' ' ||
+        coalesce("description"::text, ''))
+      ) stored`,
+    );
   },
 };
