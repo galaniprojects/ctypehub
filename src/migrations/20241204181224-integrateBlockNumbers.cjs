@@ -73,10 +73,13 @@ module.exports = {
       `SELECT id, ${columnName} FROM "${tableName}"`,
     );
 
+    // Transformation from integer to string
     for (const record of records) {
-      await queryInterface.sequelize.query(
-        `UPDATE "${tableName}" SET temporary_col = '${record[columnName]}' WHERE id = '${record.id}'`,
-      );
+      if (!Number.isNaN(record[columnName])) {
+        await queryInterface.sequelize.query(
+          `UPDATE "${tableName}" SET temporary_col = '${record[columnName]}' WHERE id = '${record.id}'`,
+        );
+      }
     }
 
     // Reverse Step 3: Remove the new column
