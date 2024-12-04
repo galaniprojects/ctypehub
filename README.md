@@ -46,19 +46,6 @@ The database should start to populate from the configured indexer.
 This project consciously did not define a `config/config.json` for sequelize.
 Instead, it relies on the `url` property inside `.sequilizerc`.
 In turn, the `url` takes `process.env.DATABASE_URI` as a value.
-This means that `DATABASE_URI` needs to previously be set as an environment variable, sadly manually.
-
-To be able to run any `sequelize-cli` commands, first you need to execute:
-
-```
-export DATABASE_URI=<protocol://username:password@host:port/database>
-```
-
-If you are using the default values, as created via `pnpm start-db`, it narrows it down to this:
-
-```
-export DATABASE_URI=postgres://postgres:postgres@localhost:5432/postgres
-```
 
 **Before introducing any changes to the database structure you new to recreate the past.**
 **For this follow these steps:**
@@ -73,8 +60,6 @@ export DATABASE_URI=postgres://postgres:postgres@localhost:5432/postgres
    ```
    pnpm migrate
    ```
-
-   _Remember to manually set the `DATABASE_URI` first as described above._
 
 3. Start the project to populate the database, by running:
    ```
