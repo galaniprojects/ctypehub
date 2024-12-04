@@ -59,3 +59,29 @@ If you are using the default values, as created via `pnpm start-db`, it narrows 
 ```
 export DATABASE_URI=postgres://postgres:postgres@localhost:5432/postgres
 ```
+
+Before introducing any changes to the database structure you new to recreate the past.
+For this follow these steps:
+
+1. Start the database, if not running yet.
+   Locally, you can run:
+   ```
+   pnpm start-db
+   ```
+2. Run all past migrations, via:
+
+   ```
+   pnpm migrate
+   ```
+
+   _Remember to manually set the `DATABASE_URI` first as described above._
+
+3. Start the project to populate the database, by running:
+   ```
+   pnpm dev
+   ```
+4. Add the seeds to the database:
+   ```
+   pnpm seed
+   ```
+   _Because the seeds depend on some data, the database needs to be previously populated._
