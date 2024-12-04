@@ -15,8 +15,8 @@
     "dev": "astro dev --port 3000",
     "start-db": "docker run -d --rm --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres",
     "stop-db": "docker rm -f postgres",
-    "migrate": "node --env-file=.env node_modules/.bin/sequelize-cli db:migrate",
-    "seed": "node --env-file=.env node_modules/.bin/sequelize-cli db:seed:all || exit 0",
+    "migrate": "node --env-file-if-exists=.env node_modules/.bin/sequelize-cli db:migrate",
+    "seed": "node --env-file-if-exists=.env node_modules/.bin/sequelize-cli db:seed:all || exit 0",
     "build": "export $(grep -v '^#' .env.example | xargs) && astro build",
     "start": "pnpm migrate && pnpm seed && node --enable-source-maps dist/server/entry.mjs"
   },
