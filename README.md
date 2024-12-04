@@ -1,4 +1,4 @@
-# ctypehub
+# cTypeHub
 
 The source code of https://ctypehub.galaniprojects.de
 
@@ -10,7 +10,7 @@ Make sure you installed these required software before running this project:
 - [pnpm](https://pnpm.io/installation#using-corepack)
 - [Docker](https://docs.docker.com/engine/install/)
 
-## Start the app locally:
+## Start the app locally
 
 After having [cloned the repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) on your local machine and defining all environment variables according to the `.env.example`, to start the app locally follow this steps.
 
@@ -60,8 +60,8 @@ If you are using the default values, as created via `pnpm start-db`, it narrows 
 export DATABASE_URI=postgres://postgres:postgres@localhost:5432/postgres
 ```
 
-Before introducing any changes to the database structure you new to recreate the past.
-For this follow these steps:
+**Before introducing any changes to the database structure you new to recreate the past.**
+**For this follow these steps:**
 
 1. Start the database, if not running yet.
    Locally, you can run:
