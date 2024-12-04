@@ -50,23 +50,29 @@ In turn, the `url` takes `process.env.DATABASE_URI` as a value.
 **Before introducing any changes to the database structure you new to recreate the past.**
 **For this follow these steps:**
 
-1. Start the database, if not running yet.
+1. Make sure you have all dependencies installed, running:
+
+   ```
+   pnpm install
+   ```
+
+2. Start the database, if not running yet.
    Locally, you can run:
    ```
    pnpm start-db
    ```
-2. Run all past migrations, via:
+3. Run all past migrations, via:
 
    ```
    pnpm migrate
    ```
 
-3. Start the project to populate the database, by running:
+4. Start the project to populate the database, by running:
    ```
    pnpm dev
    ```
    _After a while, you can stop the project, but the postgres container should continue running._
-4. Add the seeds to the database:
+5. Add the seeds to the database, by running:
    ```
    pnpm seed
    ```
