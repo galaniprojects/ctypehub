@@ -26,7 +26,7 @@ module.exports = {
       let blockValue = null;
       try {
         blockValue = BigInt(String(record[columnName]));
-      } catch (error) {}
+      } catch {}
 
       // just skip if not a valid number
       if (blockValue != null) {
@@ -80,7 +80,7 @@ module.exports = {
 
     // Transformation from bigInt to string
     for (const record of records) {
-      if (typeof record[columnName] === 'bigint') {
+      if (record[columnName] != null) {
         await queryInterface.sequelize.query(
           `UPDATE "${tableName}" SET temporary_col = '${record[columnName]}' WHERE id = '${record.id}'`,
         );
