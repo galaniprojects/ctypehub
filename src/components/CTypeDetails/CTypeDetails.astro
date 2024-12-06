@@ -53,7 +53,7 @@ linkToW3N.pathname = web3Name ?? creator;
 
 const linkToBlock = new URL(`https://polkadot.js.org/apps/`);
 linkToBlock.searchParams.set('rpc', blockchainEndpoint);
-linkToBlock.hash = `/explorer/${block ? 'query/' + block : ''}`;
+linkToBlock.hash = `/explorer/${block != null ? 'query/' + block : ''}`;
 ---
 
 <section class={containerStyles.bigContainer}>

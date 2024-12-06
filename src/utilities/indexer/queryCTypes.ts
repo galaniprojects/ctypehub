@@ -42,11 +42,14 @@ interface QueriedCType {
     web3NameId: string;
   };
   registrationBlock: {
-    id: string; // Block Ordinal Number, without punctuation
+    /** Block Ordinal Number, without punctuation */
+    id: string;
     hash: HexString;
-    timeStamp: string; // ISO8601 Date String, like 2022-02-09T13:09:18.217
+    /** ISO8601 Date String, like 2022-02-09T13:09:18.217 */
+    timeStamp: string;
   };
-  definition: string; // stringified JSON of cType Schema
+  /** Stringified JSON of cType Schema */
+  definition: string;
 }
 
 export async function queryCTypes() {
@@ -83,7 +86,7 @@ export async function queryCTypes() {
         schema: $schema,
         createdAt: new Date(registrationBlock.timeStamp + 'Z'),
         creator,
-        block: registrationBlock.id,
+        block: BigInt(registrationBlock.id),
         ...rest,
         attestationsCreated,
       });
