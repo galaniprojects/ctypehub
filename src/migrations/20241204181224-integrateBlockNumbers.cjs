@@ -12,7 +12,7 @@ module.exports = {
 
     // Step 1: Add a temporary column with the new type
     await queryInterface.addColumn(tableName, 'temporary_col', {
-      type: Sequelize.INTEGER,
+      type: Sequelize.BIGINT,
       allowNull: true,
     });
 
@@ -21,10 +21,15 @@ module.exports = {
       `SELECT id, ${columnName} FROM "${tableName}"`,
     );
 
-    // Transformation from string to integer
+    // Transformation from string to bigint
     for (const record of records) {
-      const blockValue = parseInt(String(record[columnName]), 10);
-      if (!isNaN(blockValue)) {
+      let blockValue = null;
+      try {
+        blockValue = BigInt(String(record[columnName]));
+      } catch (error) {}
+
+      // just skip if not a valid number
+      if (blockValue != null) {
         await queryInterface.sequelize.query(
           `UPDATE "${tableName}" SET temporary_col = ${blockValue} WHERE id = '${record.id}'`,
         );
@@ -73,9 +78,9 @@ module.exports = {
       `SELECT id, ${columnName} FROM "${tableName}"`,
     );
 
-    // Transformation from integer to string
+    // Transformation from bigInt to string
     for (const record of records) {
-      if (!Number.isNaN(record[columnName])) {
+      if (typeof record[columnName] === 'bigint') {
         await queryInterface.sequelize.query(
           `UPDATE "${tableName}" SET temporary_col = '${record[columnName]}' WHERE id = '${record.id}'`,
         );
