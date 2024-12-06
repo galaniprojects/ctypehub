@@ -83,7 +83,7 @@ export async function queryCTypes() {
         schema: $schema,
         createdAt: new Date(registrationBlock.timeStamp + 'Z'),
         creator,
-        block: parseInt(registrationBlock.id, 10),
+        block: BigInt(registrationBlock.id),
         ...rest,
         attestationsCreated,
       });
