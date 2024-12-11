@@ -10,7 +10,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:00:00'),
     description: 'This is some example cType data',
-    block: '123',
+    block: 123n,
     attestationsCreated: 1,
     tags: [
       {
@@ -35,7 +35,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:01:00'),
     description: 'This is an example of a CType with a nested property',
-    block: '321',
+    block: 321n,
     attestationsCreated: 22,
     isHidden: false,
   },
@@ -55,7 +55,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:02:00'),
     description: 'This is an example of a CType with a nested CType',
-    block: '456',
+    block: 456n,
     attestationsCreated: 333,
     isHidden: false,
   },
@@ -68,7 +68,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     creator: 'did:kilt:4pehddkhEanexVTTzWAtrrfo2R7xPnePpuiJLC7shQU894aY',
     createdAt: new Date('2023-05-01T12:00:00'),
     description: 'This is some example cType data',
-    block: '123',
+    block: 123n,
     attestationsCreated: 1,
     tags: [
       {
@@ -121,7 +121,7 @@ export const mockCTypes: Record<string, CTypeData> = {
     creator: 'did:kilt:4rrkiRTZgsgxjJDFkLsivqqKTqdUTuxKk3FX3mKFAeMxsR5E',
     attestationsCreated: 4444,
     createdAt: new Date('2023-05-01T12:03:00'),
-    block: '456',
+    block: 456n,
     isHidden: false,
   },
 };
