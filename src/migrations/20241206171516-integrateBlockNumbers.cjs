@@ -8,7 +8,7 @@ module.exports = {
 
     // Transformation the type of 'block' from string to bigint
     await queryInterface.changeColumn('CTypes', 'block', {
-      type: Sequelize.BIGINT,
+      type: 'BIGINT using (block::bigint)',
       allowNull: true,
     });
     // recreate the 'search' column
