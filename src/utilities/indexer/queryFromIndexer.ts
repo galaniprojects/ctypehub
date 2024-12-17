@@ -52,7 +52,10 @@ export async function queryFromIndexer(query: string) {
       `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
     );
     logger.info(`Continuing as if there where no matches to the query.`);
-    return { totalCount: 0, matches: Array.of<FetchedData>() };
+    return {
+      totalCount: 0,
+      matches: Array.of<NonNullable<FetchedData['data'][string]['nodes']>[0]>(),
+    };
   }
 
   // handle good responses
