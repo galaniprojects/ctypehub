@@ -37,13 +37,26 @@ export async function queryFromIndexer(query: string) {
   logger.debug(
     `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
-  const { data } = await got
-    .post(indexer.graphqlEndpoint, {
-      json: {
-        query,
-      },
-    })
-    .json<FetchedData>();
+
+  const responsePromise = got.post(indexer.graphqlEndpoint, {
+    json: {
+      query,
+    },
+  });
+
+  // handle bad responses
+  try {
+    await responsePromise;
+  } catch (error) {
+    logger.error(
+      `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
+    );
+    logger.info(`Continuing as if there where no matches to the query.`);
+    return { totalCount: 0, matches: Array.of<FetchedData>() };
+  }
+
+  // handle good responses
+  const { data } = await responsePromise.json<FetchedData>();
 
   const entities = Object.entries(data);
 
