@@ -38,29 +38,38 @@ export async function queryFromIndexer<ExpectedQueryResults>(query: string) {
     `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
 
-  const responsePromise = got.post(indexer.graphqlEndpoint, {
-    json: {
-      query,
-    },
-  });
+  // const responsePromise = got.post(indexer.graphqlEndpoint, {
+  //   json: {
+  //     query,
+  //   },
+  // });
 
-  // handle bad responses
-  try {
-    await responsePromise;
-  } catch (error) {
-    logger.error(
-      `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
-    );
-    logger.info(`Continuing as if there where no matches to the query.`);
-    return {
-      totalCount: 0,
-      matches: Array.of<ExpectedQueryResults>(),
-    };
-  }
+  // // handle bad responses
+  // try {
+  //   await responsePromise;
+  // } catch (error) {
+  //   logger.error(
+  //     `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
+  //   );
+  //   logger.info(`Continuing as if there where no matches to the query.`);
+  //   return {
+  //     totalCount: 0,
+  //     matches: Array.of<ExpectedQueryResults>(),
+  //   };
+  // }
 
-  // handle good responses
-  const { data } =
-    await responsePromise.json<FetchedData<ExpectedQueryResults>>();
+  // // handle good responses
+  // const { data } =
+  //   await responsePromise.json<FetchedData<ExpectedQueryResults>>();
+
+  const { data } = await got
+    .post(indexer.graphqlEndpoint, {
+      json: {
+        query,
+      },
+      throwHttpErrors: false,
+    })
+    .json<FetchedData<ExpectedQueryResults>>();
 
   const entities = Object.entries(data);
 
