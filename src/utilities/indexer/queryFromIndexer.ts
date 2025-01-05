@@ -39,17 +39,17 @@ export async function queryFromIndexer<ExpectedQueryResults>(query: string) {
   );
 
   const responsePromise = got.post(indexer.graphqlEndpoint, {
-    throwHttpErrors: false,
     json: {
       query,
     },
   });
-  const response = await responsePromise;
 
   // handle bad responses
-  if (!response.ok) {
+  try {
+    await responsePromise;
+  } catch (error) {
     logger.error(
-      `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(response, null, 2)}`,
+      `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
     );
     logger.info(`Continuing as if there where no matches to the query.`);
     return {
