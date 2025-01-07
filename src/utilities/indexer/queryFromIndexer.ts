@@ -23,27 +23,44 @@ export const QUERY_SIZE = 100;
 //   }
 // `;
 
-interface FetchedData {
+export interface FetchedData<ExpectedQueryResults> {
   data: Record<
     string,
     {
       totalCount?: number;
-      nodes?: Array<Record<string, unknown>>;
+      nodes?: ExpectedQueryResults[];
     }
   >;
 }
 
-export async function queryFromIndexer(query: string) {
+export async function queryFromIndexer<ExpectedQueryResults>(query: string) {
   logger.debug(
     `Querying from GraphQL under ${indexer.graphqlEndpoint}, using this payload: ${query} `,
   );
-  const { data } = await got
-    .post(indexer.graphqlEndpoint, {
-      json: {
-        query,
-      },
-    })
-    .json<FetchedData>();
+
+  const responsePromise = got.post(indexer.graphqlEndpoint, {
+    json: {
+      query,
+    },
+  });
+
+  // handle bad responses
+  try {
+    await responsePromise;
+  } catch (error) {
+    logger.error(
+      `Error response coming from ${indexer.graphqlEndpoint}: ${JSON.stringify(error, null, 2)}`,
+    );
+    logger.info(`Continuing as if there where no matches to the query.`);
+    return {
+      totalCount: 0,
+      matches: Array.of<ExpectedQueryResults>(),
+    };
+  }
+
+  // handle good responses
+  const { data } =
+    await responsePromise.json<FetchedData<ExpectedQueryResults>>();
 
   const entities = Object.entries(data);
 
@@ -83,7 +100,8 @@ export async function* matchesGenerator<ExpectedQueryResults>(
     return;
   }
   const query = buildQuery(0);
-  const { totalCount, matches } = await queryFromIndexer(query);
+  const { totalCount, matches } =
+    await queryFromIndexer<ExpectedQueryResults>(query);
 
   if (totalCount === 0) {
     logger.debug(
@@ -94,16 +112,18 @@ export async function* matchesGenerator<ExpectedQueryResults>(
 
   if (totalCount === matches.length) {
     for (const match of matches) {
-      yield match as ExpectedQueryResults;
+      yield match;
     }
     return;
   }
 
   for (let offset = 0; offset < totalCount; offset += QUERY_SIZE) {
-    const { matches } = await queryFromIndexer(buildQuery(offset));
+    const { matches } = await queryFromIndexer<ExpectedQueryResults>(
+      buildQuery(offset),
+    );
 
     for (const match of matches) {
-      yield match as ExpectedQueryResults;
+      yield match;
     }
     await sleep(QUERY_INTERVAL_MS);
   }
