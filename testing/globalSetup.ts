@@ -35,9 +35,9 @@ export async function setup() {
 
   // configure the code to use a local blank instance of blockchain
   blockchainContainer = await new GenericContainer(
-    'kiltprotocol/mashnet-node:latest',
+    'kiltprotocol/standalone-node:latest',
   )
-    .withCommand(['--dev', `--ws-port=${WS_PORT}`, '--ws-external'])
+    .withCommand(['--dev', `--rpc-port=${WS_PORT}`, '--rpc-external'])
     .withExposedPorts(WS_PORT)
     .withWaitStrategy(Wait.forLogMessage(`:${WS_PORT}`))
     .start();
