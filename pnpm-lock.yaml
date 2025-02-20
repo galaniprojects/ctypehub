@@ -5,8 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@kiltprotocol/type-definitions': 1.11501.0-peregrine
-  '@kiltprotocol/augment-api': 1.11501.0-peregrine
+  '@kiltprotocol/type-definitions': 1.11502.0-rc.1
+  '@kiltprotocol/augment-api': 1.11502.0-peregrine-rc.1
 
 importers:
 
@@ -20,7 +20,7 @@ importers:
         version: 3.6.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@4.4.9(@types/node@20.14.6))
       '@kiltprotocol/sdk-js':
         specifier: ^0.36.0-rc.1
-        version: 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)
+        version: 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)
       '@polkadot/extension-dapp':
         specifier: ^0.47.0
         version: 0.47.6(@polkadot/api@11.3.1)(@polkadot/util-crypto@12.6.2(@polkadot/util@12.6.2))(@polkadot/util@12.6.2)
@@ -853,11 +853,11 @@ packages:
     resolution: {integrity: sha512-CSErUL0pNUjI0snHsGlkdarn2uW7FocVvnKklREdg2KcedXkcAiS8snjChrIZNEflKk5bsSKYjiDkK4R9D6XJw==}
     engines: {node: '>=16.0'}
 
-  '@kiltprotocol/augment-api@1.11501.0-peregrine':
-    resolution: {integrity: sha512-/uuNcttyadQWvH5+g29e3DDFaGbjdwWBSnELAkZf8M9PcrgYnAV4JfwhzgyrpX9j429nxWrHvZyih9YzZ3j/YA==}
+  '@kiltprotocol/augment-api@1.11502.0-peregrine-rc.1':
+    resolution: {integrity: sha512-VsvkRaGUWAn0Ep/KQ+ULo+u+VlMYqfLD0hr+LfEKiCysM/E51lfA6bezpVaoEqM3tfvbM2YFrikjUiVEHFjQJQ==}
     hasBin: true
     peerDependencies:
-      '@kiltprotocol/type-definitions': 1.11501.0-peregrine
+      '@kiltprotocol/type-definitions': 1.11502.0-rc.1
       '@polkadot/api': ~12.2.0
       '@polkadot/typegen': ~12.2.0
       '@polkadot/types': ^12.2.0
@@ -894,8 +894,8 @@ packages:
     resolution: {integrity: sha512-+jN+u+jDFN+p4tm3+M9pJVPW3OizLxeJzZwx3MQ2JH2qoSn3nI2eYuRw5Fc6rCfUCfTry2Jj1VHfYGNPU0Vz7w==}
     engines: {node: '>=16.0'}
 
-  '@kiltprotocol/type-definitions@1.11501.0-peregrine':
-    resolution: {integrity: sha512-ZjO2lnlppdECH5Ix5FDrQvxMlqvr9wPtYfiNQ9sb7pn6dslSY6xlBwKMl0BlokdyIE4HGVLI0AiDz6av/MloAA==}
+  '@kiltprotocol/type-definitions@1.11502.0-rc.1':
+    resolution: {integrity: sha512-NZhRRWu1qnqGiOOTpzjsma1IYQ4z9J5q3GdibXn6fHUpDEMg6DlLJv6AUWWDXOsTCH6zSZ4VwAmgrdGwckhKFQ==}
     peerDependencies:
       '@polkadot/types': ^12.2.0
 
@@ -4310,7 +4310,7 @@ packages:
 
   shikiji@0.6.10:
     resolution: {integrity: sha512-WE+A5Y2ntM5hL3iJQujk97qr5Uj7PSIRXpQfrZ6h+JWPXZ8KBEDhFXc4lqNriaRq1WGOVPUT83XMOzmHiH3W8A==}
-    deprecated: Shikiji is merged back to Shiki v1.0, please migrate over to get the latest updates
+    deprecated: Deprecated, use shiki instead
 
   side-channel@1.0.6:
     resolution: {integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==}
@@ -5793,12 +5793,12 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@kiltprotocol/augment-api@1.11501.0-peregrine(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)':
+  '@kiltprotocol/augment-api@1.11502.0-peregrine-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)':
     dependencies:
       '@polkadot/api': 11.3.1
       typescript: 5.4.5
     optionalDependencies:
-      '@kiltprotocol/type-definitions': 1.11501.0-peregrine(@polkadot/types@11.3.1)
+      '@kiltprotocol/type-definitions': 1.11502.0-rc.1(@polkadot/types@11.3.1)
       '@polkadot/types': 11.3.1
       '@typescript-eslint/eslint-plugin': 7.2.0(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/parser': 7.2.0(eslint@8.57.0)(typescript@5.4.5)
@@ -5833,11 +5833,11 @@ snapshots:
   '@kiltprotocol/core@0.36.0-rc.1(typescript@5.4.5)':
     dependencies:
       '@kiltprotocol/asset-did': 0.36.0-rc.1
-      '@kiltprotocol/augment-api': 1.11501.0-peregrine(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)
+      '@kiltprotocol/augment-api': 1.11502.0-peregrine-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)
       '@kiltprotocol/chain-helpers': 0.36.0-rc.1
       '@kiltprotocol/config': 0.36.0-rc.1
-      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)
-      '@kiltprotocol/type-definitions': 1.11501.0-peregrine(@polkadot/types@11.3.1)
+      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)
+      '@kiltprotocol/type-definitions': 1.11502.0-rc.1(@polkadot/types@11.3.1)
       '@kiltprotocol/types': 0.36.0-rc.1
       '@kiltprotocol/utils': 0.36.0-rc.1
       '@polkadot/api': 11.3.1
@@ -5852,9 +5852,9 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kiltprotocol/did@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)':
+  '@kiltprotocol/did@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)':
     dependencies:
-      '@kiltprotocol/augment-api': 1.11501.0-peregrine(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)
+      '@kiltprotocol/augment-api': 1.11502.0-peregrine-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(@polkadot/api@11.3.1)(@polkadot/types@11.3.1)(typescript@5.4.5)
       '@kiltprotocol/config': 0.36.0-rc.1
       '@kiltprotocol/types': 0.36.0-rc.1
       '@kiltprotocol/utils': 0.36.0-rc.1
@@ -5872,10 +5872,10 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kiltprotocol/messaging@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)':
+  '@kiltprotocol/messaging@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)':
     dependencies:
       '@kiltprotocol/core': 0.36.0-rc.1(typescript@5.4.5)
-      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)
+      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)
       '@kiltprotocol/types': 0.36.0-rc.1
       '@kiltprotocol/utils': 0.36.0-rc.1
       '@polkadot/util': 12.6.2
@@ -5887,13 +5887,13 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kiltprotocol/sdk-js@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)':
+  '@kiltprotocol/sdk-js@0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)':
     dependencies:
       '@kiltprotocol/chain-helpers': 0.36.0-rc.1
       '@kiltprotocol/config': 0.36.0-rc.1
       '@kiltprotocol/core': 0.36.0-rc.1(typescript@5.4.5)
-      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)
-      '@kiltprotocol/messaging': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1))(typescript@5.4.5)
+      '@kiltprotocol/did': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)
+      '@kiltprotocol/messaging': 0.36.0-rc.1(@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1))(typescript@5.4.5)
       '@kiltprotocol/types': 0.36.0-rc.1
       '@kiltprotocol/utils': 0.36.0-rc.1
     transitivePeerDependencies:
@@ -5904,7 +5904,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@kiltprotocol/type-definitions@1.11501.0-peregrine(@polkadot/types@11.3.1)':
+  '@kiltprotocol/type-definitions@1.11502.0-rc.1(@polkadot/types@11.3.1)':
     dependencies:
       '@polkadot/types': 11.3.1
 
