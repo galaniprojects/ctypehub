@@ -24,7 +24,7 @@
     "@astrojs/node": "^6.1.0",
     "@astrojs/react": "^3.6.0",
     "@kiltprotocol/sdk-js": "^0.36.0-rc.1",
-    "@polkadot/extension-dapp": "^0.47.0",
+    "@polkadot/extension-dapp": "^0.60.1",
     "@polkadot/util": "^12.6.2",
     "astro": "^3.6.5",
     "dotenv": "^16.4.7",
