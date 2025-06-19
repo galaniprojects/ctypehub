@@ -23,9 +23,9 @@
   "dependencies": {
     "@astrojs/node": "^6.1.0",
     "@astrojs/react": "^3.6.0",
-    "@kiltprotocol/sdk-js": "^0.36.0-rc.1",
-    "@polkadot/extension-dapp": "^0.47.0",
-    "@polkadot/util": "^12.6.2",
+    "@kiltprotocol/sdk-js": "^0.36.0-rc.4",
+    "@polkadot/extension-dapp": "^0.60.1",
+    "@polkadot/util": "^13.5.2",
     "astro": "^3.6.5",
     "dotenv": "^16.4.7",
     "got": "^12.6.1",
@@ -82,7 +82,7 @@
     "vitest-github-actions-reporter": "^0.11.1"
   },
   "resolutions": {
-    "@kiltprotocol/type-definitions": "1.11502.0-rc.1",
-    "@kiltprotocol/augment-api": "1.11502.0-peregrine-rc.1"
+    "@kiltprotocol/type-definitions": "1.11502.1-rc.1",
+    "@kiltprotocol/augment-api": "1.11504.0-rc.1"
   }
 }
