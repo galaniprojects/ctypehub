@@ -75,7 +75,7 @@ importers:
     devDependencies:
       '@astrojs/check':
         specifier: ^0.3.4
-        version: 0.3.4(prettier-plugin-astro@0.14.0)(prettier@3.3.3)(typescript@5.4.5)
+        version: 0.3.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.4.5)
       '@testcontainers/postgresql':
         specifier: ^10.9.0
         version: 10.9.0
@@ -158,8 +158,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       prettier-plugin-astro:
-        specifier: ^0.14.0
-        version: 0.14.0
+        specifier: ^0.14.1
+        version: 0.14.1
       stylelint:
         specifier: ^16.6.1
         version: 16.6.1(typescript@5.4.5)
@@ -207,11 +207,8 @@ packages:
     peerDependencies:
       typescript: ^5.0.0
 
-  '@astrojs/compiler@1.8.0':
-    resolution: {integrity: sha512-E0TI/uyO8n+IPSZ4Fvl9Lne8JKEasR6ZMGvE2G096oTWOXSsPAhRs2LomV3z+/VRepo2h+t/SdVo54wox4eJwA==}
-
-  '@astrojs/compiler@2.3.0':
-    resolution: {integrity: sha512-pxYRAaRdMS6XUll8lbFM+Lr0DI1HKIDT+VpiC+S+9di5H/nmm3znZOgdMlLiMxADot+56eps+M1BvtKfQremXA==}
+  '@astrojs/compiler@2.12.2':
+    resolution: {integrity: sha512-w2zfvhjNCkNMmMMOn5b0J8+OmUaBL1o40ipMvqcG6NRpdC+lKxmTi48DT8Xw0SzJ3AfmeFLB45zXZXtmbsjcgw==}
 
   '@astrojs/internal-helpers@0.2.1':
     resolution: {integrity: sha512-06DD2ZnItMwUnH81LBLco3tWjcZ1lGU9rLCCBaeUCGYe9cI0wKyY2W3kDyoW1I6GmcWgt1fu+D1CTvz+FIKf8A==}
@@ -3872,8 +3869,8 @@ packages:
     resolution: {integrity: sha512-GbK2cP9nraSSUF9N2XwUwqfzlAFlMNYYl+ShE/V+H8a9uNl/oUqB1w2EL54Jh0OlyRSd8RfWYJ3coVS4TROP2w==}
     engines: {node: '>=6.0.0'}
 
-  prettier-plugin-astro@0.14.0:
-    resolution: {integrity: sha512-7jRGJsexaRIyUzTk8uzXlP45cw6DQ5Ci4bTe0xCBCcuO1Fff8jJy9oI+kRCQKSdDFTSAArMSg8GpvzlKBtSaZA==}
+  prettier-plugin-astro@0.14.1:
+    resolution: {integrity: sha512-RiBETaaP9veVstE4vUwSIcdATj6dKmXljouXc/DDNwBSPTp8FRkLGDSGFClKsAFeeg+13SB0Z1JZvbD76bigJw==}
     engines: {node: ^14.15.0 || >=16.0.0}
 
   prettier@3.3.3:
@@ -5187,9 +5184,9 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@astrojs/check@0.3.4(prettier-plugin-astro@0.14.0)(prettier@3.3.3)(typescript@5.4.5)':
+  '@astrojs/check@0.3.4(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.4.5)':
     dependencies:
-      '@astrojs/language-server': 2.5.5(prettier-plugin-astro@0.14.0)(prettier@3.3.3)(typescript@5.4.5)
+      '@astrojs/language-server': 2.5.5(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.4.5)
       chokidar: 3.5.3
       fast-glob: 3.3.2
       kleur: 4.1.5
@@ -5199,15 +5196,13 @@ snapshots:
       - prettier
       - prettier-plugin-astro
 
-  '@astrojs/compiler@1.8.0': {}
-
-  '@astrojs/compiler@2.3.0': {}
+  '@astrojs/compiler@2.12.2': {}
 
   '@astrojs/internal-helpers@0.2.1': {}
 
-  '@astrojs/language-server@2.5.5(prettier-plugin-astro@0.14.0)(prettier@3.3.3)(typescript@5.4.5)':
+  '@astrojs/language-server@2.5.5(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.4.5)':
     dependencies:
-      '@astrojs/compiler': 2.3.0
+      '@astrojs/compiler': 2.12.2
       '@jridgewell/sourcemap-codec': 1.4.15
       '@volar/kit': 1.10.10(typescript@5.4.5)
       '@volar/language-core': 1.10.10
@@ -5227,7 +5222,7 @@ snapshots:
       vscode-uri: 3.0.8
     optionalDependencies:
       prettier: 3.3.3
-      prettier-plugin-astro: 0.14.0
+      prettier-plugin-astro: 0.14.1
     transitivePeerDependencies:
       - typescript
 
@@ -6917,11 +6912,11 @@ snapshots:
 
   astro-eslint-parser@0.17.0(typescript@5.4.5):
     dependencies:
-      '@astrojs/compiler': 2.3.0
+      '@astrojs/compiler': 2.12.2
       '@typescript-eslint/scope-manager': 5.62.0
       '@typescript-eslint/types': 5.62.0
       '@typescript-eslint/typescript-estree': 5.62.0(typescript@5.4.5)
-      astrojs-compiler-sync: 0.3.2(@astrojs/compiler@2.3.0)
+      astrojs-compiler-sync: 0.3.2(@astrojs/compiler@2.12.2)
       debug: 4.3.4
       entities: 4.5.0
       eslint-visitor-keys: 3.4.3
@@ -6935,7 +6930,7 @@ snapshots:
 
   astro@3.6.5(@types/node@20.14.6)(typescript@5.4.5):
     dependencies:
-      '@astrojs/compiler': 2.3.0
+      '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.2.1
       '@astrojs/markdown-remark': 3.5.0(astro@3.6.5(@types/node@20.14.6)(typescript@5.4.5))
       '@astrojs/telemetry': 3.0.4
@@ -7006,9 +7001,9 @@ snapshots:
       - terser
       - typescript
 
-  astrojs-compiler-sync@0.3.2(@astrojs/compiler@2.3.0):
+  astrojs-compiler-sync@0.3.2(@astrojs/compiler@2.12.2):
     dependencies:
-      '@astrojs/compiler': 2.3.0
+      '@astrojs/compiler': 2.12.2
       synckit: 0.8.6
 
   async-lock@1.4.1: {}
@@ -9720,9 +9715,9 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-astro@0.14.0:
+  prettier-plugin-astro@0.14.1:
     dependencies:
-      '@astrojs/compiler': 1.8.0
+      '@astrojs/compiler': 2.12.2
       prettier: 3.3.3
       sass-formatter: 0.7.6
 
