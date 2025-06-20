@@ -37,17 +37,7 @@ jobs:
           ECR_REPOSITORY: galaniprojects/ctypehub
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker tag ctypehub $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker tag ctypehub $ECR_REGISTRY/$ECR_REPOSITORY:dev
           docker tag ctypehub $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:dev
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-      - name: Deploy to kilt cluster
-        uses: evosecurity/kubectl-aws-eks@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: galaniprojects/ctypehub
-          IMAGE_TAG: ${{ github.sha }}
-        with:
-          args: set image -n dev-kilt deployment/ctypehub ctypehub=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
